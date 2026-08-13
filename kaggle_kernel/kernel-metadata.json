@@ -1,0 +1,15 @@
+{
+  "id": "sultent/rsna-knee-submit",
+  "title": "RSNA Knee Submit",
+  "code_file": "submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "machine_shape": "NvidiaTeslaT4",
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "dataset_sources": ["sultent/rsna-knee-weights"],
+  "category_ids": []
+}

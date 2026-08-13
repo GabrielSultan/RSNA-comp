@@ -1,0 +1,211 @@
+[{"stream_name":"stderr","time":7.135502961,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
+,{"stream_name":"stderr","time":7.135588488,"data":"  validate(nb)\n"}
+,{"stream_name":"stderr","time":8.051763229,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.051797506,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.051808347,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.051811631,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.71485534,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.714905292,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.714911907,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.714916786,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.606003351,"data":"contenu /kaggle/input : ['competitions', 'datasets']\n"}
+,{"stream_name":"stdout","time":16.067031504,"data":"competition dir : /kaggle/input/competitions/rsna-knee-abnormality-detection\n"}
+,{"stream_name":"stdout","time":16.067073444,"data":"poids           : /kaggle/input/datasets/sultent/rsna-knee-weights/best.pt | existe : True\n"}
+,{"stream_name":"stdout","time":16.067080516,"data":"device          : cuda\n"}
+,{"stream_name":"stdout","time":30.853889254,"data":"modele charge | val macro-AUC local : 0.8474\n"}
+,{"stream_name":"stdout","time":32.527157367,"data":"1.2.826.0.1.3680043.8.498.77212768576945... shape (24, 224, 224) mean 49.5 (NPZ~42.0) std 46.4 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":32.884155417,"data":"1.2.826.0.1.3680043.8.498.10028715832304... shape (24, 224, 224) mean 103.1 (NPZ~42.0) std 73.9 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":33.263514463,"data":"1.2.826.0.1.3680043.8.498.15127037221336... shape (24, 224, 224) mean 48.7 (NPZ~42.0) std 57.8 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":33.803627933,"data":"1.2.826.0.1.3680043.8.498.10994427898459... shape (24, 224, 224) mean 58.5 (NPZ~42.0) std 58.7 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":33.80367249,"data":"1.2.826.0.1.3680043.8.498.11464124303928... shape (24, 224, 224) mean 66.0 (NPZ~42.0) std 53.0 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":34.027259433,"data":"3 etudes a predire\n"}
+,{"stream_name":"stderr","time":43.26396945,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":43.264012503000004,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":43.2640203,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":43.264266901,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":43.264293813,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":43.264480468,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":43.265304853,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":43.265328773,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":43.265335238,"data":"Exception encountered at \"In [5]\":\n"}
+,{"stream_name":"stderr","time":43.265339093,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":43.265343335,"data":"RuntimeError                              Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":43.265347487,"data":"/tmp/ipykernel_24/3266485649.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":43.265351847,"data":"     15     with torch.no_grad(), torch.autocast('cuda', dtype=AMP_DTYPE,\n"}
+,{"stream_name":"stderr","time":43.265355916,"data":"     16                                          enabled=(DEVICE == 'cuda')):\n"}
+,{"stream_name":"stderr","time":43.265359913,"data":"---\u003e 17         logits = model(x)\n"}
+,{"stream_name":"stderr","time":43.265364027,"data":"     18         if TTA_HFLIP:\n"}
+,{"stream_name":"stderr","time":43.265368378,"data":"     19             logits = 0.5 * (logits + model(torch.flip(x, dims=[4])))\n"}
+,{"stream_name":"stderr","time":43.265372643,"data":"\n"}
+,{"stream_name":"stderr","time":43.265376676,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265380765,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.26538518,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.26538917,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265393147,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.265397049,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.265402037,"data":"\n"}
+,{"stream_name":"stderr","time":43.265405737,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265409741,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.265413707,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.265429248,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265433173,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.265436707,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.265440555,"data":"\n"}
+,{"stream_name":"stderr","time":43.265444104,"data":"/tmp/ipykernel_24/2445992289.py in forward(self, x)\n"}
+,{"stream_name":"stderr","time":43.265448165,"data":"     27     def forward(self, x):\n"}
+,{"stream_name":"stderr","time":43.26545182,"data":"     28         b, s, d, h, w = x.shape\n"}
+,{"stream_name":"stderr","time":43.26545557,"data":"---\u003e 29         feats = self.encoder(x.reshape(b * s, d, h, w))\n"}
+,{"stream_name":"stderr","time":43.265459782,"data":"     30         return self.fusion(feats.reshape(b, s * feats.shape[-1]))\n"}
+,{"stream_name":"stderr","time":43.26547187,"data":"     31 \n"}
+,{"stream_name":"stderr","time":43.265475548,"data":"\n"}
+,{"stream_name":"stderr","time":43.265479118,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265505074000004,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.26550906,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.265512508,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265516771,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.265520598,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.265524691,"data":"\n"}
+,{"stream_name":"stderr","time":43.265529911,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265534236,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.265538207,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.265542378,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265546164,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.265549875,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.265553496,"data":"\n"}
+,{"stream_name":"stderr","time":43.265557086,"data":"/usr/local/lib/python3.12/dist-packages/timm/models/convnext.py in forward(self, x)\n"}
+,{"stream_name":"stderr","time":43.265560843,"data":"    625     def forward(self, x: torch.Tensor) -\u003e torch.Tensor:\n"}
+,{"stream_name":"stderr","time":43.265564842,"data":"    626         \"\"\"Forward pass.\"\"\"\n"}
+,{"stream_name":"stderr","time":43.265569057,"data":"--\u003e 627         x = self.forward_features(x)\n"}
+,{"stream_name":"stderr","time":43.265573144,"data":"    628         x = self.forward_head(x)\n"}
+,{"stream_name":"stderr","time":43.265576932,"data":"    629         return x\n"}
+,{"stream_name":"stderr","time":43.265581258,"data":"\n"}
+,{"stream_name":"stderr","time":43.265585108,"data":"/usr/local/lib/python3.12/dist-packages/timm/models/convnext.py in forward_features(self, x)\n"}
+,{"stream_name":"stderr","time":43.265589345,"data":"    607         \"\"\"Forward pass through feature extraction layers.\"\"\"\n"}
+,{"stream_name":"stderr","time":43.265593441,"data":"    608         x = self.stem(x)\n"}
+,{"stream_name":"stderr","time":43.265598077,"data":"--\u003e 609         x = self.stages(x)\n"}
+,{"stream_name":"stderr","time":43.265601939,"data":"    610         x = self.norm_pre(x)\n"}
+,{"stream_name":"stderr","time":43.265606045,"data":"    611         return x\n"}
+,{"stream_name":"stderr","time":43.26560967,"data":"\n"}
+,{"stream_name":"stderr","time":43.265613647,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265617852,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.265621937,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.26562581,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265630151,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.265633999,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.265638327,"data":"\n"}
+,{"stream_name":"stderr","time":43.265646387,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265650917,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.265654968,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.265659105,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265662695,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.265666987,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.265670933,"data":"\n"}
+,{"stream_name":"stderr","time":43.265674547,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/container.py in forward(self, input)\n"}
+,{"stream_name":"stderr","time":43.265678721,"data":"    251         \"\"\"\n"}
+,{"stream_name":"stderr","time":43.265682573,"data":"    252         for module in self:\n"}
+,{"stream_name":"stderr","time":43.265686465,"data":"--\u003e 253             input = module(input)\n"}
+,{"stream_name":"stderr","time":43.265690403,"data":"    254         return input\n"}
+,{"stream_name":"stderr","time":43.265694275,"data":"    255 \n"}
+,{"stream_name":"stderr","time":43.265698339,"data":"\n"}
+,{"stream_name":"stderr","time":43.265702177,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265706947,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.265711289,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.265714607,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265720528,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.265724171,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.265728616,"data":"\n"}
+,{"stream_name":"stderr","time":43.265732723,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265736975,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.265741021,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.265745057,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265749243,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.265753302,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.26575753,"data":"\n"}
+,{"stream_name":"stderr","time":43.265761115,"data":"/usr/local/lib/python3.12/dist-packages/timm/models/convnext.py in forward(self, x)\n"}
+,{"stream_name":"stderr","time":43.265764881,"data":"    304             x = checkpoint_seq(self.blocks, x)\n"}
+,{"stream_name":"stderr","time":43.265769034,"data":"    305         else:\n"}
+,{"stream_name":"stderr","time":43.265772767,"data":"--\u003e 306             x = self.blocks(x)\n"}
+,{"stream_name":"stderr","time":43.265776986,"data":"    307         return x\n"}
+,{"stream_name":"stderr","time":43.265780671,"data":"    308 \n"}
+,{"stream_name":"stderr","time":43.265785045,"data":"\n"}
+,{"stream_name":"stderr","time":43.265788775,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265796771,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.265801043,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.265804879,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265809498,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.265813315,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.265817208,"data":"\n"}
+,{"stream_name":"stderr","time":43.265820871,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265824812,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.265829085,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.265833532,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265837513,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.265841295,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.265845053,"data":"\n"}
+,{"stream_name":"stderr","time":43.265848504,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/container.py in forward(self, input)\n"}
+,{"stream_name":"stderr","time":43.26585267,"data":"    251         \"\"\"\n"}
+,{"stream_name":"stderr","time":43.265856551,"data":"    252         for module in self:\n"}
+,{"stream_name":"stderr","time":43.265860341,"data":"--\u003e 253             input = module(input)\n"}
+,{"stream_name":"stderr","time":43.265864247,"data":"    254         return input\n"}
+,{"stream_name":"stderr","time":43.265868407,"data":"    255 \n"}
+,{"stream_name":"stderr","time":43.265872769,"data":"\n"}
+,{"stream_name":"stderr","time":43.265876243,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265880614,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.265885402,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.265890507,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265894506,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.26589824,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.26590274,"data":"\n"}
+,{"stream_name":"stderr","time":43.265906341,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265910316,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.265914518,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.265918815,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265923059,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.265926921,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.265930577,"data":"\n"}
+,{"stream_name":"stderr","time":43.265937709,"data":"/usr/local/lib/python3.12/dist-packages/timm/models/convnext.py in forward(self, x)\n"}
+,{"stream_name":"stderr","time":43.265942008,"data":"    198         \"\"\"Forward pass.\"\"\"\n"}
+,{"stream_name":"stderr","time":43.26594646,"data":"    199         shortcut = x\n"}
+,{"stream_name":"stderr","time":43.265950532,"data":"--\u003e 200         x = self.conv_dw(x)\n"}
+,{"stream_name":"stderr","time":43.265954487,"data":"    201         if self.use_conv_mlp:\n"}
+,{"stream_name":"stderr","time":43.265958761,"data":"    202             x = self.norm(x)\n"}
+,{"stream_name":"stderr","time":43.265962633,"data":"\n"}
+,{"stream_name":"stderr","time":43.265965945,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _wrapped_call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265970203,"data":"   1774             return self._compiled_call_impl(*args, **kwargs)  # type: ignore[misc]\n"}
+,{"stream_name":"stderr","time":43.26597418,"data":"   1775         else:\n"}
+,{"stream_name":"stderr","time":43.265978244,"data":"-\u003e 1776             return self._call_impl(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265982127,"data":"   1777 \n"}
+,{"stream_name":"stderr","time":43.265985791,"data":"   1778     # torchrec tests the code consistency with the following code\n"}
+,{"stream_name":"stderr","time":43.265989703,"data":"\n"}
+,{"stream_name":"stderr","time":43.265993244,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py in _call_impl(self, *args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.265997265,"data":"   1785                 or _global_backward_pre_hooks or _global_backward_hooks\n"}
+,{"stream_name":"stderr","time":43.266001599,"data":"   1786                 or _global_forward_hooks or _global_forward_pre_hooks):\n"}
+,{"stream_name":"stderr","time":43.266005613,"data":"-\u003e 1787             return forward_call(*args, **kwargs)\n"}
+,{"stream_name":"stderr","time":43.266009687,"data":"   1788 \n"}
+,{"stream_name":"stderr","time":43.266013488,"data":"   1789         result = None\n"}
+,{"stream_name":"stderr","time":43.266017653,"data":"\n"}
+,{"stream_name":"stderr","time":43.266021451,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py in forward(self, input)\n"}
+,{"stream_name":"stderr","time":43.266025533,"data":"    551 \n"}
+,{"stream_name":"stderr","time":43.266029391000004,"data":"    552     def forward(self, input: Tensor) -\u003e Tensor:\n"}
+,{"stream_name":"stderr","time":43.266033537,"data":"--\u003e 553         return self._conv_forward(input, self.weight, self.bias)\n"}
+,{"stream_name":"stderr","time":43.266037375,"data":"    554 \n"}
+,{"stream_name":"stderr","time":43.266041241,"data":"    555 \n"}
+,{"stream_name":"stderr","time":43.266045191,"data":"\n"}
+,{"stream_name":"stderr","time":43.266049435,"data":"/usr/local/lib/python3.12/dist-packages/torch/nn/modules/conv.py in _conv_forward(self, input, weight, bias)\n"}
+,{"stream_name":"stderr","time":43.266053585,"data":"    546             )\n"}
+,{"stream_name":"stderr","time":43.266057421,"data":"    547 \n"}
+,{"stream_name":"stderr","time":43.266061326,"data":"--\u003e 548         return F.conv2d(\n"}
+,{"stream_name":"stderr","time":43.266065611,"data":"    549             input, weight, bias, self.stride, self.padding, self.dilation, self.groups\n"}
+,{"stream_name":"stderr","time":43.266070153,"data":"    550         )\n"}
+,{"stream_name":"stderr","time":43.266073943,"data":"\n"}
+,{"stream_name":"stderr","time":43.266078429,"data":"RuntimeError: GET was unable to find an engine to execute this computation\n"}
+,{"stream_name":"stderr","time":43.266085651,"data":"\n"}
+,{"stream_name":"stderr","time":45.678773006,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":45.678828184,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":45.849847436,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":45.849896685,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":46.561227284,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":46.873258551,"data":"[NbConvertApp] Writing 47354 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":49.413581161,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":50.319069372,"data":"[NbConvertApp] Writing 358676 bytes to __results__.html\n"}
+]
