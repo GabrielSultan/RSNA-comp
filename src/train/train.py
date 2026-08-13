@@ -1,0 +1,212 @@
+# -*- coding: utf-8 -*-
+"""Boucle d'entrainement KneeNet sur pseudo-labels masques.
+
+- Loss : BCEWithLogits masquee (y == -1 ignore) + pos_weight par cible
+  (n_neg/n_pos sur le train garde, clampe) + label smoothing.
+- Optim : AdamW, lr backbone < lr tete, cosine + warmup, AMP bf16.
+- Normalisation + augmentation GPU dans la boucle.
+- Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
+- Sanity check final sur les 58 gold (jamais utilise pour piloter).
+
+Usage : python -X utf8 -m src.train.train --config configs/baseline.yaml
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import time
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+import torch
+import torch.nn.functional as F
+import yaml
+from torch.utils.data import DataLoader
+
+from src.data.dataset_npz import (NORM_MEAN, NORM_STD, StudyDataset,
+                                  StudySeriesIndex, make_loaders)
+from src.data.transforms import augment_batch
+from src.models.kneenet import KneeNet, count_params
+from src.nlp.lexicon import TARGETS
+from src.train.metrics import macro_auc
+
+
+def load_config(path: str) -> dict:
+    with open(path, encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def compute_pos_weight(labels_csv: str, targets: list[str],
+                       lo: float = 0.5, hi: float = 5.0,
+                       max_weight: float | None = None) -> torch.Tensor:
+    df = pd.read_csv(labels_csv)
+    df = df[df.split == "train"]
+    w = []
+    for t in targets:
+        col = df[t].dropna()
+        n_pos, n_neg = (col == 1).sum(), (col == 0).sum()
+        w.append(float(np.clip(n_neg / max(n_pos, 1), lo, hi)))
+    if max_weight is not None:
+        w = [min(x, max_weight) for x in w]
+    return torch.tensor(w, dtype=torch.float32)
+
+
+def masked_bce(logits: torch.Tensor, y: torch.Tensor,
+               pos_weight: torch.Tensor, smoothing: float = 0.02) -> torch.Tensor:
+    mask = y >= 0
+    if mask.sum() == 0:
+        return logits.sum() * 0.0
+    yc = y.clamp(0, 1)
+    yc = yc * (1 - smoothing) + 0.5 * smoothing
+    loss_mat = F.binary_cross_entropy_with_logits(
+        logits, yc, reduction="none",
+        pos_weight=pos_weight.to(logits.device).unsqueeze(0),
+    )
+    return (loss_mat * mask).sum() / mask.sum().clamp(min=1)
+
+
+def lr_at(step: int, total: int, base: float, warmup: int) -> float:
+    if step < warmup:
+        return base * (step + 1) / warmup
+    p = (step - warmup) / max(1, total - warmup)
+    return base * 0.5 * (1 + math.cos(math.pi * p))
+
+
+@torch.no_grad()
+def evaluate(model, loader, device) -> tuple[np.ndarray, np.ndarray, list[str]]:
+    model.eval()
+    probs, labels, uids = [], [], []
+    for x, y, uid in loader:
+        x = x.to(device, non_blocking=True)
+        x = (x - NORM_MEAN) / NORM_STD
+        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
+            logits = model(x)
+        probs.append(torch.sigmoid(logits.float()).cpu())
+        labels.append(y)
+        uids.extend(uid)
+    return torch.cat(probs).numpy(), torch.cat(labels).numpy(), uids
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default="configs/baseline.yaml")
+    args = parser.parse_args()
+    cfg = load_config(args.config)
+
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    torch.backends.cudnn.benchmark = True
+    run_dir = Path("checkpoints") / cfg["run_name"]
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    train_ld, val_ld, targets = make_loaders(
+        labels_csv=cfg["labels_csv"], series_csv=cfg["series_csv"],
+        zip_path=cfg["zip_path"], batch_size=cfg["batch_size"],
+        num_workers=cfg["num_workers"],
+    )
+    print(f"train {len(train_ld.dataset)} | val {len(val_ld.dataset)}", flush=True)
+
+    model = KneeNet(backbone=cfg["backbone"], n_series=3, head_dim=cfg["head_dim"],
+                    dropout=cfg["dropout"], pretrained=cfg["pretrained"]).to(device)
+    print(f"KneeNet({cfg['backbone']}) : {count_params(model)} params", flush=True)
+
+    max_pw = cfg.get("pos_weight_max", None)  # None -> desactive (BCE simple)
+    if max_pw is None:
+        pos_weight = torch.ones(len(targets))
+        print("pos_weight desactive (BCE simple)")
+    else:
+        pos_weight = compute_pos_weight(cfg["labels_csv"], targets,
+                                        max_weight=max_pw)
+        print(f"pos_weight (max {max_pw}):",
+              [round(w, 2) for w in pos_weight.tolist()], flush=True)
+
+    backbone_params = list(model.encoder.parameters())
+    head_params = list(model.fusion.parameters())
+    optim = torch.optim.AdamW([
+        {"params": backbone_params, "lr": cfg["lr_backbone"]},
+        {"params": head_params, "lr": cfg["lr_head"]},
+    ], weight_decay=cfg["weight_decay"])
+
+    epochs = cfg["epochs"]
+    steps_per_epoch = len(train_ld)
+    total_steps = epochs * steps_per_epoch
+    warmup = int(0.05 * total_steps)
+
+    best_auc, history = -1.0, []
+    step = 0
+    for epoch in range(epochs):
+        model.train()
+        t0 = time.time()
+        running = 0.0
+        nb = 0
+        for x, y, _uid in train_ld:
+            x = x.to(device, non_blocking=True)
+            y = y.to(device, non_blocking=True)
+            x = augment_batch(x)
+            x = (x - NORM_MEAN) / NORM_STD
+
+            for g in optim.param_groups:
+                g["lr"] = lr_at(step, total_steps,
+                                cfg["lr_backbone"] if g is optim.param_groups[0]
+                                else cfg["lr_head"], warmup)
+
+            with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
+                logits = model(x)
+                loss = masked_bce(logits, y, pos_weight, cfg["label_smoothing"])
+            optim.zero_grad(set_to_none=True)
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            optim.step()
+
+            running += loss.item()
+            nb += 1
+            step += 1
+
+        vp, vy, _ = evaluate(model, val_ld, device)
+        val_auc, per_target = macro_auc(vy, vp, targets)
+        pstd = float(vp.std())
+        dt = time.time() - t0
+        print(f"epoch {epoch+1}/{epochs} | loss {running/max(nb,1):.4f} | "
+              f"val macro-AUC {val_auc:.4f} | proba std {pstd:.4f} | {dt:.0f}s",
+              flush=True)
+        history.append({"epoch": epoch + 1, "loss": running / max(nb, 1),
+                        "val_macro_auc": val_auc, **{f"auc_{k}": v for k, v in per_target.items()}})
+
+        if val_auc > best_auc:
+            best_auc = val_auc
+            torch.save({"model": model.state_dict(), "config": cfg,
+                        "val_macro_auc": val_auc, "epoch": epoch + 1,
+                        "targets": targets}, run_dir / "best.pt")
+            print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
+
+    (run_dir / "history.json").write_text(json.dumps(history, indent=2))
+
+    # --- Sanity check sur les 58 gold (jamais utilise pour piloter) ---
+    gold_csv = Path("data/labels/gold_nlp_predictions.csv")
+    train_csv = Path(cfg["labels_csv"]).parent.parent / "csv" / "train.csv"
+    if gold_csv.exists() and train_csv.exists():
+        train_df = pd.read_csv(train_csv)
+        gold = train_df[train_df[TARGETS].notna().all(axis=1)]
+        index = StudySeriesIndex(cfg["series_csv"])
+        gold_ds = StudyDataset(gold.StudyInstanceUID.tolist(),
+                               gold[["StudyInstanceUID"] + TARGETS], index,
+                               cfg["zip_path"], train=False, series_drop_p=0.0)
+        gold_ld = DataLoader(gold_ds, batch_size=cfg["batch_size"], shuffle=False,
+                             num_workers=cfg["num_workers"])
+        ckpt = torch.load(run_dir / "best.pt", map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model"])
+        gp, gy, _ = evaluate(model, gold_ld, device)
+        g_auc, g_per = macro_auc(gy, gp, TARGETS)
+        print(f"\n=== SANITY GOLD (58 etudes, jamais vues) ===")
+        print(f"macro-AUC gold : {g_auc:.4f}")
+        for k, v in sorted(g_per.items(), key=lambda kv: -kv[1]):
+            print(f"  {k:<18} {v:.3f}")
+        (run_dir / "gold_sanity.json").write_text(json.dumps(
+            {"macro_auc": g_auc, "per_target": g_per}, indent=2))
+
+    print(f"\ntermine. best val macro-AUC = {best_auc:.4f} -> {run_dir}")
+
+
+if __name__ == "__main__":
+    main()
