@@ -5,3 +5,7 @@ __pycache__/
 *.md
 *.txt
 scripts/
+kaggle_kernel/
+checkpoints/*
+!checkpoints/.gitkeep
+*.pt
