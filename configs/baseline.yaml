@@ -1,0 +1,19 @@
+run_name: baseline_v5_nopw
+backbone: convnext_tiny
+pretrained: true
+
+labels_csv: data/labels/train_val_labels.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/volumes.zip
+
+batch_size: 16
+num_workers: 3
+epochs: 12
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.2
