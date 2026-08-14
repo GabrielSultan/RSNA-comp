@@ -14,6 +14,7 @@ import argparse
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
+from threading import Event, Lock
 
 ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
@@ -27,9 +28,11 @@ import yaml
 from src.data.build_llm_labels import assemble_train_val
 from src.nlp.gemini_labeler import (
     MODEL_PRODUCTION,
+    GeminiOverloadError,
     cache_dir_for,
     gen_kwargs_from_cfg,
     is_model_unavailable,
+    is_overload,
     label_study,
     load_cached,
     make_client,
@@ -92,11 +95,30 @@ def main() -> None:
         client = make_client(timeout_ms=int(cfg.get("request_timeout_ms", 180_000)))
         gen_kw = gen_kwargs_from_cfg(cfg, force=args.force)
         errors = []
+        abort = Event()
+        streak_lock = Lock()
+        overload_streak = 0
+        circuit_n = int(cfg.get("circuit_breaker", 2))
+        aborted = False
 
         def job(r):
-            return r, label_study(
-                client, model, r["StudyInstanceUID"], str(r["Report"]), **gen_kw
-            )
+            nonlocal overload_streak
+            if abort.is_set():
+                raise GeminiOverloadError("coupe-circuit : API surchargee, stop")
+            try:
+                payload = label_study(
+                    client, model, r["StudyInstanceUID"], str(r["Report"]), **gen_kw
+                )
+            except Exception as exc:  # noqa: BLE001
+                if is_overload(exc):
+                    with streak_lock:
+                        overload_streak += 1
+                        if overload_streak >= circuit_n:
+                            abort.set()
+                raise
+            with streak_lock:
+                overload_streak = 0
+            return r, payload
 
         probe = missing[0]
         try:
@@ -114,9 +136,14 @@ def main() -> None:
                 ) from exc
             errors.append((probe["StudyInstanceUID"], str(exc)))
             missing = missing[1:]
+            if abort.is_set() or is_overload(exc):
+                aborted = True
 
-        if workers <= 1:
+        if not aborted and workers <= 1:
             for r in tqdm(missing, desc=model):
+                if abort.is_set():
+                    aborted = True
+                    break
                 try:
                     _, payload = job(r)
                     flat = payload_to_flat(payload)
@@ -124,7 +151,10 @@ def main() -> None:
                     rows.append(flat)
                 except Exception as exc:  # noqa: BLE001
                     errors.append((r["StudyInstanceUID"], str(exc)))
-        else:
+                    if abort.is_set() or is_overload(exc):
+                        aborted = True
+                        break
+        elif not aborted:
             with ThreadPoolExecutor(max_workers=workers) as ex:
                 futs = {ex.submit(job, r): r for r in missing}
                 for fut in tqdm(as_completed(futs), total=len(futs), desc=model):
@@ -136,6 +166,16 @@ def main() -> None:
                         rows.append(flat)
                     except Exception as exc:  # noqa: BLE001
                         errors.append((r["StudyInstanceUID"], str(exc)))
+                        if abort.is_set() or is_overload(exc):
+                            aborted = True
+                            for pending in futs:
+                                pending.cancel()
+                            break
+        if aborted:
+            print(
+                "Coupe-circuit : Google repond 503 / tokens=0. "
+                "On arrete au lieu de marteler l'API."
+            )
         if errors:
             print(f"{len(errors)} echecs (relance le meme script : le cache reprend) :")
             for uid, msg in errors[:8]:
@@ -151,6 +191,16 @@ def main() -> None:
     llm_df.to_csv(raw_path, index=False)
     print("sauvegarde:", raw_path)
     print(f"cache : {cache_dir_for(model)}")
+
+    n_expected = len(unlabeled)
+    if len(rows) < n_expected:
+        print(
+            f"Corpus incomplet ({len(rows)}/{n_expected}). "
+            "train_val_labels_llm.csv NON ecrit (evite un split partiel).\n"
+            "Le cache est a jour. Relance quand AI Studio n'affiche plus de 503 :\n"
+            "  python -X utf8 -m src.nlp.label_corpus"
+        )
+        return
 
     use_net = bool(cfg.get("lexicon_net", True)) and not args.no_lexicon_net
     cap = None if args.no_cap else cfg.get("prevalence_cap")

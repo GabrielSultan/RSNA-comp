@@ -10,6 +10,7 @@ import json
 import os
 import random
 import re
+import sys
 import time
 from pathlib import Path
 from typing import Any, Literal
@@ -275,11 +276,37 @@ def http_status(exc: BaseException) -> int | None:
     return None
 
 
+class GeminiOverloadError(RuntimeError):
+    """503 / empty / UNAVAILABLE : Google surcharge, pas un bug du rapport."""
+
+
 def is_model_unavailable(exc: BaseException) -> bool:
     if http_status(exc) == 404:
         return True
     msg = str(exc).lower()
     return "no longer available" in msg or "not_found" in msg
+
+
+def is_overload(exc: BaseException) -> bool:
+    if isinstance(exc, GeminiOverloadError):
+        return True
+    status = http_status(exc)
+    if status in {502, 503, 504}:
+        return True
+    msg = str(exc).lower()
+    return any(
+        n in msg
+        for n in (
+            "unavailable",
+            "overloaded",
+            "high demand",
+            "empty gemini",
+            "503",
+            "502",
+            "504",
+            "service unavailable",
+        )
+    )
 
 
 def _is_retryable(exc: BaseException) -> bool:
@@ -329,9 +356,14 @@ def make_client(timeout_ms: int = 180_000):
             "google-genai manquant. pip install 'google-genai>=1.40' pydantic python-dotenv"
         ) from e
     key = require_api_key()
+    # attempts=1 : on desactive le retry interne du SDK (defaut 5 x 503).
+    # Sinon tqdm fige pendant des minutes avec output_tokens=0.
     return genai.Client(
         api_key=key,
-        http_options=types.HttpOptions(timeout=timeout_ms),
+        http_options=types.HttpOptions(
+            timeout=timeout_ms,
+            retry_options=types.HttpRetryOptions(attempts=1),
+        ),
     )
 
 
@@ -375,6 +407,8 @@ def generate_labels(
     contents = user_prompt(report)
 
     last_exc: BaseException | None = None
+    overload_tries = 0
+    max_overload = min(2, max_retries)
     for attempt in range(max_retries):
         try:
             response = client.models.generate_content(
@@ -401,8 +435,29 @@ def generate_labels(
             return parsed, {"usage": usage, "attempts": attempt + 1, "raw_text": text}
         except Exception as exc:  # noqa: BLE001 — retry reseau / parse
             last_exc = exc
-            if attempt + 1 >= max_retries or not _is_retryable(exc):
+            if not _is_retryable(exc):
                 raise
+            if is_overload(exc):
+                overload_tries += 1
+                print(
+                    f"[gemini] surcharge essai {overload_tries}/{max_overload}: {exc}",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                if overload_tries >= max_overload:
+                    raise GeminiOverloadError(
+                        f"API surchargee apres {overload_tries} essais: {exc}"
+                    ) from exc
+                sleep = 20.0 * (2 ** (overload_tries - 1)) + random.random() * 5.0
+                time.sleep(min(sleep, 90.0))
+                continue
+            if attempt + 1 >= max_retries:
+                raise
+            print(
+                f"[gemini] retry {attempt + 1}/{max_retries}: {exc}",
+                file=sys.stderr,
+                flush=True,
+            )
             sleep = (2 ** attempt) + random.random()
             time.sleep(min(sleep, 60.0))
     raise RuntimeError(f"Gemini a echoue apres {max_retries} essais: {last_exc}")
