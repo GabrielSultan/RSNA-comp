@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10777331080659372520952742261140923555",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Interstitial hyperintensity in the ACL, in favor of grade 1 injury",
+    "MCL": "",
+    "Medial Meniscus": "Linear signal intensity in posterior horn of medial meniscus, without significant extending into the surface, in favor of grade 2 intrasubstance signal of posterior horn of medial meniscus",
+    "Lateral Meniscus": "",
+    "Medial OA": "Wearing cartilage in the knee joint and spur formation in the posterior tibial plateau and fluid accumulation, Osteoarthritis noted",
+    "Lateral OA": "Wearing cartilage in the knee joint and spur formation in the posterior tibial plateau and fluid accumulation, Osteoarthritis noted",
+    "PF OA": "Hyperintensity and wearing the cartilage of patellofemoral joint and spur formation, more prominent at lateral facet, reflecting osteoarthritis.",
+    "Effusion": "Joint effusion and medial and lateral patellar plicae.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1322,
+    "candidates_tokens": 427,
+    "total_tokens": 1749,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

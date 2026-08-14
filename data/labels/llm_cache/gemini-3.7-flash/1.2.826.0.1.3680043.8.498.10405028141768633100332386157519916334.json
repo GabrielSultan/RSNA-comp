@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10405028141768633100332386157519916334",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "the anterior cruciate ligament, the posterior cruciate ligament, the medial meniscus, the lateral meniscus, the medial collateral ligament... are unremarkable.",
+    "MCL": "the medial collateral ligament... are unremarkable.",
+    "Medial Meniscus": "the medial meniscus, the lateral meniscus... are unremarkable.",
+    "Lateral Meniscus": "the medial meniscus, the lateral meniscus... are unremarkable.",
+    "Medial OA": "The articular cartilage is preserved.",
+    "Lateral OA": "The articular cartilage is preserved.",
+    "PF OA": "The articular cartilage is preserved.",
+    "Effusion": "There is no significant knee joint effusion",
+    "Synovitis": "",
+    "Baker's": "no significant knee joint effusion or popliteal cyst.",
+    "Contusion": "There is normal bone marrow signal intensity.",
+    "Fracture": "There is normal bone marrow signal intensity."
+  },
+  "usage": {
+    "prompt_tokens": 1132,
+    "candidates_tokens": 405,
+    "total_tokens": 1537,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

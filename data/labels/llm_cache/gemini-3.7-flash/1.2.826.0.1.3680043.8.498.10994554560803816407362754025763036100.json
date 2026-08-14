@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10994554560803816407362754025763036100",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder mit regelrechtem Signal",
+    "MCL": "Kollateralbänder sowie Kreuzbänder mit regelrechtem Signal",
+    "Medial Meniscus": "Außen- und Innenmeniskus, Kollateralbänder sowie Kreuzbänder mit regelrechtem Signal",
+    "Lateral Meniscus": "Außen- und Innenmeniskus, Kollateralbänder sowie Kreuzbänder mit regelrechtem Signal",
+    "Medial OA": "Flächig ausgedünnter Knorpelüberzug auch femorotibial mit pct. max. an der med. Femurcondyle",
+    "Lateral OA": "Flächig ausgedünnter Knorpelüberzug auch femorotibial",
+    "PF OA": "Retropatellar geringe chondropathische Signalveränderungen mit einer oberflächlichen Rissbildung zentral (7/18, Grad I-II nach Outerbridge)",
+    "Effusion": "Kein Gelenkerguss",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Kein bone bruise",
+    "Fracture": "Knochenmarksignal unauffällig"
+  },
+  "usage": {
+    "prompt_tokens": 1160,
+    "candidates_tokens": 478,
+    "total_tokens": 1638,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

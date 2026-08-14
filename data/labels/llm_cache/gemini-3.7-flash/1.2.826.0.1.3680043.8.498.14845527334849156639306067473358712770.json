@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.14845527334849156639306067473358712770",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Rotura compleja del cuerpo, cuerno posterior y parte de la raíz meniscal posterior del menisco medial",
+    "Lateral Meniscus": "imagen sugerente de pequeña rotura del cuerpo del menisco lateral.",
+    "Medial OA": "Úlceras condrales de espesor parcial y total de la zona de carga del compartimento femorotibial medial",
+    "Lateral OA": "Cartílagos de los compartimentos femorotibial lateral y de la tróclea femoral sin alteraciones.",
+    "PF OA": "Úlceras condrales de espesor total con cambios óseos secundarios de la faceta medial y vértice de la rótula.",
+    "Effusion": "Leve derrame articular con sinovitis difusa.",
+    "Synovitis": "sinovitis difusa",
+    "Baker's": "",
+    "Contusion": "No hay alteraciones de señal significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones de señal significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1370,
+    "candidates_tokens": 483,
+    "total_tokens": 1853,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

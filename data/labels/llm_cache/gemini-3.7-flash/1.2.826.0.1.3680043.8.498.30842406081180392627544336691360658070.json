@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30842406081180392627544336691360658070",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve yan bağlar normal.",
+    "MCL": "Çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküs ve lateral menisküs normal.",
+    "Lateral Meniscus": "Medyal menisküs ve lateral menisküs normal.",
+    "Medial OA": "Eklem kıkırdakları ve kemikler normal.",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler normal.",
+    "PF OA": "Eklem kıkırdakları ve kemikler normal.",
+    "Effusion": "Diz eklemi içi sıvı miktarı normal.",
+    "Synovitis": "",
+    "Baker's": "Gastroknemyusun lateral başı tendonunu femoral insersiyon kesiminde popliteal fossa lateralindeki toplam 25 mm çaplı ve septalı gangliyon kistleri çevreliyor.",
+    "Contusion": "Eklem kıkırdakları ve kemikler normal.",
+    "Fracture": "Eklem kıkırdakları ve kemikler normal."
+  },
+  "usage": {
+    "prompt_tokens": 1178,
+    "candidates_tokens": 454,
+    "total_tokens": 1632,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

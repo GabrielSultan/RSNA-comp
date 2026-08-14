@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11495133447993934376048707763538781434",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са със запазена цялост.",
+    "MCL": "Колатерални лигаменти – нормално изобразяване.",
+    "Medial Meniscus": "Визуализират се начални дегенеративни промени в медиалния менискус (в задния му рог), без данни за руптура.",
+    "Lateral Meniscus": "Нормално изобразяване на латералния менискус.",
+    "Medial OA": "Артикулиращият хрущял на фемура и тибията е съхранен.",
+    "Lateral OA": "Артикулиращият хрущял на фемура и тибията е съхранен.",
+    "PF OA": "Патела, хрущял на пателата, ретинакулуми – без особености.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Няма костномозъчен едем.",
+    "Fracture": "Костите, формиращи колянната става са със запазена форма и сигнална характеристика."
+  },
+  "usage": {
+    "prompt_tokens": 1228,
+    "candidates_tokens": 484,
+    "total_tokens": 1712,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

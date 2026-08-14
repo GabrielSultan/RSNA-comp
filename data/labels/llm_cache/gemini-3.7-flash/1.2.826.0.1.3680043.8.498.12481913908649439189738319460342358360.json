@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12481913908649439189738319460342358360",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colateral lateral sin alteraciones.",
+    "MCL": "Signos de fenómenos cicatriciales en evolución de un esguince grado II del componente superficial del ligamento colateral medial",
+    "Medial Meniscus": "Persiste aumento de señal central del cuerno posterior y cuerpo del menisco medial, periférico, sin variaciones.",
+    "Lateral Meniscus": "El menisco lateral es de morfología y señal conservada, sin signos de rotura.",
+    "Medial OA": "Cartílagos de los compartimentos femorotibiales y patelofemoral sin alteraciones.",
+    "Lateral OA": "Cartílagos de los compartimentos femorotibiales y patelofemoral sin alteraciones.",
+    "PF OA": "Cartílagos de los compartimentos femorotibiales y patelofemoral sin alteraciones.",
+    "Effusion": "No hay derrame actual.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1243,
+    "candidates_tokens": 448,
+    "total_tokens": 1691,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.22594742481654038247097269358877852869",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "The contour of ACL & PCL appear to be within normal, no abnormal signal intensity is noted.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "in favor of grade 2 intrasubstance signal of posterior horn of medial meniscus",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "R/O grade 1 patellar chondromalacia.",
+    "Effusion": "Minimal joint effusion",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No evidence of bone contusion is noted.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1292,
+    "candidates_tokens": 371,
+    "total_tokens": 1663,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

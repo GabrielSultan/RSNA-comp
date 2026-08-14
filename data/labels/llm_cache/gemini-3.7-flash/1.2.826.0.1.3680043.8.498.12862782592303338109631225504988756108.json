@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12862782592303338109631225504988756108",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "Mayor intensidad de la señal intrasustancia en el menisco interno (sin rotura clara)",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": "Línea de fractura cortical sutil en el margen anterior de la epífisis tibial proximal"
+  },
+  "usage": {
+    "prompt_tokens": 1084,
+    "candidates_tokens": 336,
+    "total_tokens": 1420,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

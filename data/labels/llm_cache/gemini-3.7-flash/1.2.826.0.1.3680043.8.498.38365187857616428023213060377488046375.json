@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38365187857616428023213060377488046375",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Oblique undersurface tear of the posterior horn and body with dominate complete radial tear at the posterior root of the medial meniscus.",
+    "Lateral Meniscus": "Lateral meniscus: No tear.",
+    "Medial OA": "Medial compartment cartilage: High-grade chondrosis anterior weightbearing portion of the femoral condyle",
+    "Lateral OA": "Lateral compartment cartilage: Mild chondrosis.",
+    "PF OA": "Patellofemoral compartment cartilage: High-grade chondrosis of the patella and to less extent trochlea",
+    "Effusion": "Moderate joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Moderate, ruptured Baker's cyst.",
+    "Contusion": "Background marrow signal is normal without infiltrative marrow process.",
+    "Fracture": "No acute fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1641,
+    "candidates_tokens": 429,
+    "total_tokens": 2070,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

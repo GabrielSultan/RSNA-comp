@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16527747624688737126118546487228060848",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve yan bağlar normal.",
+    "MCL": "Çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküs arka boynuz - gövdesi bileşkesinde üst eklem yüzeyi ile ilişkilenen horizontal oblik ve serbest kenarda vertikal bileşenleri bulunan kompleks yırtık izleniyor.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "Eklem kıkırdakları ve kemikler normal.",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler normal.",
+    "PF OA": "Eklem kıkırdakları ve kemikler normal.",
+    "Effusion": "Diz eklemi içi sıvı miktarı normal.",
+    "Synovitis": "",
+    "Baker's": "Gastroknemyus-semimembranozis bursasındaki sıvı lokülasyonu milimetrik kalınlıkta.",
+    "Contusion": "Eklem kıkırdakları ve kemikler normal.",
+    "Fracture": "Eklem kıkırdakları ve kemikler normal."
+  },
+  "usage": {
+    "prompt_tokens": 1129,
+    "candidates_tokens": 466,
+    "total_tokens": 1595,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

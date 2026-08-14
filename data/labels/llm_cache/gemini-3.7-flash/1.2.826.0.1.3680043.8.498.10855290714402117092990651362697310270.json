@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10855290714402117092990651362697310270",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağda miksoid dejenerasyona sekonder sinyal değişikliği izlendi.",
+    "MCL": "Medial kollateral ligamende  periligamentöz ödem izlendi.",
+    "Medial Meniscus": "Medial menisküs posterior horn ve gövde kesimde grade III dejenerasyon, serbest kenarda horizontal yırtık izlendi.",
+    "Lateral Meniscus": "Lateral menisküs anterior, posterior horn ve gövde kesimde grade II dejenerasyon izlendi.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursa ve diz eklem mesafesinde sıvı artışı izlenmektedir.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1239,
+    "candidates_tokens": 407,
+    "total_tokens": 1646,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

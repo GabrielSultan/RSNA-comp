@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11604138460812393624691789275263090511",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Mild delamination of the anterior cruciate ligament suggesting a remote low-grade partial tear/injury.",
+    "MCL": "The medial collateral ligament is intact without tear.",
+    "Medial Meniscus": "There is a complex tear of the medial meniscus with a longitudinal horizontal component involving the posterior horn and body extending to the anterior horn and inferior articular surface.",
+    "Lateral Meniscus": "The lateral meniscus and the lateral collateral ligament complex are intact without tear.",
+    "Medial OA": "Moderate to severe diffuse chondral thinning at the medial tibiofemoral compartment with full-thickness involvement at the weightbearing surface with early subchondral bone marrow reactive changes along the tibial surface.",
+    "Lateral OA": "Mild diffuse chondral thinning at the lateral tibiofemoral compartment with high-grade chondral fissures along the tibial surface",
+    "PF OA": "Moderate to severe diffuse chondral thinning at the patellofemoral compartment with focal areas of severe chondropathy at the medial patellar facet, median ridge and lateral trochlea",
+    "Effusion": "Small knee joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No popliteal cyst.",
+    "Contusion": "Bones: Normal.",
+    "Fracture": "Bones: Normal."
+  },
+  "usage": {
+    "prompt_tokens": 1618,
+    "candidates_tokens": 490,
+    "total_tokens": 2108,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

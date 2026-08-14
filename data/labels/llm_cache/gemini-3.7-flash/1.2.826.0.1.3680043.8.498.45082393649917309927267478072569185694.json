@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.45082393649917309927267478072569185694",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: Normal in morphology and signal.",
+    "Lateral Meniscus": "Lateral meniscus: Normal in morphology and signal.",
+    "Medial OA": "Medial compartment cartilage: No focal cartilage defects.",
+    "Lateral OA": "Lateral compartment cartilage: No focal cartilage defects.",
+    "PF OA": "Patellofemoral chondrosis.",
+    "Effusion": "No joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Trace Baker's cyst.",
+    "Contusion": "Focal marrow edema at the posterior medial tibial plateau with cystic change may represent intraosseous ganglion cyst formation.",
+    "Fracture": "No acute fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1605,
+    "candidates_tokens": 401,
+    "total_tokens": 2006,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

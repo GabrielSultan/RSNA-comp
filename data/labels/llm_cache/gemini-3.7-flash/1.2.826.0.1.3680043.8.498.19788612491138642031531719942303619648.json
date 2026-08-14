@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.19788612491138642031531719942303619648",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL, PCL, MCL, and LCL are intact.",
+    "MCL": "ACL, PCL, MCL, and LCL are intact.",
+    "Medial Meniscus": "No evidence of meniscal tear. Intrasubstance degeneration off the posterior horn medial meniscus.",
+    "Lateral Meniscus": "No evidence of meniscal tear.",
+    "Medial OA": "Scattered area of chondrosis and fissuring with full thickness loss of the articular cartilage along the femoral surface at the medial tibiofemoral compartments",
+    "Lateral OA": "Scattered area of chondrosis and fissuring with full thickness loss of the articular cartilage along the femoral surface at the medial tibiofemoral compartments",
+    "PF OA": "",
+    "Effusion": "Small volume joint effusion.",
+    "Synovitis": "",
+    "Baker's": "1.2 x 1.4 x 3.1 cm Baker's cyst.",
+    "Contusion": "subchondral bone irregularity is found bone marrow edema.",
+    "Fracture": "Findings likely represent a remote osteochondral injury."
+  },
+  "usage": {
+    "prompt_tokens": 1290,
+    "candidates_tokens": 453,
+    "total_tokens": 1743,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

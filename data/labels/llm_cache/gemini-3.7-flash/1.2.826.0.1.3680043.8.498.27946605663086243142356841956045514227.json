@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.27946605663086243142356841956045514227",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Нормално изобразяване на кръстните връзки.",
+    "MCL": "Колатерални лигаменти - б.о.",
+    "Medial Meniscus": "МР данни за лезия на задния рог на медиалния менискус – 3 стадий",
+    "Lateral Meniscus": "В задния рог на латералния менискус не се виждат дегенеративни промени или менискални увреди.",
+    "Medial OA": "Ставният хрущял на тибията и фемура е интактен, със запазена конгруентност.",
+    "Lateral OA": "Ставният хрущял на тибията и фемура е интактен, със запазена конгруентност.",
+    "PF OA": "Патела, хрущял на пателата – б.о.",
+    "Effusion": "Няма данни за ставен излив.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Липсват зони на костномозъчен едем.",
+    "Fracture": "Костите, формиращи лявата колянна става, са с нормална форма, структура и сигнален интензитет."
+  },
+  "usage": {
+    "prompt_tokens": 1254,
+    "candidates_tokens": 508,
+    "total_tokens": 1762,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

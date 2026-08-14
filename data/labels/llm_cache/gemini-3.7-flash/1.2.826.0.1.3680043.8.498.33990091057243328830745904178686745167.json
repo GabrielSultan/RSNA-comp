@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33990091057243328830745904178686745167",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL & PCL appear to be within normal, no abnormal signal intensity is noted.",
+    "MCL": "High signal in the soft tissues medial to the medial collateral ligament and medial patellar retinaculum, in favor of grade 1 injury.",
+    "Medial Meniscus": "There are linear signal intensity in the medial meniscus with extension into the surface, in favor of tear with medial displacement.",
+    "Lateral Meniscus": "Mild increased signal intensity in the anterior horn of lateral meniscus on F/S PD image, R/O grade 2 intrasubstance signal, maybe due to myxoid degeneration or contusion.",
+    "Medial OA": "Articular cartilage wearing and osteophytes formation of right knee (including distal femur, proximal tibia and patella) with subchondral bone marrow edema over medial femoral condyle and medial tibial plateau, reflecting osteoarthritis",
+    "Lateral OA": "Articular cartilage wearing and osteophytes formation of right knee (including distal femur, proximal tibia and patella)",
+    "PF OA": "Articular cartilage wearing and osteophytes formation of right knee (including distal femur, proximal tibia and patella)",
+    "Effusion": "Small amount of joint effusion in right knee with suprapatellar extension",
+    "Synovitis": "Small amount of joint effusion in right knee with suprapatellar extension, R/O synovitis.",
+    "Baker's": "",
+    "Contusion": "reflecting osteoarthritis with bone contusion.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1417,
+    "candidates_tokens": 535,
+    "total_tokens": 1952,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

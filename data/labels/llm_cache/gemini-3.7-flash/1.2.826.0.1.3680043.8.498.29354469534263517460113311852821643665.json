@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29354469534263517460113311852821643665",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": null,
+    "Lateral Meniscus": null,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "",
+    "Lateral Meniscus": "",
+    "Medial OA": "Femorotibiale Gelenkkompartimente ansonsten regelrecht.",
+    "Lateral OA": "Femorotibiale Gelenkkompartimente ansonsten regelrecht.",
+    "PF OA": "",
+    "Effusion": "Ausgedehnt begleitend Liphämarthros.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "korrespondierenden bone bruise-Arealen am anterolateralen Femurkondylus sowie medioinferioren Patellapol",
+    "Fracture": "kortikalen Irregularitäten (am lateralen Femurcondylus V.a. Infraktionen)"
+  },
+  "usage": {
+    "prompt_tokens": 1218,
+    "candidates_tokens": 388,
+    "total_tokens": 1606,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

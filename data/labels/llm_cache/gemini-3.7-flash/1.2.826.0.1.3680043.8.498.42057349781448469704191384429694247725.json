@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42057349781448469704191384429694247725",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament promijenjenog intenziteta signala u području insercije posterolateralnog snopa za femur u smislu deg. promjena, prati se u kontinuitetu.",
+    "MCL": "Izljev uz medijalni kolateralni ligament uz povišen intrasupstancijski signal u razini medijalnog kondila femura - lezija II. stupnja.",
+    "Medial Meniscus": "Kompleksna ruptura prednjeg roga, trupa i stražnjeg roga medijalnog meniska, izražene longitudinalne komponente.",
+    "Lateral Meniscus": "Lateralni menisk je promijenjenih intenziteta signala u stražnjem rogu, u smislu degenerativnih promjena, bez znakova rupture.",
+    "Medial OA": "Denudacija kondilarne i tibijalne zglobne hrskavice medijalnog kompartmenta u smislu hondromalacije IV stupnja.",
+    "Lateral OA": "Hondromalacija tibijale hrskavice lateralnog kompartmenta III. stupnja",
+    "PF OA": "trohlearne i patelarne hrskavice II. stupnja.",
+    "Effusion": "Umjereni izljev poglavito lokuliran u suprapatelarnom recesusu",
+    "Synovitis": "",
+    "Baker's": "Baker cista CC promjera 5,6 cm.",
+    "Contusion": "koštanog edema i sitnih koštanih cisti, vjerojatno u sklopu OA promjena.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1559,
+    "candidates_tokens": 582,
+    "total_tokens": 2141,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

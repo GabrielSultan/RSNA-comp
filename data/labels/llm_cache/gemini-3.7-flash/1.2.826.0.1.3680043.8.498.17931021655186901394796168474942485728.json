@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.17931021655186901394796168474942485728",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Vidljiva je ruptura prednjeg križnog ligamenta u proksimalnoj trećini.",
+    "MCL": "Edem femoromeniscealnih vlakana dubokog sloja MCL-parcijalna ruptura?",
+    "Medial Meniscus": "kompleksna ruptura medijalnog meniska po tipu \"bucket handle\" koja se širi u stražnji korijen meniska.",
+    "Lateral Meniscus": "Ostali je nalaz u granicama normale.",
+    "Medial OA": "Hondromalacija III. stupnja hrskavica medijalnog kompartmenta femorotibijalnog zgloba.",
+    "Lateral OA": "Ostali je nalaz u granicama normale.",
+    "PF OA": "Ostali je nalaz u granicama normale.",
+    "Effusion": "Veća količina zglobnog izljeva",
+    "Synovitis": "bez značajne proliferacije sinoivije.",
+    "Baker's": "Polilobulirana Baker cista.",
+    "Contusion": "Konuzijski edem medijalnog kondila femura i medijalnog platoa tibije.",
+    "Fracture": "Ostali je nalaz u granicama normale."
+  },
+  "usage": {
+    "prompt_tokens": 1195,
+    "candidates_tokens": 492,
+    "total_tokens": 1687,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

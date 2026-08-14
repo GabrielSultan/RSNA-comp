@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12554824497579383319980187351290254727",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "medial menisküsta grade I sinyal artışı izlendi",
+    "Lateral Meniscus": "Lateral menisküs parsiyel discoid görünümdedir, lateral ve medial menisküsta grade I sinyal artışı izlendi.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Diz eklemi düzeyinde ve patellar bursada sıvı artışı izlendi.",
+    "Synovitis": "",
+    "Baker's": "Popliteal  fossada 10x5 mm boyutlarında baker kisti izlendi.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1234,
+    "candidates_tokens": 411,
+    "total_tokens": 1645,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

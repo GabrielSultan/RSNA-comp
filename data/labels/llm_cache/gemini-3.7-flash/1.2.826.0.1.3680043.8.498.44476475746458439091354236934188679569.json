@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.44476475746458439091354236934188679569",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intact cruciate and collateral ligaments.",
+    "MCL": "Intact cruciate and collateral ligaments.",
+    "Medial Meniscus": "Complex degenerate tear of the body and posterior horn of the medial meniscus",
+    "Lateral Meniscus": "Intact lateral meniscus.",
+    "Medial OA": "High-grade chondral thinning in the weightbearing portion of the medial tibiofemoral compartment.",
+    "Lateral OA": "Focal high-grade chondropathy in the lateral tibial condyle",
+    "PF OA": "High-grade chondral thinning and full-thickness chondral loss across the majority of the medial and lateral retropatellar facets.",
+    "Effusion": "Large joint effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "minor underlying bone stress change",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1255,
+    "candidates_tokens": 400,
+    "total_tokens": 1655,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

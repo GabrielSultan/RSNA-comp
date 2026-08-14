@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.25487225187305802150215261512092051199",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal ACL",
+    "MCL": "Normal ACL, PCL, MCL and LCL.",
+    "Medial Meniscus": "incomplete tearing of the posterior root of the medial meniscus",
+    "Lateral Meniscus": "Normal lateral meniscus.",
+    "Medial OA": "Mild thinning of the medial compartment articular cartilage is noted.",
+    "Lateral OA": "Normal lateral compartment articular cartilage.",
+    "PF OA": "Moderate generalized thinning of the patellofemoral articular cartilage is noted with severe thinning and loss of the lateral patellofemoral articular cartilage",
+    "Effusion": "There is a mild knee effusion.",
+    "Synovitis": "",
+    "Baker's": "A mild fluid-filled Baker's cyst is noted.",
+    "Contusion": "subchondral impaction fracturing of the weightbearing aspect of the medial femoral condyle with surrounding marrow edema",
+    "Fracture": "subchondral impaction fracturing of the weightbearing aspect of the medial femoral condyle"
+  },
+  "usage": {
+    "prompt_tokens": 1226,
+    "candidates_tokens": 431,
+    "total_tokens": 1657,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

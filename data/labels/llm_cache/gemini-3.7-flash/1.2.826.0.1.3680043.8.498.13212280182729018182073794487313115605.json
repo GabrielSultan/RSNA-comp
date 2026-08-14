@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13212280182729018182073794487313115605",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji i stražnji križni ligamenti su primjerenih intenziteta signala i održanog kontinuiteta.",
+    "MCL": "Medijalni kolateralni ligament je uredne debljine uz nešto edema u razini hvatišta za medijalni kondil tibije, u sklopu distenzije istoga.",
+    "Medial Meniscus": "Degenerativno promijenjen medijalni menisk, u području trupa moguća radijalna ruptura starijeg datuma.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture ili degeneracije.",
+    "Medial OA": "Prikaže se hondromalacija II° tibijalne hrskavice i III° hrskavice medijalnog kondila femura.",
+    "Lateral OA": "",
+    "PF OA": "Hondromalacija I° lateralne fasete patele.",
+    "Effusion": "Manja količina izljeva u patelarnim recesusima.",
+    "Synovitis": "",
+    "Baker's": "Manja količina izljeva u Baker burzi.",
+    "Contusion": "",
+    "Fracture": "Prikazana zglobna tijela primjereno su uzglobljena."
+  },
+  "usage": {
+    "prompt_tokens": 1314,
+    "candidates_tokens": 498,
+    "total_tokens": 1812,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

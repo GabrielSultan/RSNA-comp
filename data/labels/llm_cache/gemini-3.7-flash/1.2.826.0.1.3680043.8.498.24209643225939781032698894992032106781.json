@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.24209643225939781032698894992032106781",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal menisci, cruciate and collateral ligaments",
+    "MCL": "Normal menisci, cruciate and collateral ligaments",
+    "Medial Meniscus": "Normal menisci",
+    "Lateral Meniscus": "Normal menisci",
+    "Medial OA": "the remaining tricompartmental articular cartilage is well maintained throughout",
+    "Lateral OA": "the remaining tricompartmental articular cartilage is well maintained throughout",
+    "PF OA": "A subcentimeter midline femoral trochlear osteochondral lesion",
+    "Effusion": "Minimal intra-articular fluid, probably within normal physiological limits.",
+    "Synovitis": "",
+    "Baker's": "Grossly unremarkable imaged extra-articular soft tissues.",
+    "Contusion": "No marrow signal abnormality of concern",
+    "Fracture": "A subcentimeter midline femoral trochlear osteochondral lesion"
+  },
+  "usage": {
+    "prompt_tokens": 1093,
+    "candidates_tokens": 405,
+    "total_tokens": 1498,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

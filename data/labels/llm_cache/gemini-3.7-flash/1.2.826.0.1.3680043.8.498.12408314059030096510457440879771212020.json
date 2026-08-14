@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12408314059030096510457440879771212020",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji i stražnji križni ligamenti održanog intenziteta signala i održanog kontinuiteta.",
+    "MCL": "Medijalni i lateralni kolateralni ligamenti su održanog intenziteta signala i održanog kontinuiteta.",
+    "Medial Meniscus": "Medijalni i lateralni menisk bez znakova rupture ili degeneracije.",
+    "Lateral Meniscus": "Medijalni i lateralni menisk bez znakova rupture ili degeneracije.",
+    "Medial OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Lateral OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "PF OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "Zona koštanog edema u području medijalnog kondila femura.",
+    "Fracture": "Preostale prikazane koštane strukture primjerenih intenziteta signala i morfologije."
+  },
+  "usage": {
+    "prompt_tokens": 1241,
+    "candidates_tokens": 503,
+    "total_tokens": 1744,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

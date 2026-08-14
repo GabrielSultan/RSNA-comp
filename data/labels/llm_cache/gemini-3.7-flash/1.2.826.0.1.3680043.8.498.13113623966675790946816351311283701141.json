@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13113623966675790946816351311283701141",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament se ne prikazuje - totalna ruptura.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Hiperintenzitet stražnjeg roga mediijalnog meniska uz ekstruziju meniska pod MCL, stanje po kompleksnoj rupturi.",
+    "Lateral Meniscus": "Hiperintenzitet tijela i stražnjeg roga lateralnog meniska, stanje po horizontalnoj rupturi.",
+    "Medial OA": "Reducirana debljina zglobnih hrskavica, izraženije u medijalnom kompartmentu femorotibijalnog zgloba",
+    "Lateral OA": "Reducirana debljina zglobnih hrskavica, izraženije u medijalnom kompartmentu femorotibijalnog zgloba",
+    "PF OA": "denudacija zglobne hrskavice lateralnog kompartmenta femoropatelarnog zgloba u sklopu deg. promjena",
+    "Effusion": "Manji izljev suprapatelarno te u medijalnom i lateralnom recesusu.",
+    "Synovitis": "",
+    "Baker's": "Bez znakova poplitealne ciste",
+    "Contusion": "Manji subhondralni edem zglobnih tijela medijalnog kompartmenta femorotibijalog zgloba.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1378,
+    "candidates_tokens": 561,
+    "total_tokens": 1939,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

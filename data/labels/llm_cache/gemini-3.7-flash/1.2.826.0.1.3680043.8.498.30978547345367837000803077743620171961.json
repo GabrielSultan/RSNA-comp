@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30978547345367837000803077743620171961",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Laxity of ACL with increase signal intensity inside, R/O grade 1-2 injury.",
+    "MCL": "Increased signal intensity of the medial collateral ligament , R/O grade 1-2 injury.",
+    "Medial Meniscus": "linear signal intensity in posterior horn of medial meniscus,  with suspicious of extending into the surface, R/O tear.",
+    "Lateral Meniscus": "Lateral meniscus appears to be normal.",
+    "Medial OA": "Osteoarthritis of left knee joint with spur formation and subchondral edema, more severe at medial compartment",
+    "Lateral OA": "Osteoarthritis of left knee joint with spur formation and subchondral edema, more severe at medial compartment",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "A lobulated cystic lesion in popliteal region and extending into the gastrocnemiosemimembranous bursa,R/O Baker's cyst.",
+    "Contusion": "Osteoarthritis of left knee joint with spur formation and subchondral edema",
+    "Fracture": "Osteoarthritis of left knee joint with spur formation and subchondral edema"
+  },
+  "usage": {
+    "prompt_tokens": 1302,
+    "candidates_tokens": 494,
+    "total_tokens": 1796,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

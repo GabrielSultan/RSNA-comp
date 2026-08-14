@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33707148112045883958228656491167647755",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales sin alteraciones significativas.",
+    "MCL": "Ligamentos cruzados y colaterales sin alteraciones significativas.",
+    "Medial Meniscus": "Menisco medial de morfología y señal conservada, sin signos de rotura.",
+    "Lateral Meniscus": "Menisco lateral de morfología y señal conservada, sin signos de rotura.",
+    "Medial OA": "Úlceras condrales de espesor parcial de la región central del platillo tibial lateral y de la región central del cóndilo femoral medial.",
+    "Lateral OA": "Úlceras condrales de espesor parcial de la región central del platillo tibial lateral y de la región central del cóndilo femoral medial.",
+    "PF OA": "Úlceras condrales de espesor total con cambios óseos secundarios del aspecto inferior de la vertiente medial de la tróclea femoral en su región central. Condropatía rotuliana superficial difusa.",
+    "Effusion": "Mínimo derrame articular.",
+    "Synovitis": "",
+    "Baker's": "Pequeño quiste poplíteo con probable filtración.",
+    "Contusion": "No hay alteraciones de señal significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones de señal significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1422,
+    "candidates_tokens": 509,
+    "total_tokens": 1931,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

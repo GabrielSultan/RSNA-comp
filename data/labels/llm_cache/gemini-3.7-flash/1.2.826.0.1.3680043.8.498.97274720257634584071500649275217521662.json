@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.97274720257634584071500649275217521662",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anamnestisch bek. VKB Ruptur mit wohl ligamentärer Ruptur des anteromedialen Bündels sowie knöchernem Ausriss des posterolateralen Bündels",
+    "MCL": "",
+    "Medial Meniscus": "Innenmeniskus mit horizontalem Riss Pars intermedia bis ins Hinterhorn ziehend",
+    "Lateral Meniscus": "Weiteres Ossikel/Flake angrenzend an die nicht sicher abgrenzbare Außenmeniskushinterhornwurzel, hier DD ebenfalls Mitbeteiligung/knöcherner Ausriss.",
+    "Medial OA": "Knochenödem im medialen femorotibialen Gelenkkompartiment randständig, tibial führend, bei vorrangig Chondropathie.",
+    "Lateral OA": "posterolateralen Tibiaplateau nahe der Eminentia bei subchondraler Impression mit teils punktuell chondralen Läsionen.",
+    "PF OA": "",
+    "Effusion": "Begleitend geringer Gelenkerguss",
+    "Synovitis": "Reizsynovialitis",
+    "Baker's": "gering Flüssigkeit gefüllte Baker-Zyste mit CC 3,2 cm.",
+    "Contusion": "verbliebenes bone bruise im posterolateralen Tibiaplateau",
+    "Fracture": "subchondraler Impression"
+  },
+  "usage": {
+    "prompt_tokens": 1221,
+    "candidates_tokens": 519,
+    "total_tokens": 1740,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

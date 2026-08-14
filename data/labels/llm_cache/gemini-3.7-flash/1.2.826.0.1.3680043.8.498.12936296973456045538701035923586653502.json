@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12936296973456045538701035923586653502",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Bright slit SI at mid part of ACL; suspected intrasubstance tear.",
+    "MCL": "Fluid surrounding edematous MCL with high SI at proximal part of MCL; suggested sprain with inflammation.",
+    "Medial Meniscus": "suggested vertical tear at body of meniscus, with involvement of the posterior horn and suspected posterior root tear",
+    "Lateral Meniscus": "High vertical SI at anterior horn of lateral meniscus, extending to meniscal surface; suggested vertical tear.",
+    "Medial OA": "Grade-4 chondrosis at medial tibial plateau with adjacent mild subchondral bone edema, subchondral bone cysts (at femur aspect) is seen. Osteophyte is observed.",
+    "Lateral OA": "Grade-2 chondrosis of articular cartilage of weight baring area at lateral femoral condyle and lateral tibial plateau by evidence of focal defect. Osteophyte at lateral tibial plateau is shown.",
+    "PF OA": "The patellofemoral joint: Grade-3 chondrosis with focal defect at lateral aspect. Grade-3 chondrosis at femoral trochea. Osteophyte is also noted.",
+    "Effusion": "Fluid within suprapatellar bursa, knee joint, infrapatellar bursa",
+    "Synovitis": "",
+    "Baker's": "Baker cyst: Present, measured about 3.4x1.7x4.2 cm",
+    "Contusion": "mild subchondral bone edema, subchondral bone cysts (at femur aspect) is seen",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1800,
+    "candidates_tokens": 540,
+    "total_tokens": 2340,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

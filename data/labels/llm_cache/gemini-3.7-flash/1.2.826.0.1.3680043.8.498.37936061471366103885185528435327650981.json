@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.37936061471366103885185528435327650981",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "διάχυτο παθολογικό σήµα µε συνοδό πλήρη ασαφοποίηση των ινών του προσθίου χιαστού συνδέσµου, πιθανά στο πλαίσιο ολικής ρήξης του",
+    "MCL": "Φυσιολογικά απεικονίζονται ο έξω µηνίσκος, ο οπίσθιος χιαστός και οι πλάγιοι σύνδεσµοι",
+    "Medial Meniscus": "Γραµµοειδές παθολογικό σήµα αναδεικνύεται στο οπίσθιο κέρας του έσω µηνίσκου, στο πλαίσιο οριζόντιας ρήξης",
+    "Lateral Meniscus": "Φυσιολογικά απεικονίζονται ο έξω µηνίσκος",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Παρουσία µέτριας ποσότητας ενδαρθρικής συλλογής υγρού",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Παρατηρείται εικόνα οστικού οιδήµατος σε αµφότερους του κνηµιαίους κονδύλους οπισθίως, κυρίως στον έσω",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1311,
+    "candidates_tokens": 532,
+    "total_tokens": 1843,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32328699307307661181881949763360098439",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament prati se u kontinuitetu, promijenjenih intenziteta signala pri tibijalnoj inserciji, prvenstveno u smislu mukoidne degeneracije, dif. dg. manja parcijalna ruptura .",
+    "MCL": "Kolateralni ligamenti prate se u kontinuitetu",
+    "Medial Meniscus": "Lateralni i medijalni menisk bez znakova degeneracije i rupture.",
+    "Lateral Meniscus": "Lateralni i medijalni menisk bez znakova degeneracije i rupture.",
+    "Medial OA": "",
+    "Lateral OA": "Hondromalacija II. stupnja hrskavice lateralnog kondila femura.",
+    "PF OA": "Promjene intenziteta patelarne hrskavice te nekoliko manjih fisura u smislu hondromalacije I/II. stupnja.",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne ciste.",
+    "Contusion": "Manji areal koštanog edema posteriorno u lateralnom platou tibije - mogueć postkontuzijsko žarište.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1279,
+    "candidates_tokens": 498,
+    "total_tokens": 1777,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

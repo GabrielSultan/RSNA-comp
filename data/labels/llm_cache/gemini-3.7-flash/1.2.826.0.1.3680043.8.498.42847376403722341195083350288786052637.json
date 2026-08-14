@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42847376403722341195083350288786052637",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağda travmaya sekonder olabilecek sinyal artışı dikkati çekti",
+    "MCL": "lateral ve medial kollateral ligaman normaldir",
+    "Medial Meniscus": "Medial menisküs sinyal intensitesi ve bütünlüğü doğaldır",
+    "Lateral Meniscus": "Lateral menisküs posterior hornunda grade II dejenerasyon dikkati çekti",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Eklem mesafesinde ve suprapatellar bursada artmış effüzyon",
+    "Synovitis": "",
+    "Baker's": "Popliteal fossada yer işgal eden lezyon saptanmadı",
+    "Contusion": "etrafında yaygın T2A serilerde kemik iliği ödemi dikkati çekti",
+    "Fracture": "Tibia platosunda T1 ve T2A serilerde hipointens şüpheli fraktür hattı"
+  },
+  "usage": {
+    "prompt_tokens": 1205,
+    "candidates_tokens": 439,
+    "total_tokens": 1990,
+    "thoughts_tokens": 346
+  },
+  "attempts": 2
+}

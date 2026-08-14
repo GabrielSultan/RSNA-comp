@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.41605033773891953796694219242501252567",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal ACL",
+    "MCL": "MCL and LCL",
+    "Medial Meniscus": "oblique inferior surfacing tear through the posteromedial corner and posterior horn of the medial meniscus",
+    "Lateral Meniscus": "Normal lateral meniscus",
+    "Medial OA": "The tibiofemoral and patellofemoral articular cartilage is normal",
+    "Lateral OA": "The tibiofemoral and patellofemoral articular cartilage is normal",
+    "PF OA": "The tibiofemoral and patellofemoral articular cartilage is normal",
+    "Effusion": "mild knee effusion",
+    "Synovitis": "",
+    "Baker's": "mild - moderate Baker's cyst",
+    "Contusion": "Normal visualized bones",
+    "Fracture": "Normal visualized bones"
+  },
+  "usage": {
+    "prompt_tokens": 1075,
+    "candidates_tokens": 396,
+    "total_tokens": 1471,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

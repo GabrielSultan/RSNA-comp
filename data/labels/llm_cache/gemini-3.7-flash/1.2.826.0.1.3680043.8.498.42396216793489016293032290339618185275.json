@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42396216793489016293032290339618185275",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament se prati u kontinuitetu, nešto višeg signala moguće u sklopu degenerativnih promjena.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog su signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Medijalni menisk bez rupture, blago mukoidno degeneriran.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture, blago mukoidno degeneriran.",
+    "Medial OA": "",
+    "Lateral OA": "Stanjena je hrskavica lateralnog kondila femura s hondromalacijom prvog stupnja femoralne i tibijalne hrskavice.",
+    "PF OA": "Hondromalacija hrskavice patelle drugog stupnja.",
+    "Effusion": "Lamelarno izljeva u zglobu sa zavlačenjem u lateralni recesus.",
+    "Synovitis": "",
+    "Baker's": "Nema poplitealne ciste.",
+    "Contusion": "Uredan je intenzitet signala svih koštanih struktura.",
+    "Fracture": "Uredan je intenzitet signala svih koštanih struktura."
+  },
+  "usage": {
+    "prompt_tokens": 1320,
+    "candidates_tokens": 493,
+    "total_tokens": 1813,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

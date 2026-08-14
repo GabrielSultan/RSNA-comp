@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10715956446507906169485719013515169244",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Υφορική ρήξη πρόσθιου χιαστού συνδέσµου.",
+    "MCL": "",
+    "Medial Meniscus": "Εκφύλιση και ρήξη παρατηρείται στην οπίσθια κάτω µοίρα του έσω µηνίσκου.",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Παρατηρείται ύδραρθρο-αίµαρθρο",
+    "Synovitis": "",
+    "Baker's": "συνοβιακή κύστη Baker µέγιστης διαµέτρου 6cm",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1320,
+    "candidates_tokens": 388,
+    "total_tokens": 1982,
+    "thoughts_tokens": 274
+  },
+  "attempts": 1
+}

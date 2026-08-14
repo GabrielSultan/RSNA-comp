@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16483470188406187000599644150600279596",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": null,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Kruisbanden en laterale banden intact",
+    "MCL": "",
+    "Medial Meniscus": "",
+    "Lateral Meniscus": "Destructie van het corpus van de laterale meniscus met volledig substantieverlies",
+    "Medial OA": "",
+    "Lateral OA": "Gevorderd lateraal femorotibiaal kraakbeenlijden, met volledig kraakbeenverlies op het posterieure 3e dragende deel laterale femorale condylen en posterieure helft laterale tibiaplateau",
+    "PF OA": "",
+    "Effusion": "Matige opzetting suprapatellaire recessus",
+    "Synovitis": "",
+    "Baker's": "Kleine bakercyste",
+    "Contusion": "met bijhorende subchondrale veranderingen (minimaal oedeem, microbieel kleine geode's)",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1187,
+    "candidates_tokens": 424,
+    "total_tokens": 1611,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

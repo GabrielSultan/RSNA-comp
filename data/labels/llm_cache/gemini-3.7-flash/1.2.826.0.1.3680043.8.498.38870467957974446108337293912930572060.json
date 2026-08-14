@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38870467957974446108337293912930572060",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Die Kreuzbänder intakt.",
+    "MCL": "Schmaler Flüssigkeitssaum Umgebend zum MCL, DD bei Reizzustand.",
+    "Medial Meniscus": "komplexer in erster Linie degenerativer Rissbildung im Hinterhorn bis in die Pars intermedia",
+    "Lateral Meniscus": "Diskrete Signalanhebung im Außenmeniskushinterhorn und im Bereich der anterioren Anheftungsstelle (6/22), DD bei mukoider Degeneration.",
+    "Medial OA": "Auch femorotibial, führend medialseitig multiple tief greifende kontralaterale Läsionen",
+    "Lateral OA": "Auch lateralseitig führend am dorsalen Tibiaplateau vollschichtige Chondropathie",
+    "PF OA": "Tief greifende chondrale Läsion an der lateralen Patellafacette",
+    "Effusion": "Moderater Gelenkerguss.",
+    "Synovitis": "Synoviale Proliferationen.",
+    "Baker's": "Minimal Flüssigkeit an Baker Position (3/90).",
+    "Contusion": "Deutliches Ödem in der medialen Femurkondyle sowie im medialen Tibiaplateau.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1486,
+    "candidates_tokens": 500,
+    "total_tokens": 1986,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

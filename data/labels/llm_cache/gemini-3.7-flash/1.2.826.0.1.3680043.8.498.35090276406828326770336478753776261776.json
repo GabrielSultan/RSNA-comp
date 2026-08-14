@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.35090276406828326770336478753776261776",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament održanog kontinuiteta, u distalnom dijelu promijenjenih intenziteta signala uz vidljivu ganglion cistu promjera 3 mm - nalaz može odgovarati degenerativnim promjenama ili stanju nakon ranije parcijalne rupture.",
+    "MCL": "Blaže distendiran medijalni kolateralni ligament uz manji periligamentarni edem, održanog kontinuiteta.",
+    "Medial Meniscus": "uz manju horizontalnu rupturu u području crvene zone stražnjeg roga",
+    "Lateral Meniscus": "Lateralni menisk je bez znakova rupture ili degeneracije.",
+    "Medial OA": "Promijenjen intenzitet signala artikulacijskih hrskavica medijalne fasete FT zgloba - hondromalacija I/II°.",
+    "Lateral OA": "Artikulacijske hrskavice lateralne fasete FT zgloba su primjerenih intenziteta signala.",
+    "PF OA": "Hondromalacija I° medijalne fasete patele.",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije.",
+    "Fracture": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije."
+  },
+  "usage": {
+    "prompt_tokens": 1458,
+    "candidates_tokens": 561,
+    "total_tokens": 2019,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

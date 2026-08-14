@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.28954361146470748868500417103935640742",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": null,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Beperkte tot milde muco ïde degeneratie voorste kruisband, verder geen bijzonderheden",
+    "MCL": "",
+    "Medial Meniscus": "",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Graad 4 kraakbeenlijden patellofemoraal",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "locoregionaal subchondraal botoedeem ++",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1267,
+    "candidates_tokens": 348,
+    "total_tokens": 1615,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

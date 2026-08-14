@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38900640030483599614088224967855884221",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intakter Verlauf des vorderen Kreuzbandes.",
+    "MCL": "Geringer Reizzustand des MCL.",
+    "Medial Meniscus": "geringer mucoide Degeneration am Innenmeniskushinterhorn. Keine Rissbildung",
+    "Lateral Meniscus": "Mucoide Degeneration des Außenmeniskusvorderhornes ... Keine Rissbildung",
+    "Medial OA": "Ausgedünnter Knorpelbesatz an der medialen Femurkondyle im Femorotibialgelenk, fokal mit bis vollschichtiger Chondropathie",
+    "Lateral OA": "Keine höhergradige Chondropathie im lateralen Kompartiment.",
+    "PF OA": "Fokal bis vollschichtige Chondropathie retropatellar am Patellafirst (4/12 + 14). An der Trochlea ausgedünnter Knorpelbesatz.",
+    "Effusion": "Gering Gelenkerguss führend suprapatellar.",
+    "Synovitis": "",
+    "Baker's": "CC bis 8 cm ausgedehnte polylobulierte Baker-Zyste in Loco typico",
+    "Contusion": "Gering Knochenmarksödem an der medialen Femurkondyle in der subchondralen Belastungszone",
+    "Fracture": "Desweiteren unauffälliges Knochenmarkssignal."
+  },
+  "usage": {
+    "prompt_tokens": 1412,
+    "candidates_tokens": 533,
+    "total_tokens": 1945,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

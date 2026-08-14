@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.41382780862853765983216810855531499640",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Grade 1 injury or degeneration of ACL and PCL and LCL-biceps complex.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "Tear of posterior horn of medial meniscus.",
+    "Lateral Meniscus": "degeneration of lateral meniscus.",
+    "Medial OA": "Osteoarthritis of left knee, more prominent at medial compartment with grade 4 chondromalacia.",
+    "Lateral OA": "Wearing of articular cartilage of left knee with mild subchondral bone marrow edema, more porminent at medial facet of patella and medial femorotibial joint. Osteophyte of left knee",
+    "PF OA": "Wearing of articular cartilage of left knee with mild subchondral bone marrow edema, more porminent at medial facet of patella and medial femorotibial joint.",
+    "Effusion": "Moderate synovitis-joint effusion of left knee",
+    "Synovitis": "Moderate synovitis-joint effusion of left knee",
+    "Baker's": "",
+    "Contusion": "mild subchondral bone marrow edema, more porminent at medial facet of patella and medial femorotibial joint.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1402,
+    "candidates_tokens": 485,
+    "total_tokens": 1887,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

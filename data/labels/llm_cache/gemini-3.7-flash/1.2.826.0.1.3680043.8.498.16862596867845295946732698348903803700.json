@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16862596867845295946732698348903803700",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Φυσιολογικοί απεικονίζονται ο έξω µηνίσκος και οι χιαστοί σύνδεσµοι.",
+    "MCL": "1ου βαθµού κάκωσης του έσω πλαγίου συνδέσµου",
+    "Medial Meniscus": "Ρήξη έσω µηνίσκου µε παρεκτόπιση µηνισκικού υλικού",
+    "Lateral Meniscus": "Φυσιολογικοί απεικονίζονται ο έξω µηνίσκος",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Μέτρια ποσότητα υγρού ελέγχεται εντός της άρθρωσης",
+    "Synovitis": "παρουσία οριζόντιας υµενικής πτυχής εντός του υπερεπεπιγονατιδικού ορογόνου θύλακα",
+    "Baker's": "",
+    "Contusion": "οστικής θλάσης (bone contusion) στον έσω µηριαίο και κνηµιαίο κόνδυλο",
+    "Fracture": "οστικής θλάσης (bone contusion) στον έσω µηριαίο και κνηµιαίο κόνδυλο"
+  },
+  "usage": {
+    "prompt_tokens": 1584,
+    "candidates_tokens": 508,
+    "total_tokens": 2092,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

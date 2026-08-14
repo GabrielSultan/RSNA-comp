@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12219658385745696203053079500246399481",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "МР данни за парциална руптура на предната кръстна връзка с давност",
+    "MCL": "Колатерални лигаменти - със запазена цялост",
+    "Medial Meniscus": "Дегенеративни промени в медиалния менискус.",
+    "Lateral Meniscus": "МР данни за Bucket -handle лезия на латералния менискус.",
+    "Medial OA": "",
+    "Lateral OA": "масивни остеофитни наслоявания по кондилите на фемура и тибията от латералната страна на колянната става.",
+    "PF OA": "Патела – малки кисти субкортикално по задна стена,  хрущял на пателата - липсва",
+    "Effusion": "Няма МР данни за ставен излив.",
+    "Synovitis": "",
+    "Baker's": "Визуализира се малка многокамерна Бекерова киста",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1480,
+    "candidates_tokens": 462,
+    "total_tokens": 1942,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

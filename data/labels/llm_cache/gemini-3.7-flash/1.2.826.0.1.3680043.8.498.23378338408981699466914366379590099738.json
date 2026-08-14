@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.23378338408981699466914366379590099738",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL & PCL appear to be within normal, no abnormal signal intensity is noted.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "Linear signal intensity in posterior horn of medial meniscus, with suspicious of extending into the surface, R/O tear.",
+    "Lateral Meniscus": "No strong MR evidence of tear of lateral meniscus.",
+    "Medial OA": "Spur formation and irregular thining of intra-articular cartilage, reflecting osteoarthritis of left knee",
+    "Lateral OA": "Spur formation and irregular thining of intra-articular cartilage, reflecting osteoarthritis of left knee",
+    "PF OA": "grade 3-4 chondromalacia of patellofemoral joint.",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "Small Baker's cyst with perifocal edema over medial popliteal fossa.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1341,
+    "candidates_tokens": 456,
+    "total_tokens": 1797,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

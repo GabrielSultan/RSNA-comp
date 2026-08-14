@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30537361712821464927469618193893850465",
+  "labels": {
+    "ACL": null,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "Gering Flüssigkeit unterhalb des MCL ohne assoziierte Kontinuitätsunterbrechung",
+    "Medial Meniscus": "Menisci intakt",
+    "Lateral Meniscus": "Menisci intakt",
+    "Medial OA": "Knorpelbesatz femoropatellar und femorotibial regelrecht",
+    "Lateral OA": "Knorpelbesatz femoropatellar und femorotibial regelrecht",
+    "PF OA": "Knorpelbesatz femoropatellar und femorotibial regelrecht",
+    "Effusion": "Kein Gelenkerguss",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Unauffälliges Knochenmarksignal",
+    "Fracture": "Keine Fraktur"
+  },
+  "usage": {
+    "prompt_tokens": 1057,
+    "candidates_tokens": 402,
+    "total_tokens": 1459,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

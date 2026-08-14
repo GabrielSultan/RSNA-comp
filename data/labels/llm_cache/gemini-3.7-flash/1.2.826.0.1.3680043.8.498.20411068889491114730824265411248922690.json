@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.20411068889491114730824265411248922690",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder jeweils intakt.",
+    "MCL": "LCL und MCL unauffällig.",
+    "Medial Meniscus": "Ansonsten unauffällige Darstellung der menisci.",
+    "Lateral Meniscus": "V. a. Riss am Außenmeniskus mit radiärer Komponente in der Pars intermedia (4/21 und 3/98) und horizontalen Ausläufern in das Hinterhorn (4/25).",
+    "Medial OA": "Femorotibial erhaltener Knorpelbelag.",
+    "Lateral OA": "Femorotibial erhaltener Knorpelbelag.",
+    "PF OA": "Überwiegend oberflächliche Chondropathie an der lateralen Patellafacette mit einzelnen fissuralen tief greifenden Anteilen (7/10), diskrete Chondropathie auch an der medialen Patellafacette (7/10).",
+    "Effusion": "Geringer Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "Winzige Baker-Zyste (3/92).",
+    "Contusion": "Unauffälliges Knochenmarkssignal.",
+    "Fracture": "Unauffälliges Knochenmarkssignal."
+  },
+  "usage": {
+    "prompt_tokens": 1233,
+    "candidates_tokens": 502,
+    "total_tokens": 1735,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

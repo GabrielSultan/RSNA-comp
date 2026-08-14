@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11219813299300915347039206446596901205",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of anterior and posterior cruciate ligaments appearing within normal limit",
+    "MCL": "Normal appearance of medial and lateral collateral ligaments",
+    "Medial Meniscus": "No definite tear of medial or lateral meniscus in this study",
+    "Lateral Meniscus": "No definite tear of medial or lateral meniscus in this study",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Minimal joint effusion",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No significant bone marrow edema or active cortical destruction in distal femur, proximal tibia and fibula in this study.",
+    "Fracture": "No significant bone marrow edema or active cortical destruction in distal femur, proximal tibia and fibula in this study."
+  },
+  "usage": {
+    "prompt_tokens": 1111,
+    "candidates_tokens": 391,
+    "total_tokens": 1502,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

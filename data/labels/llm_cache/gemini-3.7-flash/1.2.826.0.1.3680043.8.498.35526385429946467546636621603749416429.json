@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.35526385429946467546636621603749416429",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intact anterior cruciate ligament",
+    "MCL": "The medial collateral ligament, posterior oblique ligament, fibular collateral ligament, popliteus and biceps femoris tendon attachments, as well as iliotibial band are intact.",
+    "Medial Meniscus": "Slight peripheral extrusion of the medial meniscal body without evidence of discrete medial meniscal tear.",
+    "Lateral Meniscus": "The lateral meniscus is intact.",
+    "Medial OA": "Preserved medial and lateral femorotibial articular cartilage.",
+    "Lateral OA": "Preserved medial and lateral femorotibial articular cartilage.",
+    "PF OA": "Scattered foci of mild chondrosis throughout the patellofemoral compartment.",
+    "Effusion": "Small knee joint effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No suspicious focal marrow signal alteration.",
+    "Fracture": "No suspicious focal marrow signal alteration."
+  },
+  "usage": {
+    "prompt_tokens": 1393,
+    "candidates_tokens": 424,
+    "total_tokens": 1817,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

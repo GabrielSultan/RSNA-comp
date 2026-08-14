@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33584205642521728950676369503690551550",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "VKB und HKB intakt.",
+    "MCL": "",
+    "Medial Meniscus": "Innenmeniskus ebenfalls aufgefasert.",
+    "Lateral Meniscus": "Lateral der Außenmeniskus extrudiert (4/22) sowie aufgefasert",
+    "Medial OA": "In beiden Kompartimenten höhergradig geminderter Knorpelbesatz mit teils flächiger vollschichtige Chondropathie am lateralen Tibiaplateau sowie an der medialen Femurkondyle; medial führend.",
+    "Lateral OA": "In beiden Kompartimenten höhergradig geminderter Knorpelbesatz mit teils flächiger vollschichtige Chondropathie am lateralen Tibiaplateau sowie an der medialen Femurkondyle",
+    "PF OA": "An der medialen Trochleafacette flächig vollschichtig geminderter Knorpelbesatz. Höhergradig geminderter Knorpelbesatz auch an der lateralen Trochleafacette sowie oberflächlich geminderter Knorpelbesatz an der Patellarückseite",
+    "Effusion": "Mäßiger Kniegelenkserguss mit Reizsynovialitis.",
+    "Synovitis": "Mäßiger Kniegelenkserguss mit Reizsynovialitis.",
+    "Baker's": "Ausgedehnte, lobulierte Baker-Zyste mit einer CC-Ausdehnung von 8,4 cm",
+    "Contusion": "diskretem Knochenmarksödem. Weiteres Knochenmarksödem in der Eminentia intercondylaris sowie der dorsolateralen Femurkondyle bei fokaler vollschichtiger Chondropathie",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1372,
+    "candidates_tokens": 605,
+    "total_tokens": 1977,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

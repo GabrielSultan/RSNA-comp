@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11719502398697390809777045891822044637",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligament croisé antérieur : Déchirure partielle chronique proximale de grade bas à modéré.",
+    "MCL": "Ligament médial collatéral : Signes d'entorse chronique de bas grade.",
+    "Medial Meniscus": "Déchirure horizontale oblique du corps à la jonction de la corne postérieure surfaçant distalement.",
+    "Lateral Meniscus": "Signes d'une déchirure dégénérative de bas grade avec une composante horizontale dominante dans le corps du ménisque.",
+    "Medial OA": "Arthrose sévère du compartiment articulaire médial avec perte complète du cartilage des surfaces portantes",
+    "Lateral OA": "Arthrose légère à modérée du compartiment latéral avec chondropatie proportionnelle",
+    "PF OA": "Chondropatie modérée focale dans la gorge trochléaire",
+    "Effusion": "Épanchement articulaire : Petit épanchement articulaire réactionnel.",
+    "Synovitis": "",
+    "Baker's": "Kyste de Baker : Petit kyste de Baker avec des signes de fuite proximale et distale.",
+    "Contusion": "œdème osseux réactionnel des deux côtés",
+    "Fracture": "Fractures :\nAucune."
+  },
+  "usage": {
+    "prompt_tokens": 1566,
+    "candidates_tokens": 494,
+    "total_tokens": 2060,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

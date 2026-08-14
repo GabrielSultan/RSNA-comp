@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.18392509497170616983977319528036573378",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağda komplet rüptüre sekonder bütünlük kaybı izlenmiştir.",
+    "MCL": "Medial kollateral ligamanda grade I sprain.",
+    "Medial Meniscus": "Medial ve lateral menisküs posterior hornu ve gövde kesiminde grade II dejenerasyon izlenmiştir.",
+    "Lateral Meniscus": "Medial ve lateral menisküs posterior hornu ve gövde kesiminde grade II dejenerasyon izlenmiştir.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursa ve diz eklem mesafesinde sıvı artışı izlenmiştir.",
+    "Synovitis": "diz ekleminde hafif sinovit.",
+    "Baker's": "",
+    "Contusion": "Tibia lateral plato posteriorunda fibula başında kontüzyonel kemik iliği ödemleri izlenmektedir.",
+    "Fracture": "Femur lateral kondilde subartiküler nondeplase fraktür"
+  },
+  "usage": {
+    "prompt_tokens": 1341,
+    "candidates_tokens": 452,
+    "total_tokens": 1793,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

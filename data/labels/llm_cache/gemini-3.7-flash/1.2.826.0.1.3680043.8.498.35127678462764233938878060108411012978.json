@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.35127678462764233938878060108411012978",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "There is loss of entire of the ACL.",
+    "MCL": "The MCL is intact.",
+    "Medial Meniscus": "represent bucket handle tear of medial meniscus.",
+    "Lateral Meniscus": "Oblique vertical tear with horizontal peripheral tear at posterior horn of the lateral meniscus.",
+    "Medial OA": "Focal almost full thickness cartilage loss, about 9x7mm., at weight bearing site of the medial femoral condyle",
+    "Lateral OA": "",
+    "PF OA": "PF joint is preserved.",
+    "Effusion": "Minimal joint effusion  is  observed.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Focal bone contusion at posterior medial proximal tibia and posterior lateral proximal tibia is detected.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1294,
+    "candidates_tokens": 391,
+    "total_tokens": 1685,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

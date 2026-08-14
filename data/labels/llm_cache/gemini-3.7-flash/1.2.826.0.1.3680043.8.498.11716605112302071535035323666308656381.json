@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11716605112302071535035323666308656381",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt",
+    "MCL": "medialer und lateraler Kollateralbandapparat ebenfalls unauffällig",
+    "Medial Meniscus": "Innenmeniskus gering mukoid signalalteriert, keine meniskale Rissbildung",
+    "Lateral Meniscus": "",
+    "Medial OA": "Diskrete oberflächliche Chondropathie retropatellar sowie femorotibial medial",
+    "Lateral OA": "",
+    "PF OA": "Diskrete oberflächliche Chondropathie retropatellar",
+    "Effusion": "Minimal akzentuierte Gelenkflüssigkeit",
+    "Synovitis": "",
+    "Baker's": "gering flüssigkeitsgefüllte Baker-Zyste",
+    "Contusion": "kein Knochenödem / Bone Bruise",
+    "Fracture": "Ansonsten homogenes Knochenmarksignal, kein Knochenödem / Bone Bruise"
+  },
+  "usage": {
+    "prompt_tokens": 1177,
+    "candidates_tokens": 432,
+    "total_tokens": 1609,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

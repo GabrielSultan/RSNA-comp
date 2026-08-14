@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12238865510201989224648662550299925120",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament održanog kontinuiteta, u distalnom dijelu promijenjenih intenziteta signala - može odgovarati ranijoj parcijalnoj rupturi.",
+    "MCL": "blagu distenziju medijalnog kolateralnog ligamenta koji je bez znakova rupture",
+    "Medial Meniscus": "u području stražnjeg roga moguća ranija parcijalna ruptura na podlozi degenerativnih promjena",
+    "Lateral Meniscus": "Inhomogeniji je prikaz prednjeg roga lateralnog meniska, moguća ranija parcijalna ruptura na podlozi degenerativnih promjena.",
+    "Medial OA": "Degenerativne promjene femorotibijalnog zgloba s reduciranom debljinom hrskavice, uzraženije u medijalnom dijelu.",
+    "Lateral OA": "Degenerativne promjene femorotibijalnog zgloba s reduciranom debljinom hrskavice, uzraženije u medijalnom dijelu.",
+    "PF OA": "Početne degenerativne promjene femoropatelarnog zgloba uz hondromalaciju I. stupnja hrskavice lateralne fasete patele.",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1434,
+    "candidates_tokens": 556,
+    "total_tokens": 1990,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

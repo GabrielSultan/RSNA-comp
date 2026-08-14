@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.21556073772857867149576001337847113661",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The anterior cruciate ligament, posterior cruciate ligament, medial collateral ligament and lateral collateral ligament complex including the IT band, fibular collateral ligament, biceps femoris tendon and popliteus tendon all appear intact and unremarkable.",
+    "MCL": "medial collateral ligament and lateral collateral ligament complex including the IT band, fibular collateral ligament, biceps femoris tendon and popliteus tendon all appear intact and unremarkable.",
+    "Medial Meniscus": "The medial meniscus is intact.",
+    "Lateral Meniscus": "The lateral meniscus is intact.",
+    "Medial OA": "The articular cartilage of the medial joint compartment is intact with mild chondral fraying. There is early condylar notch osteophyte formation seen to the medial compartment.",
+    "Lateral OA": "The articular cartilage of the lateral joint compartment is well-maintained.",
+    "PF OA": "There is mild chondral fraying seen to the medial articular facet of patella and there is focal fissuring seen to the femoral trochlear surface of the patellofemoral joint at the apex with intraosseous, subcortical cyst formation. Findings are in keeping with severe chondrosis.",
+    "Effusion": "There is no evidence of a significant knee effusion.",
+    "Synovitis": "",
+    "Baker's": "There is a trace Baker's cyst demonstrated.",
+    "Contusion": "Marrow signal is otherwise normal.",
+    "Fracture": "Marrow signal is otherwise normal."
+  },
+  "usage": {
+    "prompt_tokens": 1449,
+    "candidates_tokens": 523,
+    "total_tokens": 1972,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

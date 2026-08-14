@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11276674006815021828943434205349220551",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Aumento de señal central del cuerno posterior del menisco medial que no impresiona contactar con la superficie articular, sin caracteres propios de rotura.",
+    "Lateral Meniscus": "Signos de una rotura degenerativa de la raíz meniscal posterior y parte del cuerno posterior del menisco lateral con mínima extrusión meniscal.",
+    "Medial OA": "Cartílagos del compartimento femorotibial medial y de la tróclea femoral sin alteraciones.",
+    "Lateral OA": "Condropatía lesiones grado 3 de platillo tibial lateral y grado 2 del cóndilo femoral lateral.",
+    "PF OA": "Condropatía con lesiones grado 4 de la rótula.",
+    "Effusion": "Leve derrame articular con mínima sinovitis.",
+    "Synovitis": "Leve derrame articular con mínima sinovitis.",
+    "Baker's": "No hay quistes poplíteos patológicos.",
+    "Contusion": "No hay alteraciones de señal significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones de señal significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1398,
+    "candidates_tokens": 506,
+    "total_tokens": 1904,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30150613585152527569197215147135001922",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The study reveals partial tear of anterior cruciate ligament.",
+    "MCL": "Intraligamentus injury of fibular ligament and medial collateral ligament.",
+    "Medial Meniscus": "Intrameniscus edema injury in posterior horn of medial meniscus.",
+    "Lateral Meniscus": "Normal anterior  posterior horn of  lateral meniscus is seen.",
+    "Medial OA": "Normal articular surface is seen.",
+    "Lateral OA": "Normal articular surface is seen.",
+    "PF OA": "Normal articular surface is seen.",
+    "Effusion": "Minimal joint effusion is seen.",
+    "Synovitis": "",
+    "Baker's": "Synovial cyst at inferior aspect to the left proximal tibiofibular joint",
+    "Contusion": "No localized bone edema is seen.",
+    "Fracture": "No bony destruction is noted."
+  },
+  "usage": {
+    "prompt_tokens": 1238,
+    "candidates_tokens": 400,
+    "total_tokens": 1638,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

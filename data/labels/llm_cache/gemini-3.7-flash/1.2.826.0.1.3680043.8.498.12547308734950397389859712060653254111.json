@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12547308734950397389859712060653254111",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Grade 2-3 injury of ACL, in favor of ACL tear.",
+    "MCL": "C/W partial tear of MCL",
+    "Medial Meniscus": "R/O Ramp lesion of medial meniscus.",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "Synovitis of left knee with suprapatellar bursitis and patellar plicae.",
+    "Baker's": "",
+    "Contusion": "Bone contusion of distal femoral condyle and proxiaml tibia.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1329,
+    "candidates_tokens": 369,
+    "total_tokens": 1698,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

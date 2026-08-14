@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13267780356245120052411517053322874891",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Grade 2 injury of anterior cruciate ligament.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "linear signal intensity in anterior horn of medial meniscus, it extends into the surface, in favor of tear.",
+    "Lateral Meniscus": "Tear of anterior horn of lateral meniscus.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Some joint effusion",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Bone contusion with neglected fracture line at fibular head.",
+    "Fracture": "Split fractures at tibial plateau with depression of the lateral articular surface"
+  },
+  "usage": {
+    "prompt_tokens": 1192,
+    "candidates_tokens": 376,
+    "total_tokens": 1568,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

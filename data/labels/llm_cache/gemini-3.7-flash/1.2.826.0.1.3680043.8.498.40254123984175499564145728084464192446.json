@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.40254123984175499564145728084464192446",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Normal orientation with intact ligament fiber of ACL and PCL.",
+    "MCL": "Medial collateral ligament is preserved.",
+    "Medial Meniscus": "Medial meniscus is not torn.",
+    "Lateral Meniscus": "Lateral meniscus is not torn.",
+    "Medial OA": "Focal mild hyperintense fissuring articular cartilage at weight bearing part, mid medial femoral condyle",
+    "Lateral OA": "Diffuse degenerative thinning articular cartilage along the lateral femoral condyle and tibial plateau is observed.",
+    "PF OA": "Patellofemoral joint is intact.",
+    "Effusion": "Minimal PF joint effusion is observed.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No subchondral bone lesion is detected.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1327,
+    "candidates_tokens": 391,
+    "total_tokens": 1718,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

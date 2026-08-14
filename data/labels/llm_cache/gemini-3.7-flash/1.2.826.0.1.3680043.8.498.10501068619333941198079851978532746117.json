@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10501068619333941198079851978532746117",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales continuos.",
+    "MCL": "Ligamentos cruzados y colaterales continuos.",
+    "Medial Meniscus": "Meniscos de morfología y señal normal, sin signos de rotura.",
+    "Lateral Meniscus": "Meniscos de morfología y señal normal, sin signos de rotura.",
+    "Medial OA": "Cartílago femorotibial y patelofemoral de grosor y señal normal sin defectos condrales profundos.",
+    "Lateral OA": "Cartílago femorotibial y patelofemoral de grosor y señal normal sin defectos condrales profundos.",
+    "PF OA": "Cartílago femorotibial y patelofemoral de grosor y señal normal sin defectos condrales profundos.",
+    "Effusion": "No hay signos de derrame articular.",
+    "Synovitis": "",
+    "Baker's": "No se observa quiste poplíteo.",
+    "Contusion": "No hay alteración de señal difusa de la médula ósea.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1257,
+    "candidates_tokens": 463,
+    "total_tokens": 1720,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

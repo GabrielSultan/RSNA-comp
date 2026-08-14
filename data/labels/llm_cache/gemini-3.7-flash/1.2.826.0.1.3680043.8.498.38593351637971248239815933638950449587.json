@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38593351637971248239815933638950449587",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal ACL orientation with intact ligament is observed.",
+    "MCL": "MCL is intact.",
+    "Medial Meniscus": "Linear horizontal peripheral tear at posterior horn of the medial meniscus is noted.",
+    "Lateral Meniscus": "Lateral meniscus is not torn.",
+    "Medial OA": "",
+    "Lateral OA": "hyperintense fissuring cartilage surface, about intact9cm., at anterior lateral femoral condyle",
+    "PF OA": "Multiple cartilaginous defects at the PF joint",
+    "Effusion": "Minimal joint effusion with suprapatellar fluid",
+    "Synovitis": "thickneed synovial tissue are observed.",
+    "Baker's": "",
+    "Contusion": "No fracture or bone contusion is seen.",
+    "Fracture": "No fracture or bone contusion is seen."
+  },
+  "usage": {
+    "prompt_tokens": 1358,
+    "candidates_tokens": 394,
+    "total_tokens": 1752,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

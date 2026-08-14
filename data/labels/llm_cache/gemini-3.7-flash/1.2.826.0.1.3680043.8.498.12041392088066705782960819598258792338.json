@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12041392088066705782960819598258792338",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Signos de rotura parcial del ligamento cruzado anterior con engrosamiento, alteración de señal y disrupción de las fibras",
+    "MCL": "Engrosamiento, alteración de señal y disrupción / desinserción completa de las fibras proximales del componente superficial del ligamento colateral medial",
+    "Medial Meniscus": "Alteración de señal del cuerpo y cuerno posterior del menisco medial sugerente rotura compleja",
+    "Lateral Meniscus": "Rotura longitudinal vertical en la periferia del cuerno posterior del menisco lateral",
+    "Medial OA": "Cartílago femorotibial con alteración de señal difusa con algunos focos de adelgazamiento de espesor parcial y subtotal en ambas superficies de carga de los cóndilos femorales.",
+    "Lateral OA": "Cartílago femorotibial con alteración de señal difusa con algunos focos de adelgazamiento de espesor parcial y subtotal en ambas superficies de carga de los cóndilos femorales.",
+    "PF OA": "Cartílago patelofemoral con lesiones de espesor total con cambios óseos reactivos en la faceta medial de la patela.",
+    "Effusion": "Moderado / acentuado derrame articular con señal de hemartrosis diluida",
+    "Synovitis": "signos de sinovitis difusa.",
+    "Baker's": "Quiste poplíteo de 27 x 29 x 59 mm",
+    "Contusion": "Focos de contusión / fracturas trabeculares en el aspecto posterior del cóndilo femoral lateral y platillo tibial lateral",
+    "Fracture": "Focos de contusión / fracturas trabeculares en el aspecto posterior del cóndilo femoral lateral y platillo tibial lateral"
+  },
+  "usage": {
+    "prompt_tokens": 1788,
+    "candidates_tokens": 612,
+    "total_tokens": 2400,
+    "thoughts_tokens": null
+  },
+  "attempts": 4
+}

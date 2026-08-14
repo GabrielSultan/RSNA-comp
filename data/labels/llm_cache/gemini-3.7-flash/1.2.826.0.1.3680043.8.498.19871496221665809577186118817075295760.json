@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.19871496221665809577186118817075295760",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Parti ële scheur /wellicht volledige ruptuur voorste kruisband.",
+    "MCL": "Collaterale banden intact.",
+    "Medial Meniscus": "Geen onderliggend meniscusletsel.",
+    "Lateral Meniscus": "Geen onderliggend meniscusletsel.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Matige hydrops.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": "Niet verplaatste fractuur posterieure deel laterale tibiaplateau"
+  },
+  "usage": {
+    "prompt_tokens": 1153,
+    "candidates_tokens": 363,
+    "total_tokens": 1516,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

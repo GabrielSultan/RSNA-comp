@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10229223546412441924801428332647762115",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL: low grade partial tear at mid substance.",
+    "MCL": "The medial collateral ligamentous complexes are intact.",
+    "Medial Meniscus": "medial meniscus; horizontal tear at the body through the posterior horn.",
+    "Lateral Meniscus": "the lateral meniscus is not torn.",
+    "Medial OA": "Diffuse lowe grade chondrosis with osteophyte formation.",
+    "Lateral OA": "Diffuse lowe grade chondrosis with osteophyte formation",
+    "PF OA": "diffuse high grade chondrosis, and osteophyte formation.",
+    "Effusion": "Some amount of effusion with synovial thickening is present.",
+    "Synovitis": "Some amount of effusion with synovial thickening is present.",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": "Suspicious for bone fracture along lateral patellar."
+  },
+  "usage": {
+    "prompt_tokens": 1374,
+    "candidates_tokens": 400,
+    "total_tokens": 1774,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

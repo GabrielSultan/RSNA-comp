@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12176466551281285838907773521868954581",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "uredna morfologija i intenziteti signala kolateralnih ligamenata, prednjeg i stražnjeg križnog ligamenta",
+    "MCL": "uredna morfologija i intenziteti signala kolateralnih ligamenata",
+    "Medial Meniscus": "Blaže degenerativne promjene stražnjeg roga medijalnog meniska, bez jasnih znakova rupture.",
+    "Lateral Meniscus": "Lateralni menisk uredne je morfologije i intenziteta signala.",
+    "Medial OA": "Reducirana je debljina artikulacijske hrskavice medijalnog i lateralnog kompartmenta femorotibijalnog zgloba",
+    "Lateral OA": "Reducirana je debljina artikulacijske hrskavice medijalnog i lateralnog kompartmenta femorotibijalnog zgloba uz vidljivu hondromalaciju II. stupnja lateralnog platoa tibije",
+    "PF OA": "Reducirana je debljina artikulacijske hrskavice trohleje femura i medijalne fasete patele gdje je vidljiva hondromalacija II. stupnja.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "Lamelarna tanka Baker cista.",
+    "Contusion": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala.",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala."
+  },
+  "usage": {
+    "prompt_tokens": 1311,
+    "candidates_tokens": 592,
+    "total_tokens": 1903,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

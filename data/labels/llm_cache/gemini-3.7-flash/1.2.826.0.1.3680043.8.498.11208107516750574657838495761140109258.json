@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11208107516750574657838495761140109258",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "ACL; There is irregular appearance and some discontinuity of proximal part of anteromedial bundles of ACL; suspect partial tear.",
+    "MCL": "The medial collateral ligament complexes; intact",
+    "Medial Meniscus": "mild patchy increased T2 SI of meniscal ramp at the capsulosynovial junction, possible type 1 injury.",
+    "Lateral Meniscus": "The lateral compartment, the meniscus is not torn",
+    "Medial OA": "There is no focal chondrosis or chondral injury",
+    "Lateral OA": "there is no focal chondrosis or chondral injury.",
+    "PF OA": "",
+    "Effusion": "Small knee effusion is present.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Mild patchy BMElike signal at medial femoral condyle and tibial plateau; possible bone contusion.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1278,
+    "candidates_tokens": 411,
+    "total_tokens": 1689,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29735852958813434703969490187047665950",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The ACL, PCL, MCL, and LCL complex are intact",
+    "MCL": "The ACL, PCL, MCL, and LCL complex are intact",
+    "Medial Meniscus": "The medial and lateral menisci are intact",
+    "Lateral Meniscus": "The medial and lateral menisci are intact",
+    "Medial OA": "Thinning and irregularity of articular cartilages are detected in the patellofemoral and bilateral tibiofemoral compartments. The cartilage loss is most severe in the medial tibiofemoral compartment",
+    "Lateral OA": "Thinning and irregularity of articular cartilages are detected in the patellofemoral and bilateral tibiofemoral compartments.",
+    "PF OA": "Thinning and irregularity of articular cartilages are detected in the patellofemoral and bilateral tibiofemoral compartments.",
+    "Effusion": "Joint effusion and fluid in the suprapatellar bursa",
+    "Synovitis": "Suspect few lipomatous proliferation of the synovium in the lateral aspect of the suprapatellar bursa.",
+    "Baker's": "No Baker's cyst or other spaceoccupying soft tissue lesion is shown.",
+    "Contusion": "No suspicious bone lesion, gross fracture, or bone contusion is shown.",
+    "Fracture": "No suspicious bone lesion, gross fracture, or bone contusion is shown."
+  },
+  "usage": {
+    "prompt_tokens": 1266,
+    "candidates_tokens": 514,
+    "total_tokens": 1780,
+    "thoughts_tokens": null
+  },
+  "attempts": 4
+}

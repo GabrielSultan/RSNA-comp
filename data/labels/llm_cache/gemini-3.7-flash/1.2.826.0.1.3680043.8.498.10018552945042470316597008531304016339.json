@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10018552945042470316597008531304016339",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales de grosor y señal normales.",
+    "MCL": "Ligamentos cruzados y colaterales de grosor y señal normales.",
+    "Medial Meniscus": "Menisco medial de morfología normal, con discreto edema de la unión meniscocapsular, inespecífico.",
+    "Lateral Meniscus": "Menisco lateral de morfología y señal normal, sin signos de rotura.",
+    "Medial OA": "Cartílago de compartimentos femorotibiales y patelofemoral de grosor y señal normal.",
+    "Lateral OA": "Cartílago de compartimentos femorotibiales y patelofemoral de grosor y señal normal.",
+    "PF OA": "Cartílago de compartimentos femorotibiales y patelofemoral de grosor y señal normal.",
+    "Effusion": "No hay derrame articular.",
+    "Synovitis": "",
+    "Baker's": "No hay quistes poplíteos.",
+    "Contusion": "No hay alteraciones difusas de señal de la médula ósea.",
+    "Fracture": "No hay alteraciones difusas de señal de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1343,
+    "candidates_tokens": 481,
+    "total_tokens": 1824,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

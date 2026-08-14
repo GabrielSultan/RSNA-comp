@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11129751904857491327872353316480050290",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Degeneración mucoide de las fibras del LCA",
+    "MCL": "",
+    "Medial Meniscus": "Rotura de menisco interno",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Pequeña lesión osteocondral en la línea media de la superficie rotuliana",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": "Pequeña lesión osteocondral en la línea media de la superficie rotuliana"
+  },
+  "usage": {
+    "prompt_tokens": 1038,
+    "candidates_tokens": 351,
+    "total_tokens": 1848,
+    "thoughts_tokens": 459
+  },
+  "attempts": 1
+}

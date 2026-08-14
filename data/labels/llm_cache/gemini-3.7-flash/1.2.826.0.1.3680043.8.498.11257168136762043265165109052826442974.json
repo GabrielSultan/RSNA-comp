@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11257168136762043265165109052826442974",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Izmijenjeni signal posterolateralnog snopa prednjeg križnog ligamenta na tibijalnom hvatištu, ddg. moguće minimalna parcijalna ruptura, distenzija.",
+    "MCL": "Primjeren izgled kolateralnih ligamenata.",
+    "Medial Meniscus": "Menisci bez znakova rupture, medijalni početno degenerativno promijenjen.",
+    "Lateral Meniscus": "Menisci bez znakova rupture",
+    "Medial OA": "Nalazi se hondromalacija II° medijalnog kondila femura.",
+    "Lateral OA": "Hondromalacija II° lateralnog kondila tibije. U medijalnom dijelu lateralnog kondila femura defekt hrskavice LL promjera 5 mm, dubine oko 1 mm.",
+    "PF OA": "Patela Wiberg I, medijalno hondromalacija II-III°.",
+    "Effusion": "Bez izljeva u zglobnom prostoru.",
+    "Synovitis": "",
+    "Baker's": "Burzitis tetive m. semimembranosus (početno formiranje Baker ciste).",
+    "Contusion": "Prikazane koštane strukture primjerenih su intenziteta signala.",
+    "Fracture": "Prikazane koštane strukture primjerenih su intenziteta signala."
+  },
+  "usage": {
+    "prompt_tokens": 1259,
+    "candidates_tokens": 527,
+    "total_tokens": 1786,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

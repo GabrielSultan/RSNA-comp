@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12674930973831274527829261576087154644",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküste grade II dejenerasyon",
+    "Lateral Meniscus": "lateral menisküs anterior hornunda kompleks yırtık ile uyumlu görünüm izlemiştir.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursa ve diz eklem mesafesinde sıvı artışı",
+    "Synovitis": "komşu sinovyada kalınlaşma izlenmiştir (bursit ve sinovit )",
+    "Baker's": "",
+    "Contusion": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır.",
+    "Fracture": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır."
+  },
+  "usage": {
+    "prompt_tokens": 1171,
+    "candidates_tokens": 437,
+    "total_tokens": 1608,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

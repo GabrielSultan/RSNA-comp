@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10147180484860577398303524379319212586",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağda mukoid dejenerasyona sekonder diffüz kalınlaşma ve sinyal artışı izlenmiştir.",
+    "MCL": "Medial kollateral ligamande grade I sprain.",
+    "Medial Meniscus": "posterior horn ve gövde kesimde grade III dejenerasyon izlenmiştir.",
+    "Lateral Meniscus": "Lateral menisküs anterior hornu ve gövde kesimde grade II dejenerasyon izlenmiştir.",
+    "Medial OA": "Diz eklemini oluşturan her üç kompartmanda santral-marjinal osteofit formasyonu izlenmiştir.Tibiofemoral eklem medialde eklem aralığında daralma",
+    "Lateral OA": "Diz eklemini oluşturan her üç kompartmanda santral-marjinal osteofit formasyonu izlenmiştir.",
+    "PF OA": "Diz eklemini oluşturan her üç kompartmanda santral-marjinal osteofit formasyonu izlenmiştir.",
+    "Effusion": "Suprapatellar bursa ve diz eklem mesafesinde sıvı artışı izlenmektedir.",
+    "Synovitis": "diz ekleminde sinovit.",
+    "Baker's": "",
+    "Contusion": "ekleme komşu femur medial kondilde subkondral milimetrik kistler ve ödem izlenmiştir.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1416,
+    "candidates_tokens": 529,
+    "total_tokens": 1945,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

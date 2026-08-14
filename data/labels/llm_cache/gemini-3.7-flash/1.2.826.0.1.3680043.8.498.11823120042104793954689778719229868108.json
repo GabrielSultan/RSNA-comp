@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11823120042104793954689778719229868108",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament održanog kontinuiteta, povišenog signala - nalaz može odgovarati ranijoj parcijalnoj rupturi ili degenerativnim promjenama.",
+    "MCL": "medijalni kolateralni ligament, koji je primjerenih intenziteta signala, održanog kontinuiteta.",
+    "Medial Meniscus": "Medijalni menisk je u dorzalnom dijelu neravnih kontura, uz vertikalnu rupturu dorzalnog roga",
+    "Lateral Meniscus": "",
+    "Medial OA": "Hondromalacija IV° kondilarne i tibijalne hrskavice medijalno, uz formirane izraženije osteofite FT zgloba.",
+    "Lateral OA": "Hondromalacija I-II° kondilarne i tibijalne hrskavice lateralno, uz formirane rubne osteofite FT zgloba.",
+    "PF OA": "Hondromalacija III° trohleje femura.",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "Medijalni kondil femura u cijelosti je inhomogen, povišenih intenziteta signala u vidu opsežnog kostanog edema. U području medijalnog kondila tibije također se vidi veća subhondralna zona povišenog intenziteta signala u vidu koštanog edema.",
+    "Fracture": "Prikazana zglobna tijela primjereno su uzglobljena."
+  },
+  "usage": {
+    "prompt_tokens": 1572,
+    "candidates_tokens": 591,
+    "total_tokens": 2163,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.24068239310155798723127213793623172530",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve dış yan bağlar normal.",
+    "MCL": "İç yan bağ ve çevresi hafif ödemli.",
+    "Medial Meniscus": "Medyal menisküs arka boynuzu-gövdesindeki dejeneratif yapı içi intensite artışı serbest kenar düzensizliği-püsküllenmesi yanı sıra bazı düzeylerdeki lineer ılımlı hiperintensitelerin eklem yüzeyi-serbest kenara uzanması ile birlikte yırtık açısından şüpheli.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "trikompartmantal dejeneratif eklem hastalığı medyal femoral tibyal eklemde en belirgin",
+    "Lateral OA": "Diz eklemindeki trikompartmantal dejeneratif eklem hastalığı",
+    "PF OA": "patella apeksi ve medyal patellar fasetteki kıkırdak kalınlığının %50'sin aşmayan kondral dejenerasyon",
+    "Effusion": "Diz eklemi içi sıvı miktarı hafif-orta derecede artmış.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "subkondral fibrovasküler değişiklikler",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1306,
+    "candidates_tokens": 500,
+    "total_tokens": 1806,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

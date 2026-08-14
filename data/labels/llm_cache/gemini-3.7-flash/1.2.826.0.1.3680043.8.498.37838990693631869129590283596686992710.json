@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.37838990693631869129590283596686992710",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküste grade II dejenerasyon ve posterior hornunda horizontal yırtık ile uyumlu görünüm mevcuttur.",
+    "Lateral Meniscus": "Lateral menisküste grade I dejenerasyon izlenmiştir.",
+    "Medial OA": "Tibia medial plato düzeyi anteriorda subkortikal 9mm boyutta kist ve komşu kemikte kemik iliği ödemi izlenmiştir.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Eklemde sıvı artışı saptanmamıştır.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Tibia medial plato düzeyi anteriorda subkortikal 9mm boyutta kist ve komşu kemikte kemik iliği ödemi izlenmiştir.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1189,
+    "candidates_tokens": 449,
+    "total_tokens": 1638,
+    "thoughts_tokens": null
+  },
+  "attempts": 4
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12769221625850663248477857087347890908",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intercondylar compartment (anterior and posterior cruciate ligaments):\nNormal.",
+    "MCL": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Medial Meniscus": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Lateral Meniscus": "Lateral compartment (meniscus, collateral ligament complex, cartilage):\nNormal meniscus.",
+    "Medial OA": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Lateral OA": "Minimal surface fraying of articular cartilage.",
+    "PF OA": "",
+    "Effusion": "Small joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No popliteal cyst.",
+    "Contusion": "Bone marrow edema within the medial aspect of the patella and lateral femoral condyle, secondary to recent lateral patellar dislocation.",
+    "Fracture": "Small linear fracture adjacent to the medial patellar facet, secondary to an avulsion."
+  },
+  "usage": {
+    "prompt_tokens": 1355,
+    "candidates_tokens": 431,
+    "total_tokens": 1786,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

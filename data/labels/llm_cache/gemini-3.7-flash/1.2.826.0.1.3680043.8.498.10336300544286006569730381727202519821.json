@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10336300544286006569730381727202519821",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intercondylar compartment (anterior and posterior cruciate ligaments):\nNormal.",
+    "MCL": "There is some thickening of the medial collateral ligament with some soft tissue edema external to the ligament suggesting a subacute sprain.",
+    "Medial Meniscus": "There is a horizontal tear involving the body and posterior horn of the medial meniscus",
+    "Lateral Meniscus": "Lateral compartment (meniscus, collateral ligament complex, cartilage):\nNormal.",
+    "Medial OA": "There is severe chondrosis with subchondral cystic degenerative bone change involving the posterior articular surface of the medial femoral condyle.",
+    "Lateral OA": "Lateral compartment (meniscus, collateral ligament complex, cartilage):\nNormal.",
+    "PF OA": "There is an severe chondrosis involving the lateral patellar facet and median ridge of the patella",
+    "Effusion": "Moderate joint effusion with debris",
+    "Synovitis": "likely related to synovitis and inflammation",
+    "Baker's": "Small uncomplicated popliteal cyst.",
+    "Contusion": "There is focal intense subchondral bone contusion involving the medial tibial plateau.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1355,
+    "candidates_tokens": 463,
+    "total_tokens": 1818,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

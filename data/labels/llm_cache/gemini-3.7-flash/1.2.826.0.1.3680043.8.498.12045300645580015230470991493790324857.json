@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12045300645580015230470991493790324857",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL normal",
+    "MCL": "MCL normal",
+    "Medial Meniscus": "Medial meniscus normal",
+    "Lateral Meniscus": "Lateral meniscus normal",
+    "Medial OA": "Cartilages normal",
+    "Lateral OA": "Cartilages normal",
+    "PF OA": "Cartilages normal",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "No baker's cyst",
+    "Contusion": "Small contusion of lateral femoral condy",
+    "Fracture": "Multifragmentar intraarticular fracture ‚Äì Sacher type VI"
+  },
+  "usage": {
+    "prompt_tokens": 1079,
+    "candidates_tokens": 358,
+    "total_tokens": 1437,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

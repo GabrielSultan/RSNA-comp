@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32329374180424300100441619205766536205",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Umjerene degenerativne promjene prednjeg križnog ligamenta.",
+    "MCL": "Uz proksimalno hvatište medijalnog kolateralnog ligamenta nalazi se ganglion cista 6 mm, stanje po parcijalnoj rupturi.",
+    "Medial Meniscus": "Horizontalna ruptura tijela medijalnog meniskusa uz vidljivu ekstruziju za do 4 mm",
+    "Lateral Meniscus": "Lateralni meniskus uredne morfologije i intenziteta signala.",
+    "Medial OA": "Hondromalacija I. stupnja hrskavice lateralnog i medijalnog platoa tibije.",
+    "Lateral OA": "Hondromalacija I. stupnja hrskavice lateralnog i medijalnog platoa tibije.",
+    "PF OA": "Stanjenje hrskavice patele uz zone erozije.",
+    "Effusion": "Umjereni izljev suprapatelarno.",
+    "Synovitis": "",
+    "Baker's": "Mala poplitealna (Bakerove) ciste sagitalno visine oko 16 mm.",
+    "Contusion": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala.",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala."
+  },
+  "usage": {
+    "prompt_tokens": 1485,
+    "candidates_tokens": 548,
+    "total_tokens": 2033,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

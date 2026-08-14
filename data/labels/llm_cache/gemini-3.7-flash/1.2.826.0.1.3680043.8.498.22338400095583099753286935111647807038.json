@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.22338400095583099753286935111647807038",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt.",
+    "MCL": "Kollateralbänder intakt.",
+    "Medial Meniscus": "Menisci intakt.",
+    "Lateral Meniscus": "Menisci intakt.",
+    "Medial OA": "Gering flächig ausgedünnter Knorpel in der Belastungszone betont medial",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Unauffälliges Knochenmarksignal.",
+    "Fracture": "Keine frische Fraktur."
+  },
+  "usage": {
+    "prompt_tokens": 1085,
+    "candidates_tokens": 359,
+    "total_tokens": 1444,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

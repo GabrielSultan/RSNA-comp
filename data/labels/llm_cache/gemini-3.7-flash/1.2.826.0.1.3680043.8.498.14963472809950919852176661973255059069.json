@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.14963472809950919852176661973255059069",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): No tear.",
+    "MCL": "Medial collateral ligament (MCL): Periligamentous edema, likely related to adjacent meniscal pathology.",
+    "Medial Meniscus": "Complex tear of the medial meniscus body and posterior horn with dominant complete radial component at the posterior horn-root junction.",
+    "Lateral Meniscus": "Lateral meniscus: Degeneration without discrete tear.",
+    "Medial OA": "Medial compartment cartilage: Articular cartilage irregularity with areas of full-thickness fissuring at the weightbearing aspect of the joint.",
+    "Lateral OA": "Lateral compartment cartilage: Low-grade articular cartilage loss at the posterior lateral femoral condyle.",
+    "PF OA": "Diffuse low-grade cartilage loss at the patella with areas of full-thickness fissuring at the lateral and medial facets. Focal high-grade cartilage loss of the central trochlea.",
+    "Effusion": "Moderate joint effusion, incompletely imaged, with synovial proliferation.",
+    "Synovitis": "with synovial proliferation.",
+    "Baker's": "Trace leaking Baker's cyst.",
+    "Contusion": "Bone marrow edema at the medial tibial plateau, likely reactive.",
+    "Fracture": "concerning for early subchondral insufficiency fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1668,
+    "candidates_tokens": 486,
+    "total_tokens": 2154,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

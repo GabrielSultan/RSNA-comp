@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13176146790594027813190776550419533937",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The anterior cruciate ligament and posterior cruciate ligament are intact.",
+    "MCL": "The medial collateral ligament is intact.",
+    "Medial Meniscus": "The medial and lateral menisci are intact.",
+    "Lateral Meniscus": "The medial and lateral menisci are intact.",
+    "Medial OA": "The medial and lateral tibiofemoral articular cartilage is preserved.",
+    "Lateral OA": "The medial and lateral tibiofemoral articular cartilage is preserved.",
+    "PF OA": "The patellofemoral articular cartilage is preserved.",
+    "Effusion": "Trace joint fluid.",
+    "Synovitis": "",
+    "Baker's": "No Baker's cyst.",
+    "Contusion": "No suspicious bone marrow signal.",
+    "Fracture": "No osteochondral lesion."
+  },
+  "usage": {
+    "prompt_tokens": 1247,
+    "candidates_tokens": 391,
+    "total_tokens": 1875,
+    "thoughts_tokens": 237
+  },
+  "attempts": 1
+}

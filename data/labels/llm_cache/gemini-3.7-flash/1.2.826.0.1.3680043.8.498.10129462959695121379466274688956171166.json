@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10129462959695121379466274688956171166",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji i stražnji križni ligament urednog signala te se prate u kontinuitetu.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Kompleksna degenerativna ruptura medijalnog meniska sa horizontalnom rupturom stražnjeg roga te kosom rupturom prednjeg roga.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova degeneracije ili rupture.",
+    "Medial OA": "Denudacija kosti medijalnog kompartmenta femura i tibije sa koštanim edemom i subhondralnom cističnom pregradnjom.",
+    "Lateral OA": "Subhondralni koštani edem tibije i sitna cistična pregradnja u lateralnom kompartmentu sa fisurama i defektima pune debljine hrskavice.",
+    "PF OA": "Stanjenje i sniženje inteziteta signala trohlearne i patelarne hrskavice sa uzurama pune debljine i arealima edema/ cistične pregradnje, u smislu hondromalacije IV. stupnja.",
+    "Effusion": "Mala količina izljeva suprapatelarno.",
+    "Synovitis": "",
+    "Baker's": "Poplitealna cista veličine 20x6x5 mm.",
+    "Contusion": "Subhondralni koštani edem tibije i sitna cistična pregradnja u lateralnom kompartmentu",
+    "Fracture": "Patela bipartita tip II."
+  },
+  "usage": {
+    "prompt_tokens": 1420,
+    "candidates_tokens": 597,
+    "total_tokens": 2017,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

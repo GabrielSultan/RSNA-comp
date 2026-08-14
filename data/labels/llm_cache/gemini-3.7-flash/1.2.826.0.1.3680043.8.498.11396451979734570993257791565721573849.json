@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11396451979734570993257791565721573849",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "V.a. proximale Partialläsion des vorderen Kreuzbandes bei T2 Signalanhebung und einzelnen nicht eindeutig durchziehenden Faszikeln.",
+    "MCL": "Kollateralbandapparat intakt.",
+    "Medial Meniscus": "Der Innenmeniskus T2 signalangehoben mit V. a. horizontalen Riss (5/21).",
+    "Lateral Meniscus": "Am Außenmeniskus in der pars intermedia kleiner schräger Einriss am freien Rand (5/20 oder 3/91).",
+    "Medial OA": "Femorotibial an der medialen Belastungszone gering reduizierter Knorpelüberzug.",
+    "Lateral OA": "",
+    "PF OA": "Regelrechter Knorpelüberzug retropatellar und trochlear.",
+    "Effusion": "Deutlicher Liphämarthros.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "mit angrenzendem Bone Bruise (5/20).",
+    "Fracture": "Aus dem CT bekannter dorsale Tibiakopfimpression des lateralen Tibiaplateaus"
+  },
+  "usage": {
+    "prompt_tokens": 1245,
+    "candidates_tokens": 477,
+    "total_tokens": 1722,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

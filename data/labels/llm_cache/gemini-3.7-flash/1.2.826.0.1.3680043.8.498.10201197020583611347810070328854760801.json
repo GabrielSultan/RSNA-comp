@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10201197020583611347810070328854760801",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "στα πλαίσια υφολικής ρήξης",
+    "MCL": "",
+    "Medial Meniscus": "Επανελέγχεται η οριζόντια και κάθετη ρήξη στο επίπεδο συµβολής οπίσθίου κέρατος - σώµατος έσω µηνίσκου",
+    "Lateral Meniscus": "Παρατηρείται εικόνα δισκοειδούς έξω µηνίσκου, χωρίς εικόνα ρήξης",
+    "Medial OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος",
+    "Lateral OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος",
+    "PF OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος",
+    "Effusion": "Επανελέγχεται µικρή ενδοαρθρική συλλογή υγρού",
+    "Synovitis": "",
+    "Baker's": "Επανελέγχεται µε ήπια µειωµένες διαστάσεις η κύστη Baker",
+    "Contusion": "Σηµειώνεται πλήρης ύφεση του οιδήµατος του οστικού µυελού που είχε περιγραφεί σε προηγούµενη ΜΤ",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1934,
+    "candidates_tokens": 533,
+    "total_tokens": 2467,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

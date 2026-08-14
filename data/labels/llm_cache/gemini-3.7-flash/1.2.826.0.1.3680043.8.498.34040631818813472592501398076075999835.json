@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.34040631818813472592501398076075999835",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intact cruciate and collateral ligaments.",
+    "MCL": "Intact cruciate and collateral ligaments.",
+    "Medial Meniscus": "Complex tear of the posterior horn of the medial meniscus",
+    "Lateral Meniscus": "Intrasubstance degeneration of the anterior horn of the lateral meniscus is again noted.",
+    "Medial OA": "Focal osteochondral injury in the posterior non weightbearing portion of the medial femoral condyle is again appreciated",
+    "Lateral OA": "Otherwise well-maintained tricompartmental hyaline cartilage.",
+    "PF OA": "Otherwise well-maintained tricompartmental hyaline cartilage.",
+    "Effusion": "No significant joint effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "reduced surrounding bone marrow edema",
+    "Fracture": "Focal osteochondral injury in the posterior non weightbearing portion of the medial femoral condyle"
+  },
+  "usage": {
+    "prompt_tokens": 1159,
+    "candidates_tokens": 416,
+    "total_tokens": 1575,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

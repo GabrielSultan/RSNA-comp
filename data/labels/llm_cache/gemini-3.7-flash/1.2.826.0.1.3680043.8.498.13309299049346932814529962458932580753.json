@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13309299049346932814529962458932580753",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "R/O grade 1 injury or degeneration of ACL, PCL and MCL.",
+    "MCL": "R/O grade 1 injury or degeneration of ACL, PCL and MCL.",
+    "Medial Meniscus": "Tear of posterior horn of medial meniscus",
+    "Lateral Meniscus": "anterior horn of lateral meniscus, with extending into the surface, R/O tear.",
+    "Medial OA": "osteoarthritis of right knee joint, more severe at medial compartment.",
+    "Lateral OA": "Wearing of articular cartilage and subchondral bone marrow edema and tiny subchondral cyst of right knee, more prominent at medial femoral conylde and tibial plateau",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "in favor of Baker's cyst, about 5.7 cm in length.",
+    "Contusion": "subchondral bone marrow edema and tiny subchondral cyst of right knee, more prominent at medial femoral conylde and tibial plateau",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1394,
+    "candidates_tokens": 470,
+    "total_tokens": 1864,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

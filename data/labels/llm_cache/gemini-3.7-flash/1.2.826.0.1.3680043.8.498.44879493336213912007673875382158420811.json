@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.44879493336213912007673875382158420811",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "infiltration kystique ganglionnaire au sein du ligament croisé antérieur sans déchirure transfixiante",
+    "MCL": "Le ligament collatéral interne sont intacts sans déchirure.",
+    "Medial Meniscus": "Le ménisque interne et le ligament collatéral interne sont intacts sans déchirure.",
+    "Lateral Meniscus": "Le ménisque externe de même que le complexe ligamentaire collatéral externe sont intacts sans déchirure.",
+    "Medial OA": "Légère atténuation diffuse des surfaces cartilagineuses au compartiment fémoro-tibial interne sans atteinte transfixiante, en lien avec de légers changements dégénératifs/chondropathie. Ébauche d’ostéophytes marginaux.",
+    "Lateral OA": "Les surfaces cartilagineuses au compartiment fémoro-tibial externe sont relativement préservées sans atteinte transfixiante.",
+    "PF OA": "Il y a une atténuation modérée des surfaces cartilagineuses au compartiment patellofémoral avec fissures chondrales de haut grade",
+    "Effusion": "Minime épanchement intra-articulaire.",
+    "Synovitis": "",
+    "Baker's": "sans kyste de Baker significatif",
+    "Contusion": "petit foyer de changements sous-chondraux réactionnels associés",
+    "Fracture": "Il n’y a pas de dérangement interne"
+  },
+  "usage": {
+    "prompt_tokens": 1544,
+    "candidates_tokens": 525,
+    "total_tokens": 2069,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

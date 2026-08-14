@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10386894500329189457070808193345170500",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intercondylar compartment (anterior and posterior cruciate ligaments):\nUnremarkable",
+    "MCL": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Medial Meniscus": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Lateral Meniscus": "Lateral compartment (meniscus, collateral ligament complex, cartilage):\nNormal.",
+    "Medial OA": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Lateral OA": "Lateral compartment (meniscus, collateral ligament complex, cartilage):\nNormal.",
+    "PF OA": "",
+    "Effusion": "Trace within normal physiologic joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Very small popliteal cyst, measuring 0.5 x 0.4 cm.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1212,
+    "candidates_tokens": 412,
+    "total_tokens": 2016,
+    "thoughts_tokens": 392
+  },
+  "attempts": 2
+}

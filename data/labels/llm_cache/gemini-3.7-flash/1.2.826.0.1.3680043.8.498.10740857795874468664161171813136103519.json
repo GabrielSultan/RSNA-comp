@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10740857795874468664161171813136103519",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament je nešto višeg intenziteta uslijed početne mukoidne degeneracije. Pri tibijalnom hvatištu dvije manje ganglion ciste u sklopu deg. promjena.",
+    "MCL": "Kolateralni ligamenti održani, medijalni distendiran.",
+    "Medial Meniscus": "kompleksnu rupturu stražnjeg roga i ekstruziju s \"flap\"-om meniska posteriorno",
+    "Lateral Meniscus": "Lateralni menisk uredne morfologije i intenziteta signala.",
+    "Medial OA": "stanjenje hrskavice femoralnog kondila i tibijalnog platoa u medijalnom dijelu FT zgloba uz vidljivu posljedičnu redukciju intraartikularnog prostora medijalno.",
+    "Lateral OA": "osteoratrostkih promjena femorotibijalnog zgloba vide se rubni osteofit oba femoralna kondila",
+    "PF OA": "Hondromalacija I. stupnja patelarne hrskavice.",
+    "Effusion": "Blagi izljev u koljenu.",
+    "Synovitis": "",
+    "Baker's": "Poplitaelna (Baker) cista sagitalno veličine 5 cm.",
+    "Contusion": "Rubno je vidljiv i subhondralni edem zglobnih tijela medijalnog kompartmenta FT zgloba.",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala."
+  },
+  "usage": {
+    "prompt_tokens": 1469,
+    "candidates_tokens": 584,
+    "total_tokens": 2053,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

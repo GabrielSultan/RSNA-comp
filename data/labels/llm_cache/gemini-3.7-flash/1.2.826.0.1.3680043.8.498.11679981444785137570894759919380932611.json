@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11679981444785137570894759919380932611",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL is not all in a straight line and increase signal intensity inside, in favor of grade 2 injury.",
+    "MCL": "The contour of MCL is not all in a straight line and increase signal intensity inside, in favor of grade 2-3 injury",
+    "Medial Meniscus": "linear high signal intensity in the body and posterior horn of medial meniscus with extension into the surface, in favor of tear of meniscus.",
+    "Lateral Meniscus": "linear high signal intensity in the body, anterior horn and posterior horn of lateral meniscus with extension into the surface, in favor of tear of meniscus.",
+    "Medial OA": "Mild degeneration of knee joint with spur formation",
+    "Lateral OA": "Mild degeneration of knee joint with spur formation",
+    "PF OA": "Grade 3 patellar chondromalacia.",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "A lobulated cystic lesion in popliteal fossa with a small recess of the knee joint capsule lies medially between the tendons of the medial head of the gastrocnemius and the semimembranosus muscles, in favor of Baker's cyst.",
+    "Contusion": "Bone contusion of tibial plateau",
+    "Fracture": "Depression with suspicious of cortical discontinuity at articular surface of posterior lateral tibia plateau with adjacent bone marrow edema, R/O bone contusion and occult lateral tibial plateau fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1436,
+    "candidates_tokens": 546,
+    "total_tokens": 1982,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

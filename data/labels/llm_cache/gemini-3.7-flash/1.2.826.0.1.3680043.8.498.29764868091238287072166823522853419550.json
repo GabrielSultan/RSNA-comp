@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29764868091238287072166823522853419550",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "ACL is ruptured.",
+    "MCL": "Normal PCL, MCL and LCL.",
+    "Medial Meniscus": "Normal medial and lateral menisci.",
+    "Lateral Meniscus": "Normal medial and lateral menisci.",
+    "Medial OA": "The tibiofemoral and patellofemoral articular cartilage is normal.",
+    "Lateral OA": "The tibiofemoral and patellofemoral articular cartilage is normal.",
+    "PF OA": "The tibiofemoral and patellofemoral articular cartilage is normal.",
+    "Effusion": "Conclusion: Mild effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "A bone contusion is noted in the posterolateral corner of the lateral tibial plateau.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1080,
+    "candidates_tokens": 393,
+    "total_tokens": 1473,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

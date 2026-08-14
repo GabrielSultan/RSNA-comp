@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11192287547210248515805146368662883131",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji i stražnji križni ligament primjerenih intenziteta signala, bez znakova rupture.",
+    "MCL": "Distenzija medijalnog kolateralnog ligamenta.",
+    "Medial Meniscus": "Prednji rog medijalnog meniska je promijenjenih intenziteta signala uz kompleksnu rupturu na prijelazu u prednji korijen",
+    "Lateral Meniscus": "Lateralni menisk je primjerenih intenziteta signala, bez znakova rupture.",
+    "Medial OA": "Primjeren izgled zglobnih tijela FT i FP zgloba.",
+    "Lateral OA": "Hondromalacija I. stupnja hrskavice lateralnog platoa tibije.",
+    "PF OA": "Primjeren izgled zglobnih tijela FT i FP zgloba.",
+    "Effusion": "Umjerena količina izljeva u zglobu, najizraženije posteriorno i u lateralnom recesusu.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne ciste.",
+    "Contusion": "Primjeren izgled zglobnih tijela FT i FP zgloba.",
+    "Fracture": "Primjeren izgled zglobnih tijela FT i FP zgloba."
+  },
+  "usage": {
+    "prompt_tokens": 1400,
+    "candidates_tokens": 503,
+    "total_tokens": 1903,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

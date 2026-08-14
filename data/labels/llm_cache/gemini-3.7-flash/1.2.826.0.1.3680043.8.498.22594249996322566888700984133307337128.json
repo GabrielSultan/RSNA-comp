@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.22594249996322566888700984133307337128",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament pokazuje manji defekt vlakana na hvatištu za interkondilarnu eminenciju tibije u smislu manje parcijalne rupture.",
+    "MCL": "Znakovi blage distenzije medijalnog kolateralnog ligamenta.",
+    "Medial Meniscus": "Kompleksna horizontalna i radijalna ruptura koja komunicira s artikulacijskom plohom tibije, u području tijela i stražnjeg roga medijalnog meniska (Parrot beak ruptura).",
+    "Lateral Meniscus": "Diskretno povišen intenzitet signala lateralnog meniska u smislu početnih degenerativnih promjena.",
+    "Medial OA": "Prikaže se hondromalacija I° hrskavice medijalnog tibijalnog platoa. Hondromalacija III° medijalnog femoralnog kondila.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Umjereni izljev u zglobu.",
+    "Synovitis": "",
+    "Baker's": "Poplitealna cista aksijalno veličine oko 22x7 mm.",
+    "Contusion": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije.",
+    "Fracture": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije."
+  },
+  "usage": {
+    "prompt_tokens": 1381,
+    "candidates_tokens": 538,
+    "total_tokens": 1919,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.31461240229123701082444627629841504099",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "The contour of ACL & PCL appear to be within normal, no abnormal signal intensity is noted.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Lateral Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Medial OA": "",
+    "Lateral OA": "Grade 1-2 chondromalacia of patella and lateral tibial plateau.",
+    "PF OA": "Grade 1-2 chondromalacia of patella and lateral tibial plateau.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No evidence of bone contusion is noted.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1216,
+    "candidates_tokens": 397,
+    "total_tokens": 1613,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

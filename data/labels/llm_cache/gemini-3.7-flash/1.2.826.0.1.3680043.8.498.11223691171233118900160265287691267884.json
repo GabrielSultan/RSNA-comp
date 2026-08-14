@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11223691171233118900160265287691267884",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са със запазена цялост.",
+    "MCL": "Колатерални лигаменти – без особености.",
+    "Medial Meniscus": "Незначителни дегенеративни промени в медиален менискус.",
+    "Lateral Meniscus": "лезия в латералния менискус – 2b степен",
+    "Medial OA": "Артикулиращия хрущял е запазен.",
+    "Lateral OA": "Артикулиращия хрущял е запазен.",
+    "PF OA": "хрущял на пателата, ретинакулуми – нормално изобразяване",
+    "Effusion": "Няма данни за ставен излив.",
+    "Synovitis": "",
+    "Baker's": "Поплитеална ямка – без изменения.",
+    "Contusion": "Няма костномозъчен едем.",
+    "Fracture": "Костите, формиращи колянната става са със запазена форма и сигнална характеристика."
+  },
+  "usage": {
+    "prompt_tokens": 1214,
+    "candidates_tokens": 467,
+    "total_tokens": 2243,
+    "thoughts_tokens": 562
+  },
+  "attempts": 1
+}

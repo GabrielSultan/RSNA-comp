@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12379570725733005682132316461218878636",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "Degeneratieve scheur/maceratie posterieure hoorn mediale meniscus alsook corpus",
+    "Lateral Meniscus": "Normale configuratie en signaalalteraties van de laterale meniscus",
+    "Medial OA": "Gonartrose waarbij > m ilde tot matige vernauwing van de mediale femorotibiale gewrichtsruimte met zones van kraakbeenverlies/denudatie",
+    "Lateral OA": "degeneratieve aanscherping van de gewrichtsranden femorotibiaal (mediaal meer dan lateraal)",
+    "PF OA": "inhomogene signaalintensiteit in patellaire kraakbeen met oppervlakkige kraakbeendefectje laterale patellaire facet",
+    "Effusion": "geringe opzetting van de suprapatellaire bursa",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "geassocieerde reactieve T2-hyperintense beenmerg alteraties tegenaan subchondrale beenplaat",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1376,
+    "candidates_tokens": 471,
+    "total_tokens": 1847,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

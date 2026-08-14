@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13222515831888962408632292783773537312",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament održanog kontinuiteta, početno deg. promijenjen.",
+    "MCL": "Medijalni kolateralni ligament je primjerenih intenziteta signala i održanog kontinuiteta vanjskog sloja.",
+    "Medial Meniscus": "Degenerativne promjene medijalnog meniska, s kompleksnom rupturom trupa i stražnjeg roga",
+    "Lateral Meniscus": "Degenerativne promjene trupa lateralnog meniska (2. stupanj), bez znakova rupture.",
+    "Medial OA": "medijalni FT zglobni prostor je sužen, vjerojatno u sklopu deg. promjena.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Baker cista aksijalno 20 x 14, dulijne 42 mm.",
+    "Contusion": "",
+    "Fracture": "Prikazane koštane strukture primjerene morfologije"
+  },
+  "usage": {
+    "prompt_tokens": 1352,
+    "candidates_tokens": 471,
+    "total_tokens": 1823,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

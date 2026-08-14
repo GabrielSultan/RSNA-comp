@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.28490861391717560759667589681288427737",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Rotura de la raíz meniscal posterior, cuerno posterior y parte del cuerpo del menisco medial con moderada extrusión meniscal.",
+    "Lateral Meniscus": "Rotura compleja con componente principal horizontal oblicuo del cuerpo y cuerno posterior del menisco lateral.",
+    "Medial OA": "Úlceras condrales de espesor parcial y total de la zona de carga del cóndilo femoral medial.",
+    "Lateral OA": "Úlceras condrales de espesor parcial y total de la región central posterior de platillo tibial lateral.",
+    "PF OA": "Avanzados cambios degenerativos patelofemorales.",
+    "Effusion": "Moderado derrame articular con sinovitis difusa.",
+    "Synovitis": "Moderado derrame articular con sinovitis difusa.",
+    "Baker's": "",
+    "Contusion": "Edema óseo con fractura subcortical de la zona de carga del platillo tibial medial",
+    "Fracture": "fractura subcortical de la zona de carga del platillo tibial medial"
+  },
+  "usage": {
+    "prompt_tokens": 1438,
+    "candidates_tokens": 491,
+    "total_tokens": 1929,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

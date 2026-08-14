@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12007335335641704192494936946829650792",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ sinyali hafif diffüz artmıştır",
+    "MCL": "lateral ve medial kollateral ligaman normaldir",
+    "Medial Meniscus": "Medial menisküste grade II dejenerasyon izlendi",
+    "Lateral Meniscus": "Lateral menisküste horizontal yırtık izlendi",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Patellofemoral eklem mesafesinde daralma ve komşu patellar ve trohlear kıkırdaklarda hafif incelme mevcuttur(kondromalazi)",
+    "Effusion": "Diz eklemi içerisinde hafif sıvı artışı izlendi",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1158,
+    "candidates_tokens": 397,
+    "total_tokens": 1555,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

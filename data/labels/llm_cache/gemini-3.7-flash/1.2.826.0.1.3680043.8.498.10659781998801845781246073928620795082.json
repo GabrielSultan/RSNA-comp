@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10659781998801845781246073928620795082",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "ACL; mucoid degeneration with subchondral bone cyst at the tibial spine near ACL insertion",
+    "MCL": "deep MCL; complete torn",
+    "Medial Meniscus": "In medial compartment, meniscus mucoid degeneration with tear at posterior horn",
+    "Lateral Meniscus": "In lateral compartment; suspicious for posterior root injury",
+    "Medial OA": "high grade chondrosis.",
+    "Lateral OA": "Diffuse lowhigh grade chondrosis.",
+    "PF OA": "tricompartment OA changes; chondrosis with osteophyte formation",
+    "Effusion": "Minimal effusion is present in right knee.",
+    "Synovitis": "",
+    "Baker's": "Baker's cyst; 3xintact5x1.8 cm",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1221,
+    "candidates_tokens": 396,
+    "total_tokens": 1617,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

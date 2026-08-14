@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29943089198208468441240036404506927883",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intact anterior cruciate ligament",
+    "MCL": "The medial collateral ligament, posterior oblique ligament, fibular collateral ligament, popliteus and biceps femoris tendon attachments, as well as iliotibial band are intact.",
+    "Medial Meniscus": "The medial meniscus shows a tiny nondisplaced partial radial tear involving the posterior horn",
+    "Lateral Meniscus": "The lateral meniscus is intact.",
+    "Medial OA": "focal high-grade cartilage thinning involving the anterior peripheral aspect of the medial femoral condyle",
+    "Lateral OA": "Within the lateral compartment, there is fissuring of articular cartilage involving the central posterior weightbearing aspect lateral femoral condyle",
+    "PF OA": "Mild chondrosis overlying the lateral patellar facet",
+    "Effusion": "Trace knee joint fluid.",
+    "Synovitis": "",
+    "Baker's": "Baker's cyst, measuring 31 x 11 x 49 mm.",
+    "Contusion": "No suspicious focal marrow signal alteration.",
+    "Fracture": "No suspicious focal marrow signal alteration."
+  },
+  "usage": {
+    "prompt_tokens": 1454,
+    "candidates_tokens": 451,
+    "total_tokens": 1905,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

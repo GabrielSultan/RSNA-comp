@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.21060274255072711241653174133146945101",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Old, low-grade partial-thickness tear of the anterior cruciate ligament.",
+    "MCL": "The medial collateral ligament and posterior oblique ligament are intact.",
+    "Medial Meniscus": "Inferiorly surfacing incomplete tear posterior horn medial meniscus extending into the body",
+    "Lateral Meniscus": "The lateral meniscus is intact.",
+    "Medial OA": "Mild to moderate chondrosis most pronounced along the medial femorotibial compartment, suggesting evolving mild osteoarthritis of the right knee.",
+    "Lateral OA": "Scattered foci of mild chondrosis throughout the lateral femorotibial compartment.",
+    "PF OA": "Scattered foci of mild chondrosis of the patellofemoral compartment.",
+    "Effusion": "Trace knee joint fluid.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No suspicious focal marrow signal alteration.",
+    "Fracture": "No suspicious focal marrow signal alteration."
+  },
+  "usage": {
+    "prompt_tokens": 1365,
+    "candidates_tokens": 421,
+    "total_tokens": 1786,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

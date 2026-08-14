@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.24679905857546029995247839380830345841",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "An at least high-grade partial disruption of the proximal and midportions of the anterior cruciate ligament is noted",
+    "MCL": "well-preserved posterior cruciate and both collateral ligaments",
+    "Medial Meniscus": "both menisci",
+    "Lateral Meniscus": "both menisci",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "There is an associated significant joint effusion with suprapatellar extension.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No associated osteochondral impaction injury",
+    "Fracture": "No fracture or marrow infiltration."
+  },
+  "usage": {
+    "prompt_tokens": 1159,
+    "candidates_tokens": 364,
+    "total_tokens": 1523,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

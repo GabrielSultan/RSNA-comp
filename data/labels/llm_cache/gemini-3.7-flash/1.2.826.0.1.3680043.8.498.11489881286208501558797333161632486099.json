@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11489881286208501558797333161632486099",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament se prati u kontinuitetu, zadebljanih kontura i povišenih intenziteta signala, moguće u sklopu manje parcijalne rupture.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Medijalni menisk je blaže degenerativno promijenjen u stražnjem rogu, bez sigurnih znakova rupture.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova degeneracije ili rupture.",
+    "Medial OA": "Hondromalacija medijalne tibijalne hrskavice I. stupnja.",
+    "Lateral OA": "Uredan intenzitet signala femoralne hrskavice.",
+    "PF OA": "Uredna je kongruencija zglobnih tijela femoropatelarnog zgloba. Uredan intenzitet signala patelarne hrskavice.",
+    "Effusion": "Manja količina intraartikularnog izljeva.",
+    "Synovitis": "",
+    "Baker's": "Bez znakova poplitealne ciste.",
+    "Contusion": "Uredan intenzitet signala svih koštanih struktura.",
+    "Fracture": "Uredan intenzitet signala svih koštanih struktura."
+  },
+  "usage": {
+    "prompt_tokens": 1272,
+    "candidates_tokens": 524,
+    "total_tokens": 1796,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

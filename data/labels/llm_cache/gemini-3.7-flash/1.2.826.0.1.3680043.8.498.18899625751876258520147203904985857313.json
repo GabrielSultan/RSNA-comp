@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.18899625751876258520147203904985857313",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of anterior cruciate ligament (ACL) and posterior cruciate ligament (PCL) appear to be within normal",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Lateral Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Medial OA": "",
+    "Lateral OA": "Small osteochondral defect at posterior portion of lateral femoral condyle is suspected",
+    "PF OA": "",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No evidence of bone contusion is noted.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1168,
+    "candidates_tokens": 382,
+    "total_tokens": 1550,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.14495028403937132710814780922642512791",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстни връзки – със запазена цялост.",
+    "MCL": "Колатерални лигаменти – нормално изобразяване.",
+    "Medial Meniscus": "хиперинтензна лезия в задния рог на медиалния менискус – grade IIb",
+    "Lateral Meniscus": "Нормално изобразяване на латералния менискус.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Малък дефект в хрущяла на фемура. Дефектът е разположен срединно, ретропателарно",
+    "Effusion": "Няма данни за ставен излив.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Останалите кости, формиращи дясната колянна става са с нормална форма и сигнална характеристика.",
+    "Fracture": "без данни за формиране на остеоходнрален фрагмент"
+  },
+  "usage": {
+    "prompt_tokens": 1422,
+    "candidates_tokens": 454,
+    "total_tokens": 2262,
+    "thoughts_tokens": 386
+  },
+  "attempts": 1
+}

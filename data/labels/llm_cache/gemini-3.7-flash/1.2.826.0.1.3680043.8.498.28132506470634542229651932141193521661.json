@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.28132506470634542229651932141193521661",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament: intact",
+    "MCL": "Medial collateral ligament: Superficial and deep components intact.",
+    "Medial Meniscus": "Medial meniscus: Nonsurfacing hyperintensity of the body and posterior horn is probably due to intrasubstance degeneration. No evidence of meniscal tear.",
+    "Lateral Meniscus": "Lateral meniscus: intact",
+    "Medial OA": "Medial compartment: No hyaline cartilage disease.",
+    "Lateral OA": "Lateral compartment: No hyaline cartilage disease.",
+    "PF OA": "Patellofemoral compartment: No hyaline cartilage disease.",
+    "Effusion": "No joint effusion",
+    "Synovitis": "",
+    "Baker's": "Trace Baker's cyst.",
+    "Contusion": "Bones: No fracture, stress reaction, or osseous lesion is seen.",
+    "Fracture": "Bones: No fracture, stress reaction, or osseous lesion is seen."
+  },
+  "usage": {
+    "prompt_tokens": 1375,
+    "candidates_tokens": 425,
+    "total_tokens": 1800,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

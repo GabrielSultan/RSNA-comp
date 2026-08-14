@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13330694332190836651711643932953274573",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "as are the cruciate and collateral ligaments",
+    "MCL": "as are the cruciate and collateral ligaments",
+    "Medial Meniscus": "There is a complex, undisplaced tear through the posterior horn of the medial meniscus.",
+    "Lateral Meniscus": "The lateral meniscus is intact",
+    "Medial OA": "Tricompartmental articular cartilage is otherwise well preserved.",
+    "Lateral OA": "Tricompartmental articular cartilage is otherwise well preserved.",
+    "PF OA": "Solitary grade 3 cartilage fissure noted at the medial retropatellar facet.",
+    "Effusion": "No significant knee effusion",
+    "Synovitis": "",
+    "Baker's": "in keeping with a ganglion cyst that is arising from the knee joint proper",
+    "Contusion": "potentially representative of a bone marrow contusion.",
+    "Fracture": "remaining marrow signal throughout"
+  },
+  "usage": {
+    "prompt_tokens": 1273,
+    "candidates_tokens": 411,
+    "total_tokens": 1684,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

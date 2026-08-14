@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12978510157202852202776899910529174803",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са със запазена цялост.",
+    "MCL": "",
+    "Medial Meniscus": "Нормално представени менискуси.",
+    "Lateral Meniscus": "Нормално представени менискуси.",
+    "Medial OA": "Хрущялът, покриващ ставните повърхности на костите е съхранен.",
+    "Lateral OA": "Хрущялът, покриващ ставните повърхности на костите е съхранен.",
+    "PF OA": "Хрущял на пателата, ретинакулуми – нормално представени.",
+    "Effusion": "Наличие на минимален ставен излив.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Визуализира се контузионен костномозъчен едем в тибията срединно и към медиалното тибиално плато.",
+    "Fracture": "МР данни за фрактура на тибията в областта на интеркондиларните еминенции."
+  },
+  "usage": {
+    "prompt_tokens": 1265,
+    "candidates_tokens": 471,
+    "total_tokens": 1736,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

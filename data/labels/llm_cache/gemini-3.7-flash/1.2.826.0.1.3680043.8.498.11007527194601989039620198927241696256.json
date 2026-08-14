@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11007527194601989039620198927241696256",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament urednog signala te se prati u kontinuitetu.",
+    "MCL": "Izmijenjen intenzitet signala medijalnog kolateralnog ligamenta cijelim tokom, ddg distenzija s tendinpatskim promjenama.",
+    "Medial Meniscus": "Kompleksna \"bucket handle\" ruptura medijalnog meniska",
+    "Lateral Meniscus": "Vertikalna ruptura prednjeg roga lateralnog meniska.",
+    "Medial OA": "reduciranim medijalnim kompartmentom TF zglobnog prostora i kompletnim gubitkom debljine hrskavice medijalnog platoa tibije i kondila femura",
+    "Lateral OA": "",
+    "PF OA": "OA promjene PF zgloba.",
+    "Effusion": "Izljev u koljenskom zglobu u suprapatelarnom i stražnjem femoralnom recesusu.",
+    "Synovitis": "",
+    "Baker's": "Baker cista bez znakova ruptura sagitalno dimenzija 50x10mm",
+    "Contusion": "Manji koštani edem uz rub medijalnog platoa tibije- hondromalacija IV. stupnja.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1331,
+    "candidates_tokens": 505,
+    "total_tokens": 1836,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

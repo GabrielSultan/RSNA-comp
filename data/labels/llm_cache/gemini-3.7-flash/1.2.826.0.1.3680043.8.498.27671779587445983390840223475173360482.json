@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.27671779587445983390840223475173360482",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL & PCL appear to be within normal, no abnormal signal intensity is noted.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Lateral Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Medial OA": "No signficant subchondral edema or cyst of left knee.",
+    "Lateral OA": "No signficant subchondral edema or cyst of left knee.",
+    "PF OA": "Suspicious of mild increased singal intensity of lateral femoral trochlea with slight fraying surface, R/O chondromalacia.",
+    "Effusion": "Minimal joint effusion in left knee.",
+    "Synovitis": "",
+    "Baker's": "A small cystic-like lesion in medial aspect of left knee, R/O small bursitis abutting superficial MCL or ganglion cyst.",
+    "Contusion": "No evidence of bone contusion is noted.",
+    "Fracture": "No signficant subchondral edema or cyst of left knee."
+  },
+  "usage": {
+    "prompt_tokens": 1249,
+    "candidates_tokens": 465,
+    "total_tokens": 1714,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

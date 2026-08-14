@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10415616591430643294142401482460086713",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "МР данни за скъсване на предната кръстна връзка.",
+    "MCL": "Вижда се частично скъсване на медиалния колатералвен лигамент.",
+    "Medial Meniscus": "МР данни за лезия на задния рог на медиалния менискус – 2a.",
+    "Lateral Meniscus": "Нормално изобразяване на латералния менискус.",
+    "Medial OA": "Ставният хрущял на фемура, тибията и пателата е интактен.",
+    "Lateral OA": "Ставният хрущял на фемура, тибията и пателата е интактен.",
+    "PF OA": "Ставният хрущял на фемура, тибията и пателата е интактен.",
+    "Effusion": "МР данни за ставен излив, най-вероятно хеморагичен.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Костите, формиращи колянната става са с нормалн а форма и сигнален интензитет.",
+    "Fracture": "Костите, формиращи колянната става са с нормалн а форма и сигнален интензитет."
+  },
+  "usage": {
+    "prompt_tokens": 1382,
+    "candidates_tokens": 512,
+    "total_tokens": 1894,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

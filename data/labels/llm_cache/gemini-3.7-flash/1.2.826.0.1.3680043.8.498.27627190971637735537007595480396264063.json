@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.27627190971637735537007595480396264063",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "Quasi volledige radiaire scheur van de posterieure hoorn tegenaan de root, op degeneratieve basis",
+    "Lateral Meniscus": "",
+    "Medial OA": "Gevorderd femorotibiaal kraakbeenlijden graad 4, met volledig kraakbeenverlies centraal op het dragende deel van de mediale femorale condyl en het tibiaplateau",
+    "Lateral OA": "",
+    "PF OA": "Gevorderd femoropatellaire kraakbeenlijden met volledig kraakbeenverlies lateraal op het laterale facet van de trochlea de patella, met marginale osteofytose",
+    "Effusion": "forse opzetting van suprapatellaire recessus",
+    "Synovitis": "",
+    "Baker's": "Volumineuze Bakerse cyste met afmetingen 7 x 2 x 1~cm, met recente ruptuur",
+    "Contusion": "subchondraal botoedeem en mogelijks begin van kleine subchondrale insuffici ëntiefractuur",
+    "Fracture": "mogelijks begin van kleine subchondrale insuffici ëntiefractuur met beginnende T1 hypo-intense lineaire verandering"
+  },
+  "usage": {
+    "prompt_tokens": 1369,
+    "candidates_tokens": 511,
+    "total_tokens": 1880,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

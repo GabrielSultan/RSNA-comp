@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.14850534390650184292244380816212794996",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder jeweils durchgehend abgrenzbar ohne Hinweis auf eine Ruptur.",
+    "MCL": "Kollateralbandapparat unauffällig.",
+    "Medial Meniscus": "Menisci intakt.",
+    "Lateral Meniscus": "Menisci intakt.",
+    "Medial OA": "Kleine Osteophyten femorotibial",
+    "Lateral OA": "Inhomogene Darstellung des Knorpelbelags am lateralen Tibiaplateau mit einzelnen fokalen tief greifenden Läsionen",
+    "PF OA": "Unauffälliger Knorpelbelag femoropatellar.",
+    "Effusion": "Kein Gelenkerguss bei etwas akzentuierter Gelenkflüssigkeit.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Kein Knochenödem",
+    "Fracture": "diskreten kortikalen und subchondralen Irregularitäten angrenzend"
+  },
+  "usage": {
+    "prompt_tokens": 1192,
+    "candidates_tokens": 435,
+    "total_tokens": 1627,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.26792665054823243997838322477587733719",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Grade 1 injury or degeneration of ACL and PCL.",
+    "MCL": "",
+    "Medial Meniscus": "Tear of anterior/ posterior horn of medial meniscus .",
+    "Lateral Meniscus": "",
+    "Medial OA": "Osteoarthritis of right knee with subchondral bone marrow edema and cysts in medial femorotibial joint.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "Mild synovitis of right knee joint and patellar plicae.",
+    "Baker's": "",
+    "Contusion": "Bone contusion of right distal femur, major at lateral femoral condyle.",
+    "Fracture": "C/W fracture of right tibial plateau"
+  },
+  "usage": {
+    "prompt_tokens": 1325,
+    "candidates_tokens": 388,
+    "total_tokens": 1713,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

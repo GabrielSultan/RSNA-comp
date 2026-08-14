@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.39135770176150551756142329948474103964",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL is not in a straight line and increase signal intensity inside on F/S T2WI, in favor of tear.",
+    "MCL": "Interstitial increseased signal intensity of MCL on F/S T2WI, in favor of grade 1 injury.",
+    "Medial Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Lateral Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "mild infrapatellar bursitis and Baker's cyst.",
+    "Contusion": "Abnormal signal intensity is noted in proximal tibia and distal femur, which shows low signal intensity on T1WI and high signal intensity on T2WI, in favor of bone contusion.",
+    "Fracture": "Suspicious of subchondral fracture of lateral femoral condyle."
+  },
+  "usage": {
+    "prompt_tokens": 1367,
+    "candidates_tokens": 459,
+    "total_tokens": 1826,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

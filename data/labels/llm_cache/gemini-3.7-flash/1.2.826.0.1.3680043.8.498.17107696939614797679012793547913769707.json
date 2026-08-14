@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.17107696939614797679012793547913769707",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ruptura prednjeg križnog ligamenta.",
+    "MCL": "Uredna je morfologija i intenziteti signala kolateralnih ligamenata",
+    "Medial Meniscus": "Vidi se vertikalna ruptura stražnjeg roga medijalnog meniska.",
+    "Lateral Meniscus": "Radijalna ruptura stražnjeg roga lateralnog meniska.",
+    "Medial OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Lateral OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "PF OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Effusion": "Manja količina slobodne tekućine u zglobnom prostoru.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1117,
+    "candidates_tokens": 437,
+    "total_tokens": 1554,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

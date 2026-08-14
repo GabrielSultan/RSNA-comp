@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.25650384476012633612528314070894186451",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağdaki difüz ödem parsiyel yırtığı ile birlikte.",
+    "MCL": "yan bağlar normal.",
+    "Medial Meniscus": "medyal menisküsün gövde kesiminde doku kaybının eşlik ettiği kompleks dejeneratif yırtık.",
+    "Lateral Meniscus": "Lateral menisküs arka boynuzu-gövde kesiminde üst eklem yüzeyi ile ilişkilenen yırtık izleniyor.",
+    "Medial OA": "trikompartmantal dejeneratif eklem hastalığı",
+    "Lateral OA": "trikompartmantal dejeneratif eklem hastalığı lateral femoral tibyal kompartmanda en belirgin ve tam kata ulaşan eklem kıkırdağı kaybı ve dejenerasyonu",
+    "PF OA": "trikompartmantal dejeneratif eklem hastalığı",
+    "Effusion": "Diz eklemi içi orta dereceli sıvı artışı",
+    "Synovitis": "yer yer 8 mm'ye varan sinovyal hipertrofi ile birlikte.",
+    "Baker's": "Gastrokinemyus-semimembranozus (GK-SM) bursiti 5,7x2,7x1,4 cm boyutunda olup sızdırıyor.",
+    "Contusion": "Lateral tibyal plato posterolateral köşede minimal deplase akut-subakut evredeki kırığı ve medyal platoda orta hattaki subkondral kırığı geniş kemik iliği ödemi çevreliyor.",
+    "Fracture": "Lateral tibyal plato posterolateral köşede minimal deplase akut-subakut evredeki kırığı ve medyal platoda orta hattaki subkondral kırığı"
+  },
+  "usage": {
+    "prompt_tokens": 1283,
+    "candidates_tokens": 597,
+    "total_tokens": 1880,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

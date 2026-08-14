@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11723945299462627737346907048285143063",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküs arka boynuzda horizontal gövde kesiminde radial yırtık mevcuttur.",
+    "Lateral Meniscus": "Lateral menisküs  normaldir.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursa ve diz ekleminde hafif sıvı artışı izlendi.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1161,
+    "candidates_tokens": 379,
+    "total_tokens": 1934,
+    "thoughts_tokens": 394
+  },
+  "attempts": 1
+}

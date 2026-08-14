@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12501925425699863373513819814520995919",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL bütünlüğü mevcut değildir ( tam kat rüptür).",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Anterior hornundan posterior honuna uzanım gösteren ve eklem yüzü ile ilişkili yırtık ile uyumlu sinyal görünümü mevcut olup menisküs eklem dışına doğru protrüde görünümdedir.",
+    "Lateral Meniscus": "Lateral menisküste kontur düzenini bozmayan Tip II C dejenerasyon ile uyumlu sinyal görünümü izlendi.",
+    "Medial OA": "Tibiofemoral eklem mesafesi medialde daralmış kondral doku incelmiş görünümdedir.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Retropatellar aralıkta ve eklem mesafesinde hafif sıvı artışı izlendi.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır.",
+    "Fracture": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır."
+  },
+  "usage": {
+    "prompt_tokens": 1232,
+    "candidates_tokens": 483,
+    "total_tokens": 1715,
+    "thoughts_tokens": null
+  },
+  "attempts": 4
+}

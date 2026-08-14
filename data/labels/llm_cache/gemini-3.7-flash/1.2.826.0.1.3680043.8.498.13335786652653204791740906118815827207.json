@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13335786652653204791740906118815827207",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Предната кръстна връзка е с белези на мукоидна дегенерация. Последната е със запазена цялост.",
+    "MCL": "Колатерални лигаменти – б.о.",
+    "Medial Meniscus": "Нормално изобразяване на менискусите.",
+    "Lateral Meniscus": "Нормално изобразяване на менискусите.",
+    "Medial OA": "Артикулиращия хрущял на фемура и тибията от медиалната страна на ставата изглежда лекостепенно изтънен.",
+    "Lateral OA": "",
+    "PF OA": "Патела, хрущял на пателата, ретинакулуми – б.о.",
+    "Effusion": "МР данни за ставен излив.",
+    "Synovitis": "",
+    "Baker's": "Вижда се многокамерна Бекерова киста от медиалната страна на коляното с белези на руптура.",
+    "Contusion": "Няма данни за костномозъчен едем.",
+    "Fracture": "Костите, формиращи колянната става са с нормална форма и интензитет на сигнала."
+  },
+  "usage": {
+    "prompt_tokens": 1290,
+    "candidates_tokens": 503,
+    "total_tokens": 1793,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

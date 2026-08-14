@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11716730437469973434747875401501334429",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kompletna ruptura prednjeg križnog ligamenta u proksimalnoj trećini",
+    "MCL": "Edem unutarnjeg sloja vlakana medijalnog kolateralnog ligamenta",
+    "Medial Meniscus": "Umjerene degenerativne promjene medijalnog meniska s vidljivom horizontalnom rupturom u području trupa.",
+    "Lateral Meniscus": "Parcijalna ruptura vlakana prednjeg korijena lateralnog meniska.",
+    "Medial OA": "Hondromalacija III. stupnja hrskavice medijalnog kondila femura.",
+    "Lateral OA": "Hondromalacija II. stupnja hrskavice medijalnog i lateralnog tibijalnog platoa.",
+    "PF OA": "Hondromalacija I. stupnja medijalne fasete patele.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne (Bakerove) ciste.",
+    "Contusion": "Koštani edem interkondilarne emeinencije tibije.",
+    "Fracture": "Navedeno govori u prilog avulziji meniskofemoralnog ligamenta."
+  },
+  "usage": {
+    "prompt_tokens": 1415,
+    "candidates_tokens": 491,
+    "total_tokens": 1906,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

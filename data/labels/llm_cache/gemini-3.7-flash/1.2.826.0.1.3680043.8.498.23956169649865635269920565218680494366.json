@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.23956169649865635269920565218680494366",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Bandapparat intakt.",
+    "MCL": "Medialer Kollateralbandapparat mit Reizzustand.",
+    "Medial Meniscus": "Innenmeniskus bei Substanzdefekt im Hinterhorn gering extrudiert stehend mit horizontaler Rissbildung bei Auffaserung und teils nach paratibial verdrängten Meniskusanteilen",
+    "Lateral Meniscus": "Bek. mukoide Veränderungen des AM-Hinterhorns.",
+    "Medial OA": "progrediente Stigmata der medialen Gonarthrose mit flächig wellig gemindertem Knorpelbesatz",
+    "Lateral OA": "Oberflächliche Chondropathien lateral femorotibial",
+    "PF OA": "Oberflächliche Chondropathien lateral femorotibial und femoropatellar.",
+    "Effusion": "Geringer Reizerguss",
+    "Synovitis": "Reizsynovialitis.",
+    "Baker's": "Synoviale Zysten in Baker-Position.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1173,
+    "candidates_tokens": 464,
+    "total_tokens": 1637,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

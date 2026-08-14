@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11060834081463491262807709963877480026",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Globaal verhoogde signaalalteraties voorste kruisband met een bemoeilijkte continu ïteit m id substantieel > hooggradige elongatie/ruptuur.",
+    "MCL": "diepe mediale capsulaire ligament sprain.",
+    "Medial Meniscus": "Normale configuratie signaalalteraties van de mediale en de laterale meniscus, geen meniscusscheur te weerhouden.",
+    "Lateral Meniscus": "Normale configuratie signaalalteraties van de mediale en de laterale meniscus, geen meniscusscheur te weerhouden.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "botoedeem posterieure aflijning tibiaplateau",
+    "Fracture": "vermoeden van een kleine subchondrale fractuur"
+  },
+  "usage": {
+    "prompt_tokens": 1187,
+    "candidates_tokens": 428,
+    "total_tokens": 1615,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

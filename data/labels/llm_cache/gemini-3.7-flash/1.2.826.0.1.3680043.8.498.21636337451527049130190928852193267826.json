@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.21636337451527049130190928852193267826",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "uredna morfologija i intenziteti signala kolateralnih ligamenata, prednjeg i stražnjeg križnog ligamenta",
+    "MCL": "uredna morfologija i intenziteti signala kolateralnih ligamenata",
+    "Medial Meniscus": "Medijalni menisk uredne je morfologije i intenziteta signala.",
+    "Lateral Meniscus": "Potpuna radijalna ruptura stražnjeg roga lateralnog meniska u području 1 cm od stražnjeg korijena",
+    "Medial OA": "Ostale prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Lateral OA": "Nepotpuni gubitak artikulacijske hrskavice lateralnog kondila tibije.",
+    "PF OA": "Fisure i defekti pune debljine hrskavice obje fasete patele (hondromalacija 3. stupnja prema ICRS klasifikaciji).",
+    "Effusion": "Izljev u koljenu.",
+    "Synovitis": "",
+    "Baker's": "Poplitealna (Bakerova) cista promjera 4,5 cm KK.",
+    "Contusion": "Koštani edem subhondralne kosti lateralnog kondila femura i tibije u srednjoj trećini.",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije"
+  },
+  "usage": {
+    "prompt_tokens": 1344,
+    "candidates_tokens": 554,
+    "total_tokens": 1898,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

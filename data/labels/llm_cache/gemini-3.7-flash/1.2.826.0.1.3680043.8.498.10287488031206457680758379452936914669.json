@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10287488031206457680758379452936914669",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Kruisbanden en laterale banden intact.",
+    "MCL": "",
+    "Medial Meniscus": "Normaal voorkomen menisci.",
+    "Lateral Meniscus": "Normaal voorkomen menisci.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Vermoeden beginnend patellair kraakbeenlijden, met licht onregelmatig oppervlak en licht heterogeen signaal.",
+    "Effusion": "Minimaal gewrichtsvocht .",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Geen botoedeem.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1157,
+    "candidates_tokens": 363,
+    "total_tokens": 1520,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13150794288945922409613136250303663502",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Sin anomalías patológicas",
+    "MCL": "Sin anomalías patológicas",
+    "Medial Meniscus": "Cambios hialinos leves en el cuerno posterior del menisco interno sin signos de desgarro",
+    "Lateral Meniscus": "Sin anomalías patológicas",
+    "Medial OA": "Sin anomalías patológicas",
+    "Lateral OA": "Sin anomalías patológicas",
+    "PF OA": "Sin anomalías patológicas",
+    "Effusion": "Sin anomalías patológicas",
+    "Synovitis": "Sin anomalías patológicas",
+    "Baker's": "Sin anomalías patológicas",
+    "Contusion": "Sin anomalías patológicas",
+    "Fracture": "Sin anomalías patológicas"
+  },
+  "usage": {
+    "prompt_tokens": 1021,
+    "candidates_tokens": 384,
+    "total_tokens": 1815,
+    "thoughts_tokens": 410
+  },
+  "attempts": 1
+}

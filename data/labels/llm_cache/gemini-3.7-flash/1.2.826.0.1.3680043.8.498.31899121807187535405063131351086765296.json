@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.31899121807187535405063131351086765296",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intacte voorste kruisband.",
+    "MCL": "Intact mediaal collateraal ligament.",
+    "Medial Meniscus": "Kleine ondervlaktescheur aan de interne boord van de posterieure hoorn van de mediale meniscus.",
+    "Lateral Meniscus": "Intacte laterale meniscus.",
+    "Medial OA": "Geen majeure kraakbeendefecten mediaal en lateraal femorotibiaal.",
+    "Lateral OA": "Geen majeure kraakbeendefecten mediaal en lateraal femorotibiaal.",
+    "PF OA": "Parti ële dikte kraakbeenfissuur laag mediaal trochleair.",
+    "Effusion": "Geen hydrops.",
+    "Synovitis": "",
+    "Baker's": "Onverwikkelde grote bakercyste.",
+    "Contusion": "Geen botoedeem.",
+    "Fracture": "Geen botoedeem."
+  },
+  "usage": {
+    "prompt_tokens": 1340,
+    "candidates_tokens": 431,
+    "total_tokens": 1771,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

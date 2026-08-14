@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12386255059403233724886571725482313876",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Aumento de señal central del cuerno posterior del menisco medial que no contacta la superficie articular, sin caracteres propios de rotura.",
+    "Lateral Meniscus": "Aumento de señal central de manera difusa del menisco lateral que no impresiona contactar con la superficie articular, sin caracteres propios de rotura.",
+    "Medial OA": "Condropatía con lesiones grado 2 de la región central de la zona de carga del cóndilo femoral medial.",
+    "Lateral OA": "El resto de los cartílagos femorotibiales y de la tróclea femoral sin alteraciones.",
+    "PF OA": "Condropatía lesiones grado 2 y 3 de la rótula.",
+    "Effusion": "No hay derrame articular",
+    "Synovitis": "",
+    "Baker's": "No hay derrame articular y quistes poplíteos.",
+    "Contusion": "No hay alteraciones de señal significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones de señal significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1353,
+    "candidates_tokens": 492,
+    "total_tokens": 1845,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.20427402498958253193571475926580142499",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Grade 1 injury of ACL and PCL.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No evidence of tear in medial meniscus.",
+    "Lateral Meniscus": "Tear of anterior horn of lateral meniscus.",
+    "Medial OA": "Wearing of articular cartilage of left knee with spur formation",
+    "Lateral OA": "Osteoarthritis of left knee, more severe at lateral compartment wtih grade 4 injury.",
+    "PF OA": "Grade 3 patellar chondromalcia.",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "in favor of Baker's cyst.",
+    "Contusion": "subchondral bone marrow edema and tiny cyst over lateral femorotibial joint.",
+    "Fracture": "Abnormal signal intensity of disltal femoral shaft, most due to post-operative bone marrow change ( removal of internal fixation)"
+  },
+  "usage": {
+    "prompt_tokens": 1361,
+    "candidates_tokens": 447,
+    "total_tokens": 1808,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

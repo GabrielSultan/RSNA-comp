@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.40269807401373034066229810558300266830",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "No evidence of ACL injury",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No evidence of tear is noted in the medial meniscus.",
+    "Lateral Meniscus": "In favor of tear of lateral meniscus",
+    "Medial OA": "",
+    "Lateral OA": "Joint space narrowing at lateral compartment of right knee joint with spur formation and subchondral edema is noticed, in favor of osteoarthritis.",
+    "PF OA": "",
+    "Effusion": "Fluid accumulation in the suprapatellar bursa with fluid-fluid interface is noticed, in favor of hemoarthrosis.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "subchondral edema is noticed, in favor of osteoarthritis",
+    "Fracture": "Patellar fracture with bone marrow edema"
+  },
+  "usage": {
+    "prompt_tokens": 1257,
+    "candidates_tokens": 404,
+    "total_tokens": 1661,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

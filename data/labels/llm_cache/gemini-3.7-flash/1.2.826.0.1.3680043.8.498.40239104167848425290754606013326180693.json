@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.40239104167848425290754606013326180693",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal fibers with bowing related to medial meniscus extrusion.",
+    "Medial Meniscus": "Extensive complex tear at the posterior horn and body of medial meniscus with maceration and extrusion.",
+    "Lateral Meniscus": "Lateral meniscus: Normal in morphology and signal.",
+    "Medial OA": "Full thickness cartilage denudation throughout the medial femoral condyle and medial tibial plateau with subchondral cystic change and marrow edema.",
+    "Lateral OA": "Lateral compartment cartilage: Low-grade partial-thickness cartilage loss at the anterior weightbearing surfaces. High grade chondrosis along the peripheral lateral joint.",
+    "PF OA": "Patellofemoral compartment cartilage: High-grade partial-thickness cartilage loss along the medial trochlea.",
+    "Effusion": "Small joint effusion with synovitis.",
+    "Synovitis": "Small joint effusion with synovitis.",
+    "Baker's": "Small multilobulated Baker's cyst.",
+    "Contusion": "No acute fracture or bone bruise.",
+    "Fracture": "No acute fracture or bone bruise."
+  },
+  "usage": {
+    "prompt_tokens": 1721,
+    "candidates_tokens": 469,
+    "total_tokens": 2190,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

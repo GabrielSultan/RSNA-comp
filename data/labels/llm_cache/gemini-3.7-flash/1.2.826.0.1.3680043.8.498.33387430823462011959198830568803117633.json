@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33387430823462011959198830568803117633",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intact cruciate and collateral ligaments.",
+    "MCL": "Intact cruciate and collateral ligaments.",
+    "Medial Meniscus": "Intact menisci.",
+    "Lateral Meniscus": "Intact menisci.",
+    "Medial OA": "Otherwise well maintained tricompartmental articular cartilage.",
+    "Lateral OA": "Otherwise well maintained tricompartmental articular cartilage.",
+    "PF OA": "Focal high grade chondropathy and underlying cortical irregularity in the lateral retropatellar facet",
+    "Effusion": "Tiny joint effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No sinister bone marrow changes.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1144,
+    "candidates_tokens": 369,
+    "total_tokens": 1513,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

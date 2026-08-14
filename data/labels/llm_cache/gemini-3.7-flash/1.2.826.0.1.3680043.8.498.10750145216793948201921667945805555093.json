@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10750145216793948201921667945805555093",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL & PCL and LCL appear to be within normal, no abnormal signal intensity is noted.",
+    "MCL": "Interstitial increased singal intensity of medial collateral ligament, R/O grade 2 injury.",
+    "Medial Meniscus": "There are linear signal intensity in posterior horn of medial meniscus, it extends into the surface, in favor of tear.",
+    "Lateral Meniscus": "Linear signal intensity in lateral meniscus, with suspicious extending into the surface, R/O degeneration with tear.",
+    "Medial OA": "Wearing of articular cartilage and spur formation and bone marrow edema in medial femoral condyle and medial tibial condyle",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "in favor of Baker's cys, more than 10 cm in length",
+    "Contusion": "Wearing of articular cartilage and spur formation and bone marrow edema in medial femoral condyle and medial tibial condyle",
+    "Fracture": "Focal hypointensity area with concave shape in subchondral area of right medial femoral condyle (srs: 5001, Img:[ID]), R/O osteonecrosis"
+  },
+  "usage": {
+    "prompt_tokens": 1411,
+    "candidates_tokens": 508,
+    "total_tokens": 1919,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

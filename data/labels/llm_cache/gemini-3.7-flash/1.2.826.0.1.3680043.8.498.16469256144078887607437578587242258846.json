@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16469256144078887607437578587242258846",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağ proksimal kesimde intensite artışı ve liflerde devamsızlık izlenmiş olup öncelikle rüptür lehine değerlendirilmiştir.",
+    "MCL": "Lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Posterior hornunda volüm kaybı ve kompleks yırtık ile uyumlu intensite değişiklikleri izlenmektedir.",
+    "Lateral Meniscus": "Lateral menisküs anterior hornunda grade I dejenerasyon izlenmiştir. Posterior hornunda grade II dejenerasyon mevcuttur.",
+    "Medial OA": "Femur medial kondil ve tibia medial platoda büyüğü yaklaşık 6 mm çaplı kemik iliği ödeminin eşlik ettiği osteokondral defekt görünümleri izlenmiştir.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Patellofemoral eklem mesafesinde suprapatellar resese uzanım gösteren hafif sıvı artımı izlenmektedir.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": "Femur medial kondil ve tibia medial platoda büyüğü yaklaşık 6 mm çaplı kemik iliği ödeminin eşlik ettiği osteokondral defekt görünümleri izlenmiştir."
+  },
+  "usage": {
+    "prompt_tokens": 1268,
+    "candidates_tokens": 506,
+    "total_tokens": 1774,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

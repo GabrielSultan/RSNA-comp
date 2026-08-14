@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13269841239774089690227054060975903636",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL is in a straight line and increase signal intensity inside on F/S T2WI, in favor of grade 1 injury.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "Linear signal intensity in medial and lateral meniscus... in favor of degeneration of meniscus",
+    "Lateral Meniscus": "suspicious of extending into the surface of anterior horn of lateral meniscus, in favor of degeneration of meniscus and R/O tear of anterior horn of lateral meniscus.",
+    "Medial OA": "Osteoarthritis of knee joint with spur formation and subchondral bone marrow edema/cysts and irregular thining of intra-articular cartilage",
+    "Lateral OA": "Osteoarthritis of knee joint with spur formation and subchondral bone marrow edema/cysts and irregular thining of intra-articular cartilage",
+    "PF OA": "more severe at lateral patellofemoral joint with grade 3-4 chondromalacia and tiny subchondral cysts over femoral trochlea.",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis",
+    "Baker's": "",
+    "Contusion": "subchondral bone marrow edema/cysts and irregular thining of intra-articular cartilage",
+    "Fracture": "Osteoarthritis of knee joint with spur formation"
+  },
+  "usage": {
+    "prompt_tokens": 1412,
+    "candidates_tokens": 526,
+    "total_tokens": 1938,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11369844885381156110080055326139875897",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağda miksoid dejenerasyona bağlı sinyal artışı izlendi.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküste grade II dejenerasyon izlendi.",
+    "Lateral Meniscus": "Lateral menisküste kova sapı yırtığı izlendi.",
+    "Medial OA": "Diz eklemi oluşturan kemik yapılarda santral ve marjinal osteofitik sivrileşmeler",
+    "Lateral OA": "lateralde eklem aralığında azalma ve eklem kartlajlarında incelme , subkondral skleroz mevcuttur.",
+    "PF OA": "Patellar kıkırdakta tip II kondromalaziye ait görünüm izlenmiştir.",
+    "Effusion": "Suprapatellar bursada sıvı artışı izlendi.",
+    "Synovitis": "",
+    "Baker's": "Gastrocnemius kası medial krus komşuluğunda 20x12 mm boyutlarında lobüle kontürlü multiloküle ganglion kisti izlendi.",
+    "Contusion": "subkondral kistler ve kemik iliği ödemi izlendi. Bulgular dejeneratif artit lehine değerlendirildi.",
+    "Fracture": "Diz eklemi oluşturan kemik yapılarda santral ve marjinal osteofitik sivrileşmeler"
+  },
+  "usage": {
+    "prompt_tokens": 1277,
+    "candidates_tokens": 536,
+    "total_tokens": 1813,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

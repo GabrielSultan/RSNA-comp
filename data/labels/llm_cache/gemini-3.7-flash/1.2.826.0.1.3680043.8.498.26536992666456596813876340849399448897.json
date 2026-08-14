@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.26536992666456596813876340849399448897",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Both bundles are intact.",
+    "MCL": "Medial collateral ligament (MCL): Intact.",
+    "Medial Meniscus": "Medial meniscus: No meniscal tear.",
+    "Lateral Meniscus": "Lateral meniscus: No meniscal tear.",
+    "Medial OA": "Medial compartment cartilage: No focal cartilage defects.",
+    "Lateral OA": "Lateral compartment cartilage: No focal cartilage defects.",
+    "PF OA": "Patellofemoral compartment cartilage: No focal cartilage defects.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "Trace Baker's cyst.",
+    "Contusion": "",
+    "Fracture": "Normal MRI arthrogram of the left knee."
+  },
+  "usage": {
+    "prompt_tokens": 1481,
+    "candidates_tokens": 383,
+    "total_tokens": 1864,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

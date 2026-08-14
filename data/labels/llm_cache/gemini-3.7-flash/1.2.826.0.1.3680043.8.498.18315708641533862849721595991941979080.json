@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.18315708641533862849721595991941979080",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": null,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Grade 1 injury of ACL.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "",
+    "Lateral Meniscus": "Tear of posterior horn of lateral meniscus.",
+    "Medial OA": "Osteoarthritis of left knee, more prominent at lateral compartment.",
+    "Lateral OA": "Osteoarthritis of left knee, more prominent at lateral compartment.",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "prominent hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "",
+    "Contusion": "Wearing of articular cartilage of left knee with subchondral bone marrow edema, more prominent in lateral tibial plateau.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1357,
+    "candidates_tokens": 393,
+    "total_tokens": 1750,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

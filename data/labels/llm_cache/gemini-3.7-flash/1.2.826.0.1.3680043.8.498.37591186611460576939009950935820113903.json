@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.37591186611460576939009950935820113903",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal contour, orientation, signal intensity.",
+    "MCL": "Medial collateral ligament: Fluid between superficial and deep bundles; suggested medial collateral ligament bursitis.",
+    "Medial Meniscus": "Complex tear and buckethandle tear of the medial meniscus, at the anterior horn, body and posterior horn.",
+    "Lateral Meniscus": "Lateral meniscus: No tear.",
+    "Medial OA": "Thinning of cartilage at anterior weight bearing part of the medial femoral condyle, measured about 5.8 mm in width.",
+    "Lateral OA": "Lateral tibial plateau: Intact. \n  Lateral femoral condyle: Intact.",
+    "PF OA": "",
+    "Effusion": "Moderate to severe effusion within patellofemoral and tibiofemoral joints.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Associated bone bruise at adjacent medial femoral condyle and bone bruise at corresponding adjacent proximal tibia are shown.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1451,
+    "candidates_tokens": 440,
+    "total_tokens": 1891,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

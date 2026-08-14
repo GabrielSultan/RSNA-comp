@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.21520719119040558609068952147312604007",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL is in a straight line but  increase signal intensity inside, in favor of grade 1 injury",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Lateral Meniscus": "No evidence of tear is noted in either medial or lateral meniscus.",
+    "Medial OA": "Wearing of articular cartilage and spur formation and subchondral bone marrow edema over medial tibial plateau, reflecting osteoarthritis.",
+    "Lateral OA": "Osteoarthritis of left knee joint, more prominent at medial compartment.",
+    "PF OA": "Heterogenous signal intenisty of patellar cartilage with mild fraying surface, in favor of grade 2 chondromalacia.",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "A lobulated cystic lesion with internal septumin medial popliteal fossa between the tendons of the medial head of the gastrocnemius and the semimembranosus muscles, in favor of Baker's cyst",
+    "Contusion": "subchondral bone marrow edema over medial tibial plateau, reflecting osteoarthritis.",
+    "Fracture": "Osteoarthritis of left knee joint, more prominent at medial compartment."
+  },
+  "usage": {
+    "prompt_tokens": 1326,
+    "candidates_tokens": 512,
+    "total_tokens": 1838,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

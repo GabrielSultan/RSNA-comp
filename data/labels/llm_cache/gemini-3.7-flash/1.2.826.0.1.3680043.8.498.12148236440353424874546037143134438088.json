@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12148236440353424874546037143134438088",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt.",
+    "MCL": "Kollateralbänder intakt.",
+    "Medial Meniscus": "Schräg-horizontale Rissbildung im Innenmeniskushinterhorn",
+    "Lateral Meniscus": "",
+    "Medial OA": "Flächige mäßige Chondropathie femoral mit dorsal vollschichtem Knorpeldefekt",
+    "Lateral OA": "Oberflächliche Chondropathie im lateralen Kompartiment.",
+    "PF OA": "Flächig vollschichtige Chondropathie an der medialen Patellafacette sowie an der korrespondierenden Trochlea",
+    "Effusion": "Ausgeprägte Gelenkerguss",
+    "Synovitis": "synovialen Proliferationen",
+    "Baker's": "",
+    "Contusion": "Unauffälliges Knochenmarksignal.",
+    "Fracture": "Unauffälliges Knochenmarksignal."
+  },
+  "usage": {
+    "prompt_tokens": 1159,
+    "candidates_tokens": 433,
+    "total_tokens": 2064,
+    "thoughts_tokens": 472
+  },
+  "attempts": 3
+}

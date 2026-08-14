@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12171790864123519428649395041090102217",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal course with preserved signal of ACL.",
+    "MCL": "MCL is intact.",
+    "Medial Meniscus": "Oblique vertical tear at anterior horn of the medial meniscus",
+    "Lateral Meniscus": "Lateral meniscus is not  torn.",
+    "Medial OA": "mild chondrosis of the medial and lateral femoral condyle",
+    "Lateral OA": "mild chondrosis of the medial and lateral femoral condyle",
+    "PF OA": "partial thickness cartilage defect, about 6x5mm., at patellar apex",
+    "Effusion": "Minimal joint effusion with fluid distended suprapatellar bursa is seen.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "without subchondral bone lesion",
+    "Fracture": "without subchondral bone lesion"
+  },
+  "usage": {
+    "prompt_tokens": 1229,
+    "candidates_tokens": 398,
+    "total_tokens": 1627,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

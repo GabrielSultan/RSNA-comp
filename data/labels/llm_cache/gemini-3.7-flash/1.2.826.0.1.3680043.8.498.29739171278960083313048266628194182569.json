@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29739171278960083313048266628194182569",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Signos de una rotura del menisco medial, no desplazada.",
+    "Lateral Meniscus": "Rotura compleja de la raíz meniscal posterior, cuerno posterior y parte del cuerpo del menisco lateral",
+    "Medial OA": "No se observan lesiones condrales significativas de los compartimentos femorotibiales.",
+    "Lateral OA": "No se observan lesiones condrales significativas de los compartimentos femorotibiales.",
+    "PF OA": "Condropatía lesiones grado 3 y 4 de la rótula. Condropatía troclear superficial.",
+    "Effusion": "Leve derrame articular",
+    "Synovitis": "Leve derrame articular con sinovitis difusa.",
+    "Baker's": "Pequeño quiste poplíteo no complicado.",
+    "Contusion": "edema óseo periférico del cóndilo femoral lateral",
+    "Fracture": "pequeña fractura subcortical regional."
+  },
+  "usage": {
+    "prompt_tokens": 1452,
+    "candidates_tokens": 473,
+    "total_tokens": 1925,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

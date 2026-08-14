@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.36846391753332367835804699576399553980",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "acute complete tear of the anterior cruciate ligament, at mid substance.",
+    "MCL": "grade II ligamentous sprain (partial tear) of the medial collateral ligament, at mid substance (deep and superficial fibers).",
+    "Medial Meniscus": "horizontal tear at the body and complex tear (main radial component) at the posterior horn of the medial meniscus.",
+    "Lateral Meniscus": "radial tear at the body and complex tear at the posterior horn of the lateral meniscus.",
+    "Medial OA": "There is no focal chondrosis or chondral injury.",
+    "Lateral OA": "There is no focal chondrosis or chondral injury.",
+    "PF OA": "the patellar and trochlear cartilage appears congruent without chondral lesion.",
+    "Effusion": "Some amount of left knee effusion",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Bone bruise at mid weightbaring lateral femoral condyle, posteromedial and posterolateral tibial plateaus.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1361,
+    "candidates_tokens": 438,
+    "total_tokens": 1799,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

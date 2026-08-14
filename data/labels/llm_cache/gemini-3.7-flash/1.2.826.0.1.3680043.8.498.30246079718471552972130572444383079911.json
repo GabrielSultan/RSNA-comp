@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30246079718471552972130572444383079911",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ devamlılığı seçilememiştir (komplet yırtık)",
+    "MCL": "Lateral ve medial kollateral ligamanlar çevresinde hafif ödematöz görünüm (grade I sprain)",
+    "Medial Meniscus": "Medial menisküste grade II dejenerasyon, radial yırtık ile uyumlu görünüm mevcuttur",
+    "Lateral Meniscus": "Lateral menisküste grade II dejenerasyon, kova sapı yırtığı ile uyumlu görünüm mevcuttur",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursada ve diz eklemi içerisinde yaygın sıvı artışı izlenmiştir",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Femur lateral kondil ve tibia lateral plato seviyesinde yaygın kontüzyonel kemik iliği ödemleri izlenmiştir",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1249,
+    "candidates_tokens": 443,
+    "total_tokens": 1692,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

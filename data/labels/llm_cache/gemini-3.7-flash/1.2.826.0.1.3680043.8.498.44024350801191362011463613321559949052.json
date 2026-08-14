@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.44024350801191362011463613321559949052",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The anterior cruciate ligaments are almost complete torn; midsubstance.",
+    "MCL": "The medial and lateral collateral ligament complexes are intact.",
+    "Medial Meniscus": "In the medial compartment, intra-meniscus increased signal without reaching the surface; contusions at posterior part of body to posterior horn.",
+    "Lateral Meniscus": "complex tear of anterior horn of lateral meniscus with suspect for flip of the meniscus to intercondylar region.",
+    "Medial OA": "There is diffuse low grade chondrosis (less than 50% thickness cartilage loss) along weight-baring medial femoral condyle.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Minimal amount of right knee effusion is present.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "There is no fracture or bone contusion.",
+    "Fracture": "There is no fracture or bone contusion."
+  },
+  "usage": {
+    "prompt_tokens": 1343,
+    "candidates_tokens": 422,
+    "total_tokens": 1765,
+    "thoughts_tokens": null
+  },
+  "attempts": 4
+}

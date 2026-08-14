@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32479930837336533083798155873656743007",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve yan bağlar normal.",
+    "MCL": "Çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküs arka boynuzu-gövdesindeki dejenerasyona yırtık eşlik etmiyor.",
+    "Lateral Meniscus": "Lateral menisküs gövdesi düzeyinde serbest kenar düzensizliği bu düzeydeki püsküllenme tarzında yırtık açısından şüpheli.",
+    "Medial OA": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "PF OA": "Patellofemoral eklem dejenerasyonu patella apeksi ve çevresindeki troklear kıkırdağın santralindeki kondral kalınlığın %50'sine ulaşan incelme",
+    "Effusion": "Diz eklemi içi sıvı miktarı minimal artmış.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "Fracture": "Eklem kıkırdakları ve kemikler bunların dışında normal."
+  },
+  "usage": {
+    "prompt_tokens": 1283,
+    "candidates_tokens": 490,
+    "total_tokens": 1773,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

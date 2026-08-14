@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38628165743951175602803204505216754926",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Φυσιολογικά απεικονίζονται οι πλάγιοι και χιαστοί σύνδεσµοί",
+    "MCL": "Φυσιολογικά απεικονίζονται οι πλάγιοι και χιαστοί σύνδεσµοί",
+    "Medial Meniscus": "καθώς και ο έσω και έξω µηνίσκος αµφοτερόπλευρα",
+    "Lateral Meniscus": "καθώς και ο έσω και έξω µηνίσκος αµφοτερόπλευρα",
+    "Medial OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος",
+    "Lateral OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος",
+    "PF OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος",
+    "Effusion": "Χωρίς αξιολογήσιµη συλλογή υγρού ενδαρθρικά",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Με φυσιολογικό σήµα ελέγχεται ο οστικός µυελός",
+    "Fracture": "Με φυσιολογικό σήµα ελέγχεται ο οστικός µυελός"
+  },
+  "usage": {
+    "prompt_tokens": 1363,
+    "candidates_tokens": 530,
+    "total_tokens": 1893,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

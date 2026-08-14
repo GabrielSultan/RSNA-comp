@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10890699078723972693302029683905114834",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "παρατηρείται εκφύλιση και υπεξάρθρηµα του µηνίσκου",
+    "Lateral Meniscus": "εκφύλισης του µηνίσκου χωρίς όµως ουσιώδη λέπτυνση",
+    "Medial OA": "Τα ευρήµατα συνηγορούν για µετρίας βαρύτητας εκφυλιστική οστεοαρθρίτιδα",
+    "Lateral OA": "Στο έξω µεσάρθριο διάστηµα παρατηρείται ήπια εκφυλιστική οστεοαρθρίτιδα",
+    "PF OA": "Από τον έλεγχο του πρόσθιου διαµερίσµατος παρατηρούνται επιχείλια οστεόφυτα σε επιγονατίδα και τροχιλία µε παρουσία στην κεντρική µοίρα της αρθρικής επιφάνειας της επιγονατίδας εκφύλισης του αρθρικού χόνδρου",
+    "Effusion": "Ενδαρθρικά παρατηρείται συλλογή υγρού",
+    "Synovitis": "παρουσιάζει κατά τόπους υµενίτιδα",
+    "Baker's": "µικρή συνοβιακή κύστη Baker",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1514,
+    "candidates_tokens": 538,
+    "total_tokens": 2052,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16318078762749420171833135145622117452",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Transformación quística parcial del LCA.",
+    "MCL": "ligamentos colaterales dentro de límites normales.",
+    "Medial Meniscus": "Rotura que impresiona periférica del cuerno posterior y raíz meniscal posterior del menisco medial",
+    "Lateral Meniscus": "Extensa rotura compleja del cuerno anterior, cuerpo, cuerno posterior y parte de la raíz meniscal posterior del menisco lateral",
+    "Medial OA": "Úlceras condrales de espesor parcial de la zona de carga del compartimento femorotibial medial.",
+    "Lateral OA": "Úlceras condrales de espesor total con cambios óseos secundarios y proliferaciones óseas periféricas del compartimento femorotibial lateral.",
+    "PF OA": "Úlceras condrales espesor total con cambios óseos secundarios la faceta lateral y vértice de la rótula. Condropatía superficial de la tróclea femoral.",
+    "Effusion": "Leve derrame articular.",
+    "Synovitis": "",
+    "Baker's": "No hay quistes poplíteos patológicos.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1450,
+    "candidates_tokens": 478,
+    "total_tokens": 1928,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

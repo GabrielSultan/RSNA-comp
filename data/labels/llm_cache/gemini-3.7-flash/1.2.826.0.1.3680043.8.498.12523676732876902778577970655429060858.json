@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12523676732876902778577970655429060858",
+  "labels": {
+    "ACL": null,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "Normaal aspect van het mediale collaterale ligament",
+    "Medial Meniscus": "Normaal aspect van mediale meniscus.",
+    "Lateral Meniscus": "Normaal aspect van de laterale meniscus.",
+    "Medial OA": "Beperkt vernauwd voorkomen van het mediale femorotibiale compartiment.",
+    "Lateral OA": "Bewaarde femorotibiale gewrichten.",
+    "PF OA": "Bewaard patellofemoraal gewricht. Geen manifeste graad 3/graad 4 kraakbeenletsels patellofemoraal.",
+    "Effusion": "Geen manifeste hydrops suprapatellair.",
+    "Synovitis": "",
+    "Baker's": "Discrete bursa semimembranosa gastrocnemia.",
+    "Contusion": "Vlekkig botpatroon endomedullair in distale femur: verhoogde hoeveelheid rood beenmerg?",
+    "Fracture": "Bewaarde femorotibiale gewrichten."
+  },
+  "usage": {
+    "prompt_tokens": 1469,
+    "candidates_tokens": 451,
+    "total_tokens": 1920,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

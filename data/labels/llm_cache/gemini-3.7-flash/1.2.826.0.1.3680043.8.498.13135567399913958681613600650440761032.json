@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13135567399913958681613600650440761032",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "ACL: unremarkable.",
+    "MCL": "Medial collateral ligament: preserved.",
+    "Medial Meniscus": "Medial meniscus: preserved.",
+    "Lateral Meniscus": "Lateral meniscus: preserved.",
+    "Medial OA": "",
+    "Lateral OA": "Preservation of cartilage at weightbaring lateral femoral condyle and lateral tibial plateau.",
+    "PF OA": "No definite finding of patellofemoral joint arthritis.",
+    "Effusion": "No significant amount of fluid within knee joint is observed.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Normal marrow SI of medial femoral condyle and medial tibial plateau are preserved.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1358,
+    "candidates_tokens": 373,
+    "total_tokens": 1731,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

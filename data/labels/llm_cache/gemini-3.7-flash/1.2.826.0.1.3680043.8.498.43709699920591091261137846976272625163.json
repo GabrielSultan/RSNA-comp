@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.43709699920591091261137846976272625163",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "the anterior posterior cruciate ligaments are intact.",
+    "MCL": "The medial collateral ligament complexes are intact.",
+    "Medial Meniscus": "In the medial compartment, the meniscus is not torn",
+    "Lateral Meniscus": "The lateral compartment, the meniscus is not torn",
+    "Medial OA": "there is no focal chondrosis or chondral injury.",
+    "Lateral OA": "there is no focal chondrosis or chondral injury.",
+    "PF OA": "the patellar and trochlear cartilage appears congruent without chondral lesion.",
+    "Effusion": "Some amount of right knee effusion is present.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "There is bone contusion at medial femoral condyle.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1241,
+    "candidates_tokens": 389,
+    "total_tokens": 1630,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

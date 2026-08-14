@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12534628800787651008876070514080610643",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL:High grade partial tear from mid substance to tibial side.",
+    "MCL": "MCL: Possible partial tear at the femoral side",
+    "Medial Meniscus": "Medial meniscus: Intact",
+    "Lateral Meniscus": "Lateral meniscus: Complex tear combined vertical tear with horizontal tear at anterior root to anterior horn",
+    "Medial OA": "Articular cartilages are intact.",
+    "Lateral OA": "Articular cartilages are intact.",
+    "PF OA": "Articular cartilages are intact.",
+    "Effusion": "Joint effusion and fluid in suprapatellar bursa is seen.",
+    "Synovitis": "Synovitis with plica and debris at suprapatellar bursa.",
+    "Baker's": "No Baker's cyst is seen.",
+    "Contusion": "Bone contusions at lateral tibial plateu; anterior part.",
+    "Fracture": "No gross fracture or osseous destruction."
+  },
+  "usage": {
+    "prompt_tokens": 1386,
+    "candidates_tokens": 422,
+    "total_tokens": 1808,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

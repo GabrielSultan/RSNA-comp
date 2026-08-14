@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.43692339773096477132070133629776394739",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Normal ACL",
+    "MCL": "Normal ACL, PCL, MCL and LCL.",
+    "Medial Meniscus": "incomplete tearing of the posterior root of the medial meniscus",
+    "Lateral Meniscus": "Normal lateral meniscus.",
+    "Medial OA": "mild - moderate thinning of the medial compartment articular cartilage with associated mild osteophyte formation",
+    "Lateral OA": "Minor patchy fraying of the lateral compartment articular cartilage is also noted.",
+    "PF OA": "Mild - moderate patellofemoral degenerate changes also seen.",
+    "Effusion": "There is a mild - moderate knee effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "mild marrow edema in the weightbearing aspect of the medial tibial condyle",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1118,
+    "candidates_tokens": 393,
+    "total_tokens": 1511,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

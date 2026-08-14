@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.26842258746390750314059176647398369242",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "stanje po rupturi ACL na tibijalnoj inserciji, koji je degenerativno promijenjen, retrahiran uz PCL interkondilarno",
+    "MCL": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala.",
+    "Medial Meniscus": "Kompleksna ruptura medijalnog meniska na prijelazu tijela u stražnji rog.",
+    "Lateral Meniscus": "Lateralni menisk uredne je morfologije i intenziteta signala.",
+    "Medial OA": "Stanjena hrskavica femoralnih kondila i medijalnog platoa tibije.",
+    "Lateral OA": "Stanjena hrskavica femoralnih kondila i medijalnog platoa tibije. Edem hrskavice dorzolateralnog dijela lateralnog platoa tibije uz izraženi subhondralni edem u smislu osteohondralne lezije.",
+    "PF OA": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala.",
+    "Effusion": "Minimalni izljev u koljenu.",
+    "Synovitis": "",
+    "Baker's": "Sitna Bakerova cista.",
+    "Contusion": "Nešto koštanog edema u ostalom prikaznom lateralnom dijelu proksimalne tibije - postkontuzijski?",
+    "Fracture": "osteohondralne lezije"
+  },
+  "usage": {
+    "prompt_tokens": 1229,
+    "candidates_tokens": 568,
+    "total_tokens": 1797,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42965031665568825650795822006244115609",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Flat slope of ACL, C/W tear.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "No strong MR evidence of tear of medial meniscus.",
+    "Lateral Meniscus": "Linear signal intensity in anterior and posterior horn of lateral meniscus, with small size of posterior horn and displaced fragment, in favor of tear.",
+    "Medial OA": "",
+    "Lateral OA": "Wearing of articular carilage over lateral apsect of femorotibial joint with subchondral edema and spur formation, reflecting osteoarthritis.",
+    "PF OA": "",
+    "Effusion": "Increased joint effusion",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1288,
+    "candidates_tokens": 400,
+    "total_tokens": 1688,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

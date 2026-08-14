@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12307356432736970350794033171174403632",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intacte voorste kruisband.",
+    "MCL": "Intact mediaal collateraal ligament.",
+    "Medial Meniscus": "Muco ïde degeneratie in de posterieure hoorn van de mediale meniscus.",
+    "Lateral Meniscus": "Intacte laterale meniscus.",
+    "Medial OA": "Geen majeure kraakbeendefecten mediaal en lateraal femorotibiaal.",
+    "Lateral OA": "Geen majeure kraakbeendefecten mediaal en lateraal femorotibiaal.",
+    "PF OA": "Geen majeure kraakbeendefecten patellofemoraal.",
+    "Effusion": "Matige hydrops.",
+    "Synovitis": "",
+    "Baker's": "Bakercyste met weke delen oedeem afdalend langsheen de spierbuik van de mediale gastrocnemius: suggestief voor ruptuur bakercyste.",
+    "Contusion": "Opvallende hoeveelheid subchondraal oedeem in het gewrichtsdragende gedeelte van de mediale femurcondyl met discrete subchondrale hypo-intense lijn, suggestief voor insuffici ëntiefractuur.",
+    "Fracture": "Beeld suggestief voor subchondrale insuffici ëntiefractuur centraal in de mediale femurcondyl"
+  },
+  "usage": {
+    "prompt_tokens": 1309,
+    "candidates_tokens": 516,
+    "total_tokens": 1825,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

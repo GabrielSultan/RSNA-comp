@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16724013341359693140331158148551346369",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Das VKB imponiert im Verlauf gering aufgefasert und signalangehoben ohne jedoch vollständige Diskontinuität.",
+    "MCL": "Reizzustand des medialen Kollateralbandes.",
+    "Medial Meniscus": "Diffuse Signalanhebung des Innenmeniskus Hinterhornes ohne Rissbildung, in erster Linie mukoide Degeneration.",
+    "Lateral Meniscus": "Horizontale Rissbildung des Außenmeniskusvorderhornes bis in die Pars intermedia und in das Hinterhorn (5/25).",
+    "Medial OA": "Bekannt höhergradige Chondropathie mit langstreckig aufgebrauchtem Knorpelbelag der medialen femoralen Kondyle",
+    "Lateral OA": "Lateral oberflächliche Chondropathie",
+    "PF OA": "Ausgedehnter Knorpelbesatz an der medialen Facette der Patella mit lokal bis tiefergreifende Chondropathie. Gering ausgedünnter Knorpelbesatz der Trochlea.",
+    "Effusion": "kein wesentlicher Erguss.",
+    "Synovitis": "Gelenkkapsel nicht verdickt",
+    "Baker's": "",
+    "Contusion": "Kein Bone Bruise der erfassten knöchernen Strukturen.",
+    "Fracture": "Knochen: Kein Bone Bruise der erfassten knöchernen Strukturen. Zentrierte Stellung im Kniegelenk."
+  },
+  "usage": {
+    "prompt_tokens": 1498,
+    "candidates_tokens": 539,
+    "total_tokens": 2037,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

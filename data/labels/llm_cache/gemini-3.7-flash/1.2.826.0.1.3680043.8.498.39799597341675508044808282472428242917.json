@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.39799597341675508044808282472428242917",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal course with preserved signal of the ACL is noted.",
+    "MCL": "The MCL is intact.",
+    "Medial Meniscus": "Medial meniscus is not torn.",
+    "Lateral Meniscus": "Normal shape with preserved signal of the lateral meniscus is observed.",
+    "Medial OA": "No osteocartilagenous lesion is detected.",
+    "Lateral OA": "No osteocartilagenous lesion is detected.",
+    "PF OA": "The PF joint surface is preserved.",
+    "Effusion": "Minimal amount of joint effusion is seen.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No fracture or bone contusion is seen.",
+    "Fracture": "No fracture or bone contusion is seen."
+  },
+  "usage": {
+    "prompt_tokens": 1171,
+    "candidates_tokens": 386,
+    "total_tokens": 1557,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42018683052544325209168649309206539721",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Complex tear of the body and posterior horn of the medial meniscus",
+    "Lateral Meniscus": "Lateral meniscus: Normal in morphology and signal.",
+    "Medial OA": "Medial compartment cartilage: No focal cartilage defects.",
+    "Lateral OA": "Lateral compartment cartilage: No focal cartilage defects.",
+    "PF OA": "Mild chondrosis with signal alteration in the medial patellar facet",
+    "Effusion": "Moderate joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Trace Baker's cyst.",
+    "Contusion": "Medial tibial plateau edema secondary to meniscal pathology.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1572,
+    "candidates_tokens": 394,
+    "total_tokens": 1966,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

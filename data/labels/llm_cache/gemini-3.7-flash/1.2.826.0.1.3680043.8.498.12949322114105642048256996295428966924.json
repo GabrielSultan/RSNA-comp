@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12949322114105642048256996295428966924",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales de grosor y señal normal.",
+    "MCL": "Ligamentos cruzados y colaterales de grosor y señal normal.",
+    "Medial Meniscus": "Meniscos de morfología normal con aumento de señal intrasustancia de aspecto degenerativo, sin atributos sugerentes de rotura.",
+    "Lateral Meniscus": "Meniscos de morfología normal con aumento de señal intrasustancia de aspecto degenerativo, sin atributos sugerentes de rotura.",
+    "Medial OA": "Cartílago de compartimentos femorotibiales de grosor normal.",
+    "Lateral OA": "Cartílago de compartimentos femorotibiales de grosor normal.",
+    "PF OA": "Irregularidad superficial del cartílago femoropatelar, con úlcera condral grado 4 central en la tróclea femoral",
+    "Effusion": "Líquido articular en cantidad normal.",
+    "Synovitis": "",
+    "Baker's": "No hay quiste poplíteo.",
+    "Contusion": "edema subcondral reactivo",
+    "Fracture": "Cartílago de compartimentos femorotibiales de grosor normal."
+  },
+  "usage": {
+    "prompt_tokens": 1338,
+    "candidates_tokens": 484,
+    "total_tokens": 1822,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

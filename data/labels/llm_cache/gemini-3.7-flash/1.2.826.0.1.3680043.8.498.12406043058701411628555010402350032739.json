@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12406043058701411628555010402350032739",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Both bundles intact. Small internal ganglion cyst likely sequela of prior sprain.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: Normal in morphology and signal.",
+    "Lateral Meniscus": "Inner margin blunting of the lateral meniscus body.",
+    "Medial OA": "High-grade partial-thickness cartilage loss along the posterior weightbearing medial femoral condyle.",
+    "Lateral OA": "Low-grade cartilage loss along the posterior high nonweightbearing lateral femoral condyle.",
+    "PF OA": "Full-thickness cartilage loss overlying the medial patellar facet and median ridge.",
+    "Effusion": "Small joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Small Baker's cyst.",
+    "Contusion": "Full-thickness fissuring at the high posterior nonweightbearing medial femoral condyle with subchondral marrow edema.",
+    "Fracture": "Healing non-displaced fracture along the medial patella."
+  },
+  "usage": {
+    "prompt_tokens": 1627,
+    "candidates_tokens": 444,
+    "total_tokens": 2071,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10159551371305936155888341171022480536",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "ACL is ruptured in its mid substance.",
+    "MCL": "Normal PCL, MCL and LCL.",
+    "Medial Meniscus": "Normal medial and lateral menisci.",
+    "Lateral Meniscus": "Normal medial and lateral menisci.",
+    "Medial OA": "The tibiofemoral and patellofemoral articular cartilage is normal.",
+    "Lateral OA": "The tibiofemoral and patellofemoral articular cartilage is normal.",
+    "PF OA": "The tibiofemoral and patellofemoral articular cartilage is normal.",
+    "Effusion": "There is a moderate right knee effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Moderate bone contusions are seen in the weightbearing aspect of the lateral femoral condyle and posterior aspects of both tibial condyles.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1092,
+    "candidates_tokens": 409,
+    "total_tokens": 1501,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

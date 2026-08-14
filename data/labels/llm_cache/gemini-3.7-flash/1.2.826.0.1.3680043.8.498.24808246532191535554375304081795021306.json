@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.24808246532191535554375304081795021306",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "El menisco medial es de morfología y señal conservada, sin signos de rotura.",
+    "Lateral Meniscus": "Irregularidad sugiriendo una rotura degenerativa marginal de la unión del cuerno posterior con la raíz meniscal posterior del menisco lateral",
+    "Medial OA": "Úlceras condrales de espesor parcial de platillo tibial lateral y de la región central del cóndilo femoral medial.",
+    "Lateral OA": "Úlceras condrales de espesor parcial de platillo tibial lateral",
+    "PF OA": "Condropatía rotuliana superficial difusa.",
+    "Effusion": "Leve derrame articular.",
+    "Synovitis": "",
+    "Baker's": "No hay quistes poplíteos patológicos.",
+    "Contusion": "",
+    "Fracture": "Edema óseo periférico del cóndilo femoral medial con imagen sugerente de pequeña fractura subcortical regional"
+  },
+  "usage": {
+    "prompt_tokens": 1383,
+    "candidates_tokens": 467,
+    "total_tokens": 1850,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

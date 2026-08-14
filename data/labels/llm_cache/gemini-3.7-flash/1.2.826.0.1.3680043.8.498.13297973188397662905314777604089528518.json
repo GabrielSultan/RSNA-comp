@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13297973188397662905314777604089528518",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve yan bağlar normal.",
+    "MCL": "Çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "medyal menisküsün arka boynuzundaki yaygın yapı içi dejenerasyon inferiyor eklem yüzeyine yırtık biçiminde ulaşıyor.",
+    "Lateral Meniscus": "Diskoid özellikteki lateral menisküsteki horizontal klivaj yırtığı serbest kenara ulaşıyor.",
+    "Medial OA": "Medyal>lateral femoral tibyal kompartmanlardaki dejeneratif eklem hastalığı tam kata ulaşan eklem kıkırdağı kaybı ve dejenerasyonu",
+    "Lateral OA": "Medyal>lateral femoral tibyal kompartmanlardaki dejeneratif eklem hastalığı tam kata ulaşan eklem kıkırdağı kaybı ve dejenerasyonu",
+    "PF OA": "",
+    "Effusion": "Diz eklemi içi sıvı miktarı minimal artmış.",
+    "Synovitis": "",
+    "Baker's": "Gastroknemyus-semimembranozus bursasındaki sıvı koleksiyonu",
+    "Contusion": "hafif subkondral medüller fibrovasküler değişiklikler",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1159,
+    "candidates_tokens": 498,
+    "total_tokens": 1657,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

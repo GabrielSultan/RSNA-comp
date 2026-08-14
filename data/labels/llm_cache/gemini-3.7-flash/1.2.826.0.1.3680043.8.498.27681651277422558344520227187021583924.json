@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.27681651277422558344520227187021583924",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Aumento de señal central del cuerno posterior del menisco medial que no impresiona contactar con la superficie articular, sin caracteres de una rotura categórica.",
+    "Lateral Meniscus": "El menisco lateral de morfología y señal conservada, sin criterios de rotura.",
+    "Medial OA": "Cartílagos de los compartimentos femorotibiales y de la tróclea femoral sin alteraciones.",
+    "Lateral OA": "Cartílagos de los compartimentos femorotibiales y de la tróclea femoral sin alteraciones.",
+    "PF OA": "Úlceras condral de espesor parcial y total de la faceta lateral y vértice de la rótula",
+    "Effusion": "No hay significativo derrame articular",
+    "Synovitis": "",
+    "Baker's": "ni quistes poplíteos.",
+    "Contusion": "No hay alteraciones de señal significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones de señal significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1285,
+    "candidates_tokens": 487,
+    "total_tokens": 1772,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.34379812274299658721362253287768041613",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament je primjerenih intenziteta signala i održanog kontinuiteta.",
+    "MCL": "Medijalni kolateralni ligament je primjerenih intenziteta signala, održanog kontinuiteta.",
+    "Medial Meniscus": "Promijenjena morfologija i intenzitet signala tijela medijalnog meniska, ddg. ranija ozljeda, početne degenerativne promjene.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture ili degeneracije.",
+    "Medial OA": "Prikaže se hondromalacija I° hrskavice oba tibijalna platoa.",
+    "Lateral OA": "Prikaže se hondromalacija I° hrskavice oba tibijalna platoa.",
+    "PF OA": "Hondromalacija I° medijalne fasete patele.",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije.",
+    "Fracture": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije."
+  },
+  "usage": {
+    "prompt_tokens": 1362,
+    "candidates_tokens": 514,
+    "total_tokens": 1876,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

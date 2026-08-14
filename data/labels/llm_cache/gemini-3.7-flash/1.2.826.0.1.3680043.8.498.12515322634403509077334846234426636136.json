@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12515322634403509077334846234426636136",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Otherwise the anterior cruciate ligament, the posterior cruciate ligament, the extensor mechanism, the medial collateral ligament, the pes anserine tendons, the semimembranosus, the popliteus, the distal biceps femoris, the lateral collateral ligament and the IT band are unremarkable.",
+    "MCL": "the medial collateral ligament, the pes anserine tendons, the semimembranosus, the popliteus, the distal biceps femoris, the lateral collateral ligament and the IT band are unremarkable.",
+    "Medial Meniscus": "There is intrasubstance degeneration involving the body and posterior horn of the medial meniscus without a well-defined linear tear.",
+    "Lateral Meniscus": "The lateral meniscus is unremarkable.",
+    "Medial OA": "There is a diffuse mild thinning and superficial fraying involving the medial and lateral compartment most pronounced medially.",
+    "Lateral OA": "There is a diffuse mild thinning and superficial fraying involving the medial and lateral compartment most pronounced medially.",
+    "PF OA": "There are focal severe degenerative change at the patellofemoral joint with full-thickness cartilage loss involving the lateral patellar facet and median ridge with subchondral reactive changes.",
+    "Effusion": "There is a moderate knee joint effusion with synovitis.",
+    "Synovitis": "There is a moderate knee joint effusion with synovitis.",
+    "Baker's": "There is no popliteal cysts.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1227,
+    "candidates_tokens": 532,
+    "total_tokens": 1759,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

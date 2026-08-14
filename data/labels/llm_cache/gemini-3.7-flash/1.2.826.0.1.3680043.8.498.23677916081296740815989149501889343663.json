@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.23677916081296740815989149501889343663",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "potpuna ruptura prednjeg križnog ligamenta u proksimalnoj trećini",
+    "MCL": "Održani su kolateralni ligamenti",
+    "Medial Meniscus": "Kompleksna ruptura medijalnog meniska po tipu \"bucket handle\" s \"flap\"-om prednjeg roga - \"flipped meniscus\"",
+    "Lateral Meniscus": "Lateralni menisk je primjerenog intenziteta signala, bez znakova rupture",
+    "Medial OA": "Hondromalacija 2.-3. stupnja hrskavice medijalnog platoa tibije",
+    "Lateral OA": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala",
+    "PF OA": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala",
+    "Effusion": "Manja količina izljeva u lateralnom recesusu",
+    "Synovitis": "",
+    "Baker's": "Baker cista CC promjera oko 15 mm",
+    "Contusion": "Zona koštanog edema medijalnog platoa tibije posteriorno",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala"
+  },
+  "usage": {
+    "prompt_tokens": 1258,
+    "candidates_tokens": 541,
+    "total_tokens": 1799,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

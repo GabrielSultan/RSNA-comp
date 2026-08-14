@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.43355923025859051425546451466843844346",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): No tear. Small intrasubstance ganglion formation at the tibial insertion.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: Complex tear with dominant radial component at the posterior root.",
+    "Lateral Meniscus": "Lateral meniscus: No tear.",
+    "Medial OA": "Medial compartment cartilage: Confluent regions of high-grade articular cartilage loss at both sides of the weightbearing aspect of the joint",
+    "Lateral OA": "Lateral compartment cartilage: Articular cartilage irregularity and high-grade cartilage loss at the weightbearing aspect of the joint",
+    "PF OA": "Patellofemoral compartment cartilage: Diffuse articular cartilage loss at the patella, including areas of full-thickness cartilage loss",
+    "Effusion": "Small joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Moderate leaking multilobulated Baker's cyst.",
+    "Contusion": "Normal background marrow signal.",
+    "Fracture": "No acute fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1643,
+    "candidates_tokens": 448,
+    "total_tokens": 2091,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

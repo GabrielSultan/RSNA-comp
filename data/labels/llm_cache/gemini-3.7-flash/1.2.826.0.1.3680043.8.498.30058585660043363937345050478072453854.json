@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30058585660043363937345050478072453854",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intact cruciate and collateral ligaments.",
+    "MCL": "Intact cruciate and collateral ligaments.",
+    "Medial Meniscus": "Intact menisci.",
+    "Lateral Meniscus": "Intact menisci.",
+    "Medial OA": "Well-maintained tricompartmental hyaline articular cartilage.",
+    "Lateral OA": "Well-maintained tricompartmental hyaline articular cartilage.",
+    "PF OA": "Well-maintained tricompartmental hyaline articular cartilage.",
+    "Effusion": "Tiny joint effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1149,
+    "candidates_tokens": 360,
+    "total_tokens": 1948,
+    "thoughts_tokens": 439
+  },
+  "attempts": 1
+}

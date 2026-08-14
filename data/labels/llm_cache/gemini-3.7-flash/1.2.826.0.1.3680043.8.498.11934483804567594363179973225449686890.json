@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11934483804567594363179973225449686890",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "there is partial tear (low grade) of the anterior cruciate ligament at mid substance.",
+    "MCL": "There is partial tear of the medial collateral ligament, at mid substance (deep and superficial fibers).",
+    "Medial Meniscus": "there is radial tear at the posterior horn of the medial meniscus.",
+    "Lateral Meniscus": "there is longitudinal vertical tear at the posterior horn of the lateral meniscus.",
+    "Medial OA": "There is no focal chondrosis or chondral injury.",
+    "Lateral OA": "The lateral compartment, there is longitudinal vertical tear at the posterior horn of the lateral meniscus. There is no focal chondrosis or chondral injury.",
+    "PF OA": "The patellofemoral joint, the patellar and trochlear cartilage appears congruent without chondral lesion.",
+    "Effusion": "No knee effusion is present.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1365,
+    "candidates_tokens": 427,
+    "total_tokens": 1792,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

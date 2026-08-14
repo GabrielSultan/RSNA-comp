@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11654064547593365398103107850228629066",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "in favor of grade 1 injury or degeneration.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "Tear of posterior horn of medial meniscus.",
+    "Lateral Meniscus": "Degeneration of medial and lateral meniscus.",
+    "Medial OA": "Wearing of articular cartilage and subchondral bone marrow edema in medial femoral condyle and medial tibial plateau and tibial intercondylar eminance, reflencting osteoarthritis.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "in favor of Baker's cyst.",
+    "Contusion": "subchondral bone marrow edema in medial femoral condyle and medial tibial plateau and tibial intercondylar eminance, reflencting osteoarthritis.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1371,
+    "candidates_tokens": 428,
+    "total_tokens": 1799,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.35549628666222168741574331855838621990",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL: Unremarkable.",
+    "MCL": "Medial collateral ligament: Preserved.",
+    "Medial Meniscus": "Medial meniscus; horizontal tear at body to posterior horn and contusional injury of posterior root.",
+    "Lateral Meniscus": "Lateral meniscus; Minimal increase fluid SI at anterior root of lateral meniscus; contusional injury is suspected.",
+    "Medial OA": "Articular cartilage at weightbaring medial femoral condyle and medial tibial plateau; unremarakble.",
+    "Lateral OA": "Preservation of cartilage at weightbaring lateral femoral condyle and lateral tibial plateau.",
+    "PF OA": "No definite chondrosis at medial and lateral facet articular cartilage.",
+    "Effusion": "minimal joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Baker cyst: not seen.",
+    "Contusion": "Bony marrow SI at medial femoral condyle and medial tibial plateau are preserved.",
+    "Fracture": "Preserve marrow SI within patella and femur"
+  },
+  "usage": {
+    "prompt_tokens": 1466,
+    "candidates_tokens": 434,
+    "total_tokens": 1900,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

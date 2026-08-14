@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.17274490471295558668613733667390457509",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "σημειώνεται βλεννοειδής εκφύλιση και μερική ρήξη του πρόσθιου χιαστού συνδέσμου",
+    "MCL": "",
+    "Medial Meniscus": "εκφυλιστική ρήξη και μετατόπιση του έσω μηνίσκου",
+    "Lateral Meniscus": "ήπια εκφύλιση του μηνίσκου",
+    "Medial OA": "σημαντική εκφυλιστική οστεοαρθρίτιδα με ολική διάβρωση του αρθρικού χόνδρου σε έσω μηριαίο και κνημιαίο κόνδυλο",
+    "Lateral OA": "μικρά επιχείλια οστεόφυτα, ήπια επιφανειακή διάβρωση του χόνδρου",
+    "PF OA": "αναγνωρίζεται μετρία εκφύλιση του αρθρικού χόνδρου στην έξω αρθρική επιφάνεια και οστεόφυτο στην έσω αρθρική επιφάνεια της επιγονατίδας",
+    "Effusion": "Παρατηρείται μετρία ενδαρθρική συλλογή υγρού",
+    "Synovitis": "",
+    "Baker's": "Σημειώνεται ευμεγέθης κύστη Βaker",
+    "Contusion": "παρουσία επιχείλιων οστεοφύτων και υπαρθρικού οστεομυελικού οιδήματος",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1542,
+    "candidates_tokens": 562,
+    "total_tokens": 2104,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

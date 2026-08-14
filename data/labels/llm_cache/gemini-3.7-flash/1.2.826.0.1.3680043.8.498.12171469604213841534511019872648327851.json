@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12171469604213841534511019872648327851",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са интактни.",
+    "MCL": "Колатерални литгаменти – без особености.",
+    "Medial Meniscus": "МР данни за лезия на задния рог на медиалния менискус.",
+    "Lateral Meniscus": "Нормално изобразяване на латералния менискус.",
+    "Medial OA": "МР данни за начална медиална гонартроза.",
+    "Lateral OA": "Не се намират изменения в хрущяла от латералната страна на ставата.",
+    "PF OA": "МР данни за хондромалация на пателата – grade – 4.",
+    "Effusion": "Наличие на малък ставен излив.",
+    "Synovitis": "",
+    "Baker's": "Вижда се голяма Бекерова киста в поплитеалната ямка",
+    "Contusion": "в съчетание с отграничен субхонрален костно-мозъчен едем в костта",
+    "Fracture": "Фемурът, тибията и фибулата са с нормална сигнална характеристика."
+  },
+  "usage": {
+    "prompt_tokens": 1495,
+    "candidates_tokens": 487,
+    "total_tokens": 1982,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

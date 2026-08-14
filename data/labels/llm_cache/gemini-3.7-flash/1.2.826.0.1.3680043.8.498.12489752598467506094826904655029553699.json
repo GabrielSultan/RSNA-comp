@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12489752598467506094826904655029553699",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Preserve",
+    "MCL": "Grade 1 sprain of MCL.",
+    "Medial Meniscus": "Medial meniscus: Unremarkable.",
+    "Lateral Meniscus": "Lateral meniscus: Unremarkable.",
+    "Medial OA": "Medial tibial plateau: Unremarkable. Medial femoral condyle: Unremarkable.",
+    "Lateral OA": "Lateral tibial plateau: Unremarkable. Lateral femoral condyle: Unremarkable.",
+    "PF OA": "Patellar cartilage and bone: Unremarkable. Trochlear cartilage: Unremarkable.",
+    "Effusion": "No joint effusion of left knee is demonstrated.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Soft tissue contusion and subcutaneous fat standing at anterior tibial tuberosity and patellar",
+    "Fracture": "Patellar cartilage and bone: Unremarkable."
+  },
+  "usage": {
+    "prompt_tokens": 1341,
+    "candidates_tokens": 411,
+    "total_tokens": 1752,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.35906584224533966870202042352292878668",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder:\nIntakte Kreuzbänder.",
+    "MCL": "",
+    "Medial Meniscus": "Geringe mukoide Degeneration des Innenmeniskushinterhorns.",
+    "Lateral Meniscus": "Intakter Außenmeniskus.",
+    "Medial OA": "Geringe Ausdünnung des Knorpel an der medialen Femurcondyle in der Belastungszone.",
+    "Lateral OA": "Kein tiefgreifender oder vollschichtiger Knorpeldefekt, kein subchondrales Knochenödem.",
+    "PF OA": "Fokaler tiefgreifender Knorpeldefekt in der lateralen Patellafacette (Serie 7/ Image 12).",
+    "Effusion": "Akzentuierte Gelenkflüssigkeit.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Regelrechtes Knochenmarksignal.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1324,
+    "candidates_tokens": 434,
+    "total_tokens": 1758,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

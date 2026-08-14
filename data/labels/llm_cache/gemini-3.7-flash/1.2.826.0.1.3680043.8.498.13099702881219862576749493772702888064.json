@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13099702881219862576749493772702888064",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intakte Kreuzbänder.",
+    "MCL": "Gering Flüssigkeit angrenzend an das MCL sowie geringe Signalalterationen der posteromedialen Kapsel.",
+    "Medial Meniscus": "ohne Nachweis einer Rissbildung",
+    "Lateral Meniscus": "ansonstern intakter Außenmeniskus ohne Rissbildung",
+    "Medial OA": "Intakter Knorpel.",
+    "Lateral OA": "Intakter Knorpel.",
+    "PF OA": "Knorpeldefekt im oberen Patellafirst (Serie 6/ Image 19, Outerbridge Grad 4). Gegenüberliegend diskrete oberflächliche Chondropathie der Trochlea",
+    "Effusion": "Mäßiger Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "Kleine Bakerzyste.",
+    "Contusion": "Regelrechtes Knochenmarksignal.",
+    "Fracture": "Regelrechtes Knochenmarksignal."
+  },
+  "usage": {
+    "prompt_tokens": 1317,
+    "candidates_tokens": 440,
+    "total_tokens": 1757,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

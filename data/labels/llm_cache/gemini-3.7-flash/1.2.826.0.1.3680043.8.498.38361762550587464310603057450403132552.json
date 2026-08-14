@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38361762550587464310603057450403132552",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intacte voorste kruisband.",
+    "MCL": "Intact mediaal collateraal ligament.",
+    "Medial Meniscus": "Degeneratieve radiaire scheur in de posterieure wortel van de mediale meniscus.",
+    "Lateral Meniscus": "Intacte laterale meniscus.",
+    "Medial OA": "Matiggradige verdunning van het kraakbeen mediaal femorotibiaal.",
+    "Lateral OA": "",
+    "PF OA": "Groot graad 4 kraakbeenletsel lateraal trochleair. Graad 4 kraakbeenfissuur superieur patellair.",
+    "Effusion": "Matige hydrops",
+    "Synovitis": "tekens van chronische synovitis.",
+    "Baker's": "Bakercyste met tekens van ruptuur.",
+    "Contusion": "Volledige dikte kraakbeenfissuur superieur patellair met subchondraal oedeem.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1353,
+    "candidates_tokens": 440,
+    "total_tokens": 1793,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

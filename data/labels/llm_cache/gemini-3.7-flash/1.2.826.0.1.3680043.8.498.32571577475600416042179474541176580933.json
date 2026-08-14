@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32571577475600416042179474541176580933",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": null,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "",
+    "Lateral Meniscus": "Rotura de la raíz anterior del menisco externo.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Derrame articular con lipohemartrosis.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Edema de médula ósea y tejidos blandos.",
+    "Fracture": "Fractura intraarticular no desplazada de la meseta tibial lateral."
+  },
+  "usage": {
+    "prompt_tokens": 1089,
+    "candidates_tokens": 346,
+    "total_tokens": 1435,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

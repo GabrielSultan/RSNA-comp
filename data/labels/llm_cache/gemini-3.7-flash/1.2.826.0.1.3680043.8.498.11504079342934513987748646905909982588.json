@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11504079342934513987748646905909982588",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Complete full-thickness tear at the proximal third of the anterior cruciate ligament",
+    "MCL": "Medial compartment (meniscus, collateral ligament, cartilage): Normal.",
+    "Medial Meniscus": "Medial compartment (meniscus, collateral ligament, cartilage): Normal.",
+    "Lateral Meniscus": "Lateral compartment (meniscus, collateral ligament complex, cartilage): Normal.",
+    "Medial OA": "Medial compartment (meniscus, collateral ligament, cartilage): Normal.",
+    "Lateral OA": "Lateral compartment (meniscus, collateral ligament complex, cartilage): Normal.",
+    "PF OA": "Mild signal abnormality at the medial facet of the patella without full-thickness chondral fissures",
+    "Effusion": "Moderate joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No popliteal cyst.",
+    "Contusion": "Prominent bone contusions in the medial aspect of the medial femoral condyle",
+    "Fracture": "Suspected microtrabecular impaction fracture at the posterior aspect of the lateral tibial plateau."
+  },
+  "usage": {
+    "prompt_tokens": 1335,
+    "candidates_tokens": 445,
+    "total_tokens": 1780,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

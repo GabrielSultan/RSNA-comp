@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.36180248571044206939894546783755557323",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The ACL is mildly thickened however this is chronic and could relate to an old low-grade partial tear.",
+    "MCL": "Collateral ligaments intact.",
+    "Medial Meniscus": "Routine MRI of the right knee shows no medial or lateral meniscal tear.",
+    "Lateral Meniscus": "Routine MRI of the right knee shows no medial or lateral meniscal tear.",
+    "Medial OA": "No cartilage defects in the medial and lateral compartments.",
+    "Lateral OA": "No cartilage defects in the medial and lateral compartments.",
+    "PF OA": "There is focal severe chondrosis in the lateral patella with cartilage loss",
+    "Effusion": "Small simple effusion.",
+    "Synovitis": "",
+    "Baker's": "No Baker's cyst.",
+    "Contusion": "focal severe chondrosis in the lateral patella with cartilage loss and 7 mm focus of bony edema.",
+    "Fracture": "No insufficiency fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1211,
+    "candidates_tokens": 424,
+    "total_tokens": 1635,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

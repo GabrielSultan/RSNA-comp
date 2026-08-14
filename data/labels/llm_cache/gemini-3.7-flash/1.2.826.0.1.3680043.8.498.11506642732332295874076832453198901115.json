@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11506642732332295874076832453198901115",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Complete midsubstance ACL rupture.",
+    "MCL": "Grade 2 MCL sprain.",
+    "Medial Meniscus": "Intact medial and lateral menisci.",
+    "Lateral Meniscus": "Intact medial and lateral menisci.",
+    "Medial OA": "Medial compartment cartilage: No focal full thickness cartilage defects.",
+    "Lateral OA": "Lateral compartment cartilage: Osteochondral impaction injury along the lateral femoral condyle; otherwise, no focal full-thickness cartilage defects.",
+    "PF OA": "Patellofemoral compartment cartilage: No focal full-thickness cartilage defects.",
+    "Effusion": "Moderate joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Small Baker's cyst.",
+    "Contusion": "small osseous contusions along the posterior medial and lateral tibial plateaus.",
+    "Fracture": "Osteochondral impaction injury with accompanying bone marrow edema along the sulcus terminalis of the lateral femoral condyle"
+  },
+  "usage": {
+    "prompt_tokens": 1707,
+    "candidates_tokens": 430,
+    "total_tokens": 2137,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

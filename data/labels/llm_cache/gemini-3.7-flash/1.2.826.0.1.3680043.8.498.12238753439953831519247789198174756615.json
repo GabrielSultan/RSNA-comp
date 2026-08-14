@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12238753439953831519247789198174756615",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL: intact",
+    "MCL": "MCL: Deep MCL partial tear",
+    "Medial Meniscus": "Medial meniscus: no definite tear.",
+    "Lateral Meniscus": "Lateral meniscus: suspicious for anterior root partial tear",
+    "Medial OA": "Osteophyte formation of the medial compartment; OA medial compartment",
+    "Lateral OA": "Low grade osteochondral injury at mid medial femoral condyle and mid lateral femoral condyle and also posterior lateral femoral condyle.",
+    "PF OA": "",
+    "Effusion": "Joint effusion and fluid in suprapatellar bursa is seen.",
+    "Synovitis": "",
+    "Baker's": "No Baker's cyst is seen.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1397,
+    "candidates_tokens": 385,
+    "total_tokens": 1782,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.40223239401390462911823193489179244754",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL; complete tear",
+    "MCL": "The medial collateral ligament complexes are intact.",
+    "Medial Meniscus": "In the medial compartment, the meniscus is not torn",
+    "Lateral Meniscus": "The lateral compartment, complex tear at posterior horn of meniscus",
+    "Medial OA": "there is no focal chondrosis or chondral injury.",
+    "Lateral OA": "diffuse low grade chondrosis at tibial plateau",
+    "PF OA": "The patellofemoral joint, There is no chondral defect.",
+    "Effusion": "Minimal amount of right knee effusion",
+    "Synovitis": "with synovitis is present",
+    "Baker's": "",
+    "Contusion": "Severe bone marrow edema at posterior lateral tibial plateau and lateral femoral condyle",
+    "Fracture": "suspect split non displaced fracture postero lateral tibial plateau"
+  },
+  "usage": {
+    "prompt_tokens": 1228,
+    "candidates_tokens": 408,
+    "total_tokens": 1636,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

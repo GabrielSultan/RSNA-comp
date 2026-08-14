@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.22057596860528658818833903685827585805",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intacte voorste kruisband.",
+    "MCL": "Intact mediaal collateraal ligament.",
+    "Medial Meniscus": "Intacte mediale meniscus.",
+    "Lateral Meniscus": "Intacte laterale meniscus.",
+    "Medial OA": "Kleine ondiepe parti ële dikte kraakbeenfissuren centraal en centraal op de mediale femurcondyl.",
+    "Lateral OA": "Geen majeure kraakbeendefecten lateraal femorotibiaal.",
+    "PF OA": "Geen majeure kraakbeendefecten patellofemoraal.",
+    "Effusion": "Geen hydrops.",
+    "Synovitis": "",
+    "Baker's": "Kleine onverwikkelde bakercyste.",
+    "Contusion": "Geen botoedeem.",
+    "Fracture": "Verder onderzoek binnen normale grenzen."
+  },
+  "usage": {
+    "prompt_tokens": 1218,
+    "candidates_tokens": 418,
+    "total_tokens": 1636,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

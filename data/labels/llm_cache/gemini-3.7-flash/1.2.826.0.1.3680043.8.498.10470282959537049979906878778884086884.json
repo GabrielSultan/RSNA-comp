@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10470282959537049979906878778884086884",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "There is complete tear of the anterior cruciate ligament, at mid substance.",
+    "MCL": "The medial and lateral collateral ligament complexes are intact.",
+    "Medial Meniscus": "In the medial compartment, there is longitudinal vertical tear at the body and posterior horn of the medial meniscus.",
+    "Lateral Meniscus": "The lateral compartment, there is vertical longitudinal tear of the posterior horn and body of the lateral meniscus",
+    "Medial OA": "There is no focal chondrosis or chondral injury.",
+    "Lateral OA": "There is focal high grade chondral injury (more than 50% thickness cartilage loss) at the posterolateral tibial plateau",
+    "PF OA": "The patellofemaoral joint appears congruent. There is no cartilage injury.",
+    "Effusion": "Minimal amount of left knee effusion is present.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1272,
+    "candidates_tokens": 424,
+    "total_tokens": 1696,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

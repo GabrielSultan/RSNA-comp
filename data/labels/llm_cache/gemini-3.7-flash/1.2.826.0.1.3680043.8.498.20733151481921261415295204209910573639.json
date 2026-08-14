@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.20733151481921261415295204209910573639",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Complete subacute tear of the ACL.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: Normal in morphology and signal.",
+    "Lateral Meniscus": "Horizontal tear of the posterior body and posterior horn of the lateral meniscus.",
+    "Medial OA": "Medial compartment cartilage: No focal cartilage defects.",
+    "Lateral OA": "High-grade cartilage loss along the posterior lateral tibial plateau.",
+    "PF OA": "Patellofemoral compartment cartilage: Low-grade chondral fraying along the medial and lateral patellar facet.",
+    "Effusion": "Moderate joint effusion.",
+    "Synovitis": "Focal nodular synovial proliferation at the anterior joint line.",
+    "Baker's": "No Baker's cyst.",
+    "Contusion": "Osseous contusion at the posterior lateral tibial plateau with minimal residual osseous contusion at the periphery of the medial femoral condyle and lateral femoral condyle.",
+    "Fracture": "Alignment is anatomic."
+  },
+  "usage": {
+    "prompt_tokens": 1616,
+    "candidates_tokens": 443,
+    "total_tokens": 2059,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

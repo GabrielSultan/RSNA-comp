@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38173249623713271734596884672770674290",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "There is a complete tear of mid fibers of anterior cruciate ligament.",
+    "MCL": "The medial collateral ligament and lateral collateral ligament complex including the IT band, fibular collateral ligament, biceps femoris tendon and popliteus tendon all appear intact and unremarkable.",
+    "Medial Meniscus": "The medial meniscus is intact. There is some non-surfacing peripheral signal seen within the posterior horn and posterior body at the meniscal capsular insertion site but there is no evidence of a definite meniscal tear or obvious meniscal capsular separation.",
+    "Lateral Meniscus": "The lateral meniscus is intact.",
+    "Medial OA": "",
+    "Lateral OA": "The articular cartilage of the lateral joint compartment is well-maintained.",
+    "PF OA": "The articular cartilage of the patellofemoral joint is reasonably well-maintained.",
+    "Effusion": "There is a small knee effusion.",
+    "Synovitis": "",
+    "Baker's": "There is no significant Baker's cyst.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1418,
+    "candidates_tokens": 445,
+    "total_tokens": 1863,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.36825274340853796392762195174336452919",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "A chronic looking proximal ACL tear of an essentially complete nature is nonetheless present",
+    "MCL": "Intact PCL, both collateral ligaments",
+    "Medial Meniscus": "No meniscal tears appreciated either medially or laterally",
+    "Lateral Meniscus": "No meniscal tears appreciated either medially or laterally",
+    "Medial OA": "well-maintained tricompartmental articular cartilage surfaces",
+    "Lateral OA": "well-maintained tricompartmental articular cartilage surfaces",
+    "PF OA": "well-maintained tricompartmental articular cartilage surfaces",
+    "Effusion": "a moderate suprapatellar effusion",
+    "Synovitis": "",
+    "Baker's": "A small non ruptured Baker's cyst is present posteromedially.",
+    "Contusion": "Faint residual marrow oedema like signal change noted at the central third of the medial femoral condyle.",
+    "Fracture": "No other skeletal abnormality of note"
+  },
+  "usage": {
+    "prompt_tokens": 1217,
+    "candidates_tokens": 424,
+    "total_tokens": 1641,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

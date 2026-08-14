@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12153755823296803843819361055386265595",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са интактни.",
+    "MCL": "Колатерални лигаменти – без особености.",
+    "Medial Meniscus": "МР данни за частична увреда на заден рог на медиален менискус",
+    "Lateral Meniscus": "недостигаща до артикулиращия хрущял. Същата съответства на частична руптура – 2а стадий. Нормално изобразяване на латералния менискус.",
+    "Medial OA": "Ставният хрущял е лекостепенно изтънен",
+    "Lateral OA": "Ставният хрущял е лекостепенно изтънен",
+    "PF OA": "Ставният хрущял е лекостепенно изтънен",
+    "Effusion": "Липсва ставен излив.",
+    "Synovitis": "",
+    "Baker's": "Фоса поплитеа – б.о.",
+    "Contusion": "Нормален МР образ на костите, формиращи лявата колянна става.",
+    "Fracture": "Нормален МР образ на костите, формиращи лявата колянна става."
+  },
+  "usage": {
+    "prompt_tokens": 1227,
+    "candidates_tokens": 508,
+    "total_tokens": 1735,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

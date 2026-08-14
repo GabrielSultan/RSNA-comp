@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11647595587705638372290862475518195181",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Blaže degenerativno promijenjen prednji križni ligament, bez znakova rupture.",
+    "MCL": "Distenzija medijalnog kolateralnog ligamenta.",
+    "Medial Meniscus": "Kompleksna ruptura stražnjeg roga sa širenjem u tijelo degenerativnog promijenjenog medijalnog meniska uz ekstruziju.",
+    "Lateral Meniscus": "Ekstruzija blaže degenerativno promijenjenog lateralnog meniska bez vidljive rupture.",
+    "Medial OA": "Umjerene osteoartrotske promjene femorotibijalnog zgloba, izraženije u medijalnom kompartmentu gdje je prisutno značajno stanjenje hrskavice uz gubitak intraartikularnog prostora.",
+    "Lateral OA": "Hondromalacija I. stupnja hrskavica u lateralnom kompartmentu femorotibijalnog zgloba.",
+    "PF OA": "Hondromalacija II. stupnja medijalne fasete patele i I. stupnja lateralne.",
+    "Effusion": "Umjereni suprapatelarni izljev.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne (Bakerove) ciste.",
+    "Contusion": "Umjerena do izražena rekonverzija koštane srži metadijafize femura i posteriorne polovice tibije i fibule.",
+    "Fracture": "Umjerena do izražena rekonverzija koštane srži metadijafize femura i posteriorne polovice tibije i fibule."
+  },
+  "usage": {
+    "prompt_tokens": 1426,
+    "candidates_tokens": 588,
+    "total_tokens": 2014,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

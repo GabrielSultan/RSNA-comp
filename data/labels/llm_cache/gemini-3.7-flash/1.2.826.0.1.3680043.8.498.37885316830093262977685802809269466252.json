@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.37885316830093262977685802809269466252",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "El menisco medial es de morfología y señal conservada, sin signos de rotura.",
+    "Lateral Meniscus": "El menisco lateral impresiona de morfología y señal conservada, sin criterios de una rotura categórica.",
+    "Medial OA": "El resto de los cartílagos femorotibiales sin alteraciones significativas.",
+    "Lateral OA": "Condropatía superficial de platillo tibial lateral.",
+    "PF OA": "Condropatía lesiones grado 2 de la rótula.",
+    "Effusion": "Mínimo derrame articular.",
+    "Synovitis": "",
+    "Baker's": "No hay quistes poplíteos patológicos.",
+    "Contusion": "No hay alteraciones en significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones en significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1318,
+    "candidates_tokens": 448,
+    "total_tokens": 1766,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

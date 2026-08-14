@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29579560656789178333629609998252952856",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са със запазена цялост.",
+    "MCL": "Нормално изобразяване на колатералните лигаменти.",
+    "Medial Meniscus": "Нормално изобразяване на менискусите.",
+    "Lateral Meniscus": "Нормално изобразяване на менискусите.",
+    "Medial OA": "Артикулиращия хрущял на фемура и тибията е със запазена цялост.",
+    "Lateral OA": "Артикулиращия хрущял на фемура и тибията е със запазена цялост.",
+    "PF OA": "Патела, хрущял на пателата, ретинакулуми – б.о.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "Наличие на малка Бекерова киста с р-р 26/7мм.",
+    "Contusion": "Вижда се контузионен костномозъчен едем в латералния кондил на тибията.",
+    "Fracture": "хиперинтензна линия с хоризонтален ход, съответстваща на стрес фрактура"
+  },
+  "usage": {
+    "prompt_tokens": 1255,
+    "candidates_tokens": 503,
+    "total_tokens": 1758,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

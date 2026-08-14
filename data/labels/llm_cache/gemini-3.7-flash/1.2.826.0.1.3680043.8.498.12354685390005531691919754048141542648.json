@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12354685390005531691919754048141542648",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Chronic complete tear of the anterior cruciate ligament.",
+    "MCL": "There is mild thickening of the proximal medial collateral ligament",
+    "Medial Meniscus": "Oblique tear at the posterior horn of the medial meniscus extending into the tibial meniscal surface.",
+    "Lateral Meniscus": "Degenerative radial tear of the posterior horn of the lateral meniscus.",
+    "Medial OA": "Moderate femorotibial osteoarthritis with severe chondrosis in the lateral femorotibial joint compartment",
+    "Lateral OA": "focal severe chondrosis involving the weightbearing zone and posterior aspect of the lateral femoral condyle with focal deep cartilage defect",
+    "PF OA": "There is a mild superficial chondral disease involving the patellofemoral joint.",
+    "Effusion": "There is a mild joint effusion",
+    "Synovitis": "reactive synovial thickening",
+    "Baker's": "There is a low volume Baker's cyst.",
+    "Contusion": "No acute bony contusions.",
+    "Fracture": "The no acute bony contusions."
+  },
+  "usage": {
+    "prompt_tokens": 1544,
+    "candidates_tokens": 447,
+    "total_tokens": 1991,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.24635589616467409099788838058892886889",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağda parsiyel yırtık izleniyor.",
+    "MCL": "Arka çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküsün arka boynuzundaki yapı içi sinyal artışı eklem yüzeylerine yırtık biçiminde ulaşmıyor.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "PF OA": "Patellofemoral kompartman dejenerasyonu pateller kıkırdakta tam kata ulaşmayan eklem kıkırdağı kaybı ve dejenerasyonu",
+    "Effusion": "Diz eklemi içi sıvı miktarı hafif artmış.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "Fracture": "Eklem kıkırdakları ve kemikler bunların dışında normal."
+  },
+  "usage": {
+    "prompt_tokens": 1195,
+    "candidates_tokens": 465,
+    "total_tokens": 1660,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

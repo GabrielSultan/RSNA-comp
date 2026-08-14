@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12221892384948220776502422531414659289",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Les ligaments croisés antérieur et postérieur sont intacts et sans déchirure.",
+    "MCL": "",
+    "Medial Meniscus": "Il y a un émoussement vertical à la périphérie de la corne postérieure du ménisque interne, de signal moindre par rapport au liquide, qui pourrait être en lien avec une ancienne déchirure longitudinale verticale à la jonction capsulo-méniscale/lésion de type « ramp ».",
+    "Lateral Meniscus": "Le ménisque externe et le complexe ligamentaire collatéral externe sont intacts et sans déchirure.",
+    "Medial OA": "Il y a une légère chondropathie patellofémorale et fémorotibiale interne.",
+    "Lateral OA": "Les surfaces cartilagineuses fémorotibiales externes sont relativement préservées.",
+    "PF OA": "Il y a une légère chondropathie patellofémorale et fémorotibiale interne.",
+    "Effusion": "Il n'y a pas d’épanchement intra-articulaire significatif.",
+    "Synovitis": "",
+    "Baker's": "Il n’y a pas d’épanchement intra-articulaire ni kyste de Baker significatif",
+    "Contusion": "à l'exception d'un minime œdème sous-chondral au versant tibial.",
+    "Fracture": "Il n'y a pas de fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1697,
+    "candidates_tokens": 523,
+    "total_tokens": 2220,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

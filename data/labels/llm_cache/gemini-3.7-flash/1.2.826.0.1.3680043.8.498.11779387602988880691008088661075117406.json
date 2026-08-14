@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11779387602988880691008088661075117406",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Rotura degenerativa de la raíz meniscal posterior y parte del cuerno posterior del menisco medial",
+    "Lateral Meniscus": "El menisco lateral es de morfología y señal conservada, sin criterios categóricos de rotura.",
+    "Medial OA": "Úlceras condrales de espesor parcial de la zona de carga del compartimento femorotibial medial.",
+    "Lateral OA": "Cartílagos del compartimento femorotibial lateral sin alteraciones.",
+    "PF OA": "Úlceras condrales de espesor parcial y prácticamente total de distribución difusa de la rótula.",
+    "Effusion": "Leve derrame articular.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No hay alteraciones en significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones en significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1322,
+    "candidates_tokens": 458,
+    "total_tokens": 1780,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

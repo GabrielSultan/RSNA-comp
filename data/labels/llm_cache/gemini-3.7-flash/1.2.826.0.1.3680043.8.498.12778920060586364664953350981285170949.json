@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12778920060586364664953350981285170949",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Degeneration of ACL and PCL.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "Linear signal intensity in medial and lateral meniscus, without significant extending into the surface, in favor of  grade 2 intrasubstance signal",
+    "Lateral Meniscus": "Linear signal intensity in medial and lateral meniscus, without significant extending into the surface, in favor of  grade 2 intrasubstance signal",
+    "Medial OA": "Spur formation and subchondral bone marrow edema/cysts of knee and irregular thining of intra-articular cartilage, more severe at femoral trochlea and patella, reflecting osteoarthritis of knee",
+    "Lateral OA": "Spur formation and subchondral bone marrow edema/cysts of knee and irregular thining of intra-articular cartilage, more severe at femoral trochlea and patella, reflecting osteoarthritis of knee",
+    "PF OA": "Osteoarthritis of left knee with grade 3-4 chondromalacia of patellofemoral joint.",
+    "Effusion": "",
+    "Synovitis": "Mild synovitis of left knee with medial and suprapatellar patellar plicae.",
+    "Baker's": "",
+    "Contusion": "No evidence of bone contusion is noted.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1267,
+    "candidates_tokens": 503,
+    "total_tokens": 1770,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.62549354677638403845904556149868367236",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Volledige scheur van de voorste kruisband",
+    "MCL": "Parti ële scheur proximaal op het mediale collaterale ligament, graad 2",
+    "Medial Meniscus": "Normaal voorkomen menisci",
+    "Lateral Meniscus": "Normaal voorkomen menisci",
+    "Medial OA": "Normaal voorkomen kraakbeen",
+    "Lateral OA": "Normaal voorkomen kraakbeen",
+    "PF OA": "Normaal voorkomen kraakbeen",
+    "Effusion": "Matige opzetting van suprapatellaire recessus",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Minstens botcontusie",
+    "Fracture": "Impactiefractuur op centraal dragende deel van de laterale femorale condylen"
+  },
+  "usage": {
+    "prompt_tokens": 1311,
+    "candidates_tokens": 406,
+    "total_tokens": 1717,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

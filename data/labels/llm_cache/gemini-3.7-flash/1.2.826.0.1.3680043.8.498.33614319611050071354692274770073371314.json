@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33614319611050071354692274770073371314",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt.",
+    "MCL": "Kollateralbänder ebenfalls intakt.",
+    "Medial Meniscus": "Der Innenmeniskus in Pars intermedia und Hinterhorn ebenfalls deutlich signalangehoben sowie etwas substanzgemindert",
+    "Lateral Meniscus": "Der Außenmeniskus im Vorderhorn und Pars intermedia deutlich substanzgemindert, im Hinterhorn aufgetrieben und massiv signalalteriert (6/25) mit Signalanhebungen bis in die hintere Wurzel.",
+    "Medial OA": "Medialseitig vorwiegend oberflächliche Chondropathie mit einzelnen nativer greifenden Läsionen am medialen Femurkondylus",
+    "Lateral OA": "Femorotibial lateralseitig am Tibiaplateau (6/27) sowie an der Femurkondyle (5/25) teilweise vollschichtige Chondropathie.",
+    "PF OA": "Moderate Chondropathie der Trochlea",
+    "Effusion": "Geringer Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "Baker-Zyste mit V. a. Ruptur bei auf dem gastrocnemicus auslaufender Flüssigkeit.",
+    "Contusion": "Kein kontusionelle Knochenmarksödem.",
+    "Fracture": "regelrechte Stellungsverhältnisse im rechten Kniegelenk. Kein kontusionelle Knochenmarksödem."
+  },
+  "usage": {
+    "prompt_tokens": 1499,
+    "candidates_tokens": 539,
+    "total_tokens": 2038,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

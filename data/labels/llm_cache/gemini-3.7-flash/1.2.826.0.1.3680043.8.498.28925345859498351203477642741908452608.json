@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.28925345859498351203477642741908452608",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Arka çapraz bağ, çm çapraz bağ , lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküs ekstrüde görünümde olup posterior hornunda yırtık ile uyumlu sinyal değişiklikleri mevcuttur.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "Tibia proksimali ve femur distal epikondil seviyesi medialde kemik iliği ödemi ile uyumlu görünümler mevcuttur. Bu düzeyde eklem aralığı belirgin daralmıştır.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursada sıvı artışı izlenmiştir.",
+    "Synovitis": "",
+    "Baker's": "Popliteal fossada 54x15 mm çapta Baker kisti ile uyumlu görünüm mevcuttur.",
+    "Contusion": "Tibia proksimali ve femur distal epikondil seviyesi medialde kemik iliği ödemi ile uyumlu görünümler mevcuttur. Bu düzeyde eklem aralığı belirgin daralmıştır.",
+    "Fracture": "Tibia proksimali ve femur distal epikondil seviyesi medialde kemik iliği ödemi ile uyumlu görünümler mevcuttur."
+  },
+  "usage": {
+    "prompt_tokens": 1199,
+    "candidates_tokens": 538,
+    "total_tokens": 1737,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

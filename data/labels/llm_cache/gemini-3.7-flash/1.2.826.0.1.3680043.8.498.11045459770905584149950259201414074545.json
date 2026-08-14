@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11045459770905584149950259201414074545",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "LCA continuo, con aumento de señal intrasustancia sugerente de transformación quística parcial versus cambios cicatriciales.",
+    "MCL": "Ligamentos colaterales de grosor y señal normales.",
+    "Medial Meniscus": "Meniscos de morfología y señal normales, sin signos de rotura.",
+    "Lateral Meniscus": "Meniscos de morfología y señal normales, sin signos de rotura.",
+    "Medial OA": "Condropatía del cóndilo femoral medial grado 1.",
+    "Lateral OA": "Resto del cartílago de compartimentos femorotibiales y patelofemoral de grosor y señal normales.",
+    "PF OA": "Resto del cartílago de compartimentos femorotibiales y patelofemoral de grosor y señal normales.",
+    "Effusion": "No hay derrame articular.",
+    "Synovitis": "",
+    "Baker's": "Mínima distensión del receso gastrocnemio-semimembranoso.",
+    "Contusion": "No hay alteraciones difusas de señal de la médula ósea.",
+    "Fracture": "No hay alteraciones difusas de señal de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1415,
+    "candidates_tokens": 485,
+    "total_tokens": 1900,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

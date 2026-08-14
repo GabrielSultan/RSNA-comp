@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11902464730418099436837163594625541861",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intakte Darstellung des vorderen und hinteren Kreuzbandes, das VKB mittig gering signalangehoben a.e. bei Degeneration.",
+    "MCL": "Intaktes mediales und laterales Kollateralband.",
+    "Medial Meniscus": "Horizontale Rissbildung des Innnenmeniskushinterhornes mit Auslaufen an die tibiale Gelenkfläche (6/7).",
+    "Lateral Meniscus": "Gering mucoide Degeneration bei Signalanhebung des Außenmeniskushinterhornes ohne Rissbildung.",
+    "Medial OA": "Gering medial betonte Gelenkspaltverschmälerung",
+    "Lateral OA": "Keine wesentliche Chondropathie femorotibial im medialen und lateralen Kompartiment.",
+    "PF OA": "Fokal bis oberflächliche Chondropathie der Trochlea",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Ödemsignal des distalen Femurs subchondral im Bereich der Incisura (5/14). Des Weiteren kein knöchernes Ödemsignal",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1308,
+    "candidates_tokens": 486,
+    "total_tokens": 1794,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

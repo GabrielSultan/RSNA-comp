@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.16538738179840493095338324009830673843",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intact lateral collateral ligament and cruciate ligaments.",
+    "MCL": "Minor thickening of the proximal MCL with no surrounding edema suggestive of previous injury and healing with scarring.",
+    "Medial Meniscus": "Intact medial meniscus.",
+    "Lateral Meniscus": "the body and posterior horn of the lateral meniscus is severely attenuated in keeping with complex degenerate tearing",
+    "Medial OA": "Focal 2 mm x 2 mm low-grade cartilage defect in the weightbearing portion of the medial femoral condyle.",
+    "Lateral OA": "Low-grade chondral thinning in the lateral tibiofemoral compartment.",
+    "PF OA": "Relatively well-maintained patellofemoral hyaline articular cartilage.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1277,
+    "candidates_tokens": 404,
+    "total_tokens": 1681,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

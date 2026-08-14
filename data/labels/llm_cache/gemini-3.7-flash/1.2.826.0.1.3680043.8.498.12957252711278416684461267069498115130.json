@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12957252711278416684461267069498115130",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Vorderes und hinteres Kreuzband intakt.",
+    "MCL": "geringer Reizzustand des MCL.",
+    "Medial Meniscus": "Der Innenmeniskus ab Pars intermedia bis ins Hinterhorn deutlich signalalteriert und aufgetrieben mit schräger Risskomponente",
+    "Lateral Meniscus": "Der Außenmeniskus ist intakt.",
+    "Medial OA": "Medialseitig teils fokal tief greifende Chondropathie",
+    "Lateral OA": "Femorotibial lateralseitig erhaltener Knorpelbelag ohne tief greifende Chondropathie",
+    "PF OA": "Mehrere oberflächliche, teils bis zur Hälfte der Knorpelschicht erreichenden chondralen Läsionen",
+    "Effusion": "Geringer Gelenkerguss.",
+    "Synovitis": "Synovialis nicht verdickt.",
+    "Baker's": "Vergrößerte Bursa praepatellaris (5/20). Ansonsten unauffällige Darstellung der umgebenden Muskulatur und der Subkutis.",
+    "Contusion": "geringem Knochenmarködem in dem kleinerem akzessorischen Fragment (4/7). Ansonsten altersentsprechendes Knochenmarkssignal.",
+    "Fracture": "Als anatomische Normvariante Patella tripartita am superolateralen Pol"
+  },
+  "usage": {
+    "prompt_tokens": 1426,
+    "candidates_tokens": 529,
+    "total_tokens": 1955,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

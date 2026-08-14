@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11268635423021790546063903457498005204",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales continuos, de grosor y señal normales.",
+    "MCL": "Ligamentos cruzados y colaterales continuos, de grosor y señal normales.",
+    "Medial Meniscus": "Meniscos de morfología y señal normales, sin evidencia de roturas.",
+    "Lateral Meniscus": "Meniscos de morfología y señal normales, sin evidencia de roturas.",
+    "Medial OA": "Discreta irregularidad superficial del cartílago en zona de carga y central del cóndilo femoral medial.",
+    "Lateral OA": "Restantes cartílagos de los compartimentos femorotibiales de espesor conservado",
+    "PF OA": "Irregularidad difusa del cartílago articular en el compartimento patelofemoral con extensas úlceras",
+    "Effusion": "Leve derrame articular.",
+    "Synovitis": "",
+    "Baker's": "Pequeño quiste poplíteo de 6 mm",
+    "Contusion": "No hay alteraciones difusas en la señal de la médula ósea.",
+    "Fracture": "No hay alteraciones difusas en la señal de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1363,
+    "candidates_tokens": 484,
+    "total_tokens": 1847,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

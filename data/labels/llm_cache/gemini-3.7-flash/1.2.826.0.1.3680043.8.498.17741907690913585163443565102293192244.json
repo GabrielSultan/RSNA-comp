@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.17741907690913585163443565102293192244",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament urednog signala te se prati u kontinuitetu.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti se prate u kontinuitetu.",
+    "Medial Meniscus": "Medijalni menisk početno promiojenjenog signala stražnjeg roga - početne deg. promjene.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova degeneracije ili rupture.",
+    "Medial OA": "Hondromalacija I. stupnja hrskavice oba platoa tibije",
+    "Lateral OA": "Hondromalacija I. stupnja hrskavice oba platoa tibije, više lateralnog",
+    "PF OA": "Hondromalacija I.stupnja lateralne fasete patele.",
+    "Effusion": "Minimalno izljeva u suprapatelarnom i stražnjem femoralnom recesusu",
+    "Synovitis": "",
+    "Baker's": "Bez znakova poplitealne ciste.",
+    "Contusion": "Koštani edem lateralnog kondila tibije posteriorno i glave fibule, dif dg prvnestveno uslijed kontuzijskih promjena.",
+    "Fracture": "Kongruentna su zglobna tijela, simetrično održane širine oba kompartmenta TF zgloba."
+  },
+  "usage": {
+    "prompt_tokens": 1317,
+    "candidates_tokens": 526,
+    "total_tokens": 1843,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

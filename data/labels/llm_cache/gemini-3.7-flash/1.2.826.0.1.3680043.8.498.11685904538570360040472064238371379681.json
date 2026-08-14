@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11685904538570360040472064238371379681",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Zona povišenog intenziteta signala u proksimalnoj polovini posterolateralnog snopa prednjeg križnog ligamenta, moguće uslijed manje parijalne rupture.",
+    "MCL": "Medijalni kolateralni ligament urednog je signala i prati se u kontinuitetu.",
+    "Medial Meniscus": "Medijalni menisk promijenjenog intenziteta signala u području trupa i stražnjeg roga, moguće stanje po kompleksnoj rupturi.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture i degeneracije.",
+    "Medial OA": "Edem medijalnog tibijalnog platoa rubno uz vidljive koštane apozicije - OA promjene.",
+    "Lateral OA": "Hondromalacija 3. stupnja femoralne hrskavice obostrano i tibijalne hrskavice lateralno.",
+    "PF OA": "Hondromalacija 2. stupnja patelarne hrskaice u području medijalne fasete. Hondromalacija 2. stupnja trohlearne hrskavice.",
+    "Effusion": "Manja količina izljeva suprapatelarno te u lateralnom recesusu.",
+    "Synovitis": "",
+    "Baker's": "Bez znakova poplitealne ciste.",
+    "Contusion": "Edem medijalnog tibijalnog platoa rubno uz vidljive koštane apozicije - OA promjene.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1530,
+    "candidates_tokens": 558,
+    "total_tokens": 2088,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

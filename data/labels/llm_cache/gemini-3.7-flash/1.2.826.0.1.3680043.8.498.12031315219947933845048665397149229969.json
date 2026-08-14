@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12031315219947933845048665397149229969",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intact cruciate and collateral ligaments.",
+    "MCL": "Intact cruciate and collateral ligaments.",
+    "Medial Meniscus": "Radial tear of the anterior horn/body junction of the medial meniscus",
+    "Lateral Meniscus": "Intact lateral meniscus.",
+    "Medial OA": "Full-thickness chondral loss is also appreciated in the weightbearing portion of the medial femoral condyle.",
+    "Lateral OA": "Low-grade chondral thinning in the lateral tibiofemoral compartment.",
+    "PF OA": "Severe patellofemoral degenerative change with diffuse full-thickness chondral loss along the retropatellar facets and corresponding femoral trochlea",
+    "Effusion": "Small knee joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Large multiloculated ganglion cyst possibly originating from the lateral head of gastrocnemius tendon origin",
+    "Contusion": "chronic underlying bone stress changes",
+    "Fracture": "No sinister bone marrow changes."
+  },
+  "usage": {
+    "prompt_tokens": 1277,
+    "candidates_tokens": 431,
+    "total_tokens": 1708,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

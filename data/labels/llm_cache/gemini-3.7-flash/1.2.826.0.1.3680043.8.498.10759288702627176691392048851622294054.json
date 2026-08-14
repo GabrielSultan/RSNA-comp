@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10759288702627176691392048851622294054",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağın tibyal insersiyona yakın kesimi hafifçe ödemli.",
+    "MCL": "İç yan bağın çevresi ödemli olup orta kesimde fokal bir alandaki devamlılık kaybı ile karakterize parsiyel yırtığı gözleniyor.",
+    "Medial Meniscus": "mediyal menisküs gövdesinde alt eklem yüzüne ulaşan horizantal oblik yırtık mevcut.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "Eklem kıkırdakları ve kemikler bunların normal.",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler bunların normal.",
+    "PF OA": "Medyal patellar fasette intrakondral dejeneratif hipointensite izleniyor.",
+    "Effusion": "Diz eklemi içi sıvı miktarı hafif derecede artmış.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Tibyal platonun mediyalinde kemik kontüzyonu",
+    "Fracture": "yaklaşık 10x2 mm'lik bir alanı ilgilendiren küçük bir kompresyon kırığı eşlik ediyor."
+  },
+  "usage": {
+    "prompt_tokens": 1242,
+    "candidates_tokens": 492,
+    "total_tokens": 1734,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

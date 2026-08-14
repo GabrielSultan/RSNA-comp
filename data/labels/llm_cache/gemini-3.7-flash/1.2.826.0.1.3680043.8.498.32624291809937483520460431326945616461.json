@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32624291809937483520460431326945616461",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "In the intercondylar notch, the anterior and posterior cruciate ligaments are intact.",
+    "MCL": "There is grade II ligamentous sprain (partial tear) of the medial collateral ligament, at mid substance",
+    "Medial Meniscus": "In the medial compartment, the meniscus is not torn",
+    "Lateral Meniscus": "there is meniscal contusion at the posterior horn of the lateral meniscus.",
+    "Medial OA": "there is no focal chondrosis or chondral injury.",
+    "Lateral OA": "There is no focal chondrosis or chondral injury.",
+    "PF OA": "The trochlear cartilage appears congruent without chondral lesion.",
+    "Effusion": "Minimal amount of knee left effusion is present.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "There is focal bone bruise at the lateral femoral condyle.",
+    "Fracture": "Focal bone bruise at the medial patellar facet and lateral trochlea."
+  },
+  "usage": {
+    "prompt_tokens": 1423,
+    "candidates_tokens": 429,
+    "total_tokens": 1852,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

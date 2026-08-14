@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.31610133883321894510649078615659708431",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Les ligaments croisés antérieur et postérieur sont intacts sans déchirure.",
+    "MCL": "Le ligament collatéral interne de même que le complexe ligamentaire collatéral externe sont intacts sans déchirure.",
+    "Medial Meniscus": "Le ménisque interne est intact sans déchirure.",
+    "Lateral Meniscus": "Le ménisque externe est de nature discoïde sans évidence de déchirure associée.",
+    "Medial OA": "Les surfaces cartilagineuses sont préservées sans atteinte transfixiante ou changements sous-chondraux réactionnels associés.",
+    "Lateral OA": "Les surfaces cartilagineuses sont préservées sans atteinte transfixiante ou changements sous-chondraux réactionnels associés.",
+    "PF OA": "Les surfaces cartilagineuses sont préservées sans atteinte transfixiante ou changements sous-chondraux réactionnels associés.",
+    "Effusion": "Il n’y a pas d’épanchement intra-articulaire",
+    "Synovitis": "",
+    "Baker's": "Il n’y a pas d’épanchement intra-articulaire ou kyste de Baker significatif.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1247,
+    "candidates_tokens": 479,
+    "total_tokens": 1726,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

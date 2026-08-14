@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10675139840690240606562530926349987331",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "the anterior and posterior cruciate ligaments are intact",
+    "MCL": "The medial collateral ligament complexes are intact",
+    "Medial Meniscus": "In the medial compartment, the meniscus is not torn",
+    "Lateral Meniscus": "The lateral compartment, the meniscus is not torn",
+    "Medial OA": "there is no focal chondrosis or chondral injury",
+    "Lateral OA": "there is no focal chondrosis or chondral injury",
+    "PF OA": "Subacute osteochondral injury at medial patellar facet",
+    "Effusion": "Some amount of right knee effusion is present",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Bone bruise at the lateral femoral condyle",
+    "Fracture": "subacute osteochondral injury at medial patellar facet"
+  },
+  "usage": {
+    "prompt_tokens": 1443,
+    "candidates_tokens": 398,
+    "total_tokens": 1841,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

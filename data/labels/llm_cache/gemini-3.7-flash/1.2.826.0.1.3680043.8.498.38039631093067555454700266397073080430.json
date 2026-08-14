@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38039631093067555454700266397073080430",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intrasubstance mucoid degeneration of the ACL without ligament injury.",
+    "MCL": "the medial collateral ligament, the pes anserine tendons, the semimembranosus, the popliteus, the distal biceps femoris, the lateral collateral ligament and the IT band are unremarkable.",
+    "Medial Meniscus": "The medial meniscus demonstrates intrasubstance degeneration without a well-defined linear tear.",
+    "Lateral Meniscus": "Diffuse intrasubstance degeneration with maceration and degenerative tearing of the lateral meniscus",
+    "Medial OA": "There are moderate degenerative changes in the medial and patellofemoral compartments",
+    "Lateral OA": "There are severe degenerative changes in the lateral compartment with full-thickness cartilage loss at and subchondral reactive changes.",
+    "PF OA": "moderate degenerative changes in the medial and patellofemoral compartments with high-grade cartilage thinning involving the lateral patellar facet and lateral aspect of femoral trochlea.",
+    "Effusion": "There is a large knee joint effusion with synovitis.",
+    "Synovitis": "There is a large knee joint effusion with synovitis.",
+    "Baker's": "There is no popliteal cysts.",
+    "Contusion": "subchondral reactive changes",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1265,
+    "candidates_tokens": 491,
+    "total_tokens": 1756,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

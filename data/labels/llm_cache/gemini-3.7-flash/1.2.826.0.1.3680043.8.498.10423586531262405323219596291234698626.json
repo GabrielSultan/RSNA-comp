@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10423586531262405323219596291234698626",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "komplexem Riss des Hinterhorns und der Pars intermedia mit horizontaler, radiärer und vertikaler Komponente",
+    "Lateral Meniscus": "Geringe Signalanhebung des Außenmeniskus, insbesondere am Hinterhorn",
+    "Medial OA": "Dorsomedial betonte, flächige, nicht-vollschichtige Ausdünnung des Knorpels im medialen Kompartiment. Fokal zwei vollschichtige chondrale Risse",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Geringer Gelenkerguss",
+    "Synovitis": "Zeichen einer Reizsynovialitis bei betonter Synovia",
+    "Baker's": "",
+    "Contusion": "Fokal zwei vollschichtige chondrale Risse auf Höhe der Pars intermedia des Innenmeniskus (6/12) mit begleitendem Knochenmarksödem",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1211,
+    "candidates_tokens": 444,
+    "total_tokens": 1655,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

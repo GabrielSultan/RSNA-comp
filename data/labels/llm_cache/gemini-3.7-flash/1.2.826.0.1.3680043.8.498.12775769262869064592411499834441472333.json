@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12775769262869064592411499834441472333",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Complex, predominantly oblique, tear of the body and posterior horn of the medial meniscus.",
+    "Lateral Meniscus": "Lateral meniscus: Normal in morphology and signal.",
+    "Medial OA": "Medial compartment cartilage: No focal cartilage defects.",
+    "Lateral OA": "Lateral compartment cartilage: No focal cartilage defects.",
+    "PF OA": "Patellar cartilage: No focal cartilage defects. Trochlear cartilage: No focal cartilage defects.",
+    "Effusion": "No joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No Baker's cyst.",
+    "Contusion": "There is reactive bone marrow edema along the medial tibial plateau",
+    "Fracture": "Alignment is anatomic. There is reactive bone marrow edema along the medial tibial plateau (series 5 image #17). Background marrow signal is normal without infiltrative marrow process. No aggressive osseous lesions."
+  },
+  "usage": {
+    "prompt_tokens": 1581,
+    "candidates_tokens": 446,
+    "total_tokens": 2027,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10688670034893539180306173203903350286",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Vollständige ACL Ruptur.",
+    "MCL": "Geringe Auftreibung des MCL an der femoralen Insertion, Partialläsion möglich",
+    "Medial Meniscus": "Komplexe Rissbildung im Innenmeniskushinterhorn und an der Pars intermedia mit anteilig Fortsetzung zur Hinterwornwurzel hin.",
+    "Lateral Meniscus": "",
+    "Medial OA": "Keine Chondropathie femorotibial",
+    "Lateral OA": "Keine Chondropathie femorotibial",
+    "PF OA": "Keine Chondropathie femorotibial und femoropatellar.",
+    "Effusion": "Ausgeprägte Gelenkerguss.",
+    "Synovitis": "Synoviale Proliferationen.",
+    "Baker's": "",
+    "Contusion": "Bone Bruise am posterioren Tibiaplateau bds. und an beiden Femurkondylen auf Höhe des Sulcus terminalis.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1146,
+    "candidates_tokens": 440,
+    "total_tokens": 1586,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

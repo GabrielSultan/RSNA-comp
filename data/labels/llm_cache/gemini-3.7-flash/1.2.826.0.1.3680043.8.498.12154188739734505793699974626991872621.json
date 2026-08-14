@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12154188739734505793699974626991872621",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Bandstrukturen intakt.",
+    "MCL": "Bandstrukturen intakt.",
+    "Medial Meniscus": "Innenmeniskus gering mukoid im Hinterhorn mit Einriss am freien Rand am Übergang zur Pars intermedia.",
+    "Lateral Meniscus": "",
+    "Medial OA": "medial betonte, gering- bis mäßiggradige Gonarthrose mit flächig gemindertem Knorpelbesatz in der medialen Belastungszone",
+    "Lateral OA": "Oberflächliche Chondropathie lateralseitig",
+    "PF OA": "retropatellar. Bis flächig vollschichtige chondrale Läsion über 21 x 19 mm (ml x cc; 8/17, 6/16) in der Trochlea",
+    "Effusion": "Geringer Gelenkerguss",
+    "Synovitis": "Geringe Reizsynovialitis.",
+    "Baker's": "gering flüssigkeitsgefüllte Baker-Zyste.",
+    "Contusion": "hier subchondraler Zysten- minimal assozierter Ödembildung",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1220,
+    "candidates_tokens": 483,
+    "total_tokens": 1703,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

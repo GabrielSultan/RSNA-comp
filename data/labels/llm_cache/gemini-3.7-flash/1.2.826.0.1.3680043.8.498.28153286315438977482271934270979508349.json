@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.28153286315438977482271934270979508349",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağda miksoid dejenerasyona sekonder sinyal değişikliği izlendi.",
+    "MCL": "medial kollateral ligamende grade I sprain",
+    "Medial Meniscus": "anterior posterior hornu ve gövde kesiminde grade III dejenerasyon izlendi.",
+    "Lateral Meniscus": "Lateral menisküs anterior posterior hornu ve gövde kesiminde grade II dejenerasyon izlendi.",
+    "Medial OA": "Tibiofemoral eklem medialde eklem aralığında daralma ekleme komşu tibia medial platoda subkondral alanda 18x8 mm 'ye ulaşan kist , kemik iliği ödemi izlendi Bu seviyede femoral ve tibial kartilajlarda bütünlük kaybı izlendi.",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursada hafif sıvı artışı izlendi.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "tibia medial platoda subkondral alanda 18x8 mm 'ye ulaşan kist , kemik iliği ödemi izlendi",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1372,
+    "candidates_tokens": 486,
+    "total_tokens": 1858,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

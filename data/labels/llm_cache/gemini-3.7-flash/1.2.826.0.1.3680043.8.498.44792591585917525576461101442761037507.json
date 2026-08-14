@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.44792591585917525576461101442761037507",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "The cruciate ligaments are intact.",
+    "MCL": "moderate thickening with associated T2 hyperintensity of the proximal medial collateral ligament",
+    "Medial Meniscus": "moderate mucoid degeneration of the posterior horn of the medial meniscus",
+    "Lateral Meniscus": "Radial tear of the posterior horn of the lateral meniscus.",
+    "Medial OA": "There are no deep cartilage defects in the medial and lateral femorotibial joint compartment.",
+    "Lateral OA": "There are no deep cartilage defects in the medial and lateral femorotibial joint compartment.",
+    "PF OA": "Mild patellofemoral chondrosis.",
+    "Effusion": "There is no joint effusion.",
+    "Synovitis": "",
+    "Baker's": "There is no Baker's cyst.",
+    "Contusion": "no subchondral bone marrow edema",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1359,
+    "candidates_tokens": 411,
+    "total_tokens": 1770,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

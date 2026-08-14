@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42120645248710860870761681999665860884",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ femoral insersiyodan rüptüredir.",
+    "MCL": "yan bağlar  normaldir.",
+    "Medial Meniscus": "Mediyal menisküste interkondiler çentiğe deplase kova sapı yırtığı vardır.",
+    "Lateral Meniscus": "Lateral menisküs korpus apeksinde milimetrik radiyal yırtık vardır.",
+    "Medial OA": "Mediyal ve lateral femorotibyal,  eklem yüzleri normaldir.",
+    "Lateral OA": "Mediyal ve lateral femorotibyal,  eklem yüzleri normaldir.",
+    "PF OA": "Patellofemoraleklem patellar taraf mediyal fasette kondral incelme fissür oluşumu vardır.Troklear tarafta ve interkondiler sulkusa yakın lokaliasyonda kondral kayıplar vardır.",
+    "Effusion": "Diz eklemi içi sıvı miktarı normaldir.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1215,
+    "candidates_tokens": 458,
+    "total_tokens": 1969,
+    "thoughts_tokens": 296
+  },
+  "attempts": 1
+}

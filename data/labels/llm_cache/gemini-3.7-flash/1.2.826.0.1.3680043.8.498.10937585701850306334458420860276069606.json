@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10937585701850306334458420860276069606",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament urednog signala, u srednjoj trećini iregularnije konture dijela vlakana, stanje po ranijoj parcijalnoj rupturi?",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Medijalni menisk bez znakova degeneracije ili rupture.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova degeneracije ili rupture.",
+    "Medial OA": "Plitke fisure hrskavice lateralnog kondila femura i tibije, medijalnog kondila femura- hondromalacija II. stupnja.",
+    "Lateral OA": "Plitke fisure hrskavice lateralnog kondila femura i tibije, medijalnog kondila femura- hondromalacija II. stupnja.",
+    "PF OA": "Hondromalacija patelarne i trohlearne hrskavice I. stupnja.",
+    "Effusion": "Bez izljeva u zglobnim prostorima.",
+    "Synovitis": "",
+    "Baker's": "Bez znakova poplitealne ciste.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1259,
+    "candidates_tokens": 500,
+    "total_tokens": 2087,
+    "thoughts_tokens": 328
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.23046618786812839762801821364158313134",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Complex medial meniscal tear with extrusion and displaced flap fragment.",
+    "Lateral Meniscus": "Small tears at the anterior and posterior root attachments of the lateral meniscus.",
+    "Medial OA": "Medial compartment cartilage: There is mild cartilage thinning and irregularity, most prominent at the posterior weightbearing aspect with a small chondral flap at the medial femoral condyle.",
+    "Lateral OA": "Lateral compartment cartilage: Cartilage appears intact.",
+    "PF OA": "Patellofemoral compartment cartilage: There is moderate cartilage thinning and fissuring at the medial patellar facet.",
+    "Effusion": "Small joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Small, ruptured Baker cyst.",
+    "Contusion": "No acute fracture or bone bruise.",
+    "Fracture": "No acute fracture or bone bruise."
+  },
+  "usage": {
+    "prompt_tokens": 1639,
+    "candidates_tokens": 435,
+    "total_tokens": 2074,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

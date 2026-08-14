@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32109377199577933060124357239881959602",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Bandapparat intakt.",
+    "MCL": "Bandapparat intakt.",
+    "Medial Meniscus": "Geringe mukoide Veränderungen der Meniscen ohne umschriebene Rissbildung.",
+    "Lateral Meniscus": "Geringe mukoide Veränderungen der Meniscen ohne umschriebene Rissbildung.",
+    "Medial OA": "im medialen Kompartiment oberflächlichen Knorpelirregularitäten",
+    "Lateral OA": "lateral randständig in der Belastungszone subchondrales Knochenödem femoral bei fokal hochgradiger Chondropathie",
+    "PF OA": "Retropatellararthrose mit sowohl fokal an den Condylenwangen sowie femorpatellar lateral führend teils flächig hochgradige, vollschichtige Chondropathie",
+    "Effusion": "Geringer Gelenkerguss",
+    "Synovitis": "geringe Reizsynovialitis",
+    "Baker's": "",
+    "Contusion": "subchondrales Knochenödem femoral bei fokal hochgradiger Chondropathie",
+    "Fracture": "DD kleine Infraktionen/SIF möglich"
+  },
+  "usage": {
+    "prompt_tokens": 1173,
+    "candidates_tokens": 480,
+    "total_tokens": 1653,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.17865613300681542407687000381594067366",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales continuos.",
+    "MCL": "Ligamentos cruzados y colaterales continuos.",
+    "Medial Meniscus": "Meniscos de morfología y señal conservados. No hay criterios de rotura.",
+    "Lateral Meniscus": "Meniscos de morfología y señal conservados. No hay criterios de rotura.",
+    "Medial OA": "Cartílago de los compartimentos femorotibiales de espesor y señal conservados sin defectos condrales profundos.",
+    "Lateral OA": "Cartílago de los compartimentos femorotibiales de espesor y señal conservados sin defectos condrales profundos.",
+    "PF OA": "Condropatía rotuliana grado 1.",
+    "Effusion": "No hay derrame articular.",
+    "Synovitis": "",
+    "Baker's": "No se observa quiste de Baker.",
+    "Contusion": "No hay alteración de señal difusa la médula ósea.",
+    "Fracture": "No hay alteración de señal difusa la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1220,
+    "candidates_tokens": 459,
+    "total_tokens": 1679,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

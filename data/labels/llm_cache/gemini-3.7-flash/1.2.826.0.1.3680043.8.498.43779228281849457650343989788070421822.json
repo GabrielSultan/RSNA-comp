@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.43779228281849457650343989788070421822",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Uredni su morfologija i intenziteti signala kolateralnih ligamenata, prednjeg i stražnjeg križnog ligamenta",
+    "MCL": "Uredni su morfologija i intenziteti signala kolateralnih ligamenata",
+    "Medial Meniscus": "Vidi se horizontalna ruptura stražnjeg roga medijalnog meniska.",
+    "Lateral Meniscus": "Degenerativno je promijenjen lateralni menisk uz suspektnu rupturu prednjeg roga.",
+    "Medial OA": "Početne OA promjene FT zgloba.",
+    "Lateral OA": "Početne OA promjene FT zgloba.",
+    "PF OA": "Prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Effusion": "izljev u suprapatelarnoj burzi",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne (Bakerove) ciste.",
+    "Contusion": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala.",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala."
+  },
+  "usage": {
+    "prompt_tokens": 1228,
+    "candidates_tokens": 519,
+    "total_tokens": 1747,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

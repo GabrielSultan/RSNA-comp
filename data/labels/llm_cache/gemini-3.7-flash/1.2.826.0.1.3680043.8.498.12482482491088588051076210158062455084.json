@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12482482491088588051076210158062455084",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Кръстните връзки са интактни. ... МР данни за мукоидна дегенерация на предната кръстна връзка.",
+    "MCL": "Колатерални лигаменти – без особености",
+    "Medial Meniscus": "Лезия на задните рога на медиалните менискуси – grade 3.",
+    "Lateral Meniscus": "Дегенеративна промяна се открива и при педния рог на латералния менускус, с малка /6мм./ киста в него.",
+    "Medial OA": "МР данни за двустранна медиална гонартроза",
+    "Lateral OA": "Ставният хрущял от латералната страна на ставата е запазен.",
+    "PF OA": "",
+    "Effusion": "Двустранен ставен излив.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Наличие на субхондрален едеме на костния мозък в медиалния фемурален кондил, във връзка с дегенеративните промени в подлежащия хрущял.",
+    "Fracture": "Малки остеофити се намират и по ставните краища на тибията."
+  },
+  "usage": {
+    "prompt_tokens": 1676,
+    "candidates_tokens": 514,
+    "total_tokens": 2190,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10454875772176439944597553400963295397",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ANTERIOR CRUCIATE LIGAMENT:  Intact.",
+    "MCL": "MEDIAL COLLATERAL LIGAMENT:  Intact.",
+    "Medial Meniscus": "MEDIAL MENISCUS: Posterior horn tear is present. There is a horizontal undersurface tear component, as well as a radial tear component.",
+    "Lateral Meniscus": "LATERAL MENISCUS:  Intact.",
+    "Medial OA": "MEDIAL COMPARTMENT:  Within normal limits.",
+    "Lateral OA": "LATERAL COMPARTMENT:  Within normal limits.",
+    "PF OA": "PATELLOFEMORAL COMPARTMENT: Mild superficial irregularity of the patellar cartilage.",
+    "Effusion": "JOINT EFFUSION:  Small knee joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Small popliteal cyst.",
+    "Contusion": "",
+    "Fracture": "BONE MARROW:  No fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1336,
+    "candidates_tokens": 430,
+    "total_tokens": 1766,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

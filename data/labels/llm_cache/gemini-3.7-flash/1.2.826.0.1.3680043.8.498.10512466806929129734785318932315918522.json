@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10512466806929129734785318932315918522",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Početna mukoidna degeneracija križnih ligamenata, uz posterolateralni dio ACL ganglion cista 5mm",
+    "MCL": "uredna morfologija i intenziteti signala kolateralnih ligamenata",
+    "Medial Meniscus": "Medijalni menisk primjerene je morfologije",
+    "Lateral Meniscus": "blaga degeneracija lateralnog meniska",
+    "Medial OA": "Ostale prikazane artikulacijske hrskavice urednih su intenziteta signala",
+    "Lateral OA": "Hondromalacija patelarne i hrskavice lateralnog platoa tibije 3. stupnja",
+    "PF OA": "Hondromalacija patelarne i hrskavice lateralnog platoa tibije 3. stupnja",
+    "Effusion": "Manji izljev u koljenu",
+    "Synovitis": "",
+    "Baker's": "Manja Bakerova cista",
+    "Contusion": "",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala"
+  },
+  "usage": {
+    "prompt_tokens": 1219,
+    "candidates_tokens": 481,
+    "total_tokens": 1700,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

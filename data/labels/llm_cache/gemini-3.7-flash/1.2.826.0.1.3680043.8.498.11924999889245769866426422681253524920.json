@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11924999889245769866426422681253524920",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament se prati u kontinuitetu, uz proksimalno hvatište promijenjenih intenziteta signala u sklopu entezopatskih/degenerativnih promjena.",
+    "MCL": "Medijalni kolateralni ligament urednog je signala te se prati u kontinuitetu.",
+    "Medial Meniscus": "Longitudinalna ruptura stražnjeg roga medijalnog meniska, vjerojatno na bazi degenerativnih promjena.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture.",
+    "Medial OA": "Izmijenjen intenzitet signala medijalne kondilarne hrskavice u prilog hondromalaciji III stupnja te stanjena hrskavica izmijenjenog intenziteta uz diskretan koštani edem u dorzalnom dijelu u prilog hondromalaciji III/IV stupnja.",
+    "Lateral OA": "Izmijenjen intenzitet signala hrskavice lateralne kondilarne hrskavice i lateralnog platoa tibije u prilog hondromalaciji II/III stupnja.",
+    "PF OA": "Lateralni dio zgloba pokazuje teške OA promjene s potpunim gubitkom zglobnog prostora te izraženom osteofitozom i sklerozacijom zglobnih tijela.",
+    "Effusion": "Umjerena količina intraartikularnog izljeva.",
+    "Synovitis": "",
+    "Baker's": "Vretenasto oblikovana poplitealna cista dimenzija oko 25x6 mm.",
+    "Contusion": "Subhiondralne ciste i koštani edem u sklopu OA promjena.",
+    "Fracture": "Subhondralna sklerozacija oba platoa tibije uz osteofit dorzalnog ruba medijalnog platoa."
+  },
+  "usage": {
+    "prompt_tokens": 1607,
+    "candidates_tokens": 641,
+    "total_tokens": 2248,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.29343735048224321966824641432873034291",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Low-grade partial tear of the anterior cruciate ligament.",
+    "MCL": "No acute injury of the medial collateral ligament",
+    "Medial Meniscus": "The medial and lateral meniscus are intact.",
+    "Lateral Meniscus": "The medial and lateral meniscus are intact.",
+    "Medial OA": "There is a minimal superficial chondrosis in the medial femorotibial joint compartment.",
+    "Lateral OA": "",
+    "PF OA": "Moderate patellofemoral chondrosis with a focal area of cartilage delamination at the medial patellar facet.",
+    "Effusion": "There is mild joint effusion.",
+    "Synovitis": "",
+    "Baker's": "There is a low volume Baker's cyst.",
+    "Contusion": "Posttraumatic contusions at the anterior aspect of the medial and lateral femoral condyles.",
+    "Fracture": "Nondisplaced, subchondral fracture of the lateral tibial plateau"
+  },
+  "usage": {
+    "prompt_tokens": 1398,
+    "candidates_tokens": 421,
+    "total_tokens": 1819,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

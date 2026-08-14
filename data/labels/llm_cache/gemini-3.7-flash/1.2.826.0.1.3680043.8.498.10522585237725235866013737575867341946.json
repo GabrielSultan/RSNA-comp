@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10522585237725235866013737575867341946",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağda miksoid dejenerasyon ile uyumlu sinyal artışı izlendi.",
+    "MCL": "Medial ve lateral  kollateral ligamen çevresinde ligamentöz ödem mevcuttur ( grade I  sprain ).",
+    "Medial Meniscus": "Medial menisküste grade III dejenerasyon ve posterior hornunda  horizyontal yırtık izlendi .",
+    "Lateral Meniscus": "Lateral menisküste maserasyon , volüm kaybı ve horizontal yırtık izlendi.",
+    "Medial OA": "Diz eklemini oluşturan kemik yapılarda osteofitik sivrileşmeler tibiofemoral eklem mesafesinde daralma , komşu kartilajlarda incelme izlendi ( dejeneratif artrit bulguları ).",
+    "Lateral OA": "Diz eklemini oluşturan kemik yapılarda osteofitik sivrileşmeler tibiofemoral eklem mesafesinde daralma , komşu kartilajlarda incelme izlendi ( dejeneratif artrit bulguları ).",
+    "PF OA": "Patellofemoral eklem lateral fasette komşu kıkırdaklarda incelme eklem mesafesinde daralma ve subkondral kemik iliği ödemleri izlendi(artroz).",
+    "Effusion": "Suprapatellar bursada sıvı artışı , lateral reseslerde , suprapatellar bursada ve diz eklemi içerisinde  yaygın sıvı artışları izlendi.",
+    "Synovitis": "",
+    "Baker's": "Popliteal fossada 22 mm boyutlarında baker kisti izlendi.",
+    "Contusion": "Patellofemoral eklem lateral fasette komşu kıkırdaklarda incelme eklem mesafesinde daralma ve subkondral kemik iliği ödemleri izlendi(artroz).",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1355,
+    "candidates_tokens": 638,
+    "total_tokens": 1993,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

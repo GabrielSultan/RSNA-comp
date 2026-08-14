@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.22632919018724241015271844108954804020",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament je umjereno degenerativno promijenjen, bez znakova rupture. Ganglion cista veličine oko 8 mm uz proksimalno hvatište.",
+    "MCL": "Medijalni kolateralni ligament je blago distendiran",
+    "Medial Meniscus": "Medijalni menisk je degenerativno promijenjen, bez evidentne rupture.",
+    "Lateral Meniscus": "Lateralni menisk je primjerenih intenziteta signala, bez znakova rupture.",
+    "Medial OA": "Umjerene degenerativne promjene FT zgloba sa stanjenjem hrskavica",
+    "Lateral OA": "Umjerene degenerativne promjene FT zgloba sa stanjenjem hrskavica, zonom denudacije u području lateralnog kondila femura",
+    "PF OA": "Posljedično izražene degenerativne promjene FP zgloba s gubitkom hrskavica faseta patele i trohleje femura",
+    "Effusion": "Umjerena do značajna količina izljeva u zglobu",
+    "Synovitis": "uz hipertrofiju sinovije",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "zonama koštanog edema patele i lateralnog kondila femura anteriorno uz prisutne subhondralne ciste",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1520,
+    "candidates_tokens": 544,
+    "total_tokens": 2064,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10318366890716843554246682186865048846",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intakte Darstellung und Faserverlauf des vorderen und hinteren Kreuzbandes.",
+    "MCL": "Intakte Darstellung des medialen und lateralen Kollateralbandes.",
+    "Medial Meniscus": "Komplexe Rissbildung am Innenmeniskushinterhorn mit Ausläufern bis an die tibiale Insertion",
+    "Lateral Meniscus": "Gering steifige Signalanhebungen im Außenmeniskusvorderhorn und - hinterhorn.",
+    "Medial OA": "Degenerative Veränderungen betont im medialen femorotibialen Gelenk mit Gelenkspaltverschmälerung und osteophytären Ausziehungen femoral und am Tibiaplateau",
+    "Lateral OA": "Fokal oberflächliche Chondropathie im lateralen femorotibialen Kompartiment",
+    "PF OA": "Retropatellar fokal bis vollschichtige Chondropathie medialseitig",
+    "Effusion": "Deutlich Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Subchondrales Ödem an der medialen Femurkondyle angrenzend (5/18). Deutliche Ausdünnung des Knorpelbesatz des im medialen Kompartiment mit perifokal vollschichtige Chondropathie angrenzend an das Ödemsignal.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1347,
+    "candidates_tokens": 530,
+    "total_tokens": 2212,
+    "thoughts_tokens": 335
+  },
+  "attempts": 2
+}

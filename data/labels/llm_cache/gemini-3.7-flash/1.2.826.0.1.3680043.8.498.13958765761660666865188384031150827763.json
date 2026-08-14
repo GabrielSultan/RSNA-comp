@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13958765761660666865188384031150827763",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament je nešto viših intenziteta signala uz tibijalno hvatište, vj. u sklopu degenerativnih promjena, bez jasnih znakova rupture.",
+    "MCL": "Medijalni kolateralni ligament je primjerenih intenziteta signala, bez znakova rupture.",
+    "Medial Meniscus": "Medijalni menisk je početno degenerativno promijenjen u području stražnjeg roga, bez znakova rupture.",
+    "Lateral Meniscus": "Lateralni menisk je primjerenih intenziteta signala, bez znakova rupture.",
+    "Medial OA": "Početne degenerativne promjene FT zgloba",
+    "Lateral OA": "malom zonom erozije hrskavice lateralnog platoa tibije",
+    "PF OA": "Umjerene degenerativne promjene FP zgloba s izraženo stanjenom patelarnom hrskavicom i hondromalacičnim promjenama 1. stupnja.",
+    "Effusion": "Bez značajnije količine izljeva u zglobu.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne ciste.",
+    "Contusion": "Manji areali rekonverzije koštane srži u području proksimalne metadijafize femura.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1395,
+    "candidates_tokens": 532,
+    "total_tokens": 1927,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11682243736539231948790371952356165171",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Aumento de señal del LCA que impresiona continuo, hallazgo inespecífico.",
+    "MCL": "LCP y ligamentos colaterales dentro de límites normales.",
+    "Medial Meniscus": "Aumento de señal central del cuerno posterior y cuerpo del menisco medial que no impresiona contactar con la superficie articular, sin caracteres propios de rotura.",
+    "Lateral Meniscus": "Signos sugerentes una rotura del cuerno anterior y parte del cuerpo del menisco lateral.",
+    "Medial OA": "Condropatía superficial de la región central de la zona de carga del cóndilo femoral medial.",
+    "Lateral OA": "Úlceras condrales de espesor parcial de platillo tibial lateral.",
+    "PF OA": "Condropatía con lesiones grado 4 de la región periférica de la vertiente lateral de la tróclea femoral. Condropatía con lesiones grado 3 y 4 de la rótula.",
+    "Effusion": "Mínimo derrame articular.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No hay alteraciones en significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones en significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1512,
+    "candidates_tokens": 492,
+    "total_tokens": 2004,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

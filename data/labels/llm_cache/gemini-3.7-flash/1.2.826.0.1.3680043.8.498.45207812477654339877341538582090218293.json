@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.45207812477654339877341538582090218293",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "МР данни за частична увреда на предна кръстна връзка.",
+    "MCL": "Нормално изобразяване на медиалния колатерален лигамент.",
+    "Medial Meniscus": "Вижда се лезия с вертикален към кос ход в задния рог на медиалния менискус.",
+    "Lateral Meniscus": "Нормално изобразяване на латералния менискус.",
+    "Medial OA": "Артикулиращия хрущял на фемура и тибията е запазен.",
+    "Lateral OA": "Артикулиращия хрущял на фемура и тибията е запазен.",
+    "PF OA": "",
+    "Effusion": "Наличие на ставен излив.",
+    "Synovitis": "",
+    "Baker's": "Не се намират патологични промени в поплитеалната ямка.",
+    "Contusion": "Костите, формиращи колянната става са с нормална форма и сигнална характеристика.",
+    "Fracture": "Костите, формиращи колянната става са с нормална форма и сигнална характеристика."
+  },
+  "usage": {
+    "prompt_tokens": 1376,
+    "candidates_tokens": 488,
+    "total_tokens": 1864,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

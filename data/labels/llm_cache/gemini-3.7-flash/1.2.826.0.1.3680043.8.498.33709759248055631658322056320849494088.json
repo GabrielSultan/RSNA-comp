@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33709759248055631658322056320849494088",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intacte voorste kruisband.",
+    "MCL": "Intact mediaal collateraal ligament.",
+    "Medial Meniscus": "Intacte mediale meniscus.",
+    "Lateral Meniscus": "Intacte laterale meniscus.",
+    "Medial OA": "Prominente osteofyt op de mediale femurcondyl.",
+    "Lateral OA": "Parti ële dikte kraakbeenfissuur posterocentraal op de laterale femurcondyl.",
+    "PF OA": "Verdunning van het kraakbeen mediaal patellair. Volledige dikte kraakbeendefecten laag trochleair met subchondraal oedeem",
+    "Effusion": "Matige hydrops.",
+    "Synovitis": "",
+    "Baker's": "Ganglioncyste gelegen oppervlakkig tegenaan de femorale insertie van het lateraal collateraal ligament",
+    "Contusion": "subchondraal oedeem",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1346,
+    "candidates_tokens": 442,
+    "total_tokens": 1788,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

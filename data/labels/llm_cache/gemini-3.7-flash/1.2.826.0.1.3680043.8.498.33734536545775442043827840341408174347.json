@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33734536545775442043827840341408174347",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL, PCL, MCL, and PCL are intact.",
+    "MCL": "ACL, PCL, MCL, and PCL are intact.",
+    "Medial Meniscus": "Medial and lateral meniscus are unremarkable.",
+    "Lateral Meniscus": "Medial and lateral meniscus are unremarkable.",
+    "Medial OA": "The articular cartilage is well preserved.",
+    "Lateral OA": "The articular cartilage is well preserved.",
+    "PF OA": "The articular cartilage is well preserved.",
+    "Effusion": "No knee effusion.",
+    "Synovitis": "",
+    "Baker's": "0.6 cm Baker cyst.",
+    "Contusion": "No altered bone marrow signal intensity.",
+    "Fracture": "No altered bone marrow signal intensity."
+  },
+  "usage": {
+    "prompt_tokens": 1180,
+    "candidates_tokens": 384,
+    "total_tokens": 1564,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

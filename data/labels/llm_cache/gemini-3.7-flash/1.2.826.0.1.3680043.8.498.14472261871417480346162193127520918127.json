@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.14472261871417480346162193127520918127",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "ACL high grade partial tear.",
+    "MCL": "MCL; superficial; intact deep; high grade injury",
+    "Medial Meniscus": "In the medial compartment, there is horizontal tear from anterior to posterior horn. Complex tear with gap 5 mm at posterior horn.",
+    "Lateral Meniscus": "Lateral meniscus; contusional injury at anterior horn of meniscus.",
+    "Medial OA": "diffuse high grade chondrosis (more than 50% thickness cartilage loss) along weight-baring medial femoral condyle and medial tibial plateau.",
+    "Lateral OA": "",
+    "PF OA": "The patellofemoral joint, there is diffuse low grade chondrosis (less than 50% thickness cartilage loss) along medial, lateral patellar facets, medial and lateral trochleas.",
+    "Effusion": "Some amount of left knee effusion with synovitis is present.",
+    "Synovitis": "Some amount of left knee effusion with synovitis is present.",
+    "Baker's": "",
+    "Contusion": "There is no fracture or bone contusion.",
+    "Fracture": "There is no fracture or bone contusion."
+  },
+  "usage": {
+    "prompt_tokens": 1335,
+    "candidates_tokens": 466,
+    "total_tokens": 1801,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

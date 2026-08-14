@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.20375739629244657719385962474248679850",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): No tear.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: No tear.",
+    "Lateral Meniscus": "Lateral meniscus: No tear.",
+    "Medial OA": "Medial compartment cartilage: Intact.",
+    "Lateral OA": "Lateral compartment cartilage: Intact.",
+    "PF OA": "Patellofemoral compartment cartilage: Diffuse articular cartilage irregularity. High-grade articular cartilage loss of the medial patellar facet.",
+    "Effusion": "Small knee joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No Baker's cyst.",
+    "Contusion": "Normal background marrow signal.",
+    "Fracture": "No acute fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1509,
+    "candidates_tokens": 391,
+    "total_tokens": 1900,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

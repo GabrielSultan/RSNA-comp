@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.23166300530486600338569917595744444657",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The anterior cruciate ligament, posterior cruciate ligament, medial collateral ligament and lateral collateral ligament complex are intact",
+    "MCL": "The anterior cruciate ligament, posterior cruciate ligament, medial collateral ligament and lateral collateral ligament complex are intact",
+    "Medial Meniscus": "The medial meniscus is intact and appears unremarkable.",
+    "Lateral Meniscus": "The lateral meniscus is intact and unremarkable.",
+    "Medial OA": "The articular cartilage of the medial joint compartment is well-maintained.",
+    "Lateral OA": "The articular cartilage of the lateral joint compartment is well-maintained.",
+    "PF OA": "Mild to moderate chondromalacia patella.",
+    "Effusion": "No evidence of a significant knee effusion.",
+    "Synovitis": "",
+    "Baker's": "Small Baker's cyst.",
+    "Contusion": "Marrow signal is normal.",
+    "Fracture": "Marrow signal is normal."
+  },
+  "usage": {
+    "prompt_tokens": 1452,
+    "candidates_tokens": 416,
+    "total_tokens": 1868,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

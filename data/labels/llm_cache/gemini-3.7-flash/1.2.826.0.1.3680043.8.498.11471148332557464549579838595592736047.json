@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11471148332557464549579838595592736047",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Vidi se blagi hiperintenzitet kaudalne dvije trećine prednjeg križnog ligamenta moguće uslijed distenzije ili početne mukoidne degeneracije.",
+    "MCL": "Nalazi se uredna morfologija i intenziteti signala kolateralnih ligamenata",
+    "Medial Meniscus": "Medijalni i lateralni menisk uredne morfologije i intenziteta signala.",
+    "Lateral Meniscus": "Medijalni i lateralni menisk uredne morfologije i intenziteta signala.",
+    "Medial OA": "Ostale prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Lateral OA": "Hondromalacija prvog stupnja hrskavice lateralnog platoa tibije.",
+    "PF OA": "Ostale prikazane artikulacijske hrskavice urednih su intenziteta signala.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se poplitealne (Bakerove) ciste.",
+    "Contusion": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala.",
+    "Fracture": "Ostale prikazane koštane, mekotkivne i neurovaskularne strukture uredne su morfologije i intenziteta signala."
+  },
+  "usage": {
+    "prompt_tokens": 1217,
+    "candidates_tokens": 532,
+    "total_tokens": 1749,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

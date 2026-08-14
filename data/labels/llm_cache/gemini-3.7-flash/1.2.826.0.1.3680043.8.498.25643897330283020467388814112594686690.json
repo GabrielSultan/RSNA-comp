@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.25643897330283020467388814112594686690",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Normal ACL, PCL, MCL and LCL.",
+    "MCL": "Normal ACL, PCL, MCL and LCL.",
+    "Medial Meniscus": "Normal medial and lateral menisci. No evidence of tears.",
+    "Lateral Meniscus": "Normal medial and lateral menisci. No evidence of tears.",
+    "Medial OA": "Minor thinning of the medial compartment articular cartilage is noted.",
+    "Lateral OA": "The lateral tibiofemoral and patellofemoral articular cartilage is normal.",
+    "PF OA": "The lateral tibiofemoral and patellofemoral articular cartilage is normal.",
+    "Effusion": "There is a minor knee effusion.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1090,
+    "candidates_tokens": 394,
+    "total_tokens": 1484,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

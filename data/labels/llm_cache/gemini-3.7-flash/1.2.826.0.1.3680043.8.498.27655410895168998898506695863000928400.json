@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.27655410895168998898506695863000928400",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Μερική ρήξη πρόσθιου χιαστού συνδέσµου µε αίµαρθρο.",
+    "MCL": "Μερική κάκωση συνδέσµων έσω και έξω πλαγίου.",
+    "Medial Meniscus": "Φυσιολογικοί απεικονίζονται ο οπίσθιος χιαστός σύνδεσµος καθώς και ο έσω και έξω µηνίσκος.",
+    "Lateral Meniscus": "Φυσιολογικοί απεικονίζονται ο οπίσθιος χιαστός σύνδεσµος καθώς και ο έσω και έξω µηνίσκος.",
+    "Medial OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος.",
+    "Lateral OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος.",
+    "PF OA": "Εντός του φυσιολογικού ελέγχεται ο αρθρικός χόνδρος.",
+    "Effusion": "Μετρία συλλογή υγρού µε αιµορραγικά στοιχεία παρατηρείται ενδοαρθρικά.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Οστεοµυλικό οίδηµα (bone bruise) έσω µηριαίου κονδύλου",
+    "Fracture": "Αναγνωρίζεται ήπιο εµπιεστικό κάταγµα οπίσθιου έξω κνηµιαίου πλατώ"
+  },
+  "usage": {
+    "prompt_tokens": 1544,
+    "candidates_tokens": 570,
+    "total_tokens": 2114,
+    "thoughts_tokens": null
+  },
+  "attempts": 5
+}

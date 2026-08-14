@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38420384692181444061893234153745102059",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament se prati u kontinuitetu, bez znakova rupture. Izmjenjenog intenziteta signala u smislu mukoidne degeneracije.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Horizontalna ruptura stražnjeg roga i dijela trupa medijalnog meniska koja seže do obje artikulacijske površine.",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture.",
+    "Medial OA": "Uredan intenzitet signala ostalih hrskavičnih površina koljenskog zgloba.",
+    "Lateral OA": "Hondromalacija II° lateralnog tibijalnog platoa uz početne rubne osteofite zglobnih tijela u smislu OA promjena.",
+    "PF OA": "Hondromalacija IV° patelarne hrskavice uz sitne rubne osteofite FP zgloba u smislu OA promjena.",
+    "Effusion": "Nema izljeva.",
+    "Synovitis": "",
+    "Baker's": "Poplitealna cista veličine 21x8mm, uz vidljiv tekući sadržaj uz fasciju m. semimembranosus u smislu rupture poplitealne ciste.",
+    "Contusion": "Uredan intenzitet signala svih koštanih struktura.",
+    "Fracture": "Uredan intenzitet signala svih koštanih struktura."
+  },
+  "usage": {
+    "prompt_tokens": 1411,
+    "candidates_tokens": 568,
+    "total_tokens": 1979,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

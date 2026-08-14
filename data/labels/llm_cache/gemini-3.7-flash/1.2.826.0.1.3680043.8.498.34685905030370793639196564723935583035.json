@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.34685905030370793639196564723935583035",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "MCL": "Ligamentos cruzados y colaterales dentro de límites normales.",
+    "Medial Meniscus": "Aumento de señal central del cuerno posterior y cuerpo del menisco medial que no impresiona contactar con la superficie articular, sin caracteres propios de rotura.",
+    "Lateral Meniscus": "El menisco lateral es de morfología y señal conservada, sin signos de rotura.",
+    "Medial OA": "Condropatía lesiones grado 1 y 2 del compartimento femorotibial lateral y de la región central de la zona de carga del cóndilo femoral medial.",
+    "Lateral OA": "Condropatía lesiones grado 1 y 2 del compartimento femorotibial lateral",
+    "PF OA": "Condropatía lesiones grado 2 y 3 de la rótula.",
+    "Effusion": "Leve derrame articular",
+    "Synovitis": "",
+    "Baker's": "No hay quistes poplíteos patológicos.",
+    "Contusion": "Edema óseo difuso del cóndilo femoral medial con imagen de fractura subcortical",
+    "Fracture": "Edema óseo asociado a fractura subcortical de la región anterior del cóndilo femoral lateral, sin signos de colapso articular. Estos hallazgos podrían representar fenómenos de una fractura secundario a insuficiencia"
+  },
+  "usage": {
+    "prompt_tokens": 1529,
+    "candidates_tokens": 534,
+    "total_tokens": 2063,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

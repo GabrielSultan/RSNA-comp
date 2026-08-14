@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12300749089664733313051543117302244508",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Intact.",
+    "MCL": "Medial collateral ligament (MCL): Intact.",
+    "Medial Meniscus": "Complete radial tear at junction of posterior horn and root with complex tearing extending into body and medial extrusion.",
+    "Lateral Meniscus": "Lateral meniscus: Intact. No discrete tear.",
+    "Medial OA": "Severe medial, moderate patellofemoral, and minimal lateral compartmental osteoarthritis",
+    "Lateral OA": "minimal lateral compartmental osteoarthritis",
+    "PF OA": "moderate patellofemoral, and minimal lateral compartmental osteoarthritis",
+    "Effusion": "Large joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Trace popliteal cyst",
+    "Contusion": "Moderate subchondral edema in the medial tibial plateau without discrete subchondral fracture, in keeping with osseous stress response.",
+    "Fracture": "No discrete fracture."
+  },
+  "usage": {
+    "prompt_tokens": 1646,
+    "candidates_tokens": 420,
+    "total_tokens": 2066,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

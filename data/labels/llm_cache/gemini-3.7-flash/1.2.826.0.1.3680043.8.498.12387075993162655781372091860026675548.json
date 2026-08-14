@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12387075993162655781372091860026675548",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağda mukoid dejenerasyona sekonder kalınlaşma ve sinyal artışı izlenmiştir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküste belirgin hacim kaybı izlenmekte olup gövde kesimi izlenmemiştir. Anterior ve posterior hornlarında ise grade III dejenerasyonlar izlenmiştir.",
+    "Lateral Meniscus": "Lateral menisküs anterior, posterior horn ve gövde kesimde grade II dejenerasyon izlenmiştir.",
+    "Medial OA": "Tibiofemoral eklem medialde eklem aralığında daralma, ekleme komşu femur medial kondilde subkondral fokal kemik iliği ödemi izlenmiştir. Bu düzeyde femoral ve tibial kartilajlarda bütünlük kaybı izlenmiştir.",
+    "Lateral OA": "Tibiofemoral eklem medialde eklem aralığında daralma",
+    "PF OA": "",
+    "Effusion": "Suprapatellar bursa ve diz eklem mesafesinde sıvı artışı izlenmiştir.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Patellada süperior kesiminde kontüzyonel kemik iliği ödemi izlenmiştir.",
+    "Fracture": "Patellada fokal kontüzyonel kemik iliği ödemi."
+  },
+  "usage": {
+    "prompt_tokens": 1304,
+    "candidates_tokens": 535,
+    "total_tokens": 1839,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

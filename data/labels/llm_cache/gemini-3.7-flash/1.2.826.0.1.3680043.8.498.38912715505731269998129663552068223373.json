@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38912715505731269998129663552068223373",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve yan bağlar normal.",
+    "MCL": "Çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküs arka boynuzu-gövdesindeki dejenerasyona gövdesi düzeyindeki doku kaybının da eşlik ettiği kompleks yırtık ve medyale 5 mm ekstrüzyon eşlik ediyor.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "Diz eklemindeki trikompartmantal dejeneratif eklem hastalığı",
+    "Lateral OA": "Diz eklemindeki trikompartmantal dejeneratif eklem hastalığı",
+    "PF OA": "medyal patellar faset santralindeki tam kata ulaşan kondral fissür",
+    "Effusion": "Diz eklemi içi sıvı miktarı minimal artmış.",
+    "Synovitis": "",
+    "Baker's": "Gastroknemyus semimembranozus bursasındaki 4 cm maksimum boyutlu lobüle konturlu sıvı koleksiyonu sızdırmıyor.",
+    "Contusion": "eşlik eden subkortikal medüller fibrovasküler değişiklikler",
+    "Fracture": "Diz eklemindeki trikompartmantal dejeneratif eklem hastalığı medyal patellar faset santralindeki tam kata ulaşan kondral fissür, medyal femoral kondilin ağırlık taşıyan yüzeyindeki segmenter tam kat kondral kayıp, eşlik eden subkortikal medüller fibrovasküler değişiklikler ve milimetrik boyutlu marjinal osteofitler ile karakterize."
+  },
+  "usage": {
+    "prompt_tokens": 1300,
+    "candidates_tokens": 574,
+    "total_tokens": 1874,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

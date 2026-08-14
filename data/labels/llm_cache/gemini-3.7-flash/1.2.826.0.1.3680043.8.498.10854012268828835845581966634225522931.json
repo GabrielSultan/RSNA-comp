@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10854012268828835845581966634225522931",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Das VKB ist in der Kontinuität verfolgbar, jedoch tibialseitig mit deutl. Signalsteigerung und Auftreibung",
+    "MCL": "Intakte Darstellung der Fasern des lateralen und medialen Kollateralbandes",
+    "Medial Meniscus": "Unauffällige Signalgebung und Form der Menisci",
+    "Lateral Meniscus": "Unauffällige Signalgebung und Form der Menisci",
+    "Medial OA": "Kiene Chondropathie",
+    "Lateral OA": "Kiene Chondropathie",
+    "PF OA": "Kiene Chondropathie",
+    "Effusion": "Deutlich hämorrhagischer Gelenkerguss",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Knochenmarksödem am lateralen Tibiaplateau ohne eindeutige kortikale Stufenbildung, DD im Rahmen einer knöchernen Kontusion",
+    "Fracture": "ohne eindeutige kortikale Stufenbildung"
+  },
+  "usage": {
+    "prompt_tokens": 1165,
+    "candidates_tokens": 443,
+    "total_tokens": 1608,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

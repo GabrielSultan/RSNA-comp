@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.42776652100045349404152232788825670056",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": null,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "ACL normal.",
+    "MCL": "MCL normal.",
+    "Medial Meniscus": "Medial meniscus degeneration.",
+    "Lateral Meniscus": "Lateral meniscus tear.",
+    "Medial OA": "",
+    "Lateral OA": "OA of lateral compartment.",
+    "PF OA": "",
+    "Effusion": "No effusion.",
+    "Synovitis": "",
+    "Baker's": "Baker's cyst present.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1038,
+    "candidates_tokens": 326,
+    "total_tokens": 1364,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

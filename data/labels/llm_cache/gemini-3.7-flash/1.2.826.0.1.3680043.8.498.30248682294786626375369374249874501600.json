@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.30248682294786626375369374249874501600",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "the anterior and posterior cruciate ligaments are intact",
+    "MCL": "The medial collateral ligament complexes are intact.",
+    "Medial Meniscus": "Radial tear at the posterior horn of the medial meniscus.",
+    "Lateral Meniscus": "The lateral compartment, the lateral meniscus is not torn.",
+    "Medial OA": "",
+    "Lateral OA": "The articular cartilage appears normal.",
+    "PF OA": "Patellofemoral compartmental osteoarthritis of left knee by evidence of chondrosis and osteophytes.",
+    "Effusion": "Large amount of left knee effusion",
+    "Synovitis": "Large amount of left knee effusion with synovitis is present.",
+    "Baker's": "",
+    "Contusion": "Focal subchondral bone sclerosis (early insufficiency fracture) combining with extensive marrow edema at weightbaring medial femoral condyle",
+    "Fracture": "Focal subchondral bone sclerosis (early insufficiency fracture)"
+  },
+  "usage": {
+    "prompt_tokens": 1334,
+    "candidates_tokens": 417,
+    "total_tokens": 1751,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

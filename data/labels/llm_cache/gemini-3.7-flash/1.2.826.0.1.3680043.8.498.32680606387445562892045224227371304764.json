@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.32680606387445562892045224227371304764",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The ACL, PCL, medial and lateral collateral ligaments, patellar tendon, popliteus tendon, biceps femoris tendon, and iliotibial tract appear unremarkable.",
+    "MCL": "medial and lateral collateral ligaments, patellar tendon, popliteus tendon, biceps femoris tendon, and iliotibial tract appear unremarkable.",
+    "Medial Meniscus": "There is no abnormal signal inside the medial and lateral menisci.",
+    "Lateral Meniscus": "There is no abnormal signal inside the medial and lateral menisci.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": "Suspect linear fracture of tibial eminence."
+  },
+  "usage": {
+    "prompt_tokens": 1121,
+    "candidates_tokens": 396,
+    "total_tokens": 1517,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

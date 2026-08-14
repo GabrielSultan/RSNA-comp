@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.23733147518259581649562651915997449088",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Primjeren je izgled prednjeg i stražnjeg križnog ligamenta.",
+    "MCL": "Primjeren je izgled kolateralnih ligamenata.",
+    "Medial Meniscus": "Primjeren je izgled medijalnog i lateralnog meniska.",
+    "Lateral Meniscus": "Primjeren je izgled medijalnog i lateralnog meniska.",
+    "Medial OA": "Ne vidi se znakova osteoartritisa.",
+    "Lateral OA": "Ne vidi se znakova osteoartritisa.",
+    "PF OA": "Ne vidi se znakova osteoartritisa.",
+    "Effusion": "Bez izljeva",
+    "Synovitis": "",
+    "Baker's": "bez formirane Baker ciste.",
+    "Contusion": "bez znakova edema",
+    "Fracture": "primjeren je izgled koštanih struktura"
+  },
+  "usage": {
+    "prompt_tokens": 1084,
+    "candidates_tokens": 416,
+    "total_tokens": 1680,
+    "thoughts_tokens": 180
+  },
+  "attempts": 1
+}

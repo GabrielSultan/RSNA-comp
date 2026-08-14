@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11052720536194493057619720620119095739",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "le ligament croisé antérieur, le ligament croisé postérieur, le mécanisme des extenseurs, le ligament collatéral interne, le semi-membraneux, le muscle et tendon du poplité, le biceps fémoris distal, le ligament collatéral externe et la bandelette ilio-tibiale sont sans particularité",
+    "MCL": "le ligament collatéral interne, le semi-membraneux, le muscle et tendon du poplité, le biceps fémoris distal, le ligament collatéral externe et la bandelette ilio-tibiale sont sans particularité",
+    "Medial Meniscus": "Les ménisques sont sans particularité.",
+    "Lateral Meniscus": "Les ménisques sont sans particularité.",
+    "Medial OA": "Le cartilage du compartiment interne et externe est préservé.",
+    "Lateral OA": "Le cartilage du compartiment interne et externe est préservé.",
+    "PF OA": "Il y a changements dégénératifs légers à modérés au niveau patellofémoral.",
+    "Effusion": "Il n’y a pas d’épanchement intra-articulaire significatif",
+    "Synovitis": "",
+    "Baker's": "Il n’y a pas d’épanchement intra-articulaire significatif ou de kyste poplité.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1316,
+    "candidates_tokens": 523,
+    "total_tokens": 1839,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

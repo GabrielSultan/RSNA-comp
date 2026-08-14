@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12266644932420958618394322959047940542",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Otherwise the ACL, the PCL, the extensor mechanism, the medial meniscus, the lateral meniscus, the extensor mechanism, the medial collateral ligament, the pes anserine tendons, the semimembranosus, the popliteus, the distal biceps femoris, the lateral collateral ligament and the IT band are unremarkable.",
+    "MCL": "the medial collateral ligament, the pes anserine tendons, the semimembranosus, the popliteus, the distal biceps femoris, the lateral collateral ligament and the IT band are unremarkable.",
+    "Medial Meniscus": "the medial meniscus, the lateral meniscus, the extensor mechanism, the medial collateral ligament",
+    "Lateral Meniscus": "the medial meniscus, the lateral meniscus, the extensor mechanism, the medial collateral ligament",
+    "Medial OA": "The articular cartilage is preserved. There are no significant degenerative changes.",
+    "Lateral OA": "The articular cartilage is preserved. There are no significant degenerative changes.",
+    "PF OA": "The articular cartilage is preserved. There are no significant degenerative changes.",
+    "Effusion": "There is a small knee joint effusion",
+    "Synovitis": "",
+    "Baker's": "no popliteal cysts.",
+    "Contusion": "There is normal bone marrow signal intensity.",
+    "Fracture": "There is normal bone marrow signal intensity."
+  },
+  "usage": {
+    "prompt_tokens": 1166,
+    "candidates_tokens": 509,
+    "total_tokens": 1675,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

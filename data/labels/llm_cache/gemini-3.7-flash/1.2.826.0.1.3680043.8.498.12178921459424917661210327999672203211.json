@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12178921459424917661210327999672203211",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral kollateral ligaman normaldir.",
+    "MCL": "Medial kollateral ligaman çevresinde hafif sıvı artışı mevcuttur.",
+    "Medial Meniscus": "medial menisküste grade III dejenerasyon ve posterior hornunda horizontal yırtık ile uyumlu görünüm mevcuttur.",
+    "Lateral Meniscus": "Lateral menisküste grade I dejenerasyon",
+    "Medial OA": "Medial tibiofemoral eklem mesafesinde azalma, komşu kartilajlarda incelme ve subkondral kemik iliği ödemi mevcuttur (dejeneratif artrit bulguları ).",
+    "Lateral OA": "",
+    "PF OA": "Patellar kıkırdakta medial faset düzeyinde hafif fokal incelme izlenmiştir.",
+    "Effusion": "Eklemde sıvı artışı saptanmamıştır.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "subkondral kemik iliği ödemi mevcuttur (dejeneratif artrit bulguları )",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1223,
+    "candidates_tokens": 478,
+    "total_tokens": 1701,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

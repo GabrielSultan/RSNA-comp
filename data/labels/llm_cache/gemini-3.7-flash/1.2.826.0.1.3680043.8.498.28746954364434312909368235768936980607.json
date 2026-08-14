@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.28746954364434312909368235768936980607",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküs posterior hornunda horizontal yırtık ile uyumlu görünüm izlenmektedir.",
+    "Lateral Meniscus": "Lateral menisküs anterior ve posterior hornunda grade II dejenerasyon ile uyumlu sinyal değişikliği izlenmektedir.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Suprapateller bursada hafif sıvı artışı izlenmektedir.",
+    "Synovitis": "",
+    "Baker's": "Fibula kollateral ligaman düzeyinde 18x6 mm ve 12x7 mm boyutlarında lobüle konturlu septalı kistik lezyon izlenmektedir(ganglion kisti).",
+    "Contusion": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır.",
+    "Fracture": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır."
+  },
+  "usage": {
+    "prompt_tokens": 1193,
+    "candidates_tokens": 484,
+    "total_tokens": 1677,
+    "thoughts_tokens": null
+  },
+  "attempts": 5
+}

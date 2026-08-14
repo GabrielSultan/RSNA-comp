@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.43325226037168674077736336919956196684",
+  "labels": {
+    "ACL": null,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "",
+    "MCL": "",
+    "Medial Meniscus": "Στο έσω διαµέρισµα του γόνατος, παρατηρείται εκφυλιστική ρήξη στο οπίσθιο κέρας του µηνίσκου",
+    "Lateral Meniscus": "Στο έξω διαµέρισµα του γόνατος, σηµειούται απλή εκφύλιση, χωρίς ρήξη του µηνίσκου.",
+    "Medial OA": "διάβρωση του αρθρικού χόνδρου ICRS grade III τον έσω µηριαίο κόνδυλο",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Ενδαρθρική συλλογή υγρού",
+    "Synovitis": "",
+    "Baker's": "συνοβιακή κύστη Baker κεφαλουραίας διαµέτρου 6,5cm",
+    "Contusion": "",
+    "Fracture": "Τα ευρήµατα συνηγορούν υπέρ κατάγµατος ανεπάρκειας (συνώνυµο της αυτόµατης οστεονέκρωσης) στον έσω µηριαίο κόνδυλο."
+  },
+  "usage": {
+    "prompt_tokens": 1333,
+    "candidates_tokens": 498,
+    "total_tokens": 1831,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

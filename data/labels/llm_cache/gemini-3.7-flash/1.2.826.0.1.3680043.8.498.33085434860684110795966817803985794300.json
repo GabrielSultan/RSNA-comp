@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.33085434860684110795966817803985794300",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament primjerenih intenziteta singala, prati se u kontinuitetu.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Menisci bez znakova rupture i degeneracije.",
+    "Lateral Meniscus": "Menisci bez znakova rupture i degeneracije.",
+    "Medial OA": "Izmijenjen intenzitet signala femoralne i tibijalne hrskavice u smislu početne hondromalacije.",
+    "Lateral OA": "Izmijenjen intenzitet signala femoralne i tibijalne hrskavice u smislu početne hondromalacije.",
+    "PF OA": "Fisura trohlearne hrskavice uz formiranu subhondralnu cistu u središnjem dijelu, promjera 4 mm",
+    "Effusion": "Nema izljeva.",
+    "Synovitis": "",
+    "Baker's": "Manja Baker cista (LL promjera 14 mm).",
+    "Contusion": "subhondralnu cistu u središnjem dijelu, promjera 4 mm uz usku zonu okolnog koštanog edema.",
+    "Fracture": "Fisura trohlearne hrskavice"
+  },
+  "usage": {
+    "prompt_tokens": 1218,
+    "candidates_tokens": 518,
+    "total_tokens": 1736,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

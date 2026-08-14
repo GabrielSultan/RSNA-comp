@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11669120316759278775792190599036288128",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Anterior çapraz bağ tabia yapışma düzeyinde sinyal artişI mevcuttur.",
+    "MCL": "Medial kollateral ligaman çevresinde sinyal ve sıvı artışı izlenmiştir.",
+    "Medial Meniscus": "Lateral menisküs ve medial menisküs normaldir.",
+    "Lateral Meniscus": "Lateral menisküs ve medial menisküs normaldir.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Patellada subkondral milimetrik kist ve kemik iliği ödemi ile uyumlu görünüm mevcuttur.",
+    "Effusion": "Diz eklemi düzeyinde minimal sıvı artışı izlenmiştir.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1211,
+    "candidates_tokens": 405,
+    "total_tokens": 1616,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

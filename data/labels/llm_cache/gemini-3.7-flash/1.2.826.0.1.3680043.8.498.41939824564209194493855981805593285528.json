@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.41939824564209194493855981805593285528",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt.",
+    "MCL": "Kollateralbänder ebenfalls intakt.",
+    "Medial Meniscus": "Keine menisceale Rissbildung bei geringen Signalanhebungen des Innenmeniskus in Pars intermedia",
+    "Lateral Meniscus": "Keine menisceale Rissbildung",
+    "Medial OA": "Diskrete oberflächliche chondrale Irregularitäten am medialen Tibiaplateau und der medialen Femurkondyle mit zarten osteophytären Ausziehungen",
+    "Lateral OA": "Femorotibial ebenfalls regelrechte Stellung. Keine menisceale Rissbildung bei geringen Signalanhebungen des Innenmeniskus in Pars intermedia (5/22). Diskrete oberflächliche chondrale Irregularitäten am medialen Tibiaplateau und der medialen Femurkondyle",
+    "PF OA": "Unauffälliger retropatellarer Knorpel. Auch an der Trochlea unauffälliger Knorpelbelag. Keine Chondropathie",
+    "Effusion": "Kein gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "Kleine Baker-Zyste.",
+    "Contusion": "Kein Nachweis eines Knochenmarksödem.",
+    "Fracture": "Altersentsprechend unauffälliges Knochenmark."
+  },
+  "usage": {
+    "prompt_tokens": 1184,
+    "candidates_tokens": 521,
+    "total_tokens": 1705,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

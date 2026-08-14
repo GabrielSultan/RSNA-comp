@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11184968672176462852561645279750399747",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Chronic partial tear of the proximal fibers.",
+    "MCL": "Medial collateral ligament (MCL): Intact",
+    "Medial Meniscus": "Complex tear of the posterior horn/body with a small flap formation migrating into the lateral meniscotibial gutter.",
+    "Lateral Meniscus": "Lateral meniscus: Fraying of the body segment inner margin.",
+    "Medial OA": "Thinning of the weightbearing femoral condyle cartilage",
+    "Lateral OA": "Lateral compartment cartilage: No focal cartilage defects.",
+    "PF OA": "Focal full-thickness fissuring along the medial/central trochlea with underlying subchondral cystic change.",
+    "Effusion": "Small joint effusion with synovitis.",
+    "Synovitis": "Small joint effusion with synovitis.",
+    "Baker's": "Small, ruptured Baker's cyst.",
+    "Contusion": "No acute fracture or bone bruise.",
+    "Fracture": "No acute fracture or bone bruise."
+  },
+  "usage": {
+    "prompt_tokens": 1638,
+    "candidates_tokens": 430,
+    "total_tokens": 2068,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

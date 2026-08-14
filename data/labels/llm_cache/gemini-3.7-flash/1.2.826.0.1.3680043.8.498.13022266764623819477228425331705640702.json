@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13022266764623819477228425331705640702",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "R/O mucoid degenration and partial tear of AXL.",
+    "MCL": "",
+    "Medial Meniscus": "Linear and blurring hyperintensity in the posterior horn of medial meniscus with articular surface disruption, in favor of longitudinal tear",
+    "Lateral Meniscus": "Mild increased intensity in the lateral meniscus, in favor intrasubstance degeneration",
+    "Medial OA": "Wearing articular cartilage of knee joint with large spur formation and tiny subchondral cysts, more severe at medial compartment, reflecting osteoarthritis.",
+    "Lateral OA": "Wearing articular cartilage of knee joint with large spur formation and tiny subchondral cysts, more severe at medial compartment, reflecting osteoarthritis.",
+    "PF OA": "Focal increased intensity in the patellar cartilage with fissure and tiny subchondral cyst, more prominent at medial side, in favor of grade 4 chondral injury.",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "in favor of small Baker's cyst.",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1451,
+    "candidates_tokens": 466,
+    "total_tokens": 1917,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

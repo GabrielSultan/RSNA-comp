@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11964919539297578836040550782883323317",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküs posterior horn-gövde kesim düzeyinde kompleks yırtık ile uyumlu sinyal intensite değişiklikleri izlendi.",
+    "Lateral Meniscus": "Lateral menisküs normaldir.",
+    "Medial OA": "Diz eklem aralığı medial kompartmanda daralmış",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "Diz eklem aralığı ve suprapatellar bursada efüzyon izlendi.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "bu düzeyde diz eklemini oluşturan kemik yüzlerde kontüzyonel ödem dikkati çekmiştir.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1177,
+    "candidates_tokens": 427,
+    "total_tokens": 1604,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

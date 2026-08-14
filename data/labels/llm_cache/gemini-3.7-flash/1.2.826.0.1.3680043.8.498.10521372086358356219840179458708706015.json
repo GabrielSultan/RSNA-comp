@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10521372086358356219840179458708706015",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "VKB mukoid.",
+    "MCL": "MCL und LCL intakt.",
+    "Medial Meniscus": "Komplexe Rissbildung des Innenmeniskus in der Pars intermedia sowie dem Hinterhorn mit nach paratibial disloziertem Lappenriss",
+    "Lateral Meniscus": "Außenmeniskus ohne Anhalt für eine Rissbildung.",
+    "Medial OA": "medial betonten Panonarthrose mit osteophytären Anbauten aller Gelenkpartner sowie insbesondere im medialen Kompartiment progredienter flächiger vollschichtiger Chondropathie",
+    "Lateral OA": "Ebenfalls progrediente Chondropathie mit höhergradig geminderten Knorpelbesatz und V. a. fokal vollschichtige Chondropathie der lateralen Femurkondyle",
+    "PF OA": "Ebenfalls höhergradig geminderter Knorpelbesatz der Trochlea mit teils flächiger vollschichtiger Chondropathie. Teils höhergradige fokale, chondrale Läsionen auch retropatellar",
+    "Effusion": "Akzentuierte Gelenkflüssigkeit.",
+    "Synovitis": "",
+    "Baker's": "Lobulierte, flüssigkeitsgefüllte Baker-Zyste mit einer CC-Ausdehnung von ca. 7,8 cm.",
+    "Contusion": "korrespondierend geringem Knochenmarksödem in der medialen Femurkondyle sowie dem medialen Tibiaplateau",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1334,
+    "candidates_tokens": 566,
+    "total_tokens": 1900,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

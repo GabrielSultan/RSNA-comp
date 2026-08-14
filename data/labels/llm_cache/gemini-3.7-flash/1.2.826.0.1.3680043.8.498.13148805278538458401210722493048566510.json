@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13148805278538458401210722493048566510",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Il y a une entorse de grade intermédiaire/déchirure partielle du ligament croisé antérieur.",
+    "MCL": "Il y a une entorse de grade 1 du ligament collatéral interne",
+    "Medial Meniscus": "Le ménisque interne est intact et sans déchirure.",
+    "Lateral Meniscus": "Il y a une petite déchirure oblique à la jonction de la corne postérieure et du corps du ménisque externe.",
+    "Medial OA": "Il y a une légère atténuation diffuse des surfaces cartilagineuses au compartiment fémorotibial interne avec une fissure chondrale de haut grade",
+    "Lateral OA": "Il y a une atténuation modérée des surfaces cartilagineuses au compartiment fémorotibial externe avec une fissure chondrale transfixiante au versant fémoral",
+    "PF OA": "Il y a une atténuation légère à modérée des surfaces cartilagineuses patellofémorales avec une fissure chondrale transfixiante",
+    "Effusion": "Il y a un petit épanchement intra-articulaire.",
+    "Synovitis": "",
+    "Baker's": "Il n'y a pas de kyste de Baker.",
+    "Contusion": "petite contusion osseuse associée au condyle fémoral interne",
+    "Fracture": "Il y a une fracture trabéculaire sous-chondrale par impaction au versant postérieur du plateau tibial externe"
+  },
+  "usage": {
+    "prompt_tokens": 1779,
+    "candidates_tokens": 532,
+    "total_tokens": 2311,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.34791780913322886484171421115861604853",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": null,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): No tear.",
+    "MCL": "Medial collateral ligament: Preserved.",
+    "Medial Meniscus": "Medial meniscus: No tear.",
+    "Lateral Meniscus": "Lateral meniscus: Suspect incomplete discoid meniscus. Horizontal tear from anterior horn to body to posterior horn",
+    "Medial OA": "Medial tibial plateau: Normal.  \n  Medial femoral condyle: Normal.",
+    "Lateral OA": "Lateral tibial plateau: Normal.  \n  Lateral femoral condyle: Normal.",
+    "PF OA": "Normal articular cartilage of patellar facet and femoral troclear is observed.  \n  No cartilage chondrosis is shown.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1319,
+    "candidates_tokens": 403,
+    "total_tokens": 1722,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

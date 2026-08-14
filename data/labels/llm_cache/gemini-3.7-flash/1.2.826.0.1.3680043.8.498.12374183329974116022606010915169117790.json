@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12374183329974116022606010915169117790",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral kollateral ligaman normaldir",
+    "MCL": "Medial kollateral ligamen çevresinde periligamentöz hafif ödem görünümü izlendi ( grade I sprain )",
+    "Medial Meniscus": "Medial menisküste grade III dejenerasyon",
+    "Lateral Meniscus": "lateral menisküste grade II dejenerasyon izlendi",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Patellar kıkırdak medial faset düzeyinde kıkırdakta bütünlük kaybı ve komşu kemikte subkondral kemik iliği ödemi izlendi ( grade IV kondromalazi )",
+    "Effusion": "Suprapatellar bursada ve diz eklemi içerisinde hafif sıvı artışı izlendi",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "komşu kemikte subkondral kemik iliği ödemi izlendi",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1232,
+    "candidates_tokens": 446,
+    "total_tokens": 1678,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

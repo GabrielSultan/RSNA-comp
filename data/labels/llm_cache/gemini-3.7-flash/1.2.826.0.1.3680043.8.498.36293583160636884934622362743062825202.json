@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.36293583160636884934622362743062825202",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The anterior and posterior cruciate ligaments are intact.",
+    "MCL": "The medial and lateral collateral ligament complexes are intact.",
+    "Medial Meniscus": "In the medial compartment, the meniscus is not torn",
+    "Lateral Meniscus": "The lateral compartment, likewise, appears normal including meniscus",
+    "Medial OA": "there is no focal chondrosis or chondral injury.",
+    "Lateral OA": "The lateral compartment, likewise, appears normal including meniscus and articular cartilage.",
+    "PF OA": "The patellofemoral joint appears congruent. There is no cartilage injury.",
+    "Effusion": "No knee effusion is present.",
+    "Synovitis": "Normal MR examination of the left knee.",
+    "Baker's": "Normal MR examination of the left knee.",
+    "Contusion": "There is no fracture or bone contusion.",
+    "Fracture": "There is no fracture or bone contusion."
+  },
+  "usage": {
+    "prompt_tokens": 1163,
+    "candidates_tokens": 418,
+    "total_tokens": 1581,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

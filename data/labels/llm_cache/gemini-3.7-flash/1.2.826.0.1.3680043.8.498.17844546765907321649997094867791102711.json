@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.17844546765907321649997094867791102711",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağdaki laksite artışı ve ödem yüksek olasılıkla tam kat-tam kata yakın yırtık ile birlikte.",
+    "MCL": "yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküs ve lateral menisküs normal.",
+    "Lateral Meniscus": "Medyal menisküs ve lateral menisküs normal.",
+    "Medial OA": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler bunların dışında normal.",
+    "PF OA": "femoral troklear oluk ve patellofemoral bağlar normal",
+    "Effusion": "Diz eklemi içi sıvı miktarı hafif derecede artmış.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Tibyal plato posterolateral köşesinde pivot kayması ile ilintili kemik kontüzyonu mevcut.",
+    "Fracture": "Lateral femoral kondilin ağırlık taşıyan yüzeyinin anteriyor yarısındaki subkondral kırığı kemik iliği ödemi çevreliyor."
+  },
+  "usage": {
+    "prompt_tokens": 1200,
+    "candidates_tokens": 471,
+    "total_tokens": 1671,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

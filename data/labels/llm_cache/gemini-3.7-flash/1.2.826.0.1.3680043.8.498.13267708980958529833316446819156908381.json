@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13267708980958529833316446819156908381",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Τα συνδεσµικά στοιχεία είναι ακέραια.",
+    "MCL": "Τα συνδεσµικά στοιχεία είναι ακέραια.",
+    "Medial Meniscus": "εκφυλιστική ρήξη του µηνίσκου",
+    "Lateral Meniscus": "Από τον έλεγχο του πρόσθιου και έξω διαµερίσµατος, δεν παρατηρούνται αξιόλογα ευρήµατα.",
+    "Medial OA": "εκφυλιστική οστεοαρθρίτιδα έσω διαµερίσµατος",
+    "Lateral OA": "Από τον έλεγχο του πρόσθιου και έξω διαµερίσµατος, δεν παρατηρούνται αξιόλογα ευρήµατα.",
+    "PF OA": "Από τον έλεγχο του πρόσθιου και έξω διαµερίσµατος, δεν παρατηρούνται αξιόλογα ευρήµατα.",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "υπαρθρικό οστεοµυελικό οίδηµα στην κνήµη",
+    "Fracture": "µικροδοκιδώδες κάταγµα ανεπάρκειας"
+  },
+  "usage": {
+    "prompt_tokens": 1291,
+    "candidates_tokens": 520,
+    "total_tokens": 1811,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

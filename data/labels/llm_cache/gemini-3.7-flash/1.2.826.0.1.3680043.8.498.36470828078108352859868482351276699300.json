@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.36470828078108352859868482351276699300",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": 1.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Vorderes und hinteres Kreuzband sowie Kollateralbänder intakt.",
+    "MCL": "Kollateralbänder intakt.",
+    "Medial Meniscus": "Horizontale Rissbildung des Innenmeniskus im Pars intermedia und Hinterhorn.",
+    "Lateral Meniscus": "Geringe Signalalterationen des Außenmeniskus, insbesondere am Vorederhorn ohne eindeutige Rissbildung.",
+    "Medial OA": "Initial degenerative Veränderungen.",
+    "Lateral OA": "entsprechendem Knorpeldefekt",
+    "PF OA": "Keine höhergradige Chondropathie femoropatellar",
+    "Effusion": "Geringer Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "Bakerzyste.",
+    "Contusion": "Bonebruise Areal des lateralen Tibiaplateaus. Geringes Bonebruise Areal auch am medialen Tibiaplateau sowie der medialen Femurcondyle.",
+    "Fracture": "Impressionsfraktur des lateralen Tibiaplateaus"
+  },
+  "usage": {
+    "prompt_tokens": 1183,
+    "candidates_tokens": 455,
+    "total_tokens": 1638,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

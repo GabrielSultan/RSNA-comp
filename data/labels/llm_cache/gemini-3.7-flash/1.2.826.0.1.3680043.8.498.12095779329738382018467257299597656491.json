@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12095779329738382018467257299597656491",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": null,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": null,
+    "Effusion": null,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "The contour of ACL is in a straight line and increase signal intensity inside on F/S T2WI, in favor of grade 1 injury.",
+    "MCL": "Some signal intensity around the soft tissue medial to the MCL; partial disruption also noted, in favor of grade 2 injury",
+    "Medial Meniscus": "",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "",
+    "Effusion": "",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "No significant bone marrow edema or active cortical destruction noted at distal femur and proximal tibia and fibula in this study.",
+    "Fracture": "No significant bone marrow edema or active cortical destruction noted at distal femur and proximal tibia and fibula in this study."
+  },
+  "usage": {
+    "prompt_tokens": 1252,
+    "candidates_tokens": 397,
+    "total_tokens": 2000,
+    "thoughts_tokens": 351
+  },
+  "attempts": 1
+}

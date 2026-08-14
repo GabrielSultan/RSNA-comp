@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.21135201439483157418374033420156525658",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Intakter Faserverlauf des vorderen und hinteren Kreuzbandes.",
+    "MCL": "Intakte Darstellung des medialen und lateralen Kollateralbandes.",
+    "Medial Meniscus": "intakte Darstellung des Innen- und Außenmeniskus ohne Nachweis einer Rissbildung.",
+    "Lateral Meniscus": "Allenfalls minimale punktförmige flaue Signalanhebung des Außenmeniskushinterhornes (6/21) DD mukoide Degeneration. Des Weiteren intakte Darstellung des Innen- und Außenmeniskus ohne Nachweis einer Rissbildung.",
+    "Medial OA": "Unauffällige Darstellung des retropatellaren Knorpelbesatz des sowie des femorotibialen Knorpelbesatz des, keine Chondropathie.",
+    "Lateral OA": "Unauffällige Darstellung des retropatellaren Knorpelbesatz des sowie des femorotibialen Knorpelbesatz des, keine Chondropathie.",
+    "PF OA": "Unauffällige Darstellung des retropatellaren Knorpelbesatz des sowie des femorotibialen Knorpelbesatz des, keine Chondropathie.",
+    "Effusion": "Gering Gelenkflüssigkeit, kein wesentlicher Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Keine Ödemsignal der erfassten knöchernen Strukturen.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1200,
+    "candidates_tokens": 549,
+    "total_tokens": 1749,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

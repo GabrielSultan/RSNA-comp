@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.43256905750043156063416845850825787417",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligamentos cruzados y colateral lateral sin alteraciones.",
+    "MCL": "Leve engrosamiento impresiona secuelar del componente superficial del ligamento colateral medial.",
+    "Medial Meniscus": "Aumento de señal central del cuerno posterior del menisco medial que no impresiona contactar con la superficie articular, sin caracteres propios de rotura.",
+    "Lateral Meniscus": "Pequeña rotura marginal del cuerno posterior del menisco lateral, sin desplazamiento de segmentos.",
+    "Medial OA": "Cartílagos de los compartimentos femorotibiales sin alteraciones.",
+    "Lateral OA": "Cartílagos de los compartimentos femorotibiales sin alteraciones.",
+    "PF OA": "Fina úlcera condral de espesor total de la región central de la tróclea femoral con cambios óseos secundarios. Úlceras condrales de espesor parcial y total de la faceta lateral, vértice y faceta medial de la rótula.",
+    "Effusion": "Leve a moderado derrame articular con sinovitis difusa.",
+    "Synovitis": "Leve a moderado derrame articular con sinovitis difusa.",
+    "Baker's": "Pequeño quiste poplíteo sin signos de rotura.",
+    "Contusion": "No hay alteraciones de señal significativas de la médula ósea.",
+    "Fracture": "No hay alteraciones de señal significativas de la médula ósea."
+  },
+  "usage": {
+    "prompt_tokens": 1449,
+    "candidates_tokens": 538,
+    "total_tokens": 1987,
+    "thoughts_tokens": null
+  },
+  "attempts": 4
+}

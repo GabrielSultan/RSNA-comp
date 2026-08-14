@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12041491173612341571223481616114183729",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": null,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.0,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Vorderes und hinteres Kreuzband intakt und mit unauffälligem Signal.",
+    "MCL": "Mediales Kollateralband intakt.",
+    "Medial Meniscus": "Innenmeniskus und Außenmeniskus intakt.",
+    "Lateral Meniscus": "Innenmeniskus und Außenmeniskus intakt.",
+    "Medial OA": "Kein Nachweis einer osteochondralen Läsion.",
+    "Lateral OA": "Kein Nachweis einer osteochondralen Läsion.",
+    "PF OA": "Kein Nachweis einer osteochondralen Läsion.",
+    "Effusion": "Medial betonter Gelenkerguss",
+    "Synovitis": "",
+    "Baker's": "Ca. 12 mm messende zystische Struktur dorsal angrenzend an die distale Tibia, a. e. Baker-Zyste.",
+    "Contusion": "",
+    "Fracture": "Kein Hinweis auf eine Fraktur."
+  },
+  "usage": {
+    "prompt_tokens": 1151,
+    "candidates_tokens": 435,
+    "total_tokens": 1586,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

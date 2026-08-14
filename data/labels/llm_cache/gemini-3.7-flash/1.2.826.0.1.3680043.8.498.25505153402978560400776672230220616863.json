@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.25505153402978560400776672230220616863",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ligament croisé antérieur : Normal.",
+    "MCL": "Ligament collatéral médial : Normal.",
+    "Medial Meniscus": "Ménisque médial : Normal.",
+    "Lateral Meniscus": "Ménisque latéral : Normal.",
+    "Medial OA": "Changements dégénératifs :\nAucune.",
+    "Lateral OA": "Changements dégénératifs :\nAucune.",
+    "PF OA": "Changements dégénératifs :\nAucune.",
+    "Effusion": "Épanchement articulaire : Pas de liquide significatif.",
+    "Synovitis": "Examen dans les limites de la normale.",
+    "Baker's": "Kyste de Baker : Aucun.",
+    "Contusion": "Signal de la moelle osseuse :\nNormal.",
+    "Fracture": "Fractures :\nAucune."
+  },
+  "usage": {
+    "prompt_tokens": 1166,
+    "candidates_tokens": 408,
+    "total_tokens": 1574,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.13030662056306690969977140713179461363",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji križni ligament urednog je signala te se prati u kontinuitetu.",
+    "MCL": "Lateralni i medijalni kolateralni ligamenti urednog su signala te se prate u kontinuitetu.",
+    "Medial Meniscus": "Medijalni menisk: kompleksna ruptura na prijelazu stražnjeg roga u trup meniska",
+    "Lateral Meniscus": "Moguća manja degenerativna ruptura prednjeg roga s gornje artikulacijske strane.",
+    "Medial OA": "Gotovo potpuni gubitak hrskavice u medijalnom dijelu tibiofemoralnog zglobnog prostora",
+    "Lateral OA": "Hondromalacija III stupnja u lateralnom dijelu.",
+    "PF OA": "Rubne koštane apozicije u sklopu osteoartroze FT i FP zgloba.",
+    "Effusion": "Umjereni izljev u zglobu.",
+    "Synovitis": "",
+    "Baker's": "Sitna poplitealna cista, oko 13 mm u kraniokaudalnom promjeru.",
+    "Contusion": "Primjeren je intenzitet signala prikazanog dijela femura, tibije i fibule.",
+    "Fracture": "Primjeren je intenzitet signala prikazanog dijela femura, tibije i fibule."
+  },
+  "usage": {
+    "prompt_tokens": 1494,
+    "candidates_tokens": 535,
+    "total_tokens": 2029,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

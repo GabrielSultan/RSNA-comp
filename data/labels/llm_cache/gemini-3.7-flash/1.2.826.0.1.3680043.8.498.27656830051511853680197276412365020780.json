@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.27656830051511853680197276412365020780",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Anterior cruciate ligament (ACL): Normal with both bundles intact.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: Normal in morphology and signal.",
+    "Lateral Meniscus": "Lateral meniscus: Normal in morphology and signal.",
+    "Medial OA": "Medial compartment cartilage: No focal cartilage defects.",
+    "Lateral OA": "Lateral compartment cartilage: No focal cartilage defects.",
+    "PF OA": "Patellofemoral compartment cartilage: No focal cartilage defects.",
+    "Effusion": "No joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No Baker's cyst.",
+    "Contusion": "Marrow edema along the peripheral aspect of the medial femoral condyle could represent a very small osseous contusion in the appropriate context.",
+    "Fracture": "No aggressive osseous lesions."
+  },
+  "usage": {
+    "prompt_tokens": 1530,
+    "candidates_tokens": 413,
+    "total_tokens": 1943,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

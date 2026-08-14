@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12942677240800343332600884989364651588",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ön çapraz bağ ve arka çapraz bağ, lateral ve medial kollateral ligaman normaldir.",
+    "MCL": "lateral ve medial kollateral ligaman normaldir.",
+    "Medial Meniscus": "Medial menisküste grade II dejenerasyon",
+    "Lateral Meniscus": "lateral menisküste grade I dejenerasyon izlendi.",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "Patellar kıkırdak medial fasette bütünlük kaybı ve komşu kemikte subkondral kemik iliği ödemi izlendi ( grade IV kondromalazi ).",
+    "Effusion": "Eklemde sıvı artışı saptanmamıştır.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Patellar kıkırdak medial fasette bütünlük kaybı ve komşu kemikte subkondral kemik iliği ödemi izlendi ( grade IV kondromalazi )",
+    "Fracture": "Diz eklemini oluşturan kemik yapıların sinyal intensiteleri doğaldır."
+  },
+  "usage": {
+    "prompt_tokens": 1169,
+    "candidates_tokens": 460,
+    "total_tokens": 1629,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

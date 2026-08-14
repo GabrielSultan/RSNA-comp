@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10391178814963564201551003358372148419",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Çapraz ve yan bağlar normal.",
+    "MCL": "Çapraz ve yan bağlar normal.",
+    "Medial Meniscus": "Medyal menisküs gövde-arka boynuzunu ilgilendiren geniş doku kaybı ile birlikte olan kompleks dejeneratif yırtık.",
+    "Lateral Meniscus": "Lateral menisküs normal.",
+    "Medial OA": "Medyal femorotibyal kompartman osteoartriti tam kat eklem kıkırdağı kaybı",
+    "Lateral OA": "Eklem kıkırdakları ve kemikler bunun dışında normal.",
+    "PF OA": "Eklem kıkırdakları ve kemikler bunun dışında normal.",
+    "Effusion": "Diz eklemi içi sıvı miktarı orta derecede artmış.",
+    "Synovitis": "",
+    "Baker's": "Gastrokinemyus-semimembranozus bursiti minimal kalınlıkta; sızdırıyor.",
+    "Contusion": "Eklem kıkırdakları ve kemikler bunun dışında normal.",
+    "Fracture": "Eklem kıkırdakları ve kemikler bunun dışında normal."
+  },
+  "usage": {
+    "prompt_tokens": 1146,
+    "candidates_tokens": 477,
+    "total_tokens": 1945,
+    "thoughts_tokens": 322
+  },
+  "attempts": 1
+}

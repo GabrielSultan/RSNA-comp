@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11860731961337988611847638299761007498",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 1.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "VKB sowie HKB intakt.",
+    "MCL": "LCL und MCL intakt.",
+    "Medial Meniscus": "Geringe mukoide Signalalterationen des Innenmeniskus im Hinterhorn, keine fassbare Rissbildung.",
+    "Lateral Meniscus": "Kein Anhalt für eine Rissbildung des Außenmeniskus.",
+    "Medial OA": "Keine wesentliche Chondropathie.",
+    "Lateral OA": "Keine wesentliche Chondropathie.",
+    "PF OA": "Keine wesentliche Chondropathie.",
+    "Effusion": "Akzentuierte Flüssigkeit im Kniegelenk.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "Gering bone bruise in der medialen Femurkondyle sowie der medialen proximalen Tibia, in erster Linie postkontusionell nach Distorsionstrauma.",
+    "Fracture": "unauffällige Signalgebung der übrigen ossären Strukturen"
+  },
+  "usage": {
+    "prompt_tokens": 1177,
+    "candidates_tokens": 438,
+    "total_tokens": 1615,
+    "thoughts_tokens": null
+  },
+  "attempts": 3
+}

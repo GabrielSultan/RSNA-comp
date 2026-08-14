@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.38069035744880456154810472748123499221",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": null,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.0,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji i stražnji križni ligamenti su primjerenih intenziteta signala i održanog kontinuiteta",
+    "MCL": "ekstruziju za oko 5 mm koja potiskuje medijalni kolateralni ligament s periligamentarnim edemom",
+    "Medial Meniscus": "Ruptura prednjeg korijena medijalnog meniska",
+    "Lateral Meniscus": "Lateralni menisk bez znakova rupture i degeneracije.",
+    "Medial OA": "Prikaže se hondromalacija III° hrskavice medijalnog tibijalnog platoa",
+    "Lateral OA": "Hondromalacija II° hrskavice lateralnog tibijalnog platoa uz formirane rubne osteofite FT zgloba",
+    "PF OA": "hondromalacija IV° trohleje femura medijalno",
+    "Effusion": "",
+    "Synovitis": "Suprapatelarna plika uz blaži sinovitis.",
+    "Baker's": "Poplitealna cista promjera 14 mm.",
+    "Contusion": "uz subhondralne lezije i okolni koštani edem te koštani edem medijalnog kondila femura",
+    "Fracture": "Opisano odgovara uznapredovalnim degenerativnim promjenama."
+  },
+  "usage": {
+    "prompt_tokens": 1490,
+    "candidates_tokens": 526,
+    "total_tokens": 2016,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

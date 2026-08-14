@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12009816058271421855131593296751372723",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Ganglion cyst associated with the anterior fibers of the ACL measuring up to 1.4 cm maximally in AP dimension. Mucoid changes within the remainder of the ACL.",
+    "MCL": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Medial Meniscus": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Lateral Meniscus": "Longitudinal tear of the posterior horn/body of the lateral meniscus, with a flap displaced meniscal fragment within the posterior superior intercondylar notch.",
+    "Medial OA": "Medial compartment (meniscus, collateral ligament, cartilage):\nNormal.",
+    "Lateral OA": "Full-thickness cartilage fissures within the lateral tibial plateau articular cartilage with reactive subchondral reactive bone marrow signal change (grade 4 chondrosis).",
+    "PF OA": "Partial-thickness chondral fissuring involving the medial and lateral patellar articular facet cartilage (grade 2/3 chondrosis).",
+    "Effusion": "Small joint effusion.",
+    "Synovitis": "",
+    "Baker's": "No popliteal cyst.",
+    "Contusion": "Bones:\nNormal.",
+    "Fracture": "Bones:\nNormal."
+  },
+  "usage": {
+    "prompt_tokens": 1314,
+    "candidates_tokens": 482,
+    "total_tokens": 1796,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

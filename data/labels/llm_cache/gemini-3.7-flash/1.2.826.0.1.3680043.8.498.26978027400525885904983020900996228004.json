@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.26978027400525885904983020900996228004",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": null,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Normaal aspect van de voorste en achterste kruisband",
+    "MCL": "alsook de beide collaterale ligamenten",
+    "Medial Meniscus": "Longitudinale ondervlakte scheur posterieure hoorn mediale meniscus (overgrijpend op het corpus)",
+    "Lateral Meniscus": "",
+    "Medial OA": "",
+    "Lateral OA": "",
+    "PF OA": "graad~3 kraakbeen lijden patellair en meer ge ïsoleerd graad~4 kraakbeen lijden t.h.v. het centrale deel van de trochlea",
+    "Effusion": "Geen significante opzetting van de suprapatellaire bursa",
+    "Synovitis": "",
+    "Baker's": "evenwel een Baker-cyste gekenmerkt door een polylobulaire/multiloculaire aflijning",
+    "Contusion": "locoregionaal T2 hyperintense beenmergalteraties aanliggend tegenaan de subchondrale been plaat van mediaal tibiaplateau (passen d bij reactieve oste ïtis)",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1326,
+    "candidates_tokens": 468,
+    "total_tokens": 1794,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

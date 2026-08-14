@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.10774147135673365265606645781662088745",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "The contour of ACL is in a straight line and increase signal intensity inside on F/S T2WI, in favor of grade 1 injury.",
+    "MCL": "Both medial & lateral collateral ligaments appear to be within normal.",
+    "Medial Meniscus": "Obliteration of posteiror horn of medial meniscus, in favor of tear.",
+    "Lateral Meniscus": "No strong MR evidence of tear of lateral meniscus.",
+    "Medial OA": "Wearing of articular cartilage of left knee, more severe at medial compartment, and subchondral edema and spur formation, reflecting osteoarthritis",
+    "Lateral OA": "Wearing of articular cartilage of left knee, more severe at medial compartment, and subchondral edema and spur formation, reflecting osteoarthritis",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis.",
+    "Baker's": "A lobulated cystic lesion in medial popliteal fossa between the tendons of the medial head of the gastrocnemius and the semimembranosus muscles, in favor of Baker's cyst.",
+    "Contusion": "subchondral edema and spur formation, reflecting osteoarthritis",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1330,
+    "candidates_tokens": 490,
+    "total_tokens": 1820,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

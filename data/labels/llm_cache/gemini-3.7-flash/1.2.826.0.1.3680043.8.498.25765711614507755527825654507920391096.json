@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.25765711614507755527825654507920391096",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 0.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Prednji i stražnji križni ligamenti su održanog kontinuiteta, prednji križni ligament je blaže deg. promijenjen.",
+    "MCL": "Medijalni i lateralni kolateralni ligamenti su primjerenih intenziteta signala, održanog kontinuiteta.",
+    "Medial Meniscus": "Horizontalna ruptura stražnjeg roga i trupa medijalnog meniska na osnovi deg. promjena.",
+    "Lateral Meniscus": "Blaže deg. promjene lateralnog meniska.",
+    "Medial OA": "Prikaže se hondromalacija I-II° hrskavice medijalnog i lateralnog tibijalnog platoa, uz reduciranu debljinu hrskavice, izraženije medijalno te formirane manje osteofite - u smislu početnih degenerativnih promjena.",
+    "Lateral OA": "Prikaže se hondromalacija I-II° hrskavice medijalnog i lateralnog tibijalnog platoa... Hondromalacija III° hrskavice lateralnog kondila femura.",
+    "PF OA": "",
+    "Effusion": "Bez signifikantnog izljeva u zglob.",
+    "Synovitis": "",
+    "Baker's": "Ne nalazi se znakova poplitealne ciste.",
+    "Contusion": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije.",
+    "Fracture": "Prikazane koštane strukture primjerenih intenziteta signala i morfologije."
+  },
+  "usage": {
+    "prompt_tokens": 1363,
+    "candidates_tokens": 573,
+    "total_tokens": 1936,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

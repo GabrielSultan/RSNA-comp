@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.36924091633099385100942228071545017565",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Intact anterior cruciate ligament",
+    "MCL": "The medial collateral ligament, posterior oblique ligament, fibular collateral ligament, and biceps femoris tendon insertion are intact.",
+    "Medial Meniscus": "Intrasubstance degeneration posterior horn medial meniscus without tear.",
+    "Lateral Meniscus": "The lateral meniscus is intact.",
+    "Medial OA": "Preserved medial femorotibial articular cartilage.",
+    "Lateral OA": "There is a tiny focus of full-thickness cartilage denuding involving the posterior weightbearing aspect lateral tibial plateau.",
+    "PF OA": "Moderate patellofemoral chondrosis consistent with moderate patellofemoral predominant osteoarthritis of the right knee.",
+    "Effusion": "Small knee joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Small Baker's cyst.",
+    "Contusion": "No suspicious focal marrow signal alteration.",
+    "Fracture": "No suspicious focal marrow signal alteration."
+  },
+  "usage": {
+    "prompt_tokens": 1376,
+    "candidates_tokens": 424,
+    "total_tokens": 1800,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

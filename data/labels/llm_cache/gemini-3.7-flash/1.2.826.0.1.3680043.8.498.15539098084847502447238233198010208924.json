@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.15539098084847502447238233198010208924",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 0.0,
+    "PF OA": 0.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt.",
+    "MCL": "Medialer und lateraler Kollateralbandapparat ohne Auffälligkeiten.",
+    "Medial Meniscus": "Unauffällige Signalgebung von Innenmeniskus und Außenmeniskus, keine fassbare Rissbildung.",
+    "Lateral Meniscus": "Unauffällige Signalgebung von Innenmeniskus und Außenmeniskus, keine fassbare Rissbildung.",
+    "Medial OA": "Femorotibial homogener Knorpelbesatz im medialen und lateralen Kompartiment, keine tiefgreifende Chondropathie-Areale.",
+    "Lateral OA": "Femorotibial homogener Knorpelbesatz im medialen und lateralen Kompartiment, keine tiefgreifende Chondropathie-Areale.",
+    "PF OA": "Auch retropatellar homogener Knorpelüberzug.",
+    "Effusion": "Minimal akzentuierte Gelenkflüssigkeit, kein ausgeprägter Gelenkerguss.",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "kein Bone Bruise / Knochenödem.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1212,
+    "candidates_tokens": 486,
+    "total_tokens": 1698,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.15337067581747365729183643142512558411",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": null,
+    "Medial Meniscus": 1.0,
+    "Lateral Meniscus": null,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Volledige scheur van de voorste kruisband met voorste schuiflade",
+    "MCL": "",
+    "Medial Meniscus": "Extreem degeneratief voorkomen mediale meniscus, met belangrijk substantieverlies",
+    "Lateral Meniscus": "",
+    "Medial OA": "Gevorderd mediaal femorotibiaal kraakbeenlijden, met volledig kraakbeenverlies",
+    "Lateral OA": "Matig lateraal femorotibiaal kraakbeenlijden, met kraakbeenverlies mediaal op de laterale femorale condyl",
+    "PF OA": "Matig tot gevorderd femoropatellair kraakbeenlijden met volledig kraakbeenverlies",
+    "Effusion": "Matige opzetting suprapatellaire recessus",
+    "Synovitis": "",
+    "Baker's": "",
+    "Contusion": "minimale modificaties van het subchondrale bot op de posterieure 3e van de mediale tibiaplateau",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1287,
+    "candidates_tokens": 453,
+    "total_tokens": 1740,
+    "thoughts_tokens": null
+  },
+  "attempts": 2
+}

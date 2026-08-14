@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.44863396093454506630473164990623458425",
+  "labels": {
+    "ACL": 1.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 0.0,
+    "Lateral OA": 1.0,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "There is severe mucoid degeneration of the anterior cruciate ligament, with evidence of chronic partial tear.",
+    "MCL": "Medial collateral ligament (MCL): Normal.",
+    "Medial Meniscus": "Medial meniscus: Normal in morphology and signal.",
+    "Lateral Meniscus": "Lateral meniscus: There is a large, complex tear involving the anterior horn and body, extending to the posterior horn, with moderate extrusion.",
+    "Medial OA": "Medial compartment cartilage: Cartilage appears intact.",
+    "Lateral OA": "Lateral compartment cartilage: Moderate to severe cartilage loss is present, most prominent at the posterior aspect. Small osteophytes.",
+    "PF OA": "There is mild cartilage thinning and fissuring at the patella diffusely. Moderate cartilage thinning and fissuring is present at the trochlea diffusely",
+    "Effusion": "Small joint effusion.",
+    "Synovitis": "",
+    "Baker's": "Moderate Baker cyst.",
+    "Contusion": "No acute fracture or bone bruise.",
+    "Fracture": "No acute fracture or bone bruise."
+  },
+  "usage": {
+    "prompt_tokens": 1625,
+    "candidates_tokens": 447,
+    "total_tokens": 2072,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

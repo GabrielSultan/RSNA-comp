@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.25549974159486441938843396591725289882",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": null,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 1.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": 1.0,
+    "Contusion": 1.0,
+    "Fracture": null
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.0
+  },
+  "evidence": {
+    "ACL": "Increase interstitial intensity of ACL and proximal PCL with straight linear contour suspect degenerative change",
+    "MCL": "",
+    "Medial Meniscus": "grade 2 intrasubstance signal of posterior horn of medial meniscus, maybe due to degeneration.",
+    "Lateral Meniscus": "Suspect bucket handle tear of anterior horn of lateral meniscus",
+    "Medial OA": "Osteoarthritis of right knee joint, more severe at lateral compartment",
+    "Lateral OA": "Osteoarthritis of right knee joint, more severe at lateral compartment",
+    "PF OA": "",
+    "Effusion": "Joint effusion and suprapatellar bursitis",
+    "Synovitis": "hypertrophy of the synovium, indicative of synovitis",
+    "Baker's": "in favor of Baker's cyst.",
+    "Contusion": "differential diagnosis of bone contusion.",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1616,
+    "candidates_tokens": 407,
+    "total_tokens": 2023,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

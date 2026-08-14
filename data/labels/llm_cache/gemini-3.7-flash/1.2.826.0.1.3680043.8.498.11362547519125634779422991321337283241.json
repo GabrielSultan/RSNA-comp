@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.11362547519125634779422991321337283241",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": null,
+    "PF OA": 1.0,
+    "Effusion": 1.0,
+    "Synovitis": 1.0,
+    "Baker's": null,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.0,
+    "PF OA": 0.9,
+    "Effusion": 0.9,
+    "Synovitis": 0.9,
+    "Baker's": 0.0,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Normal ACL orientation with intact ligament fiber is observed.",
+    "MCL": "MCL is intact.",
+    "Medial Meniscus": "Medial meniscus is  not torn.",
+    "Lateral Meniscus": "Lateral meniscus is not torn.",
+    "Medial OA": "Low grade chondrosis with small marginal osteophyte at the medial femoral condyle are noted.",
+    "Lateral OA": "",
+    "PF OA": "Medial PF; thinning hyperintense cartilage at the medial patellar facet and chondral fissuring, small partial thickness cartilage defects (about 2mm.) at medial trochlea; grade3 chondropathy",
+    "Effusion": "The study reveals moderate PF joint effusion and fluid distended suprapatellar bursa",
+    "Synovitis": "mild thickened  synovial tissue",
+    "Baker's": "",
+    "Contusion": "osteochondral defect, about 5mm. and 6mm., at anterior mediall femoral condyle with subchondral bone edema",
+    "Fracture": ""
+  },
+  "usage": {
+    "prompt_tokens": 1278,
+    "candidates_tokens": 439,
+    "total_tokens": 1717,
+    "thoughts_tokens": null
+  },
+  "attempts": 1
+}

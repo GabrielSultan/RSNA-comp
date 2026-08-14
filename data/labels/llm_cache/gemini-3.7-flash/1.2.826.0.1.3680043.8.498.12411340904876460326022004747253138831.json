@@ -1,0 +1,53 @@
+{
+  "model": "gemini-3.7-flash",
+  "StudyInstanceUID": "1.2.826.0.1.3680043.8.498.12411340904876460326022004747253138831",
+  "labels": {
+    "ACL": 0.0,
+    "MCL": 0.0,
+    "Medial Meniscus": 0.0,
+    "Lateral Meniscus": 0.0,
+    "Medial OA": 1.0,
+    "Lateral OA": 1.0,
+    "PF OA": null,
+    "Effusion": 0.0,
+    "Synovitis": null,
+    "Baker's": 1.0,
+    "Contusion": 0.0,
+    "Fracture": 0.0
+  },
+  "conf": {
+    "ACL": 0.9,
+    "MCL": 0.9,
+    "Medial Meniscus": 0.9,
+    "Lateral Meniscus": 0.9,
+    "Medial OA": 0.9,
+    "Lateral OA": 0.9,
+    "PF OA": 0.0,
+    "Effusion": 0.9,
+    "Synovitis": 0.0,
+    "Baker's": 0.9,
+    "Contusion": 0.9,
+    "Fracture": 0.9
+  },
+  "evidence": {
+    "ACL": "Kreuzbänder intakt",
+    "MCL": "Kollateralbänder intakt",
+    "Medial Meniscus": "Mukoide Degeneration im Hinterhorn des Innenmeniskus",
+    "Lateral Meniscus": "Außenmeniskusvorderhorn isoliert deutlich aufgetrieben und mukoid signalverändert ohne eindeutige Rissbildung",
+    "Medial OA": "Flächige mäßige Chondropathie femoral lateral und oberflächlich auch medial",
+    "Lateral OA": "Flächige mäßige Chondropathie femoral lateral und oberflächlich auch medial",
+    "PF OA": "",
+    "Effusion": "Kein Gelenkerguss",
+    "Synovitis": "",
+    "Baker's": "Bakerzyste",
+    "Contusion": "Kein Knochenmarködem",
+    "Fracture": "Keine frische Fraktur"
+  },
+  "usage": {
+    "prompt_tokens": 1087,
+    "candidates_tokens": 418,
+    "total_tokens": 1737,
+    "thoughts_tokens": 232
+  },
+  "attempts": 1
+}
