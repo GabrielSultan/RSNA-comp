@@ -127,6 +127,43 @@ class StudyDataset(Dataset):
         return x, torch.from_numpy(y), uid
 
 
+def _exclude_gold(df: pd.DataFrame, labels_csv: str) -> pd.DataFrame:
+    """Les 58 gold restent hors train/val (reserve sanity-check)."""
+    train_csv = Path(labels_csv).resolve().parent.parent / "csv" / "train.csv"
+    if not train_csv.exists():
+        return df
+    from src.nlp.lexicon import TARGETS
+    train_df = pd.read_csv(train_csv, usecols=["StudyInstanceUID"] + TARGETS)
+    gold_uids = set(train_df[train_df[TARGETS].notna().all(axis=1)]["StudyInstanceUID"])
+    n = int(df["StudyInstanceUID"].isin(gold_uids).sum())
+    if n:
+        print(f"gold exclus du train/val : {n} etudes", flush=True)
+        df = df[~df["StudyInstanceUID"].isin(gold_uids)]
+    return df
+
+
+def _ensure_split(df: pd.DataFrame, targets: list[str],
+                  val_frac: float = 0.15, seed: int = 42) -> pd.DataFrame:
+    """Split 85/15 si le CSV n'a pas de colonne split (ex. blend candidat)."""
+    if "split" in df.columns:
+        return df
+    rng = np.random.default_rng(seed)
+    n_pos = (df[targets] >= 0.5).sum(axis=1)
+    pos_bin = pd.cut(n_pos, bins=[-1, 0, 2, 4, 20], labels=["0", "1-2", "3-4", "5+"])
+    split = pd.Series("train", index=df.index)
+    for _, group in df.groupby(pos_bin, observed=False):
+        n_val = max(1, int(round(len(group) * val_frac))) if len(group) >= 4 else 0
+        if n_val > 0:
+            chosen = rng.choice(group.index.to_numpy(),
+                                size=min(n_val, len(group)), replace=False)
+            split.loc[chosen] = "val"
+    out = df.copy()
+    out["split"] = split.values
+    print(f"split auto 85/15 : train {(out.split == 'train').sum()} | "
+          f"val {(out.split == 'val').sum()}", flush=True)
+    return out
+
+
 def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  series_csv: str = "data/csv/train_series.csv",
                  zip_path: str = "data/volumes.zip",
@@ -136,10 +173,12 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
     df = pd.read_csv(labels_csv)
     targets = [c for c in df.columns if c not in ("StudyInstanceUID", "lang", "split")]
     df = df.dropna(subset=targets, how="all")  # etudes sans aucun label : exclues
+    df = _exclude_gold(df, labels_csv)
 
     index = StudySeriesIndex(series_csv)
     # ne garder que les etudes ayant au moins une serie indexee
     df = df[df.StudyInstanceUID.isin(index.by_study.keys())]
+    df = _ensure_split(df, targets)
 
     train_df = df[df.split == "train"]
     val_df = df[df.split == "val"]
