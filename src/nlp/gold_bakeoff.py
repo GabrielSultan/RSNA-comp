@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Bake-off gold : lexique vs Gemini 3.1 Pro Preview.
+"""Bake-off gold : lexique vs Gemini 3.7 Flash.
 
 Les 58 gold ne servent QU'a comparer. On ne retune pas le prompt dessus.
 
@@ -34,6 +34,7 @@ from src.nlp.gemini_labeler import (
     KneeReportLabels,
     RESPONSE_JSON_SCHEMA,
     get_api_key,
+    gen_kwargs_from_cfg,
     is_model_unavailable,
     label_study,
     list_generate_models,
@@ -75,21 +76,14 @@ def _label_one(client, model, uid, report, cfg, force):
         model,
         uid,
         report,
-        force=force,
-        llm_conf=float(cfg.get("llm_conf", 0.90)),
-        temperature=float(cfg.get("temperature", 0.0)),
-        seed=cfg.get("seed", 0),
-        thinking_budget=cfg.get("thinking_budget"),
-        max_output_tokens=int(cfg.get("max_output_tokens", 8192)),
-        max_retries=int(cfg.get("max_retries", 6)),
+        **gen_kwargs_from_cfg(cfg, force=force),
     )
 
 
 def _die_unavailable(model: str, exc: BaseException) -> None:
     raise SystemExit(
         f"{model} indisponible ({exc}).\n"
-        "gemini-2.5-pro est ferme aux nouvelles cles. "
-        "Modele actuel : gemini-3.1-pro-preview (payant, billing AI Studio).\n"
+        "Modele vise : gemini-3.7-flash. "
         "Liste les modeles de ta cle : python -X utf8 -m src.nlp.gold_bakeoff --list-models"
     ) from exc
 

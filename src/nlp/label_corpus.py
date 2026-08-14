@@ -5,7 +5,7 @@ UN seul modele (defaut : production_model du yaml). Ne pas mixer plusieurs model
 
 Usage :
   python -X utf8 -m src.nlp.label_corpus
-  python -X utf8 -m src.nlp.label_corpus --model gemini-3.1-pro-preview --workers 2
+  python -X utf8 -m src.nlp.label_corpus --model gemini-3.7-flash --workers 2
   python -X utf8 -m src.nlp.label_corpus --from-cache   # rebuild CSV sans API
 """
 from __future__ import annotations
@@ -28,6 +28,7 @@ from src.data.build_llm_labels import assemble_train_val
 from src.nlp.gemini_labeler import (
     MODEL_PRODUCTION,
     cache_dir_for,
+    gen_kwargs_from_cfg,
     is_model_unavailable,
     label_study,
     load_cached,
@@ -89,15 +90,7 @@ def main() -> None:
         print("Mode --from-cache : les etudes absentes du cache restent hors CSV.")
     elif missing:
         client = make_client(timeout_ms=int(cfg.get("request_timeout_ms", 180_000)))
-        gen_kw = dict(
-            force=args.force,
-            llm_conf=float(cfg.get("llm_conf", 0.90)),
-            temperature=float(cfg.get("temperature", 0.0)),
-            seed=cfg.get("seed", 0),
-            thinking_budget=cfg.get("thinking_budget"),
-            max_output_tokens=int(cfg.get("max_output_tokens", 8192)),
-            max_retries=int(cfg.get("max_retries", 6)),
-        )
+        gen_kw = gen_kwargs_from_cfg(cfg, force=args.force)
         errors = []
 
         def job(r):
@@ -116,8 +109,8 @@ def main() -> None:
             if is_model_unavailable(exc):
                 raise SystemExit(
                     f"{model} indisponible ({exc}).\n"
-                    "gemini-2.5-pro est ferme aux nouvelles cles. "
-                    "Utilise gemini-3.1-pro-preview (billing AI Studio)."
+                    "Modele vise : gemini-3.7-flash. "
+                    "python -X utf8 -m src.nlp.gold_bakeoff --list-models"
                 ) from exc
             errors.append((probe["StudyInstanceUID"], str(exc)))
             missing = missing[1:]

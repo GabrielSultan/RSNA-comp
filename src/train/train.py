@@ -6,7 +6,8 @@
 - Optim : AdamW, lr backbone < lr tete, cosine + warmup, AMP bf16.
 - Normalisation + augmentation GPU dans la boucle.
 - Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
-- Sanity check final sur les 58 gold (jamais utilise pour piloter).
+- Val loss (BCE, pas d'aug) loggee chaque epoch pour comparer a la train loss.
+- Macro-AUC gold (58) loggee chaque epoch, jamais utilisee pour piloter.
 
 Usage : python -X utf8 -m src.train.train --config configs/baseline.yaml
 """
@@ -75,18 +76,62 @@ def lr_at(step: int, total: int, base: float, warmup: int) -> float:
 
 
 @torch.no_grad()
-def evaluate(model, loader, device) -> tuple[np.ndarray, np.ndarray, list[str]]:
+def evaluate(model, loader, device, pos_weight: torch.Tensor | None = None,
+             smoothing: float = 0.0) -> tuple[np.ndarray, np.ndarray, list[str], float]:
+    """Forward eval : probabilites, labels, uids, BCE masquee moyenne.
+
+    Pas d'augmentation. `pos_weight` / `smoothing` alignes sur la train loss
+    pour que train vs val soient comparables (l'aug reste le seul ecart).
+    """
     model.eval()
     probs, labels, uids = [], [], []
+    loss_sum, n_mask = 0.0, 0.0
+    pw = None if pos_weight is None else pos_weight.to(device)
     for x, y, uid in loader:
         x = x.to(device, non_blocking=True)
+        y_dev = y.to(device, non_blocking=True)
         x = (x - NORM_MEAN) / NORM_STD
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
             logits = model(x)
-        probs.append(torch.sigmoid(logits.float()).cpu())
+        logits_f = logits.float()
+        probs.append(torch.sigmoid(logits_f).cpu())
         labels.append(y)
         uids.extend(uid)
-    return torch.cat(probs).numpy(), torch.cat(labels).numpy(), uids
+        if pw is not None:
+            mask = y_dev >= 0
+            if mask.any():
+                yc = y_dev.clamp(0, 1)
+                yc = yc * (1 - smoothing) + 0.5 * smoothing
+                loss_mat = F.binary_cross_entropy_with_logits(
+                    logits_f, yc, reduction="none",
+                    pos_weight=pw.unsqueeze(0),
+                )
+                loss_sum += (loss_mat * mask).sum().item()
+                n_mask += mask.sum().item()
+    val_loss = loss_sum / n_mask if n_mask > 0 else float("nan")
+    return torch.cat(probs).numpy(), torch.cat(labels).numpy(), uids, val_loss
+
+
+def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
+    """58 etudes gold depuis train.csv, ou None si indisponible."""
+    train_csv = Path(cfg["labels_csv"]).parent.parent / "csv" / "train.csv"
+    if not train_csv.exists():
+        return None
+    train_df = pd.read_csv(train_csv)
+    gold = train_df[train_df[TARGETS].notna().all(axis=1)]
+    if len(gold) == 0:
+        return None
+    index = StudySeriesIndex(cfg["series_csv"])
+    gold = gold[gold.StudyInstanceUID.isin(index.by_study.keys())]
+    if len(gold) == 0:
+        return None
+    ds = StudyDataset(
+        gold.StudyInstanceUID.tolist(),
+        gold[["StudyInstanceUID"] + TARGETS], index,
+        cfg["zip_path"], train=False, series_drop_p=0.0,
+    )
+    return DataLoader(ds, batch_size=batch_size, shuffle=False,
+                      num_workers=num_workers)
 
 
 def main() -> None:
@@ -133,8 +178,16 @@ def main() -> None:
     total_steps = epochs * steps_per_epoch
     warmup = int(0.05 * total_steps)
 
+    gold_ld = make_gold_loader(cfg, cfg["batch_size"], cfg["num_workers"])
+    if gold_ld is not None:
+        print(f"gold sanity loader : {len(gold_ld.dataset)} etudes "
+              "(loggee, jamais pour le checkpoint)", flush=True)
+    else:
+        print("gold sanity loader : indisponible", flush=True)
+
     best_auc, history = -1.0, []
     step = 0
+    smoothing = float(cfg.get("label_smoothing", 0.0) or 0.0)
     for epoch in range(epochs):
         model.train()
         t0 = time.time()
@@ -153,7 +206,7 @@ def main() -> None:
 
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
                 logits = model(x)
-                loss = masked_bce(logits, y, pos_weight, cfg["label_smoothing"])
+                loss = masked_bce(logits, y, pos_weight, smoothing)
             optim.zero_grad(set_to_none=True)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -163,15 +216,28 @@ def main() -> None:
             nb += 1
             step += 1
 
-        vp, vy, _ = evaluate(model, val_ld, device)
+        train_loss = running / max(nb, 1)
+        vp, vy, _, val_loss = evaluate(
+            model, val_ld, device, pos_weight=pos_weight, smoothing=smoothing)
         val_auc, per_target = macro_auc(vy, vp, targets)
+        gold_auc = None
+        if gold_ld is not None:
+            gp, gy, _, _ = evaluate(
+                model, gold_ld, device, pos_weight=pos_weight, smoothing=smoothing)
+            gold_auc, _ = macro_auc(gy, gp, TARGETS)
         pstd = float(vp.std())
         dt = time.time() - t0
-        print(f"epoch {epoch+1}/{epochs} | loss {running/max(nb,1):.4f} | "
-              f"val macro-AUC {val_auc:.4f} | proba std {pstd:.4f} | {dt:.0f}s",
+        gold_txt = f" | gold AUC {gold_auc:.4f}" if gold_auc is not None else ""
+        print(f"epoch {epoch+1}/{epochs} | train {train_loss:.4f} | "
+              f"val {val_loss:.4f} | val AUC {val_auc:.4f}{gold_txt} | "
+              f"proba std {pstd:.4f} | {dt:.0f}s",
               flush=True)
-        history.append({"epoch": epoch + 1, "loss": running / max(nb, 1),
-                        "val_macro_auc": val_auc, **{f"auc_{k}": v for k, v in per_target.items()}})
+        rec = {"epoch": epoch + 1, "loss": train_loss, "val_loss": val_loss,
+               "val_macro_auc": val_auc,
+               **{f"auc_{k}": v for k, v in per_target.items()}}
+        if gold_auc is not None:
+            rec["gold_macro_auc"] = gold_auc
+        history.append(rec)
 
         if val_auc > best_auc:
             best_auc = val_auc
@@ -182,28 +248,20 @@ def main() -> None:
 
     (run_dir / "history.json").write_text(json.dumps(history, indent=2))
 
-    # --- Sanity check sur les 58 gold (jamais utilise pour piloter) ---
-    gold_csv = Path("data/labels/gold_nlp_predictions.csv")
-    train_csv = Path(cfg["labels_csv"]).parent.parent / "csv" / "train.csv"
-    if gold_csv.exists() and train_csv.exists():
-        train_df = pd.read_csv(train_csv)
-        gold = train_df[train_df[TARGETS].notna().all(axis=1)]
-        index = StudySeriesIndex(cfg["series_csv"])
-        gold_ds = StudyDataset(gold.StudyInstanceUID.tolist(),
-                               gold[["StudyInstanceUID"] + TARGETS], index,
-                               cfg["zip_path"], train=False, series_drop_p=0.0)
-        gold_ld = DataLoader(gold_ds, batch_size=cfg["batch_size"], shuffle=False,
-                             num_workers=cfg["num_workers"])
+    # Sanity gold du meilleur checkpoint (jamais utilise pour piloter)
+    if gold_ld is not None:
         ckpt = torch.load(run_dir / "best.pt", map_location=device, weights_only=False)
         model.load_state_dict(ckpt["model"])
-        gp, gy, _ = evaluate(model, gold_ld, device)
+        gp, gy, _, _ = evaluate(
+            model, gold_ld, device, pos_weight=pos_weight, smoothing=smoothing)
         g_auc, g_per = macro_auc(gy, gp, TARGETS)
-        print(f"\n=== SANITY GOLD (58 etudes, jamais vues) ===")
+        print(f"\n=== SANITY GOLD (58 etudes, jamais vues, best epoch {ckpt['epoch']}) ===")
         print(f"macro-AUC gold : {g_auc:.4f}")
         for k, v in sorted(g_per.items(), key=lambda kv: -kv[1]):
             print(f"  {k:<18} {v:.3f}")
         (run_dir / "gold_sanity.json").write_text(json.dumps(
-            {"macro_auc": g_auc, "per_target": g_per}, indent=2))
+            {"macro_auc": g_auc, "per_target": g_per, "epoch": ckpt["epoch"]},
+            indent=2))
 
     print(f"\ntermine. best val macro-AUC = {best_auc:.4f} -> {run_dir}")
 

@@ -21,9 +21,9 @@ from src.nlp.lexicon import TARGETS
 ROOT = Path(__file__).resolve().parents[2]
 
 # gemini-2.5-pro est ferme aux nouvelles cles (404 "no longer available to
-# new users"). Remplacement officiel : gemini-3.1-pro-preview (payant, pas de free tier).
-MODEL_PRODUCTION = "gemini-3.1-pro-preview"
-MODEL_GOLD_PREVIEW = "gemini-3.1-pro-preview"
+# new users"). Production : Gemini 3.7 Flash (free tier possible, thinking low).
+MODEL_PRODUCTION = "gemini-3.7-flash"
+MODEL_GOLD_PREVIEW = "gemini-3.7-flash"
 
 # Cles JSON (ASCII, pas d'apostrophe) -> colonnes competition
 JSON_TO_TARGET = {
@@ -342,6 +342,7 @@ def generate_labels(
     *,
     temperature: float = 0.0,
     seed: int | None = 0,
+    thinking_level: str | None = None,
     thinking_budget: int | None = None,
     max_output_tokens: int = 8192,
     max_retries: int = 6,
@@ -358,7 +359,14 @@ def generate_labels(
     }
     if seed is not None:
         config_kwargs["seed"] = seed
-    if thinking_budget is not None:
+    # Gemini 3 : thinking_level (low/medium/high). Ne pas mixer avec thinking_budget.
+    # 3.7 Flash : minimal -> 400 ; defaut API = medium.
+    if thinking_level:
+        config_kwargs["thinking_config"] = types.ThinkingConfig(
+            thinking_level=thinking_level,
+            include_thoughts=False,
+        )
+    elif thinking_budget is not None:
         config_kwargs["thinking_config"] = types.ThinkingConfig(
             thinking_budget=thinking_budget,
             include_thoughts=False,
@@ -428,6 +436,20 @@ def label_study(
     }
     save_cached(model, study_uid, payload)
     return payload
+
+
+def gen_kwargs_from_cfg(cfg: dict[str, Any], *, force: bool = False) -> dict[str, Any]:
+    """Kwargs communs gold_bakeoff / label_corpus -> label_study."""
+    return {
+        "force": force,
+        "llm_conf": float(cfg.get("llm_conf", 0.90)),
+        "temperature": float(cfg.get("temperature", 0.0)),
+        "seed": cfg.get("seed", 0),
+        "thinking_level": cfg.get("thinking_level"),
+        "thinking_budget": cfg.get("thinking_budget"),
+        "max_output_tokens": int(cfg.get("max_output_tokens", 8192)),
+        "max_retries": int(cfg.get("max_retries", 6)),
+    }
 
 
 def payload_to_flat(payload: dict[str, Any]) -> dict[str, Any]:
