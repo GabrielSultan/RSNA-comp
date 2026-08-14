@@ -3,6 +3,8 @@ backbone: convnext_tiny
 pretrained: true
 
 labels_csv: data/labels/train_val_labels.csv
+# Apres bake-off + corpus LLM :
+# labels_csv: data/labels/train_val_labels_llm.csv
 series_csv: data/csv/train_series.csv
 zip_path: data/volumes.zip
 

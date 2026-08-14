@@ -1,0 +1,38 @@
+# Labellisation des rapports par Gemini (offline, jamais au submit).
+#
+# gemini-2.5-pro est ferme aux nouvelles cles (404). Remplacement : 3.1 Pro Preview.
+# 3.1 Pro Preview est payant (pas de free tier API) — billing AI Studio requis.
+#
+# Protocole :
+#   1. python -X utf8 -m src.nlp.gold_bakeoff
+#      -> 58 gold, lexique vs gemini-3.1-pro-preview
+#   2. Si le LLM bat le lexique, python -X utf8 -m src.nlp.label_corpus
+#   3. Pointer configs/baseline.yaml : labels_csv: data/labels/train_val_labels_llm.csv
+
+production_model: gemini-3.1-pro-preview
+gold_models:
+  - gemini-3.1-pro-preview
+  # Optionnel, moins cher / moins fort en 9 langues :
+  # - gemini-3.5-flash
+
+temperature: 0.0
+seed: 0
+# null = defaut API (thinking autorise). 0 = desactive si le modele l'accepte.
+thinking_budget: null
+max_output_tokens: 8192
+workers: 2
+request_timeout_ms: 180000
+max_retries: 6
+
+# Confiance attribuee a un 0/1 LLM (unknown -> 0, donc masque en loss).
+llm_conf: 0.90
+
+# Filet lexique : desaccord 0/1 a confiance lexique >= seuil -> NaN (pas un vote).
+lexicon_net: true
+lexicon_conf: 0.75
+lexicon_csv: data/labels/pseudo_labels.csv
+
+# Plafond de prevalence des positifs gardes (securite BCE). null pour desactiver.
+prevalence_cap: 0.65
+val_frac: 0.15
+split_seed: 42
