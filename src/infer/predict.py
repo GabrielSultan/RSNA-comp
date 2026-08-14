@@ -33,7 +33,7 @@ def load_model(weights_path: str | Path, device: str = "cuda") -> KneeNet:
 @torch.no_grad()
 def predict_studies(model: KneeNet, test_csv: str | Path,
                     test_series_csv: str | Path, test_series_dir: str | Path,
-                    device: str = "cuda", tta_hflip: bool = False) -> pd.DataFrame:
+                    device: str = "cuda") -> pd.DataFrame:
     test = pd.read_csv(test_csv)
     series = pd.read_csv(test_series_csv)
     test_series_dir = Path(test_series_dir)
@@ -48,8 +48,6 @@ def predict_studies(model: KneeNet, test_csv: str | Path,
 
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
             logits = model(x)
-            if tta_hflip:
-                logits = 0.5 * (logits + model(torch.flip(x, dims=[4])))
         prob = torch.sigmoid(logits.float()).cpu().numpy()[0]
         rows.append([uid] + prob.tolist())
         print(f"  {uid} -> ok", flush=True)
