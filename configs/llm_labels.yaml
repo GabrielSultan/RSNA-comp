@@ -21,7 +21,10 @@ thinking_budget: null
 max_output_tokens: 8192
 workers: 2
 request_timeout_ms: 180000
-max_retries: 6
+# 3 retries applicatifs. Le SDK ne retry plus les 503 (attempts=1).
+max_retries: 3
+# N 503 consecutifs -> stop propre (cache conserve, relance plus tard).
+circuit_breaker: 2
 
 # Confiance attribuee a un 0/1 LLM (unknown -> 0, donc masque en loss).
 llm_conf: 0.90

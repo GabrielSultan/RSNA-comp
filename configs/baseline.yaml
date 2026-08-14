@@ -1,16 +1,17 @@
-run_name: baseline_v5_nopw
+run_name: baseline_v6_blend
 backbone: convnext_tiny
 pretrained: true
 
-labels_csv: data/labels/train_val_labels.csv
-# Apres bake-off + corpus LLM :
+labels_csv: data/labels/llm_labels_v4_blend.csv
+# labels_csv: data/labels/train_val_labels.csv
 # labels_csv: data/labels/train_val_labels_llm.csv
 series_csv: data/csv/train_series.csv
 zip_path: data/volumes.zip
 
 batch_size: 16
 num_workers: 3
-epochs: 12
+epochs: 20
+early_stop_patience: 3
 
 lr_backbone: 0.0001
 lr_head: 0.0003
@@ -18,4 +19,4 @@ weight_decay: 0.05
 label_smoothing: 0.0
 pos_weight_max: null
 head_dim: 512
-dropout: 0.2
+dropout: 0.4
