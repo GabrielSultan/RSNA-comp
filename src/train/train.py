@@ -6,6 +6,7 @@
 - Optim : AdamW, lr backbone < lr tete, cosine + warmup, AMP bf16.
 - Normalisation + augmentation GPU dans la boucle.
 - Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
+- Early stopping sur la val AUC (patience dans le YAML).
 - Val loss (BCE, pas d'aug) loggee chaque epoch pour comparer a la train loss.
 - Macro-AUC gold (58) loggee chaque epoch, jamais utilisee pour piloter.
 
@@ -187,7 +188,11 @@ def main() -> None:
 
     best_auc, history = -1.0, []
     step = 0
+    stale = 0
+    patience = int(cfg.get("early_stop_patience", 0) or 0)
     smoothing = float(cfg.get("label_smoothing", 0.0) or 0.0)
+    if patience > 0:
+        print(f"early stopping : patience {patience} (val macro-AUC)", flush=True)
     for epoch in range(epochs):
         model.train()
         t0 = time.time()
@@ -241,10 +246,19 @@ def main() -> None:
 
         if val_auc > best_auc:
             best_auc = val_auc
+            stale = 0
             torch.save({"model": model.state_dict(), "config": cfg,
                         "val_macro_auc": val_auc, "epoch": epoch + 1,
                         "targets": targets}, run_dir / "best.pt")
             print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
+        else:
+            stale += 1
+            if patience > 0:
+                print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
+            if patience > 0 and stale >= patience:
+                print(f"early stop a l'epoch {epoch+1} "
+                      f"(meilleur val AUC {best_auc:.4f})", flush=True)
+                break
 
     (run_dir / "history.json").write_text(json.dumps(history, indent=2))
 
