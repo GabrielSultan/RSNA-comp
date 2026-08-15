@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
-"""Pretraitement DICOM -> volume (24, 224, 224) uint8, reproduisant les NPZ.
+"""Pretraitement DICOM -> volume (24, 224, 224) uint8, aligné sur la conversion NPZ.
 
-Pipeline par serie :
-1. Lecture des .dcm (pydicom), tri par InstanceNumber (fallback : position
-   le long de la normale ImageOrientationPatient).
-2. pixel_array float32, RescaleSlope/Intercept si presents, inversion si
-   MONOCHROME1.
-3. Resize de chaque coupe a 224x224 (INTER_AREA).
-4. Normalisation robuste : clip percentiles 1-99 -> [0, 255] uint8.
-5. Resample a 24 coupes par indices linspace.
-
-NOTE : la recette exacte des NPZ communautaires est inconnue ; ce pipeline
-est la meilleure approximation. A valider au premier run Kaggle en comparant
-les distributions (moments) aux NPZ train (voir notebook 06).
+Recette identique a `kaggle_kernels/_gen_convert_nb.py` :
+1. Lecture des .dcm, tri InstanceNumber (fallback : normale IOP).
+2. RescaleSlope/Intercept, inversion MONOCHROME1.
+3. Crop centre 130 mm (PixelSpacing) sinon centre 70 %.
+4. Percentiles 1-99 -> [0, 1].
+5. Bande profondeur 20-80 % (evite air / bords), puis linspace 24 coupes.
+6. Resize 224x224, uint8.
 """
 from __future__ import annotations
 
@@ -23,6 +18,9 @@ import numpy as np
 
 N_SLICES = 24
 IMG_SIZE = 224
+CROP_MM = 130.0
+CROP_REL = 0.70
+BAND = (0.20, 0.80)
 
 
 def _slice_sort_key(ds) -> float:
@@ -45,8 +43,44 @@ def _slice_sort_key(ds) -> float:
     return 0.0
 
 
+def _spacing_mm(ds):
+    ps = getattr(ds, "PixelSpacing", None) or getattr(ds, "ImagerPixelSpacing", None)
+    if ps is None:
+        return None
+    try:
+        return float(ps[0]), float(ps[1])
+    except (TypeError, ValueError, IndexError):
+        return None
+
+
+def _center_crop(img: np.ndarray, row_mm, col_mm) -> np.ndarray:
+    h, w = img.shape[:2]
+    if row_mm is not None and col_mm is not None and row_mm > 0 and col_mm > 0:
+        ch = int(round(CROP_MM / row_mm))
+        cw = int(round(CROP_MM / col_mm))
+        ch = min(h, max(8, ch))
+        cw = min(w, max(8, cw))
+    else:
+        ch = max(8, int(round(h * CROP_REL)))
+        cw = max(8, int(round(w * CROP_REL)))
+        ch, cw = min(h, ch), min(w, cw)
+    y0 = (h - ch) // 2
+    x0 = (w - cw) // 2
+    return img[y0:y0 + ch, x0:x0 + cw]
+
+
+def _rescale(ds, arr: np.ndarray) -> np.ndarray:
+    arr = arr.astype(np.float32, copy=False)
+    slope = float(getattr(ds, "RescaleSlope", 1.0) or 1.0)
+    intercept = float(getattr(ds, "RescaleIntercept", 0.0) or 0.0)
+    arr = arr * slope + intercept
+    if getattr(ds, "PhotometricInterpretation", "MONOCHROME2") == "MONOCHROME1":
+        arr = arr.max() - arr
+    return arr
+
+
 def load_series_dicom(series_dir: str | Path) -> np.ndarray:
-    """Un dossier de .dcm -> volume (n_slices, 224, 224) uint8."""
+    """Un dossier de .dcm -> volume (24, 224, 224) uint8."""
     import pydicom
 
     series_dir = Path(series_dir)
@@ -57,40 +91,58 @@ def load_series_dicom(series_dir: str | Path) -> np.ndarray:
     datasets = []
     for f in files:
         try:
-            ds = pydicom.dcmread(str(f))
-            datasets.append(ds)
+            datasets.append(pydicom.dcmread(str(f)))
         except Exception:
             continue
     if not datasets:
         raise RuntimeError(f"aucun DICOM lisible dans {series_dir}")
-
     datasets.sort(key=_slice_sort_key)
 
-    slices = []
+    frames = []
+    sp = None
     for ds in datasets:
-        arr = ds.pixel_array.astype(np.float32)
-        slope = float(getattr(ds, "RescaleSlope", 1.0) or 1.0)
-        intercept = float(getattr(ds, "RescaleIntercept", 0.0) or 0.0)
-        arr = arr * slope + intercept
-        if getattr(ds, "PhotometricInterpretation", "MONOCHROME2") == "MONOCHROME1":
-            arr = arr.max() - arr
-        arr = cv2.resize(arr, (IMG_SIZE, IMG_SIZE), interpolation=cv2.INTER_AREA)
-        slices.append(arr)
+        arr = ds.pixel_array
+        if sp is None:
+            sp = _spacing_mm(ds)
+        arr = _rescale(ds, arr)
+        if arr.ndim == 2:
+            frames.append(arr)
+        elif arr.ndim == 3:
+            frames.extend([arr[i] for i in range(arr.shape[0])])
+        else:
+            raise RuntimeError(f"ndim inattendu {arr.ndim}")
+    if not frames:
+        raise RuntimeError("aucune coupe")
 
-    vol = np.stack(slices)  # (n, 224, 224) float32
+    row_mm, col_mm = (sp if sp is not None else (None, None))
+    cropped = [_center_crop(im, row_mm, col_mm) for im in frames]
+    h0, w0 = cropped[0].shape[:2]
+    stacked = []
+    for c in cropped:
+        if c.shape[:2] != (h0, w0):
+            c = cv2.resize(c, (w0, h0), interpolation=cv2.INTER_AREA)
+        stacked.append(c)
+    vol = np.stack(stacked, axis=0)
 
-    # normalisation robuste par percentiles -> uint8
     lo, hi = np.percentile(vol, 1.0), np.percentile(vol, 99.0)
     if hi <= lo:
         hi = lo + 1.0
     vol = np.clip((vol - lo) / (hi - lo), 0, 1)
 
-    # resample a 24 coupes
     n = vol.shape[0]
-    idx = np.linspace(0, n - 1, N_SLICES).round().astype(int)
-    vol = vol[idx]
+    a = int(np.floor(BAND[0] * (n - 1)))
+    b = int(np.ceil(BAND[1] * (n - 1)))
+    if b - a + 1 < 8:
+        a, b = 0, n - 1
+    band = vol[a:b + 1]
+    idx = np.linspace(0, band.shape[0] - 1, N_SLICES).round().astype(int)
+    band = band[idx]
 
-    return (vol * 255.0).round().astype(np.uint8)
+    out = np.empty((N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.uint8)
+    for i in range(N_SLICES):
+        sl = cv2.resize(band[i], (IMG_SIZE, IMG_SIZE), interpolation=cv2.INTER_AREA)
+        out[i] = np.clip(sl * 255.0, 0, 255).round().astype(np.uint8)
+    return out
 
 
 def study_to_tensor(study_dir: str | Path, series_rows,

@@ -13,7 +13,6 @@ import numpy as np
 import pandas as pd
 import torch
 
-from src.data.dataset_npz import NORM_MEAN, NORM_STD
 from src.data.transforms import TTA_VARIANTS, apply_affine
 from src.infer.preprocess_dicom import study_to_tensor
 from src.models.kneenet import KneeNet
@@ -25,7 +24,8 @@ def load_model(weights_path: str | Path, device: str = "cuda") -> KneeNet:
     cfg = ckpt.get("config", {})
     model = KneeNet(backbone=cfg.get("backbone", "convnext_tiny"), n_series=3,
                     head_dim=cfg.get("head_dim", 512),
-                    dropout=cfg.get("dropout", 0.2), pretrained=False)
+                    dropout=cfg.get("dropout", 0.2), pretrained=False,
+                    encode_chunk=int(cfg.get("encode_chunk", 16)))
     model.load_state_dict(ckpt["model"])
     model.to(device).eval()
     return model
@@ -58,7 +58,6 @@ def predict_studies(model: KneeNet, test_csv: str | Path,
         probs = []
         for angle_deg, scale in variants:
             xv = apply_affine(x0, angle_deg=angle_deg, scale=scale)
-            xv = (xv - NORM_MEAN) / NORM_STD
             logits = _predict_logits(model, xv, device)
             probs.append(torch.sigmoid(logits.float()))
         prob = torch.stack(probs, dim=0).mean(dim=0).cpu().numpy()[0]
