@@ -4,7 +4,7 @@
 - Loss : BCEWithLogits masquee (y == -1 ignore) + pos_weight par cible
   (n_neg/n_pos sur le train garde, clampe) + label smoothing.
 - Optim : AdamW, lr backbone < lr tete, cosine + warmup, AMP bf16.
-- Normalisation + augmentation GPU dans la boucle.
+- Augmentation GPU dans la boucle ; normalisation ImageNet dans KneeNet.
 - Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
 - Early stopping sur la val AUC (patience dans le YAML).
 - Val loss (BCE, pas d'aug) loggee chaque epoch pour comparer a la train loss.
@@ -27,8 +27,7 @@ import torch.nn.functional as F
 import yaml
 from torch.utils.data import DataLoader
 
-from src.data.dataset_npz import (NORM_MEAN, NORM_STD, StudyDataset,
-                                  StudySeriesIndex, make_loaders)
+from src.data.dataset_npz import StudyDataset, StudySeriesIndex, make_loaders
 from src.data.transforms import augment_batch
 from src.models.kneenet import KneeNet, count_params
 from src.nlp.lexicon import TARGETS
@@ -91,7 +90,6 @@ def evaluate(model, loader, device, pos_weight: torch.Tensor | None = None,
     for x, y, uid in loader:
         x = x.to(device, non_blocking=True)
         y_dev = y.to(device, non_blocking=True)
-        x = (x - NORM_MEAN) / NORM_STD
         with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
             logits = model(x)
         logits_f = logits.float()
@@ -153,9 +151,13 @@ def main() -> None:
     )
     print(f"train {len(train_ld.dataset)} | val {len(val_ld.dataset)}", flush=True)
 
-    model = KneeNet(backbone=cfg["backbone"], n_series=3, head_dim=cfg["head_dim"],
-                    dropout=cfg["dropout"], pretrained=cfg["pretrained"]).to(device)
-    print(f"KneeNet({cfg['backbone']}) : {count_params(model)} params", flush=True)
+    model = KneeNet(
+        backbone=cfg["backbone"], n_series=3, head_dim=cfg["head_dim"],
+        dropout=cfg["dropout"], pretrained=cfg["pretrained"],
+        encode_chunk=int(cfg.get("encode_chunk", 16)),
+    ).to(device)
+    print(f"KneeNet 2.5D-RGB attn({cfg['backbone']}) : {count_params(model)} params",
+          flush=True)
 
     max_pw = cfg.get("pos_weight_max", None)  # None -> desactive (BCE simple)
     if max_pw is None:
@@ -167,8 +169,8 @@ def main() -> None:
         print(f"pos_weight (max {max_pw}):",
               [round(w, 2) for w in pos_weight.tolist()], flush=True)
 
-    backbone_params = list(model.encoder.parameters())
-    head_params = list(model.fusion.parameters())
+    backbone_params = list(model.encoder_parameters())
+    head_params = list(model.head_parameters())
     optim = torch.optim.AdamW([
         {"params": backbone_params, "lr": cfg["lr_backbone"]},
         {"params": head_params, "lr": cfg["lr_head"]},
@@ -202,7 +204,6 @@ def main() -> None:
             x = x.to(device, non_blocking=True)
             y = y.to(device, non_blocking=True)
             x = augment_batch(x)
-            x = (x - NORM_MEAN) / NORM_STD
 
             for g in optim.param_groups:
                 g["lr"] = lr_at(step, total_steps,
