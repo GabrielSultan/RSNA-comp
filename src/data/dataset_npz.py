@@ -76,7 +76,8 @@ class StudyDataset(Dataset):
     colonnes = 12 cibles (NaN = masque)."""
 
     """Les volumes sont renvoyes dans [0, 1] SANS normalisation ni augmentation :
-    normalisation et augmentation (GPU) se font dans la boucle d'entrainement."""
+    l'aug GPU est dans la boucle d'entrainement, ImageNet dans KneeNet.
+    Les NPZ crop130 sont deja restreints a la bande profondeur 20-80 %."""
 
     def __init__(
         self,
