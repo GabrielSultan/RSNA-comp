@@ -1,0 +1,19 @@
+{
+  "crop_mm": 130.0,
+  "crop_rel": 0.7,
+  "band": [
+    0.2,
+    0.8
+  ],
+  "n_slices": 24,
+  "img_size": 224,
+  "planes": [
+    "Sagittal",
+    "Coronal",
+    "Axial"
+  ],
+  "shard_id": 1,
+  "n_shards": 2,
+  "n_jobs": 6609,
+  "note": "1 serie fluid-prioritaire par plan. Crop 130 mm (PixelSpacing) sinon centre 70 %. Bande profondeur 20-80 %, linspace 24, resize 224, uint8."
+}
