@@ -10,7 +10,9 @@
 - Val loss (BCE, pas d'aug) loggee chaque epoch pour comparer a la train loss.
 - Macro-AUC gold (58) loggee chaque epoch, jamais utilisee pour piloter.
 
-Usage : python -X utf8 -m src.train.train --config configs/baseline.yaml
+Usage :
+  python -X utf8 -m src.train.train --config configs/baseline.yaml
+  python -X utf8 -m src.train.train --config configs/baseline.yaml --resume
 """
 from __future__ import annotations
 
@@ -133,9 +135,25 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
                       num_workers=num_workers)
 
 
+def _ckpt_path(run_dir: Path, explicit: str | None) -> Path | None:
+    if explicit:
+        p = Path(explicit)
+        return p if p.exists() else None
+    last_p, best_p = run_dir / "last.pt", run_dir / "best.pt"
+    if last_p.exists():
+        return last_p
+    if best_p.exists():
+        return best_p
+    return None
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/baseline.yaml")
+    parser.add_argument("--resume", action="store_true",
+                        help="reprend last.pt (sinon best.pt) du run_name")
+    parser.add_argument("--ckpt", default=None,
+                        help="checkpoint explicite (avec --resume)")
     args = parser.parse_args()
     cfg = load_config(args.config)
 
@@ -151,9 +169,14 @@ def main() -> None:
     )
     print(f"train {len(train_ld.dataset)} | val {len(val_ld.dataset)}", flush=True)
 
+    resume_path = _ckpt_path(run_dir, args.ckpt) if args.resume else None
+    if args.resume and resume_path is None:
+        raise SystemExit("aucun checkpoint (last.pt / best.pt) pour --resume")
+
     model = KneeNet(
         backbone=cfg["backbone"], n_series=3, head_dim=cfg["head_dim"],
-        dropout=cfg["dropout"], pretrained=cfg["pretrained"],
+        dropout=cfg["dropout"],
+        pretrained=bool(cfg["pretrained"]) and resume_path is None,
         encode_chunk=int(cfg.get("encode_chunk", 16)),
     ).to(device)
     print(f"KneeNet 2.5D-RGB attn({cfg['backbone']}) : {count_params(model)} params",
@@ -191,11 +214,30 @@ def main() -> None:
     best_auc, history = -1.0, []
     step = 0
     stale = 0
+    start_epoch = 0
     patience = int(cfg.get("early_stop_patience", 0) or 0)
     smoothing = float(cfg.get("label_smoothing", 0.0) or 0.0)
     if patience > 0:
         print(f"early stopping : patience {patience} (val macro-AUC)", flush=True)
-    for epoch in range(epochs):
+
+    if resume_path is not None:
+        ckpt = torch.load(resume_path, map_location=device, weights_only=False)
+        model.load_state_dict(ckpt["model"])
+        if "optim" in ckpt:
+            optim.load_state_dict(ckpt["optim"])
+        start_epoch = int(ckpt.get("epoch", 0))
+        step = int(ckpt.get("step", start_epoch * steps_per_epoch))
+        best_auc = float(ckpt.get("val_macro_auc", -1.0))
+        stale = int(ckpt.get("stale", 0))
+        hist_p = run_dir / "history.json"
+        if hist_p.exists():
+            history = json.loads(hist_p.read_text(encoding="utf-8"))
+            history = [h for h in history if int(h.get("epoch", 0)) <= start_epoch]
+        print(f"resume {resume_path} | epoch {start_epoch} | "
+              f"best val AUC {best_auc:.4f} | step {step}"
+              f"{'' if 'optim' in ckpt else ' (AdamW neuf)'}", flush=True)
+
+    for epoch in range(start_epoch, epochs):
         model.train()
         t0 = time.time()
         running = 0.0
@@ -248,18 +290,27 @@ def main() -> None:
         if val_auc > best_auc:
             best_auc = val_auc
             stale = 0
-            torch.save({"model": model.state_dict(), "config": cfg,
-                        "val_macro_auc": val_auc, "epoch": epoch + 1,
-                        "targets": targets}, run_dir / "best.pt")
-            print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
+            improved = True
         else:
             stale += 1
-            if patience > 0:
-                print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
-            if patience > 0 and stale >= patience:
+            improved = False
+
+        payload = {
+            "model": model.state_dict(), "optim": optim.state_dict(),
+            "config": cfg, "val_macro_auc": best_auc, "epoch": epoch + 1,
+            "step": step, "stale": stale, "targets": targets,
+        }
+        torch.save(payload, run_dir / "last.pt")
+        if improved:
+            torch.save(payload, run_dir / "best.pt")
+            print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
+        elif patience > 0:
+            print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
+            if stale >= patience:
                 print(f"early stop a l'epoch {epoch+1} "
                       f"(meilleur val AUC {best_auc:.4f})", flush=True)
                 break
+        (run_dir / "history.json").write_text(json.dumps(history, indent=2))
 
     (run_dir / "history.json").write_text(json.dumps(history, indent=2))
 
