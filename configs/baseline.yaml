@@ -1,14 +1,16 @@
-run_name: baseline_v6_blend
+run_name: baseline_v8_25d_attn
 backbone: convnext_tiny
 pretrained: true
 
-labels_csv: data/labels/llm_labels_v4_blend.csv
+labels_csv: data/labels/labels_llm_gpt56sol.csv
 # labels_csv: data/labels/train_val_labels.csv
 # labels_csv: data/labels/train_val_labels_llm.csv
 series_csv: data/csv/train_series.csv
 zip_path: data/volumes.zip
 
-batch_size: 16
+# 2.5D RGB : ~72 forwards ConvNeXt / etude, checkpoint + chunks
+batch_size: 4
+encode_chunk: 8
 num_workers: 3
 epochs: 20
 early_stop_patience: 3
