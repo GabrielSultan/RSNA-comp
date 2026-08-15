@@ -5,6 +5,7 @@ data/*.png
 __pycache__/
 *.md
 *.txt
+memory_context/
 scripts/
 kaggle_kernel/
 checkpoints/*
