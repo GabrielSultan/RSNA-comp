@@ -63,3 +63,46 @@ def augment_batch(
     xv = xv.clamp(1e-4, 1).pow(gamma)
 
     return xv.reshape(b, s, d, h, w)
+
+
+# TTA inference : identity + petites rotations / zooms. Pas de hflip
+# (echangerait medial/lateral : menisques, OA).
+TTA_VARIANTS: tuple[tuple[float, float], ...] = (
+    (0.0, 1.00),
+    (5.0, 1.00),
+    (-5.0, 1.00),
+    (0.0, 0.95),
+    (0.0, 1.05),
+)
+
+
+def apply_affine(
+    x: torch.Tensor,
+    angle_deg: float = 0.0,
+    scale: float = 1.0,
+    tx: float = 0.0,
+    ty: float = 0.0,
+) -> torch.Tensor:
+    """x : (B, S, D, H, W) dans [0, 1]. Meme affine pour tous les plans.
+
+    Convention identique a `augment_batch` (cos/sin divises par scale).
+    """
+    if angle_deg == 0.0 and scale == 1.0 and tx == 0.0 and ty == 0.0:
+        return x
+    b, s, d, h, w = x.shape
+    device = x.device
+    xf = x.reshape(b * s * d, 1, h, w)
+    angle = x.new_tensor(angle_deg * np.pi / 180.0)
+    sc = x.new_tensor(scale)
+    cos, sin = torch.cos(angle) / sc, torch.sin(angle) / sc
+    theta = xf.new_zeros(b, 2, 3)
+    theta[:, 0, 0] = cos
+    theta[:, 0, 1] = -sin
+    theta[:, 0, 2] = tx
+    theta[:, 1, 0] = sin
+    theta[:, 1, 1] = cos
+    theta[:, 1, 2] = ty
+    theta = theta.repeat_interleave(s * d, dim=0)
+    grid = F.affine_grid(theta, xf.shape, align_corners=False)
+    xf = F.grid_sample(xf, grid, align_corners=False, padding_mode="zeros")
+    return xf.reshape(b, s, d, h, w)

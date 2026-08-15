@@ -14,6 +14,7 @@ import pandas as pd
 import torch
 
 from src.data.dataset_npz import NORM_MEAN, NORM_STD
+from src.data.transforms import TTA_VARIANTS, apply_affine
 from src.infer.preprocess_dicom import study_to_tensor
 from src.models.kneenet import KneeNet
 from src.nlp.lexicon import TARGETS
@@ -31,24 +32,36 @@ def load_model(weights_path: str | Path, device: str = "cuda") -> KneeNet:
 
 
 @torch.no_grad()
+def _predict_logits(model: KneeNet, x: torch.Tensor, device: str) -> torch.Tensor:
+    with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
+        return model(x)
+
+
+@torch.no_grad()
 def predict_studies(model: KneeNet, test_csv: str | Path,
                     test_series_csv: str | Path, test_series_dir: str | Path,
-                    device: str = "cuda") -> pd.DataFrame:
+                    device: str = "cuda", tta: bool = True) -> pd.DataFrame:
+    """tta=True : moyenne des sigmoides sur TTA_VARIANTS (pas de hflip)."""
     test = pd.read_csv(test_csv)
     series = pd.read_csv(test_series_csv)
     test_series_dir = Path(test_series_dir)
+    variants = TTA_VARIANTS if tta else ((0.0, 1.0),)
+    print(f"TTA : {len(variants)} variantes (hflip off)", flush=True)
 
     rows = []
     for uid in test.StudyInstanceUID:
         study_dir = test_series_dir / uid
         srows = series[series.StudyInstanceUID == uid]
         vol = study_to_tensor(study_dir, srows)          # (3, 24, 224, 224) [0,1]
-        x = torch.from_numpy(vol).unsqueeze(0).to(device)
-        x = (x - NORM_MEAN) / NORM_STD
+        x0 = torch.from_numpy(vol).unsqueeze(0).to(device)
 
-        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-            logits = model(x)
-        prob = torch.sigmoid(logits.float()).cpu().numpy()[0]
+        probs = []
+        for angle_deg, scale in variants:
+            xv = apply_affine(x0, angle_deg=angle_deg, scale=scale)
+            xv = (xv - NORM_MEAN) / NORM_STD
+            logits = _predict_logits(model, xv, device)
+            probs.append(torch.sigmoid(logits.float()))
+        prob = torch.stack(probs, dim=0).mean(dim=0).cpu().numpy()[0]
         rows.append([uid] + prob.tolist())
         print(f"  {uid} -> ok", flush=True)
 
