@@ -12,7 +12,8 @@
 
 Usage :
   python -X utf8 -m src.train.train --config configs/kneenet_v8.yaml
-  python -X utf8 -m src.train.train --config configs/baseline.yaml --resume
+  python -X utf8 -m src.train.train --config configs/kneenet_v8_subset.yaml
+  python -X utf8 -m src.train.train --config configs/kneenet_v9_t1_subset.yaml
   python -X utf8 -m src.train.train --list-models
 """
 from __future__ import annotations
@@ -32,7 +33,9 @@ from torch.utils.data import DataLoader
 
 from src.data.dataset_npz import StudyDataset, StudySeriesIndex, make_loaders
 from src.data.transforms import augment_batch
-from src.models.registry import build_model, count_params, list_models
+from src.models.registry import (
+    build_model, count_params, default_n_series, list_models,
+)
 from src.nlp.lexicon import TARGETS
 from src.train.metrics import macro_auc
 
@@ -116,6 +119,8 @@ def evaluate(model, loader, device, pos_weight: torch.Tensor | None = None,
 
 def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
     """58 etudes gold depuis train.csv, ou None si indisponible."""
+    if cfg.get("skip_gold"):
+        return None
     train_csv = Path(cfg["labels_csv"]).parent.parent / "csv" / "train.csv"
     if not train_csv.exists():
         return None
@@ -131,6 +136,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
         gold.StudyInstanceUID.tolist(),
         gold[["StudyInstanceUID"] + TARGETS], index,
         cfg["zip_path"], train=False, series_drop_p=0.0,
+        n_series=int(cfg.get("n_series", 3)),
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=False,
                       num_workers=num_workers)
@@ -168,6 +174,7 @@ def main() -> None:
     if args.model:
         cfg["model"] = args.model
     cfg.setdefault("model", "kneenet_v8")
+    cfg.setdefault("n_series", default_n_series(cfg["model"]))
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     torch.backends.cudnn.benchmark = True
@@ -178,8 +185,14 @@ def main() -> None:
         labels_csv=cfg["labels_csv"], series_csv=cfg["series_csv"],
         zip_path=cfg["zip_path"], batch_size=cfg["batch_size"],
         num_workers=cfg["num_workers"],
+        n_series=int(cfg.get("n_series", 3)),
+        train_frac=float(cfg.get("train_frac", 1.0)),
+        train_frac_seed=int(cfg.get("train_frac_seed", 42)),
     )
-    print(f"train {len(train_ld.dataset)} | val {len(val_ld.dataset)}", flush=True)
+    print(f"train {len(train_ld.dataset)} | val {len(val_ld.dataset)} "
+          f"| n_series {int(cfg.get('n_series', 3))}", flush=True)
+    (run_dir / "train_uids.txt").write_text(
+        "\n".join(train_ld.dataset.items), encoding="utf-8")
 
     resume_path = _ckpt_path(run_dir, args.ckpt) if args.resume else None
     if args.resume and resume_path is None:

@@ -4,6 +4,7 @@ from src.models.registry import (
     MODELS,
     build_model,
     count_params,
+    default_n_series,
     get_model_class,
     list_models,
 )
@@ -13,6 +14,7 @@ __all__ = [
     "MODELS",
     "build_model",
     "count_params",
+    "default_n_series",
     "get_model_class",
     "list_models",
 ]

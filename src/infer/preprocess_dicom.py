@@ -145,34 +145,63 @@ def load_series_dicom(series_dir: str | Path) -> np.ndarray:
     return out
 
 
+def _pick_plane_row(series_rows, plane: str):
+    """Fluid-sensitive d'abord, sinon n'importe quelle serie du plan."""
+    rows = series_rows[series_rows.Anatomical_Plane == plane]
+    if len(rows) == 0:
+        return None
+    fluid_col = "Fluid_Sensitive" if "Fluid_Sensitive" in rows.columns else None
+    fluid = rows[rows[fluid_col] == 1] if fluid_col else rows.iloc[0:0]
+    if len(fluid) == 0 and "Fat_Suppression" in rows.columns:
+        fluid = rows[rows.Fat_Suppression == 1]
+    pick = (fluid if len(fluid) else rows).sort_values("SeriesInstanceUID").iloc[0]
+    return pick
+
+
+def _pick_nonfluid_row(series_rows, exclude: set[str]):
+    """T1 / non-fluide pas deja utilisee. Sagittal d'abord."""
+    for plane in ("Sagittal", "Coronal", "Axial"):
+        rows = series_rows[series_rows.Anatomical_Plane == plane]
+        if "Fluid_Sensitive" in rows.columns:
+            rows = rows[rows.Fluid_Sensitive == 0]
+        rows = rows[~rows.SeriesInstanceUID.isin(exclude)]
+        if len(rows) == 0:
+            continue
+        return rows.sort_values("SeriesInstanceUID").iloc[0]
+    return None
+
+
 def study_to_tensor(study_dir: str | Path, series_rows,
-                    n_series_planes=("Sagittal", "Coronal", "Axial")) -> np.ndarray:
-    """Une etude -> (3, 24, 224, 224) float32 dans [0, 1].
+                    n_series: int = 3) -> np.ndarray:
+    """Une etude -> (n_series, 24, 224, 224) float32 dans [0, 1].
 
     series_rows : DataFrame des series de l'etude (colonnes SeriesInstanceUID,
     Anatomical_Plane, Fluid_Sensitive, Fat_Suppression).
-    Selection : fluid-sensitive d'abord (Fluid_Sensitive ; si absent au test,
-    repli sur Fat_Suppression — les deux colonnes restent distinctes).
+    Slots 0-2 : sag / cor / ax, fluid-sensitive d'abord.
+    Slot 3 si n_series>=4 : non-fluide (T1), sagittal prioritaire, masque
+    (zeros) si absent.
     """
+    planes = ("Sagittal", "Coronal", "Axial")
     study_dir = Path(study_dir)
-    out = np.zeros((len(n_series_planes), N_SLICES, IMG_SIZE, IMG_SIZE),
-                   dtype=np.float32)
-    for i, plane in enumerate(n_series_planes):
-        rows = series_rows[series_rows.Anatomical_Plane == plane]
-        if len(rows) == 0:
-            continue
-        fluid_col = "Fluid_Sensitive" if "Fluid_Sensitive" in rows.columns else None
-        fluid = rows[rows[fluid_col] == 1] if fluid_col else rows.iloc[0:0]
-        if len(fluid) == 0 and "Fat_Suppression" in rows.columns:
-            fluid = rows[rows.Fat_Suppression == 1]
-        pick = (fluid if len(fluid) else rows).sort_values("SeriesInstanceUID").iloc[0]
+    out = np.zeros((n_series, N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.float32)
+    used: set[str] = set()
+
+    def _fill(i: int, pick) -> None:
+        if pick is None:
+            return
         series_dir = study_dir / pick.SeriesInstanceUID
         if not series_dir.exists():
-            continue
+            return
         try:
             vol = load_series_dicom(series_dir)
         except Exception as e:
             print(f"  [warn] serie {pick.SeriesInstanceUID}: {e}")
-            continue
+            return
+        used.add(str(pick.SeriesInstanceUID))
         out[i] = vol.astype(np.float32) / 255.0
+
+    for i, plane in enumerate(planes):
+        _fill(i, _pick_plane_row(series_rows, plane))
+    if n_series >= 4:
+        _fill(3, _pick_nonfluid_row(series_rows, used))
     return out

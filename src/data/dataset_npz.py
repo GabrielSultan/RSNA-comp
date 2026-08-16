@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Dataset etude-level : 3 plans (sag/cor/ax, fluid prioritaire) -> tensor
-(3, 24, 224, 224), 12 labels avec masque (-1 = masque).
+"""Dataset etude-level : 3 plans fluid (sag/cor/ax) + slot T1 optionnel.
 
-Lecture NPZ en streaming depuis volumes.zip (un ZipFile par worker).
-Series dropout : avec proba `series_drop_p`, un plan est mis a zero
-(robustesse aux series manquantes au test + augmentation).
+Sortie (S, 24, 224, 224), S=3 (v8) ou S=4 (v9, 4e slot = non-fluide).
+12 labels avec masque (-1 = masque). Lecture NPZ depuis volumes.zip.
+Series dropout : un plan (ou le T1) mis a zero avec proba `series_drop_p`.
 """
 from __future__ import annotations
 
@@ -70,6 +69,21 @@ class StudySeriesIndex:
             return cands[0]
         return cands[int(rng.integers(len(cands)))]
 
+    def pick_nonfluid(self, study_uid: str, exclude: set[str],
+                      rng: np.random.Generator | None):
+        """T1 / non-fluide pas deja utilisee. Sagittal d'abord, puis cor, ax."""
+        plans = self.by_study.get(study_uid)
+        if plans is None:
+            return None
+        for plane in PLANES:
+            cands = [s for s in plans[plane][0] if s not in exclude]
+            if not cands:
+                continue
+            if rng is None:
+                return cands[0]
+            return cands[int(rng.integers(len(cands)))]
+        return None
+
 
 class StudyDataset(Dataset):
     """items : liste de StudyInstanceUID. labels_df indexe par StudyInstanceUID,
@@ -87,6 +101,7 @@ class StudyDataset(Dataset):
         zip_path: str = "data/volumes.zip",
         train: bool = True,
         series_drop_p: float = 0.15,
+        n_series: int = 3,
     ) -> None:
         self.items = items
         self.labels = (
@@ -96,30 +111,48 @@ class StudyDataset(Dataset):
         self.zip_path = zip_path
         self.train = train
         self.series_drop_p = series_drop_p
+        self.n_series = int(n_series)
+        if self.n_series not in (3, 4):
+            raise ValueError(f"n_series={self.n_series} : attendu 3 ou 4")
 
     def __len__(self) -> int:
         return len(self.items)
 
-    def _load_plane(self, study_uid: str, plane: str,
-                    rng: np.random.Generator | None) -> torch.Tensor:
-        sid = self.index.pick(study_uid, plane, rng if self.train else None)
+    def _load_sid(self, sid: str | None) -> torch.Tensor:
         if sid is None:
             return torch.zeros(N_SLICES, 224, 224)
-        vol = load_volume(self.zip_path, sid).astype(np.float32) / 255.0
-        return torch.from_numpy(vol)
+        try:
+            vol = load_volume(self.zip_path, sid).astype(np.float32) / 255.0
+            return torch.from_numpy(vol)
+        except Exception:
+            return torch.zeros(N_SLICES, 224, 224)
+
+    def _maybe_drop(self) -> bool:
+        return self.train and torch.rand(()).item() < self.series_drop_p
 
     def __getitem__(self, i: int):
         uid = self.items[i]
         rng = np.random.default_rng(
             (hash(uid) & 0xFFFFFFFF) ^ (np.random.randint(0, 2**31) if self.train else 0)
         )
+        used: set[str] = set()
         vols = []
+        pick_rng = rng if self.train else None
         for plane in PLANES:
-            if self.train and torch.rand(()).item() < self.series_drop_p:
+            if self._maybe_drop():
+                vols.append(torch.zeros(N_SLICES, 224, 224))
+                continue
+            sid = self.index.pick(uid, plane, pick_rng)
+            if sid is not None:
+                used.add(sid)
+            vols.append(self._load_sid(sid))
+        if self.n_series >= 4:
+            if self._maybe_drop():
                 vols.append(torch.zeros(N_SLICES, 224, 224))
             else:
-                vols.append(self._load_plane(uid, plane, rng))
-        x = torch.stack(vols)  # (3, 24, 224, 224)
+                vols.append(self._load_sid(
+                    self.index.pick_nonfluid(uid, used, pick_rng)))
+        x = torch.stack(vols)  # (3|4, 24, 224, 224)
 
         if self.labels is None:
             return x, uid
@@ -165,10 +198,36 @@ def _ensure_split(df: pd.DataFrame, targets: list[str],
     return out
 
 
+def _subsample_train(train_df: pd.DataFrame, targets: list[str],
+                     frac: float, seed: int) -> pd.DataFrame:
+    """Sous-echantillon stratifie du train seulement (val inchangee)."""
+    if frac >= 1.0:
+        return train_df
+    if frac <= 0.0:
+        raise ValueError(f"train_frac={frac} : doit etre dans (0, 1]")
+    rng = np.random.default_rng(seed)
+    n_pos = (train_df[targets] >= 0.5).sum(axis=1)
+    pos_bin = pd.cut(n_pos, bins=[-1, 0, 2, 4, 20], labels=["0", "1-2", "3-4", "5+"])
+    keep = []
+    for _, group in train_df.groupby(pos_bin, observed=False):
+        if len(group) == 0:
+            continue
+        n = max(1, int(round(len(group) * frac)))
+        n = min(n, len(group))
+        chosen = rng.choice(group.index.to_numpy(), size=n, replace=False)
+        keep.extend(chosen.tolist())
+    out = train_df.loc[keep]
+    print(f"train_frac={frac:g} seed={seed} : {len(out)} / {len(train_df)} etudes",
+          flush=True)
+    return out
+
+
 def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  series_csv: str = "data/csv/train_series.csv",
                  zip_path: str = "data/volumes.zip",
-                 batch_size: int = 8, num_workers: int = 4):
+                 batch_size: int = 8, num_workers: int = 4,
+                 n_series: int = 3, train_frac: float = 1.0,
+                 train_frac_seed: int = 42):
     from torch.utils.data import DataLoader
 
     df = pd.read_csv(labels_csv)
@@ -183,14 +242,23 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
 
     train_df = df[df.split == "train"]
     val_df = df[df.split == "val"]
+    train_df = _subsample_train(train_df, targets, train_frac, train_frac_seed)
+
+    if n_series >= 4:
+        n_t1 = sum(
+            1 for uid in train_df.StudyInstanceUID
+            if index.pick_nonfluid(uid, set(), None) is not None
+        )
+        print(f"slot T1 (non-fluide) : {n_t1}/{len(train_df)} etudes train",
+              flush=True)
 
     train_ds = StudyDataset(
         train_df.StudyInstanceUID.tolist(), train_df[["StudyInstanceUID"] + targets],
-        index, zip_path, train=True, series_drop_p=0.15,
+        index, zip_path, train=True, series_drop_p=0.15, n_series=n_series,
     )
     val_ds = StudyDataset(
         val_df.StudyInstanceUID.tolist(), val_df[["StudyInstanceUID"] + targets],
-        index, zip_path, train=False, series_drop_p=0.0,
+        index, zip_path, train=False, series_drop_p=0.0, n_series=n_series,
     )
 
     train_ld = DataLoader(train_ds, batch_size=batch_size, shuffle=True,

@@ -50,7 +50,9 @@ def predict_studies(model, test_csv: str | Path,
     for uid in test.StudyInstanceUID:
         study_dir = test_series_dir / uid
         srows = series[series.StudyInstanceUID == uid]
-        vol = study_to_tensor(study_dir, srows)          # (3, 24, 224, 224) [0,1]
+        vol = study_to_tensor(
+            study_dir, srows, n_series=int(getattr(model, "n_series", 3)),
+        )
         x0 = torch.from_numpy(vol).unsqueeze(0).to(device)
 
         probs = []

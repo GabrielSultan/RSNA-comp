@@ -27,6 +27,7 @@ import torch.nn as nn
 # nom CLI / YAML  ->  module Python qui expose `class KneeNet`
 MODELS: dict[str, str] = {
     "kneenet_v8": "src.models.kneenet_v8",
+    "kneenet_v9": "src.models.kneenet_v9",
 }
 
 DEFAULT_MODEL = "kneenet_v8"
@@ -34,6 +35,14 @@ DEFAULT_MODEL = "kneenet_v8"
 
 def list_models() -> list[str]:
     return sorted(MODELS)
+
+
+def default_n_series(name: str) -> int:
+    cls = get_model_class(name)
+    p = inspect.signature(cls.__init__).parameters.get("n_series")
+    if p is None or p.default is inspect.Parameter.empty:
+        return 3
+    return int(p.default)
 
 
 def get_model_class(name: str) -> type[nn.Module]:
