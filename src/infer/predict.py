@@ -15,30 +15,28 @@ import torch
 
 from src.data.transforms import TTA_VARIANTS, apply_affine
 from src.infer.preprocess_dicom import study_to_tensor
-from src.models.kneenet import KneeNet
+from src.models.registry import build_model
 from src.nlp.lexicon import TARGETS
 
 
-def load_model(weights_path: str | Path, device: str = "cuda") -> KneeNet:
+def load_model(weights_path: str | Path, device: str = "cuda"):
     ckpt = torch.load(str(weights_path), map_location=device, weights_only=False)
     cfg = ckpt.get("config", {})
-    model = KneeNet(backbone=cfg.get("backbone", "convnext_tiny"), n_series=3,
-                    head_dim=cfg.get("head_dim", 512),
-                    dropout=cfg.get("dropout", 0.2), pretrained=False,
-                    encode_chunk=int(cfg.get("encode_chunk", 16)))
+    cfg.setdefault("model", "kneenet_v8")
+    model = build_model(cfg, pretrained=False)
     model.load_state_dict(ckpt["model"])
     model.to(device).eval()
     return model
 
 
 @torch.no_grad()
-def _predict_logits(model: KneeNet, x: torch.Tensor, device: str) -> torch.Tensor:
+def _predict_logits(model, x: torch.Tensor, device: str) -> torch.Tensor:
     with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
         return model(x)
 
 
 @torch.no_grad()
-def predict_studies(model: KneeNet, test_csv: str | Path,
+def predict_studies(model, test_csv: str | Path,
                     test_series_csv: str | Path, test_series_dir: str | Path,
                     device: str = "cuda", tta: bool = True) -> pd.DataFrame:
     """tta=True : moyenne des sigmoides sur TTA_VARIANTS (pas de hflip)."""

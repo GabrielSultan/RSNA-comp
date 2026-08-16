@@ -1,4 +1,5 @@
 run_name: baseline_v8_25d_attn
+model: kneenet_v8
 backbone: convnext_tiny
 pretrained: true
 

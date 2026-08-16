@@ -1,0 +1,30 @@
+# Recette figee : vrai 2.5D RGB + attn 12 tetes (public LB 0.876, epoch 15).
+# Relancer tel quel, ou copier ce fichier pour un autre jeu de labels.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_v8.yaml
+#
+# Autre train set : copier vers configs/kneenet_v8_mon_split.yaml,
+# changer labels_csv + run_name, garder model: kneenet_v8.
+
+run_name: baseline_v8_25d_attn
+model: kneenet_v8
+backbone: convnext_tiny
+pretrained: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/volumes.zip
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 20
+early_stop_patience: 3
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

@@ -11,8 +11,9 @@
 - Macro-AUC gold (58) loggee chaque epoch, jamais utilisee pour piloter.
 
 Usage :
-  python -X utf8 -m src.train.train --config configs/baseline.yaml
+  python -X utf8 -m src.train.train --config configs/kneenet_v8.yaml
   python -X utf8 -m src.train.train --config configs/baseline.yaml --resume
+  python -X utf8 -m src.train.train --list-models
 """
 from __future__ import annotations
 
@@ -31,7 +32,7 @@ from torch.utils.data import DataLoader
 
 from src.data.dataset_npz import StudyDataset, StudySeriesIndex, make_loaders
 from src.data.transforms import augment_batch
-from src.models.kneenet import KneeNet, count_params
+from src.models.registry import build_model, count_params, list_models
 from src.nlp.lexicon import TARGETS
 from src.train.metrics import macro_auc
 
@@ -150,12 +151,23 @@ def _ckpt_path(run_dir: Path, explicit: str | None) -> Path | None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/baseline.yaml")
+    parser.add_argument("--model", default=None,
+                        help="surcharge cfg['model'] (ex. kneenet_v8)")
+    parser.add_argument("--list-models", action="store_true",
+                        help="affiche les architectures et quitte")
     parser.add_argument("--resume", action="store_true",
                         help="reprend last.pt (sinon best.pt) du run_name")
     parser.add_argument("--ckpt", default=None,
                         help="checkpoint explicite (avec --resume)")
     args = parser.parse_args()
+    if args.list_models:
+        for name in list_models():
+            print(name)
+        return
     cfg = load_config(args.config)
+    if args.model:
+        cfg["model"] = args.model
+    cfg.setdefault("model", "kneenet_v8")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     torch.backends.cudnn.benchmark = True
@@ -173,13 +185,11 @@ def main() -> None:
     if args.resume and resume_path is None:
         raise SystemExit("aucun checkpoint (last.pt / best.pt) pour --resume")
 
-    model = KneeNet(
-        backbone=cfg["backbone"], n_series=3, head_dim=cfg["head_dim"],
-        dropout=cfg["dropout"],
-        pretrained=bool(cfg["pretrained"]) and resume_path is None,
-        encode_chunk=int(cfg.get("encode_chunk", 16)),
+    arch = cfg.get("model", "kneenet_v8")
+    model = build_model(
+        cfg, pretrained=bool(cfg.get("pretrained", True)) and resume_path is None,
     ).to(device)
-    print(f"KneeNet 2.5D-RGB attn({cfg['backbone']}) : {count_params(model)} params",
+    print(f"{arch} ({cfg.get('backbone', '?')}) : {count_params(model)} params",
           flush=True)
 
     max_pw = cfg.get("pos_weight_max", None)  # None -> desactive (BCE simple)
