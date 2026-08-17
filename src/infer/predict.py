@@ -24,7 +24,7 @@ def load_model(weights_path: str | Path, device: str = "cuda"):
     cfg = ckpt.get("config", {})
     cfg.setdefault("model", "kneenet_v8")
     model = build_model(cfg, pretrained=False)
-    model.load_state_dict(ckpt["model"])
+    model.load_state_dict(ckpt["model"], strict=False)
     model.to(device).eval()
     return model
 
