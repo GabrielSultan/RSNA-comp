@@ -28,6 +28,7 @@ import torch.nn as nn
 MODELS: dict[str, str] = {
     "kneenet_v8": "src.models.kneenet_v8",
     "kneenet_v9": "src.models.kneenet_v9",
+    "kneenet_v10": "src.models.kneenet_v10",
 }
 
 DEFAULT_MODEL = "kneenet_v8"
