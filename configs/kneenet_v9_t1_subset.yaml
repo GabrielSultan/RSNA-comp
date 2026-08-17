@@ -1,5 +1,6 @@
-# Comparaison rapide : v9 (4e slot T1) sur 25 % du train, val pleine.
-# Meme train_frac_seed que kneenet_v8_subset.yaml -> memes etudes train.
+# Ablation naive v9 (T1 toujours dans le softmax, encodeur partage). RUN TERMINE.
+# Ne pas relancer : kneenet_v9.py a maintenant une gate + no_grad T1.
+# Nouveau run : configs/kneenet_v9_t1_gate_subset.yaml
 #   python -X utf8 -m src.train.train --config configs/kneenet_v9_t1_subset.yaml
 
 run_name: subset_v9_t1_frac025
