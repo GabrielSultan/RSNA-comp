@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Pretraitement DICOM -> volume (24, 224, 224) uint8, aligné sur la conversion NPZ.
+"""Pretraitement DICOM -> volume uint8, aligne sur la conversion NPZ.
 
-Recette identique a `kaggle_kernels/_gen_convert_nb.py` :
+Recette identique a `kaggle_DICOM_exctract/_gen_convert_nb.py` (grayscale)
+et `_gen_convert_rgb25d_nb.py` (voisins DICOM) :
 1. Lecture des .dcm, tri InstanceNumber (fallback : normale IOP).
 2. RescaleSlope/Intercept, inversion MONOCHROME1.
 3. Crop centre 130 mm (PixelSpacing) sinon centre 70 %.
 4. Percentiles 1-99 -> [0, 1].
 5. Bande profondeur 20-80 % (evite air / bords), puis linspace 24 coupes.
 6. Resize 224x224, uint8.
+7. Si rgb_neighbors : pour chaque centre k du linspace, stocker k-1, k, k+1
+   dans le volume ORIGINAL (1 coupe DICOM d'ecart), pas dans les 24.
 """
 from __future__ import annotations
 
@@ -79,8 +82,20 @@ def _rescale(ds, arr: np.ndarray) -> np.ndarray:
     return arr
 
 
-def load_series_dicom(series_dir: str | Path) -> np.ndarray:
-    """Un dossier de .dcm -> volume (24, 224, 224) uint8."""
+def _to_u8(sl: np.ndarray) -> np.ndarray:
+    sl = cv2.resize(sl, (IMG_SIZE, IMG_SIZE), interpolation=cv2.INTER_AREA)
+    return np.clip(sl * 255.0, 0, 255).round().astype(np.uint8)
+
+
+def load_series_dicom(
+    series_dir: str | Path,
+    rgb_neighbors: bool = False,
+) -> np.ndarray:
+    """Un dossier de .dcm -> (24, 224, 224) ou (24, 3, 224, 224) uint8.
+
+    rgb_neighbors=False : grayscale crop130 (linspace 24).
+    rgb_neighbors=True  : R=k-1, G=k, B=k+1 dans le volume original.
+    """
     import pydicom
 
     series_dir = Path(series_dir)
@@ -134,14 +149,24 @@ def load_series_dicom(series_dir: str | Path) -> np.ndarray:
     b = int(np.ceil(BAND[1] * (n - 1)))
     if b - a + 1 < 8:
         a, b = 0, n - 1
-    band = vol[a:b + 1]
-    idx = np.linspace(0, band.shape[0] - 1, N_SLICES).round().astype(int)
-    band = band[idx]
+    idx_band = np.linspace(0, b - a, N_SLICES).round().astype(int)
+    idx_orig = np.clip(a + idx_band, 0, n - 1)
 
-    out = np.empty((N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.uint8)
-    for i in range(N_SLICES):
-        sl = cv2.resize(band[i], (IMG_SIZE, IMG_SIZE), interpolation=cv2.INTER_AREA)
-        out[i] = np.clip(sl * 255.0, 0, 255).round().astype(np.uint8)
+    if not rgb_neighbors:
+        out = np.empty((N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.uint8)
+        for i, k in enumerate(idx_orig):
+            out[i] = _to_u8(vol[int(k)])
+        return out
+
+    out = np.empty((N_SLICES, 3, IMG_SIZE, IMG_SIZE), dtype=np.uint8)
+    last = n - 1
+    for i, k in enumerate(idx_orig):
+        k = int(k)
+        km = 0 if k <= 0 else k - 1
+        kp = last if k >= last else k + 1
+        out[i, 0] = _to_u8(vol[km])
+        out[i, 1] = _to_u8(vol[k])
+        out[i, 2] = _to_u8(vol[kp])
     return out
 
 
@@ -172,8 +197,12 @@ def _pick_nonfluid_row(series_rows, exclude: set[str]):
 
 
 def study_to_tensor(study_dir: str | Path, series_rows,
-                    n_series: int = 3) -> np.ndarray:
-    """Une etude -> (n_series, 24, 224, 224) float32 dans [0, 1].
+                    n_series: int = 3,
+                    rgb_neighbors: bool = False) -> np.ndarray:
+    """Une etude -> float32 dans [0, 1].
+
+    Grayscale : (n_series, 24, 224, 224).
+    rgb_neighbors : (n_series, 24, 3, 224, 224) R=k-1 G=k B=k+1 DICOM.
 
     series_rows : DataFrame des series de l'etude (colonnes SeriesInstanceUID,
     Anatomical_Plane, Fluid_Sensitive, Fat_Suppression).
@@ -183,7 +212,12 @@ def study_to_tensor(study_dir: str | Path, series_rows,
     """
     planes = ("Sagittal", "Coronal", "Axial")
     study_dir = Path(study_dir)
-    out = np.zeros((n_series, N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.float32)
+    if rgb_neighbors:
+        out = np.zeros(
+            (n_series, N_SLICES, 3, IMG_SIZE, IMG_SIZE), dtype=np.float32,
+        )
+    else:
+        out = np.zeros((n_series, N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.float32)
     used: set[str] = set()
 
     def _fill(i: int, pick) -> None:
@@ -193,7 +227,7 @@ def study_to_tensor(study_dir: str | Path, series_rows,
         if not series_dir.exists():
             return
         try:
-            vol = load_series_dicom(series_dir)
+            vol = load_series_dicom(series_dir, rgb_neighbors=rgb_neighbors)
         except Exception as e:
             print(f"  [warn] serie {pick.SeriesInstanceUID}: {e}")
             return
