@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 import time
 from pathlib import Path
 
@@ -31,7 +32,7 @@ import torch.nn.functional as F
 import yaml
 from torch.utils.data import DataLoader
 
-from src.data.dataset_npz import StudyDataset, StudySeriesIndex, make_loaders
+from src.data.dataset_npz import StudyDataset, make_loaders, make_series_index
 from src.data.transforms import augment_batch
 from src.models.registry import (
     build_model, count_params, default_n_series, list_models,
@@ -129,7 +130,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
     gold = train_df[train_df[TARGETS].notna().all(axis=1)]
     if len(gold) == 0:
         return None
-    index = StudySeriesIndex(cfg["series_csv"])
+    index, volume_index = make_series_index(cfg["series_csv"], cfg["zip_path"])
     gold = gold[gold.StudyInstanceUID.isin(index.by_study.keys())]
     if len(gold) == 0:
         return None
@@ -138,6 +139,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
         gold[["StudyInstanceUID"] + TARGETS], index,
         cfg["zip_path"], train=False, series_drop_p=0.0,
         n_series=int(cfg.get("n_series", 3)),
+        volume_index=volume_index,
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=False,
                       num_workers=num_workers)
@@ -190,7 +192,8 @@ def main() -> None:
         train_frac=float(cfg.get("train_frac", 1.0)),
         train_frac_seed=int(cfg.get("train_frac_seed", 42)),
     )
-    print(f"train {len(train_ld.dataset)} | val {len(val_ld.dataset)} "
+    n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
+    print(f"train {n_train} | val {n_val} "
           f"| n_series {int(cfg.get('n_series', 3))}", flush=True)
     (run_dir / "train_uids.txt").write_text(
         "\n".join(train_ld.dataset.items), encoding="utf-8")
@@ -209,7 +212,7 @@ def main() -> None:
     max_pw = cfg.get("pos_weight_max", None)  # None -> desactive (BCE simple)
     if max_pw is None:
         pos_weight = torch.ones(len(targets))
-        print("pos_weight desactive (BCE simple)")
+        print("pos_weight desactive (BCE simple)", flush=True)
     else:
         pos_weight = compute_pos_weight(cfg["labels_csv"], targets,
                                         max_weight=max_pw)
@@ -243,6 +246,17 @@ def main() -> None:
     smoothing = float(cfg.get("label_smoothing", 0.0) or 0.0)
     if patience > 0:
         print(f"early stopping : patience {patience} (val macro-AUC)", flush=True)
+
+    # Recap apres le spawn DataLoader : sous Windows, les prints du
+    # make_loaders sont souvent avales par les workers (stdout partage).
+    recap = (
+        f"dataset effectif : train {n_train} | val {n_val} "
+        f"| n_series {int(cfg.get('n_series', 3))} "
+        f"| train_frac {float(cfg.get('train_frac', 1.0)):g} "
+        f"| steps/epoch {steps_per_epoch}"
+    )
+    print(recap, flush=True)
+    print(recap, file=sys.stderr, flush=True)
 
     if resume_path is not None:
         ckpt = torch.load(resume_path, map_location=device, weights_only=False)
@@ -304,6 +318,9 @@ def main() -> None:
               f"val {val_loss:.4f} | val AUC {val_auc:.4f}{gold_txt} | "
               f"proba std {pstd:.4f} | {dt:.0f}s",
               flush=True)
+        if pstd < 0.005:
+            print(f"  !! proba std {pstd:.2e} : probas presque constantes, "
+                  "le modele s'effondre (graphe casse)", flush=True)
         rec = {"epoch": epoch + 1, "loss": train_loss, "val_loss": val_loss,
                "val_macro_auc": val_auc, "proba_std": pstd,
                **{f"auc_{k}": v for k, v in per_target.items()}}
