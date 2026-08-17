@@ -2,12 +2,14 @@
 """Dataset etude-level : 3 plans fluid (sag/cor/ax) + slot T1 optionnel.
 
 Sortie (S, 24, 224, 224), S=3 (v8) ou S=4 (v9, 4e slot = non-fluide).
-12 labels avec masque (-1 = masque). Lecture NPZ depuis volumes.zip.
+12 labels avec masque (-1 = masque). Lecture NPZ depuis un zip unique
+(`data/volumes.zip`) ou un dossier de shards (`data/crop130/*.zip`).
 Series dropout : un plan (ou le T1) mis a zero avec proba `series_drop_p`.
 """
 from __future__ import annotations
 
 import io
+import os
 import zipfile
 from pathlib import Path
 
@@ -21,30 +23,92 @@ N_SLICES = 24
 NORM_MEAN = 0.1648
 NORM_STD = 0.1941
 
-# ZipFile partage par processus worker (pas picklable -> lazy par pid)
-_ZIPS: dict[int, zipfile.ZipFile] = {}
+# ZipFile partage par processus worker (pas picklable -> lazy par pid + chemin)
+_ZIPS: dict[tuple[int, str], zipfile.ZipFile] = {}
+_VOLUME_SOURCE_CACHE: dict[str, dict[str, str] | None] = {}
 
 
 def _zip_for(path: str) -> zipfile.ZipFile:
-    import os
-
-    pid = os.getpid()
-    if pid not in _ZIPS:
-        _ZIPS[pid] = zipfile.ZipFile(path)
-    return _ZIPS[pid]
+    key = (os.getpid(), path)
+    if key not in _ZIPS:
+        _ZIPS[key] = zipfile.ZipFile(path)
+    return _ZIPS[key]
 
 
-def load_volume(zip_path: str, series_uid: str) -> np.ndarray:
-    z = _zip_for(zip_path)
+def load_volume(zip_file: str, series_uid: str) -> np.ndarray:
+    z = _zip_for(zip_file)
     # .copy() : detache du buffer/mmap pour limiter l'empreinte RAM des workers
     return np.load(io.BytesIO(z.read(series_uid + ".npz")))["data"].copy()
+
+
+def _index_from_manifests(dir_path: Path) -> dict[str, str]:
+    """manifest_partN.csv + *partN.zip -> SeriesInstanceUID -> chemin zip."""
+    mapping: dict[str, str] = {}
+    for man in sorted(dir_path.glob("manifest_part*.csv")):
+        part = man.stem.replace("manifest_", "")
+        zips = sorted(dir_path.glob(f"*{part}.zip"))
+        if not zips:
+            continue
+        zp = str(zips[0])
+        df = pd.read_csv(man, usecols=["SeriesInstanceUID", "ok"])
+        for sid, ok in zip(df.SeriesInstanceUID, df.ok):
+            if int(ok) == 1:
+                mapping[str(sid)] = zp
+    return mapping
+
+
+def _index_from_zips(dir_path: Path) -> dict[str, str]:
+    mapping: dict[str, str] = {}
+    for zp in sorted(dir_path.glob("*.zip")):
+        with zipfile.ZipFile(zp) as z:
+            for name in z.namelist():
+                if name.endswith(".npz"):
+                    mapping[Path(name).stem] = str(zp)
+    return mapping
+
+
+def resolve_volume_source(zip_path: str) -> dict[str, str] | None:
+    """None = un seul zip (lecture directe). dict = sid -> zip (dossier shards)."""
+    p = Path(zip_path)
+    cache_key = str(p.resolve()) if p.exists() else zip_path
+    if cache_key in _VOLUME_SOURCE_CACHE:
+        return _VOLUME_SOURCE_CACHE[cache_key]
+    if p.is_file():
+        _VOLUME_SOURCE_CACHE[cache_key] = None
+        return None
+    if not p.is_dir():
+        raise FileNotFoundError(f"zip_path introuvable : {zip_path}")
+    mapping = _index_from_manifests(p) or _index_from_zips(p)
+    if not mapping:
+        raise FileNotFoundError(f"aucune serie NPZ dans {p}")
+    n_z = len(set(mapping.values()))
+    print(f"volumes {p} : {len(mapping)} series dans {n_z} zip(s)", flush=True)
+    _VOLUME_SOURCE_CACHE[cache_key] = mapping
+    return mapping
+
+
+def make_series_index(
+    series_csv: str | Path, zip_path: str,
+) -> tuple["StudySeriesIndex", dict[str, str] | None]:
+    volume_index = resolve_volume_source(zip_path)
+    keep = None if volume_index is None else set(volume_index)
+    return StudySeriesIndex(series_csv, keep_sids=keep), volume_index
 
 
 class StudySeriesIndex:
     """Index etude -> candidats par plan (fluid d'abord)."""
 
-    def __init__(self, series_csv: str | Path) -> None:
+    def __init__(
+        self,
+        series_csv: str | Path,
+        keep_sids: set[str] | None = None,
+    ) -> None:
         df = pd.read_csv(series_csv)
+        if keep_sids is not None:
+            n0 = len(df)
+            df = df[df.SeriesInstanceUID.isin(keep_sids)]
+            print(f"series presentes dans les volumes : {len(df)} / {n0}",
+                  flush=True)
         df = df.sort_values("SeriesInstanceUID")
         self.by_study: dict[str, dict[str, dict[int, list[str]]]] = {}
         for uid, g in df.groupby("StudyInstanceUID"):
@@ -102,6 +166,7 @@ class StudyDataset(Dataset):
         train: bool = True,
         series_drop_p: float = 0.15,
         n_series: int = 3,
+        volume_index: dict[str, str] | None = None,
     ) -> None:
         self.items = items
         self.labels = (
@@ -109,6 +174,7 @@ class StudyDataset(Dataset):
         )
         self.index = index
         self.zip_path = zip_path
+        self.volume_index = volume_index
         self.train = train
         self.series_drop_p = series_drop_p
         self.n_series = int(n_series)
@@ -121,8 +187,11 @@ class StudyDataset(Dataset):
     def _load_sid(self, sid: str | None) -> torch.Tensor:
         if sid is None:
             return torch.zeros(N_SLICES, 224, 224)
+        src = self.zip_path if self.volume_index is None else self.volume_index.get(sid)
+        if src is None:
+            return torch.zeros(N_SLICES, 224, 224)
         try:
-            vol = load_volume(self.zip_path, sid).astype(np.float32) / 255.0
+            vol = load_volume(src, sid).astype(np.float32) / 255.0
             return torch.from_numpy(vol)
         except Exception:
             return torch.zeros(N_SLICES, 224, 224)
@@ -235,7 +304,7 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
     df = df.dropna(subset=targets, how="all")  # etudes sans aucun label : exclues
     df = _exclude_gold(df, labels_csv)
 
-    index = StudySeriesIndex(series_csv)
+    index, volume_index = make_series_index(series_csv, zip_path)
     # ne garder que les etudes ayant au moins une serie indexee
     df = df[df.StudyInstanceUID.isin(index.by_study.keys())]
     df = _ensure_split(df, targets)
@@ -255,10 +324,12 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
     train_ds = StudyDataset(
         train_df.StudyInstanceUID.tolist(), train_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=True, series_drop_p=0.15, n_series=n_series,
+        volume_index=volume_index,
     )
     val_ds = StudyDataset(
         val_df.StudyInstanceUID.tolist(), val_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=False, series_drop_p=0.0, n_series=n_series,
+        volume_index=volume_index,
     )
 
     train_ld = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
