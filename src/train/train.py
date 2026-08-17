@@ -96,8 +96,9 @@ def evaluate(model, loader, device, pos_weight: torch.Tensor | None = None,
     for x, y, uid in loader:
         x = x.to(device, non_blocking=True)
         y_dev = y.to(device, non_blocking=True)
-        with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
-            logits = model(x)
+        # eval en fp32 : en bf16, des logits peu disperses sont arrondis a des
+        # probas identiques -> AUC = 0.5 exact (artefact de ties, vu sur v9)
+        logits = model(x)
         logits_f = logits.float()
         probs.append(torch.sigmoid(logits_f).cpu())
         labels.append(y)
@@ -304,7 +305,7 @@ def main() -> None:
               f"proba std {pstd:.4f} | {dt:.0f}s",
               flush=True)
         rec = {"epoch": epoch + 1, "loss": train_loss, "val_loss": val_loss,
-               "val_macro_auc": val_auc,
+               "val_macro_auc": val_auc, "proba_std": pstd,
                **{f"auc_{k}": v for k, v in per_target.items()}}
         if gold_auc is not None:
             rec["gold_macro_auc"] = gold_auc
