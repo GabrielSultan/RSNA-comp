@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
-"""KneeNet v11 — v10 + diffs a travers le plan (B) + mix 1x1 init v10 (A).
+"""KneeNet v11 — v10 + stack adjacent (k-1, k, k+1) au lieu de R=G=B.
 
 Archi identique a v10 : ResNet-50 RadImageNet, attention 12 tetes.
-Encodage d'entree, pour chaque coupe k (clamp aux bords = replique) :
-  R = 0.5 + 0.5*(k - (k-1))   # derivee k-1 -> k
-  G = k                       # coupe d'interet
-  B = 0.5 + 0.5*((k+1) - k)   # derivee k -> k+1
-Puis Conv2d(3, 3, 1) `stem_mix` init a « tout depuis G » : a l'epoch 0
-le stem voit R=G=B=k (identique v10). Le 1x1 peut ouvrir les diffs.
-
+Seul l'encodage d'entree change : pour chaque coupe k, les 3 canaux du
+stem recoivent les coupes k-1, k, k+1 (clamp aux bords = replique).
 Le masque `valid` reste calcule sur la coupe centrale.
+
 Entree : (B, S, D, H, W) grayscale [0, 1] — dataset / aug inchanges.
+Pas de mean/std ImageNet (RadImageNet : rescale 1/255).
+
 BN de l'encodeur : running stats gelees (comme v10).
 """
 from __future__ import annotations
@@ -71,21 +69,12 @@ class KneeNet(nn.Module):
             nn.Dropout(dropout),
             nn.Linear(head_dim, 1),
         )
-        # A : mélange appris, init = ne lire que G (= coupe k)
-        self.stem_mix = nn.Conv2d(3, 3, kernel_size=1, bias=False)
-        self._init_stem_mix()
         self.register_buffer(
             "img_mean", torch.zeros(1, 3, 1, 1), persistent=True,
         )
         self.register_buffer(
             "img_std", torch.ones(1, 3, 1, 1), persistent=True,
         )
-
-    def _init_stem_mix(self) -> None:
-        """out_c = in_G pour les 3 canaux -> R=G=B=k au depart."""
-        with torch.no_grad():
-            self.stem_mix.weight.zero_()
-            self.stem_mix.weight[:, 1, 0, 0] = 1.0
 
     def _load_radimagenet(self, path: str) -> None:
         p = Path(path)
@@ -150,19 +139,10 @@ class KneeNet(nn.Module):
             dd = rest % d
             d_m = (dd - 1).clamp(0, d - 1)
             d_p = (dd + 1).clamp(0, d - 1)
-            prev = x[bs, ss, d_m]
-            center = x[bs, ss, dd]
-            nxt = x[bs, ss, d_p]
-            # B : G = coupe k, R/B = diffs centrees dans [0, 1]
+            # R=k-1, G=k, B=k+1 (clamp = replique aux bords)
             rgb = torch.stack(
-                [
-                    0.5 + 0.5 * (center - prev),
-                    center,
-                    0.5 + 0.5 * (nxt - center),
-                ],
-                dim=1,
+                [x[bs, ss, d_m], x[bs, ss, dd], x[bs, ss, d_p]], dim=1,
             )
-            rgb = self.stem_mix(rgb)
             rgb = (rgb - self.img_mean) / self.img_std
             enc = self._encode_chunks(rgb)
             if feats.dtype != enc.dtype:
