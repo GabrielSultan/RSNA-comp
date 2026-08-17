@@ -74,7 +74,14 @@ def download_one(url: str, dest: Path) -> None:
             if attempt >= RETRIES:
                 raise
             time.sleep(min(60, 2 ** attempt))
-    tmp.replace(dest)
+    for i in range(8):
+        try:
+            tmp.replace(dest)
+            break
+        except PermissionError:
+            time.sleep(1 + i)
+    else:
+        tmp.replace(dest)
     print(f"OK {dest} ({dest.stat().st_size/1e9:.2f} GB)", flush=True)
 
 
