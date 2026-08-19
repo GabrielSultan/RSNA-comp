@@ -1,0 +1,33 @@
+# v8bis subset : ConvNeXt-Small, prior-init, encodeur gele 2 epochs,
+# lr_backbone 2e-5. labels llm_labels_v4_blend, 25 % du train.
+#   python -X utf8 -m src.train.train --config configs/kneenet_v8bis_crop130_subset.yaml
+
+run_name: subset_v8bis_lr2e5_frac025
+model: kneenet_v8bis
+n_series: 3
+backbone: convnext_small
+pretrained: true
+
+labels_csv: data/labels/llm_labels_v4_blend.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+
+batch_size: 4
+encode_chunk: 8
+# Windows : 3 workers rechargent chacun torch+CUDA -> WinError 1455 (pagefile).
+num_workers: 0
+epochs: 10
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.00002
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
+freeze_encoder_epochs: 2
