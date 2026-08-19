@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Augmentations de volumes — version batch GPU.
 
-Entree : (B, S, D, H, W) float dans [0, 1] (S = nb de series/plans).
+Entree grayscale : (B, S, D, H, W) float dans [0, 1].
+Entree RGB DICOM : (B, S, D, 3, H, W) — meme affine / photo sur les 3
+canaux d'une coupe (les diffs k-1/k/k+1 restent coherents).
 Memes parametres pour les D slices d'un volume ; parametres differents
-par volume du batch. Un seul affine_grid sur (B*S*D) images -> quasi gratuit
-sur GPU.
+par volume du batch.
 """
 from __future__ import annotations
 
@@ -22,15 +23,24 @@ def augment_batch(
     contrast: float = 0.15,
     gamma_range: tuple[float, float] = (0.85, 1.15),
 ) -> torch.Tensor:
-    """x : (B, S, D, H, W) sur device GPU. Retourne meme shape.
+    """x : (B, S, D, H, W) ou (B, S, D, 3, H, W) sur GPU. Retourne meme shape.
 
     Pas de flip horizontal : il echange medial/lateral (menisques, OA).
     """
-    b, s, d, h, w = x.shape
+    rgb = x.ndim == 6
+    if rgb:
+        b, s, d, c, h, w = x.shape
+        if c != 3:
+            raise ValueError(f"attendu C=3, recu {tuple(x.shape)}")
+    elif x.ndim == 5:
+        b, s, d, h, w = x.shape
+        c = 1
+    else:
+        raise ValueError(f"attendu 5D ou 6D, recu {tuple(x.shape)}")
     device = x.device
     n_vol = b * s
 
-    xf = x.reshape(n_vol * d, 1, h, w)
+    xf = x.reshape(n_vol * d, c, h, w)
 
     # affine : une matrice par volume, repetee sur les D slices
     max_rot = max_rotate_deg * np.pi / 180.0
@@ -52,16 +62,18 @@ def augment_batch(
     grid = F.affine_grid(theta, xf.shape, align_corners=False)
     xf = F.grid_sample(xf, grid, align_corners=False, padding_mode="zeros")
 
-    # photometrique : un scalaire par volume
+    # photometrique : un scalaire par volume (identique sur les 3 canaux)
     bshift = (torch.rand(n_vol, 1, 1, 1, 1, device=device) * 2 - 1) * brightness
     cscale = torch.empty(n_vol, 1, 1, 1, 1, device=device).uniform_(
         1 - contrast, 1 + contrast)
     gamma = torch.empty(n_vol, 1, 1, 1, 1, device=device).uniform_(*gamma_range)
 
-    xv = xf.reshape(n_vol, d, 1, h, w)
+    xv = xf.reshape(n_vol, d, c, h, w)
     xv = ((xv + bshift).clamp(0, 1) - 0.5) * cscale + 0.5
     xv = xv.clamp(1e-4, 1).pow(gamma)
 
+    if rgb:
+        return xv.reshape(b, s, d, c, h, w)
     return xv.reshape(b, s, d, h, w)
 
 
@@ -83,15 +95,22 @@ def apply_affine(
     tx: float = 0.0,
     ty: float = 0.0,
 ) -> torch.Tensor:
-    """x : (B, S, D, H, W) dans [0, 1]. Meme affine pour tous les plans.
+    """x : (B, S, D, H, W) ou (B, S, D, 3, H, W) dans [0, 1].
+    Meme affine pour tous les plans (et les 3 canaux RGB).
 
     Convention identique a `augment_batch` (cos/sin divises par scale).
     """
     if angle_deg == 0.0 and scale == 1.0 and tx == 0.0 and ty == 0.0:
         return x
-    b, s, d, h, w = x.shape
-    device = x.device
-    xf = x.reshape(b * s * d, 1, h, w)
+    rgb = x.ndim == 6
+    if rgb:
+        b, s, d, c, h, w = x.shape
+    elif x.ndim == 5:
+        b, s, d, h, w = x.shape
+        c = 1
+    else:
+        raise ValueError(f"attendu 5D ou 6D, recu {tuple(x.shape)}")
+    xf = x.reshape(b * s * d, c, h, w)
     angle = x.new_tensor(angle_deg * np.pi / 180.0)
     sc = x.new_tensor(scale)
     cos, sin = torch.cos(angle) / sc, torch.sin(angle) / sc
@@ -105,4 +124,6 @@ def apply_affine(
     theta = theta.repeat_interleave(s * d, dim=0)
     grid = F.affine_grid(theta, xf.shape, align_corners=False)
     xf = F.grid_sample(xf, grid, align_corners=False, padding_mode="zeros")
+    if rgb:
+        return xf.reshape(b, s, d, c, h, w)
     return xf.reshape(b, s, d, h, w)
