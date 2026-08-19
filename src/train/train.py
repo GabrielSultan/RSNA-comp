@@ -21,6 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import shutil
 import sys
 import time
 from pathlib import Path
@@ -59,6 +60,25 @@ def compute_pos_weight(labels_csv: str, targets: list[str],
     if max_weight is not None:
         w = [min(x, max_weight) for x in w]
     return torch.tensor(w, dtype=torch.float32)
+
+
+def compute_prior_logits(labels_csv: str, targets: list[str],
+                         eps: float = 1e-4) -> list[float]:
+    """Logit de la frequence positive de chaque cible (init du biais final).
+
+    Demarrer le head exactement au prior empeche la phase "course au prior"
+    de la BCE, qui ecrase la variance des logits avant que le head apprenne
+    (collapse observe sur v8bis / convnext_small).
+    """
+    df = pd.read_csv(labels_csv)
+    if "split" in df.columns:  # certains CSV n'ont pas encore de split
+        df = df[df.split == "train"]
+    priors = []
+    for t in targets:
+        p = float(df[t].dropna().mean())
+        p = min(max(p, eps), 1 - eps)
+        priors.append(float(np.log(p / (1 - p))))
+    return priors
 
 
 def masked_bce(logits: torch.Tensor, y: torch.Tensor,
@@ -140,6 +160,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
         cfg["zip_path"], train=False, series_drop_p=0.0,
         n_series=int(cfg.get("n_series", 3)),
         volume_index=volume_index,
+        rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=False,
                       num_workers=num_workers)
@@ -155,6 +176,43 @@ def _ckpt_path(run_dir: Path, explicit: str | None) -> Path | None:
     if best_p.exists():
         return best_p
     return None
+
+
+def _atomic_torch_save(obj, path: Path, retries: int = 4) -> None:
+    """Ecrit via un .tmp puis replace. Evite un .pt tronque si OneDrive/disque
+    coupe le flux (erreur `unexpected pos` / `iostream stream error`)."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_name(path.name + ".tmp")
+    last_err: BaseException | None = None
+    for attempt in range(retries):
+        try:
+            if tmp.exists():
+                tmp.unlink()
+            torch.save(obj, tmp)
+            tmp.replace(path)
+            return
+        except (RuntimeError, OSError) as e:
+            last_err = e
+            if tmp.exists():
+                try:
+                    tmp.unlink()
+                except OSError:
+                    pass
+            time.sleep(1.5 * (attempt + 1))
+    raise RuntimeError(
+        f"echec sauvegarde {path} ({retries} essais) : {last_err}\n"
+        "Souvent disque plein, ou OneDrive/antivirus qui verrouille le "
+        "fichier pendant torch.save (Documents est souvent synchronise)."
+    ) from last_err
+
+
+def _copy_ckpt(src: Path, dst: Path) -> None:
+    tmp = dst.with_name(dst.name + ".tmp")
+    if tmp.exists():
+        tmp.unlink()
+    shutil.copy2(src, tmp)
+    tmp.replace(dst)
 
 
 def main() -> None:
@@ -191,6 +249,7 @@ def main() -> None:
         n_series=int(cfg.get("n_series", 3)),
         train_frac=float(cfg.get("train_frac", 1.0)),
         train_frac_seed=int(cfg.get("train_frac_seed", 42)),
+        rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
     )
     n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
     print(f"train {n_train} | val {n_val} "
@@ -203,8 +262,10 @@ def main() -> None:
         raise SystemExit("aucun checkpoint (last.pt / best.pt) pour --resume")
 
     arch = cfg.get("model", "kneenet_v8")
+    prior_logits = compute_prior_logits(cfg["labels_csv"], targets)
     model = build_model(
         cfg, pretrained=bool(cfg.get("pretrained", True)) and resume_path is None,
+        bias_init=prior_logits,
     ).to(device)
     print(f"{arch} ({cfg.get('backbone', '?')}) : {count_params(model)} params",
           flush=True)
@@ -225,6 +286,16 @@ def main() -> None:
         {"params": backbone_params, "lr": cfg["lr_backbone"]},
         {"params": head_params, "lr": cfg["lr_head"]},
     ], weight_decay=cfg["weight_decay"])
+
+    # Linear probing : encodeur gele au debut (features stables pour le
+    # head/attention), degel a l'epoch `freeze_encoder_epochs`.
+    freeze_epochs = int(cfg.get("freeze_encoder_epochs", 0) or 0)
+    encoder_frozen = False
+    # Rampe courte au degel : les moments AdamW du backbone sont vierges
+    # (aucun gradient pendant le gel) -> sans re-warmup, les premiers pas
+    # sont ~lr par coordonnee et detruisent l'adaptation du head.
+    rewarm_steps = 0
+    unfreeze_step = None
 
     epochs = cfg["epochs"]
     steps_per_epoch = len(train_ld)
@@ -275,7 +346,22 @@ def main() -> None:
               f"best val AUC {best_auc:.4f} | step {step}"
               f"{'' if 'optim' in ckpt else ' (AdamW neuf)'}", flush=True)
 
+    if (freeze_epochs > 0 and start_epoch < freeze_epochs
+            and hasattr(model, "set_encoder_frozen")):
+        model.set_encoder_frozen(True)
+        encoder_frozen = True
+        print(f"encodeur gele jusqu'a l'epoch {freeze_epochs} "
+              "(linear probing)", flush=True)
+
+    rewarm_steps = int(0.25 * steps_per_epoch)
+
     for epoch in range(start_epoch, epochs):
+        if encoder_frozen and epoch >= freeze_epochs:
+            model.set_encoder_frozen(False)
+            encoder_frozen = False
+            unfreeze_step = step
+            print(f"epoch {epoch + 1} : encodeur degele "
+                  f"(re-warmup {rewarm_steps} steps)", flush=True)
         model.train()
         t0 = time.time()
         running = 0.0
@@ -286,9 +372,15 @@ def main() -> None:
             x = augment_batch(x)
 
             for g in optim.param_groups:
-                g["lr"] = lr_at(step, total_steps,
-                                cfg["lr_backbone"] if g is optim.param_groups[0]
-                                else cfg["lr_head"], warmup)
+                if g is optim.param_groups[0]:
+                    base = cfg["lr_backbone"]
+                    if (unfreeze_step is not None
+                            and step - unfreeze_step < rewarm_steps):
+                        g["lr"] = base * (step - unfreeze_step + 1) / rewarm_steps
+                    else:
+                        g["lr"] = lr_at(step, total_steps, base, warmup)
+                else:
+                    g["lr"] = lr_at(step, total_steps, cfg["lr_head"], warmup)
 
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
                 logits = model(x)
@@ -341,9 +433,11 @@ def main() -> None:
             "config": cfg, "val_macro_auc": best_auc, "epoch": epoch + 1,
             "step": step, "stale": stale, "targets": targets,
         }
-        torch.save(payload, run_dir / "last.pt")
+        (run_dir / "history.json").write_text(json.dumps(history, indent=2))
+        last_p = run_dir / "last.pt"
+        _atomic_torch_save(payload, last_p)
         if improved:
-            torch.save(payload, run_dir / "best.pt")
+            _copy_ckpt(last_p, run_dir / "best.pt")
             print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
         elif patience > 0:
             print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
@@ -351,7 +445,6 @@ def main() -> None:
                 print(f"early stop a l'epoch {epoch+1} "
                       f"(meilleur val AUC {best_auc:.4f})", flush=True)
                 break
-        (run_dir / "history.json").write_text(json.dumps(history, indent=2))
 
     (run_dir / "history.json").write_text(json.dumps(history, indent=2))
 
