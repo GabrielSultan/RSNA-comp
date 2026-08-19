@@ -20,7 +20,7 @@ import torch
 import torch.nn.functional as F
 
 from src.infer.inspect_attention import (
-    build_loader, load_ckpt_model, load_config, plane_names,
+    build_loader, cam_token_slice_attn, load_ckpt_model, load_config, plane_names,
 )
 from src.models.kneenet_v14 import MAP_HW
 
@@ -303,6 +303,148 @@ def plot_same_slice(ex: dict, targets: list[str], planes: list[str],
         fig.savefig(out, dpi=120)
         plt.close(fig)
     return fig
+
+
+def _mass_d_from_sdt(mean_sdt: np.ndarray) -> np.ndarray:
+    mass = mean_sdt.mean(axis=2).sum(0)
+    return mass / max(float(mass.sum()), 1e-12)
+
+
+def summarize_gap_vs_cam(mean_gap: np.ndarray, mean_cam: np.ndarray,
+                         targets: list[str], planes: list[str],
+                         n_studies: int) -> dict:
+    mass_gap_d = _mass_d_from_sdt(mean_gap)
+    mass_cam_d = _mass_d_from_sdt(mean_cam)
+    rows = []
+    for ti, name in enumerate(targets):
+        a = mean_gap[:, :, ti].ravel()
+        b = mean_cam[:, :, ti].ravel()
+        corr = float("nan") if a.std() < 1e-12 or b.std() < 1e-12 else float(
+            np.corrcoef(a, b)[0, 1]
+        )
+        mg = mean_gap[:, :, ti].sum(0)
+        mc = mean_cam[:, :, ti].sum(0)
+        rows.append({
+            "target": name,
+            "corr": corr,
+            "peak_gap": int(mg.argmax()),
+            "peak_cam": int(mc.argmax()),
+            "plane_gap": planes[int(mean_gap[:, :, ti].sum(1).argmax())],
+            "plane_cam": planes[int(mean_cam[:, :, ti].sum(1).argmax())],
+        })
+    return {
+        "n_studies": int(n_studies),
+        "targets": targets,
+        "planes": planes,
+        "mean_gap": mean_gap,
+        "mean_cam": mean_cam,
+        "mass_gap_d": mass_gap_d,
+        "mass_cam_d": mass_cam_d,
+        "corr": [(r["target"], r["corr"]) for r in rows],
+        "rows": rows,
+    }
+
+
+def collect_gap_vs_cam_slice(model, loader, device: str, targets: list[str]):
+    """Masse par coupe : attn v14 (scores GAP) vs scores sur tokens CAM."""
+    n_series = int(model.n_series)
+    sum_gap = None
+    sum_cam = None
+    n_studies = 0
+    model.eval()
+    for x, _y, _uids in loader:
+        x = x.to(device, non_blocking=True)
+        out = model.interpret(x)
+        gap = out["slice_attn"].float()
+        cam = cam_token_slice_attn(model, out["cam_tokens"], out["valid"]).float()
+        valid = out["valid"].unsqueeze(-1).float()
+        if sum_gap is None:
+            _b, s, _d, t = gap.shape
+            sum_gap = torch.zeros(s, _d, t)
+            sum_cam = torch.zeros(s, _d, t)
+        sum_gap += (gap * valid).sum(0).cpu()
+        sum_cam += (cam * valid).sum(0).cpu()
+        n_studies += x.size(0)
+        print(f"  compare {n_studies} etudes", flush=True)
+    n = max(n_studies, 1)
+    mean_gap = (sum_gap / n).numpy()
+    mean_cam = (sum_cam / n).numpy()
+    return summarize_gap_vs_cam(
+        mean_gap, mean_cam, targets, plane_names(n_series), n_studies,
+    )
+
+
+def plot_gap_vs_cam_slice(cmp_: dict, out: Path | None = None):
+    import matplotlib.pyplot as plt
+    xs = np.arange(len(cmp_["mass_gap_d"]))
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+    ax = axes[0]
+    ax.plot(xs, cmp_["mass_gap_d"], marker="o", ms=3, label="v14 reel (score GAP)")
+    ax.plot(xs, cmp_["mass_cam_d"], marker="s", ms=3, label="contrefactuel (score token CAM)")
+    ax.axhline(1.0 / len(xs), color="#888", ls="--", lw=1, label="uniforme 1/24")
+    ax.set_xlabel("indice de coupe")
+    ax.set_ylabel("masse (moy. plans et cibles)")
+    ax.set_title("Attention-coupe : GAP vs token CAM")
+    ax.legend(frameon=False, fontsize=8)
+    ax.grid(True, alpha=0.3)
+    ax = axes[1]
+    names = [c[0] for c in cmp_["corr"]]
+    vals = [c[1] for c in cmp_["corr"]]
+    ax.barh(names[::-1], vals[::-1], color="#2c3e50")
+    ax.set_xlim(0, 1)
+    ax.set_xlabel("corr. masse (plan, coupe)")
+    ax.set_title("Accord GAP / CAM par tete")
+    fig.tight_layout()
+    if out is not None:
+        fig.savefig(out, dpi=130)
+        plt.close(fig)
+    return fig
+
+
+def plot_gap_vs_cam_heatmaps(cmp_: dict, out: Path | None = None):
+    import matplotlib.pyplot as plt
+    targets = cmp_["targets"]
+    planes = cmp_["planes"]
+    g, c = cmp_["mean_gap"], cmp_["mean_cam"]
+    g_td = np.stack([g[:, :, t].sum(0) for t in range(len(targets))])
+    c_td = np.stack([c[:, :, t].sum(0) for t in range(len(targets))])
+    g_sd = g.mean(axis=2)
+    c_sd = c.mean(axis=2)
+    fig, axes = plt.subplots(2, 2, figsize=(12, 9))
+    panels = (
+        (axes[0, 0], g_sd, planes, "v14 reel — plans (moy. tetes)"),
+        (axes[0, 1], c_sd, planes, "contrefactuel CAM — plans"),
+        (axes[1, 0], g_td, targets, "v14 reel — tetes (somme plans)"),
+        (axes[1, 1], c_td, targets, "contrefactuel CAM — tetes"),
+    )
+    for ax, mat, labels, title in panels:
+        im = ax.imshow(mat, aspect="auto", cmap="magma")
+        ax.set_yticks(range(len(labels)))
+        ax.set_yticklabels(labels, fontsize=8)
+        ax.set_xticks(range(mat.shape[1]))
+        ax.set_title(title, fontsize=10)
+        fig.colorbar(im, ax=ax, fraction=0.03, pad=0.02)
+    axes[1, 0].set_xlabel("indice de coupe")
+    axes[1, 1].set_xlabel("indice de coupe")
+    fig.tight_layout()
+    if out is not None:
+        fig.savefig(out, dpi=130)
+        plt.close(fig)
+    return fig
+
+
+def save_gap_vs_cam(cmp_: dict, out: Path) -> None:
+    out.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(
+        out / "gap_vs_cam_slice.npz",
+        mean_gap=cmp_["mean_gap"],
+        mean_cam=cmp_["mean_cam"],
+        mass_gap_d=cmp_["mass_gap_d"],
+        mass_cam_d=cmp_["mass_cam_d"],
+    )
+    pd.DataFrame(cmp_["rows"]).to_csv(out / "gap_vs_cam_slice.csv", index=False)
+    plot_gap_vs_cam_slice(cmp_, out / "gap_vs_cam_slice.png")
+    plot_gap_vs_cam_heatmaps(cmp_, out / "gap_vs_cam_heatmaps.png")
 
 
 def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,

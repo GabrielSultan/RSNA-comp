@@ -9,8 +9,8 @@ Une coupe « morte » = presque jamais dans le top-5 d'aucune tete, et
 une masse d'attention tres inferieure a l'uniforme 1/D.
 
 Usage :
+  python -X utf8 -m src.infer.inspect_attention --config configs/kneenet_v14_crop130_subset.yaml --split gold
   python -X utf8 -m src.infer.inspect_attention --config configs/kneenet_v11_crop130.yaml
-  python -X utf8 -m src.infer.inspect_attention --config configs/kneenet_v8_crop130_subset.yaml --split gold
 """
 from __future__ import annotations
 
@@ -94,6 +94,23 @@ def scores_to_attn(model, x: torch.Tensor,
 
 
 @torch.no_grad()
+def cam_token_slice_attn(model, cam_tokens: torch.Tensor,
+                         valid: torch.Tensor) -> torch.Tensor:
+    """Softmax coupe si on scorait le token CAM (diag de attn_score).
+
+    cam_tokens : (B, S, D, T, C) deja + plane/slice embed.
+    Retour : (B, S, D, T). Contrefactuel v15, pas le forward v14.
+    """
+    b, s, d, t, c = cam_tokens.shape
+    logits = model.attn_score(cam_tokens.reshape(b * s * d * t, c))
+    logits = logits.reshape(b, s, d, t, t)
+    scores = torch.diagonal(logits, dim1=3, dim2=4)
+    scores = scores.masked_fill(~valid.unsqueeze(-1), -1.0e4)
+    attn = torch.softmax(scores.float().reshape(b, s * d, t), dim=1)
+    return attn.reshape(b, s, d, t).to(cam_tokens.dtype)
+
+
+@torch.no_grad()
 def forward_with_attn(model, x: torch.Tensor):
     """Forward eval + cartes d'attention. Hook, pas de patch des .py figees."""
     captured: dict[str, torch.Tensor] = {}
@@ -168,6 +185,7 @@ def build_loader(cfg: dict, split: str, batch_size: int, num_workers: int,
     return loader, list(targets)
 
 
+@torch.no_grad()
 def collect_attention(model, loader, device: str, targets: list[str],
                       n_examples: int = 4):
     """Agregue l'attention val/gold. Garde quelques volumes pour les mosaics."""
@@ -180,18 +198,32 @@ def collect_attention(model, loader, device: str, targets: list[str],
     topk_any = np.zeros((n_series, d), dtype=np.float64)
     n_studies = 0
     examples: list[dict] = []
+    use_cam = hasattr(model, "interpret")
+    sum_cam = (
+        np.zeros((n_series, d, n_targets), dtype=np.float64) if use_cam else None
+    )
 
     model.eval()
     for x, _y, uids in loader:
         x = x.to(device, non_blocking=True)
-        _, attn, valid = forward_with_attn(model, x)
-        attn_np = attn.cpu().numpy()
+        if use_cam:
+            out = model.interpret(x)
+            attn = out["slice_attn"]
+            valid = out["valid"]
+            cam = cam_token_slice_attn(model, out["cam_tokens"], valid)
+            cam_np = cam.float().cpu().numpy()
+        else:
+            _, attn, valid = forward_with_attn(model, x)
+            cam_np = None
+        attn_np = attn.float().cpu().numpy()
         valid_np = valid.cpu().numpy()
         b, s, dd, t = attn_np.shape
         assert dd == d, f"D={dd}, attendu {d}"
 
         sum_attn += (attn_np * valid_np[..., None]).sum(axis=0)
         n_valid += valid_np.sum(axis=0)
+        if cam_np is not None:
+            sum_cam += (cam_np * valid_np[..., None]).sum(axis=0)
 
         flat = attn_np.reshape(b, s * dd, t)
         top_idx = np.argpartition(-flat, kth=min(TOPK, s * dd) - 1, axis=1)
@@ -239,6 +271,10 @@ def collect_attention(model, loader, device: str, targets: list[str],
         "pct_top5_any": pct_top5_any,
         "mass_d": mass_d,
         "examples": examples,
+        "mean_cam_sdt": (
+            None if sum_cam is None
+            else sum_cam / np.maximum(n_valid[..., None], 1.0)
+        ),
     }
 
 
@@ -498,6 +534,16 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
     plot_heatmaps(agg, out_dir)
     plot_examples(agg, out_dir)
     print_report(summary, table)
+    if agg.get("mean_cam_sdt") is not None:
+        from src.infer.inspect_spatial import save_gap_vs_cam, summarize_gap_vs_cam
+        cmp_ = summarize_gap_vs_cam(
+            agg["mean_sdt"], agg["mean_cam_sdt"],
+            agg["targets"], agg["planes"], agg["n_studies"],
+        )
+        save_gap_vs_cam(cmp_, out_dir)
+        med = float(np.nanmedian([r["corr"] for r in cmp_["rows"]]))
+        print(f"GAP vs CAM (contrefactuel v15) corr mediane {med:.3f} "
+              f"-> {out_dir / 'gap_vs_cam_slice.csv'}")
     print(f"\necrit -> {out_dir}")
     return summary
 
@@ -513,7 +559,7 @@ def main() -> None:
     parser.add_argument("--max-studies", type=int, default=None)
     parser.add_argument("--n-examples", type=int, default=4)
     parser.add_argument("--batch-size", type=int, default=None)
-    parser.add_argument("--workers", type=int, default=2)
+    parser.add_argument("--workers", type=int, default=0)
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -523,10 +569,19 @@ def main() -> None:
         Path("checkpoints") / cfg["run_name"] / "best.pt"
     )
     if not ckpt.exists():
-        raise SystemExit(f"checkpoint introuvable : {ckpt}")
-    out = Path(args.out) if args.out else (
-        Path("checkpoints") / cfg["run_name"] / "attention_inspect"
-    )
+        alt = ckpt.parent / "last.pt"
+        if alt.exists():
+            ckpt = alt
+        else:
+            raise SystemExit(f"checkpoint introuvable : {ckpt}")
+    if args.out:
+        out = Path(args.out)
+    else:
+        folder = (
+            "attention_inspect_gold" if args.split == "gold"
+            else "attention_inspect"
+        )
+        out = Path("checkpoints") / cfg["run_name"] / folder
     bs = int(args.batch_size or cfg.get("batch_size") or 4)
     run(
         cfg, ckpt, args.split, out, device, bs, args.workers,
