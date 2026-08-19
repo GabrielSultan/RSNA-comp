@@ -241,11 +241,15 @@ class KneeNet(nn.Module):
             local[idx] = loc
             spatial[idx] = spat
         logits, slice_attn = self._slice_pool(x, valid, gaps, local)
+        pe = self.plane_embed[:s].view(1, s, 1, 1, -1)
+        se = self.slice_embed[:d].view(1, 1, d, 1, -1)
+        cam_tokens = local.reshape(b, s, d, self.n_targets, -1) + pe + se
         return {
             "logits": logits,
             "slice_attn": slice_attn,
             "spatial_attn": spatial.reshape(
                 b, s, d, self.n_targets, hw, hw,
             ),
+            "cam_tokens": cam_tokens,
             "valid": valid,
         }
