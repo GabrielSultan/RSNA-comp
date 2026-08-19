@@ -21,9 +21,12 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import os
 import shutil
 import sys
+import tempfile
 import time
+import uuid
 from pathlib import Path
 
 import numpy as np
@@ -178,41 +181,70 @@ def _ckpt_path(run_dir: Path, explicit: str | None) -> Path | None:
     return None
 
 
-def _atomic_torch_save(obj, path: Path, retries: int = 4) -> None:
-    """Ecrit via un .tmp puis replace. Evite un .pt tronque si OneDrive/disque
-    coupe le flux (erreur `unexpected pos` / `iostream stream error`)."""
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + ".tmp")
+def _publish_ckpt(src: Path, dest: Path, retries: int = 8) -> None:
+    """Copie src -> dest via un .tmp unique (OneDrive verrouille souvent
+    le meme nom .tmp d'un essai a l'autre, WinError 32)."""
+    dest = Path(dest)
+    dest.parent.mkdir(parents=True, exist_ok=True)
     last_err: BaseException | None = None
     for attempt in range(retries):
+        tmp = dest.with_name(
+            f"{dest.name}.{os.getpid()}.{uuid.uuid4().hex[:8]}.tmp")
         try:
-            if tmp.exists():
-                tmp.unlink()
-            torch.save(obj, tmp)
-            tmp.replace(path)
-            return
-        except (RuntimeError, OSError) as e:
-            last_err = e
-            if tmp.exists():
+            shutil.copy2(src, tmp)
+            try:
+                os.replace(tmp, dest)
+            except OSError:
+                shutil.copy2(tmp, dest)
                 try:
-                    tmp.unlink()
+                    tmp.unlink(missing_ok=True)
                 except OSError:
                     pass
-            time.sleep(1.5 * (attempt + 1))
+            return
+        except OSError as e:
+            last_err = e
+            try:
+                tmp.unlink(missing_ok=True)
+            except OSError:
+                pass
+            time.sleep(2.0 * (attempt + 1))
     raise RuntimeError(
-        f"echec sauvegarde {path} ({retries} essais) : {last_err}\n"
-        "Souvent disque plein, ou OneDrive/antivirus qui verrouille le "
-        "fichier pendant torch.save (Documents est souvent synchronise)."
+        f"echec copie vers {dest} ({retries} essais) : {last_err}\n"
+        "Souvent OneDrive/antivirus qui verrouille le .pt dans Documents."
     ) from last_err
 
 
+def _atomic_torch_save(obj, path: Path, also: Path | None = None,
+                       retries: int = 8) -> None:
+    """torch.save dans %TEMP% (hors sync OneDrive), puis copie vers path.
+
+    Evite un .pt tronque (`iostream stream error`) et WinError 32 sur un
+    .tmp deja pris par OneDrive pendant l'ecriture lente (~300 Mo)."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, raw = tempfile.mkstemp(suffix=".pt", prefix=f"{path.stem}_")
+    os.close(fd)
+    staging = Path(raw)
+    try:
+        torch.save(obj, staging)
+        _publish_ckpt(staging, path, retries=retries)
+        if also is not None:
+            _publish_ckpt(staging, also, retries=retries)
+    except (RuntimeError, OSError) as e:
+        raise RuntimeError(
+            f"echec sauvegarde {path} : {e}\n"
+            "Souvent disque plein, ou OneDrive/antivirus qui verrouille "
+            "le fichier (Documents est souvent synchronise)."
+        ) from e
+    finally:
+        try:
+            staging.unlink(missing_ok=True)
+        except OSError:
+            pass
+
+
 def _copy_ckpt(src: Path, dst: Path) -> None:
-    tmp = dst.with_name(dst.name + ".tmp")
-    if tmp.exists():
-        tmp.unlink()
-    shutil.copy2(src, tmp)
-    tmp.replace(dst)
+    _publish_ckpt(src, dst)
 
 
 def main() -> None:
@@ -302,7 +334,10 @@ def main() -> None:
     total_steps = epochs * steps_per_epoch
     warmup = int(0.05 * total_steps)
 
-    gold_ld = make_gold_loader(cfg, cfg["batch_size"], cfg["num_workers"])
+    # Gold = 58 etudes : 0 worker. Sinon, sous Windows, train+val+gold
+    # ouvrent chacun 3 processus qui mmap les zip -> OOM CPU (~14 Mo
+    # refusés alors que le tenseur est petit).
+    gold_ld = make_gold_loader(cfg, cfg["batch_size"], num_workers=0)
     if gold_ld is not None:
         print(f"gold sanity loader : {len(gold_ld.dataset)} etudes "
               "(loggee, jamais pour le checkpoint)", flush=True)
@@ -435,9 +470,13 @@ def main() -> None:
         }
         (run_dir / "history.json").write_text(json.dumps(history, indent=2))
         last_p = run_dir / "last.pt"
-        _atomic_torch_save(payload, last_p)
+        try:
+            _atomic_torch_save(
+                payload, last_p,
+                also=(run_dir / "best.pt") if improved else None)
+        except RuntimeError as e:
+            print(f"  !! {e}", flush=True)
         if improved:
-            _copy_ckpt(last_p, run_dir / "best.pt")
             print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
         elif patience > 0:
             print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
