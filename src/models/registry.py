@@ -27,9 +27,13 @@ import torch.nn as nn
 # nom CLI / YAML  ->  module Python qui expose `class KneeNet`
 MODELS: dict[str, str] = {
     "kneenet_v8": "src.models.kneenet_v8",
+    "kneenet_v8bis": "src.models.kneenet_v8bis",
     "kneenet_v9": "src.models.kneenet_v9",
     "kneenet_v10": "src.models.kneenet_v10",
     "kneenet_v11": "src.models.kneenet_v11",
+    "kneenet_v12": "src.models.kneenet_v12",
+    "kneenet_v13": "src.models.kneenet_v13",
+    "kneenet_v14": "src.models.kneenet_v14",
 }
 
 DEFAULT_MODEL = "kneenet_v8"
