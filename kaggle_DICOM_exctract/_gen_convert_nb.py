@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
-"""Génère les notebooks Kaggle de conversion DICOM -> NPZ crop 130 mm."""
+"""Génère les notebooks Kaggle de conversion DICOM -> NPZ crop 130 mm.
+
+Par defaut : variante 320 px (nouveaux kernels / zip / dataset).
+Les notebooks 224 existants (convert_crop130_part*) ne sont pas ecrases.
+"""
 from pathlib import Path
 
 import nbformat as nbf
 
 ROOT = Path(__file__).resolve().parent
+
+# Variante poussee sur Kaggle. 224 reste dans convert_crop130_part{0,1}.
+IMG_SIZE = 320
+DIR_PREFIX = "convert_crop130_320"
+ZIP_PREFIX = "volumes_crop130_320"
+KERNEL_SLUG = "rsna-knee-convert-crop130-320"
+KERNEL_TITLE = "RSNA Knee Convert crop130 320"
+N_SHARDS = 2
 
 CODE_CONVERT = r'''
 import os, io, gc, time, json, traceback
@@ -21,7 +33,7 @@ CROP_MM = 130.0
 CROP_REL = 0.70          # fallback si PixelSpacing absent
 BAND = (0.20, 0.80)      # profondeur : on ignore les 20 % de chaque bord
 N_SLICES = 24
-IMG_SIZE = 224
+IMG_SIZE = __IMG_SIZE__
 PLANES = ["Sagittal", "Coronal", "Axial"]
 N_WORKERS = 4
 # --------------------------------------------------------------------------
@@ -247,7 +259,7 @@ def series_path(study_uid: str, series_uid: str) -> Path:
 CODE_RUN = r'''
 import zipfile
 
-zip_path = OUT_DIR / f"volumes_crop130_part{SHARD_ID}.zip"
+zip_path = OUT_DIR / f"__ZIP_PREFIX___part{SHARD_ID}.zip"
 manifest_path = OUT_DIR / f"manifest_part{SHARD_ID}.csv"
 recipe_path = OUT_DIR / "RECIPE.json"
 
@@ -261,7 +273,7 @@ recipe = {
     "shard_id": SHARD_ID,
     "n_shards": N_SHARDS,
     "n_jobs": len(jobs),
-    "note": "1 serie fluid-prioritaire par plan. Crop 130 mm (PixelSpacing) sinon centre 70 %. Bande profondeur 20-80 %, linspace 24, resize 224, uint8.",
+    "note": "1 serie fluid-prioritaire par plan. Crop 130 mm (PixelSpacing) sinon centre 70 %. Bande profondeur 20-80 %, linspace 24, resize __IMG_SIZE__, uint8.",
 }
 recipe_path.write_text(json.dumps(recipe, indent=2), encoding="utf-8")
 print(json.dumps(recipe, indent=2))
@@ -355,14 +367,25 @@ with zfmod.ZipFile(zip_path) as zf:
             vol = np.load(io.BytesIO(f.read()))["data"]
         print(name, vol.shape, vol.dtype, "min", int(vol.min()), "max", int(vol.max()),
               "mean", float(vol.mean()), "std", float(vol.std()))
+        assert vol.shape == (N_SLICES, IMG_SIZE, IMG_SIZE), vol.shape
         means.append(float(vol.mean()))
 print("mean uint8 (3 samples)", means)
+print(f"attendu : shape ({N_SLICES}, {IMG_SIZE}, {IMG_SIZE}) uint8")
 print("cible historique NPZ communautaires : mean~42 std~49.5 (crop 130 mm => moments differents, c'est normal)")
 print("fichiers working :", sorted(p.name for p in OUT_DIR.iterdir() if p.is_file()))
 '''
 
 
-def make_notebook(shard_id: int, n_shards: int) -> nbf.NotebookNode:
+def _fill(src: str, img_size: int, zip_prefix: str) -> str:
+    return src.replace("__IMG_SIZE__", str(img_size)).replace("__ZIP_PREFIX__", zip_prefix)
+
+
+def make_notebook(
+    shard_id: int,
+    n_shards: int,
+    img_size: int,
+    zip_prefix: str,
+) -> nbf.NotebookNode:
     nb = nbf.v4.new_notebook()
     nb["metadata"] = {
         "kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
@@ -371,26 +394,28 @@ def make_notebook(shard_id: int, n_shards: int) -> nbf.NotebookNode:
     cells = [
         nbf.v4.new_markdown_cell(
             "# RSNA Knee — conversion DICOM → NPZ (crop 130 mm)\n\n"
-            f"**Shard {shard_id}/{n_shards}** (CPU, internet off).\n\n"
+            f"**Shard {shard_id}/{n_shards}** (CPU, internet off). "
+            f"**{img_size}×{img_size}** uint8.\n\n"
             "Lit `train_series/` sur Kaggle, garde **1 série fluid-prioritaire par plan** "
             "(sag / cor / ax), applique :\n\n"
             "1. crop physique **130 mm** (`PixelSpacing`) ou crop centre 70 % si spacing absent\n"
             "2. bande profondeur **20–80 %**\n"
-            "3. resample **24** coupes, resize **224×224**, uint8, percentiles 1–99\n\n"
+            f"3. resample **24** coupes, resize **{img_size}×{img_size}**, uint8, percentiles 1–99\n\n"
             "Sortie dans `/kaggle/working/` :\n"
-            f"- `volumes_crop130_part{shard_id}.zip` (`{{SeriesInstanceUID}}.npz` → `data`)\n"
+            f"- `{zip_prefix}_part{shard_id}.zip` (`{{SeriesInstanceUID}}.npz` → `data`)\n"
             f"- `manifest_part{shard_id}.csv`\n"
             "- `RECIPE.json`\n\n"
             "Ensuite : `kaggle kernels output` puis train local. "
             "Le submit devra recopier **la même recette**."
         ),
         nbf.v4.new_code_cell(
-            f"SHARD_ID = {shard_id}\nN_SHARDS = {n_shards}\n" + CODE_CONVERT
+            f"SHARD_ID = {shard_id}\nN_SHARDS = {n_shards}\n"
+            + _fill(CODE_CONVERT, img_size, zip_prefix)
         ),
         nbf.v4.new_code_cell(CODE_FIND),
         nbf.v4.new_code_cell(CODE_PICK),
         nbf.v4.new_code_cell(CODE_FUNCS),
-        nbf.v4.new_code_cell(CODE_RUN),
+        nbf.v4.new_code_cell(_fill(CODE_RUN, img_size, zip_prefix)),
         nbf.v4.new_code_cell(CODE_VERIFY),
     ]
     nb["cells"] = cells
@@ -398,15 +423,15 @@ def make_notebook(shard_id: int, n_shards: int) -> nbf.NotebookNode:
 
 
 def main() -> None:
-    for shard in (0, 1):
-        d = ROOT / f"convert_crop130_part{shard}"
+    for shard in range(N_SHARDS):
+        d = ROOT / f"{DIR_PREFIX}_part{shard}"
         d.mkdir(parents=True, exist_ok=True)
-        nb = make_notebook(shard, 2)
+        nb = make_notebook(shard, N_SHARDS, IMG_SIZE, ZIP_PREFIX)
         path = d / "convert.ipynb"
         nbf.write(nb, path)
         meta = {
-            "id": f"sultent/rsna-knee-convert-crop130-part{shard}",
-            "title": f"RSNA Knee Convert crop130 part{shard}",
+            "id": f"sultent/{KERNEL_SLUG}-part{shard}",
+            "title": f"{KERNEL_TITLE} part{shard}",
             "code_file": "convert.ipynb",
             "language": "python",
             "kernel_type": "notebook",
