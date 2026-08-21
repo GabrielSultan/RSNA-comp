@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """Dataset etude-level : 3 plans fluid (sag/cor/ax) + slot T1 optionnel.
 
-Sortie grayscale (S, 24, 224, 224) ou RGB DICOM (S, 24, 3, 224, 224)
-si `rgb_neighbors=True` (NPZ crop130_rgb25d). S=3 (v8) ou S=4 (v9).
+Sortie grayscale (S, 24, H, W) ou RGB DICOM (S, 24, 3, H, W)
+si `rgb_neighbors=True` (NPZ crop130_rgb25d). H=W=`img_size` (224 ou 320).
+S=3 (v8) ou S=4 (v9).
 12 labels avec masque (-1 = masque). Lecture NPZ depuis un zip unique
 (`data/volumes.zip`) ou un dossier de shards (`data/crop130/*.zip`).
 Series dropout : un plan (ou le T1) mis a zero avec proba `series_drop_p`.
@@ -169,6 +170,7 @@ class StudyDataset(Dataset):
         n_series: int = 3,
         volume_index: dict[str, str] | None = None,
         rgb_neighbors: bool = False,
+        img_size: int = 224,
     ) -> None:
         self.items = items
         self.labels = (
@@ -181,13 +183,17 @@ class StudyDataset(Dataset):
         self.series_drop_p = series_drop_p
         self.n_series = int(n_series)
         self.rgb_neighbors = bool(rgb_neighbors)
+        self.img_size = int(img_size)
         if self.n_series not in (3, 4):
             raise ValueError(f"n_series={self.n_series} : attendu 3 ou 4")
+        if self.img_size < 32:
+            raise ValueError(f"img_size={self.img_size} : trop petit")
 
     def _empty(self) -> torch.Tensor:
+        s = self.img_size
         if self.rgb_neighbors:
-            return torch.zeros(N_SLICES, 3, 224, 224)
-        return torch.zeros(N_SLICES, 224, 224)
+            return torch.zeros(N_SLICES, 3, s, s)
+        return torch.zeros(N_SLICES, s, s)
 
     def __len__(self) -> int:
         return len(self.items)
@@ -239,7 +245,7 @@ class StudyDataset(Dataset):
             else:
                 vols.append(self._load_sid(
                     self.index.pick_nonfluid(uid, used, pick_rng)))
-        x = torch.stack(vols)  # (3|4, 24, [3,] 224, 224)
+        x = torch.stack(vols)  # (3|4, 24, [3,] H, W)
 
         if self.labels is None:
             return x, uid
@@ -314,7 +320,8 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  zip_path: str = "data/volumes.zip",
                  batch_size: int = 8, num_workers: int = 4,
                  n_series: int = 3, train_frac: float = 1.0,
-                 train_frac_seed: int = 42, rgb_neighbors: bool = False):
+                 train_frac_seed: int = 42, rgb_neighbors: bool = False,
+                 img_size: int = 224):
     from torch.utils.data import DataLoader
 
     df = pd.read_csv(labels_csv)
@@ -334,6 +341,7 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
     if rgb_neighbors:
         print("rgb_neighbors : volumes (D, 3, H, W) DICOM k-1/k/k+1",
               flush=True)
+    print(f"img_size={img_size}", flush=True)
 
     if n_series >= 4:
         n_t1 = sum(
@@ -347,11 +355,13 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
         train_df.StudyInstanceUID.tolist(), train_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=True, series_drop_p=0.15, n_series=n_series,
         volume_index=volume_index, rgb_neighbors=rgb_neighbors,
+        img_size=img_size,
     )
     val_ds = StudyDataset(
         val_df.StudyInstanceUID.tolist(), val_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=False, series_drop_p=0.0, n_series=n_series,
         volume_index=volume_index, rgb_neighbors=rgb_neighbors,
+        img_size=img_size,
     )
 
     train_ld = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
