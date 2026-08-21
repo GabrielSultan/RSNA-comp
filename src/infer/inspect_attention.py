@@ -96,10 +96,10 @@ def scores_to_attn(model, x: torch.Tensor,
 @torch.no_grad()
 def cam_token_slice_attn(model, cam_tokens: torch.Tensor,
                          valid: torch.Tensor) -> torch.Tensor:
-    """Softmax coupe si on scorait le token CAM (diag de attn_score).
+    """Softmax coupe en scorant le token CAM (diag de attn_score).
 
     cam_tokens : (B, S, D, T, C) deja + plane/slice embed.
-    Retour : (B, S, D, T). Contrefactuel v15, pas le forward v14.
+    Retour : (B, S, D, T). Forward v15 ; contrefactuel pour v14.
     """
     b, s, d, t, c = cam_tokens.shape
     logits = model.attn_score(cam_tokens.reshape(b * s * d * t, c))
@@ -108,6 +108,21 @@ def cam_token_slice_attn(model, cam_tokens: torch.Tensor,
     scores = scores.masked_fill(~valid.unsqueeze(-1), -1.0e4)
     attn = torch.softmax(scores.float().reshape(b, s * d, t), dim=1)
     return attn.reshape(b, s, d, t).to(cam_tokens.dtype)
+
+
+@torch.no_grad()
+def gap_token_slice_attn(model, gap_tokens: torch.Tensor,
+                         valid: torch.Tensor) -> torch.Tensor:
+    """Softmax coupe en scorant le GAP (chemin v14).
+
+    gap_tokens : (B, S, D, C) deja + plane/slice embed.
+    Retour : (B, S, D, T). Forward v14 ; contrefactuel pour v15.
+    """
+    scores = model.attn_score(gap_tokens)
+    scores = scores.masked_fill(~valid.unsqueeze(-1), -1.0e4)
+    b, n_s, d, t = scores.shape
+    attn = torch.softmax(scores.float().reshape(b, n_s * d, t), dim=1)
+    return attn.reshape(b, n_s, d, t).to(gap_tokens.dtype)
 
 
 @torch.no_grad()
@@ -170,6 +185,7 @@ def build_loader(cfg: dict, split: str, batch_size: int, num_workers: int,
             train_frac=float(cfg.get("train_frac", 1.0)),
             train_frac_seed=int(cfg.get("train_frac_seed", 42)),
             rgb_neighbors=rgb,
+            img_size=int(cfg.get("img_size", 224)),
         )
         ds = train_ld.dataset if split == "train" else val_ld.dataset
         ds.train = False
@@ -199,9 +215,7 @@ def collect_attention(model, loader, device: str, targets: list[str],
     n_studies = 0
     examples: list[dict] = []
     use_cam = hasattr(model, "interpret")
-    sum_cam = (
-        np.zeros((n_series, d, n_targets), dtype=np.float64) if use_cam else None
-    )
+    sum_cam = None
 
     model.eval()
     for x, _y, uids in loader:
@@ -210,8 +224,13 @@ def collect_attention(model, loader, device: str, targets: list[str],
             out = model.interpret(x)
             attn = out["slice_attn"]
             valid = out["valid"]
-            cam = cam_token_slice_attn(model, out["cam_tokens"], valid)
-            cam_np = cam.float().cpu().numpy()
+            if "gap_tokens" in out:
+                alt = gap_token_slice_attn(model, out["gap_tokens"], valid)
+            elif "cam_tokens" in out:
+                alt = cam_token_slice_attn(model, out["cam_tokens"], valid)
+            else:
+                alt = None
+            cam_np = None if alt is None else alt.float().cpu().numpy()
         else:
             _, attn, valid = forward_with_attn(model, x)
             cam_np = None
@@ -223,6 +242,8 @@ def collect_attention(model, loader, device: str, targets: list[str],
         sum_attn += (attn_np * valid_np[..., None]).sum(axis=0)
         n_valid += valid_np.sum(axis=0)
         if cam_np is not None:
+            if sum_cam is None:
+                sum_cam = np.zeros((n_series, d, n_targets), dtype=np.float64)
             sum_cam += (cam_np * valid_np[..., None]).sum(axis=0)
 
         flat = attn_np.reshape(b, s * dd, t)
@@ -271,6 +292,9 @@ def collect_attention(model, loader, device: str, targets: list[str],
         "pct_top5_any": pct_top5_any,
         "mass_d": mass_d,
         "examples": examples,
+        "slice_score_real": str(
+            getattr(model, "slice_score_on", "gap")
+        ),
         "mean_cam_sdt": (
             None if sum_cam is None
             else sum_cam / np.maximum(n_valid[..., None], 1.0)
@@ -536,13 +560,24 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
     print_report(summary, table)
     if agg.get("mean_cam_sdt") is not None:
         from src.infer.inspect_spatial import save_gap_vs_cam, summarize_gap_vs_cam
-        cmp_ = summarize_gap_vs_cam(
-            agg["mean_sdt"], agg["mean_cam_sdt"],
-            agg["targets"], agg["planes"], agg["n_studies"],
-        )
+        real = agg.get("slice_score_real", "gap")
+        if real == "cam":
+            cmp_ = summarize_gap_vs_cam(
+                agg["mean_cam_sdt"], agg["mean_sdt"],
+                agg["targets"], agg["planes"], agg["n_studies"],
+                real="cam",
+            )
+            label = "GAP (contrefactuel) vs CAM (v15)"
+        else:
+            cmp_ = summarize_gap_vs_cam(
+                agg["mean_sdt"], agg["mean_cam_sdt"],
+                agg["targets"], agg["planes"], agg["n_studies"],
+                real="gap",
+            )
+            label = "GAP vs CAM (contrefactuel v15)"
         save_gap_vs_cam(cmp_, out_dir)
         med = float(np.nanmedian([r["corr"] for r in cmp_["rows"]]))
-        print(f"GAP vs CAM (contrefactuel v15) corr mediane {med:.3f} "
+        print(f"{label} corr mediane {med:.3f} "
               f"-> {out_dir / 'gap_vs_cam_slice.csv'}")
     print(f"\necrit -> {out_dir}")
     return summary

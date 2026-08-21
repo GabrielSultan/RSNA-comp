@@ -8,7 +8,7 @@ et `_gen_convert_rgb25d_nb.py` (voisins DICOM) :
 3. Crop centre 130 mm (PixelSpacing) sinon centre 70 %.
 4. Percentiles 1-99 -> [0, 1].
 5. Bande profondeur 20-80 % (evite air / bords), puis linspace 24 coupes.
-6. Resize 224x224, uint8.
+6. Resize IMG_SIZE (224 par defaut, 320 pour crop130_320), uint8.
 7. Si rgb_neighbors : pour chaque centre k du linspace, stocker k-1, k, k+1
    dans le volume ORIGINAL (1 coupe DICOM d'ecart), pas dans les 24.
 """
@@ -82,16 +82,17 @@ def _rescale(ds, arr: np.ndarray) -> np.ndarray:
     return arr
 
 
-def _to_u8(sl: np.ndarray) -> np.ndarray:
-    sl = cv2.resize(sl, (IMG_SIZE, IMG_SIZE), interpolation=cv2.INTER_AREA)
+def _to_u8(sl: np.ndarray, img_size: int = IMG_SIZE) -> np.ndarray:
+    sl = cv2.resize(sl, (img_size, img_size), interpolation=cv2.INTER_AREA)
     return np.clip(sl * 255.0, 0, 255).round().astype(np.uint8)
 
 
 def load_series_dicom(
     series_dir: str | Path,
     rgb_neighbors: bool = False,
+    img_size: int = IMG_SIZE,
 ) -> np.ndarray:
-    """Un dossier de .dcm -> (24, 224, 224) ou (24, 3, 224, 224) uint8.
+    """Un dossier de .dcm -> (24, S, S) ou (24, 3, S, S) uint8, S=`img_size`.
 
     rgb_neighbors=False : grayscale crop130 (linspace 24).
     rgb_neighbors=True  : R=k-1, G=k, B=k+1 dans le volume original.
@@ -152,21 +153,22 @@ def load_series_dicom(
     idx_band = np.linspace(0, b - a, N_SLICES).round().astype(int)
     idx_orig = np.clip(a + idx_band, 0, n - 1)
 
+    size = int(img_size)
     if not rgb_neighbors:
-        out = np.empty((N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.uint8)
+        out = np.empty((N_SLICES, size, size), dtype=np.uint8)
         for i, k in enumerate(idx_orig):
-            out[i] = _to_u8(vol[int(k)])
+            out[i] = _to_u8(vol[int(k)], size)
         return out
 
-    out = np.empty((N_SLICES, 3, IMG_SIZE, IMG_SIZE), dtype=np.uint8)
+    out = np.empty((N_SLICES, 3, size, size), dtype=np.uint8)
     last = n - 1
     for i, k in enumerate(idx_orig):
         k = int(k)
         km = 0 if k <= 0 else k - 1
         kp = last if k >= last else k + 1
-        out[i, 0] = _to_u8(vol[km])
-        out[i, 1] = _to_u8(vol[k])
-        out[i, 2] = _to_u8(vol[kp])
+        out[i, 0] = _to_u8(vol[km], size)
+        out[i, 1] = _to_u8(vol[k], size)
+        out[i, 2] = _to_u8(vol[kp], size)
     return out
 
 
@@ -198,11 +200,12 @@ def _pick_nonfluid_row(series_rows, exclude: set[str]):
 
 def study_to_tensor(study_dir: str | Path, series_rows,
                     n_series: int = 3,
-                    rgb_neighbors: bool = False) -> np.ndarray:
+                    rgb_neighbors: bool = False,
+                    img_size: int = IMG_SIZE) -> np.ndarray:
     """Une etude -> float32 dans [0, 1].
 
-    Grayscale : (n_series, 24, 224, 224).
-    rgb_neighbors : (n_series, 24, 3, 224, 224) R=k-1 G=k B=k+1 DICOM.
+    Grayscale : (n_series, 24, S, S) avec S=`img_size`.
+    rgb_neighbors : (n_series, 24, 3, S, S) R=k-1 G=k B=k+1 DICOM.
 
     series_rows : DataFrame des series de l'etude (colonnes SeriesInstanceUID,
     Anatomical_Plane, Fluid_Sensitive, Fat_Suppression).
@@ -212,12 +215,13 @@ def study_to_tensor(study_dir: str | Path, series_rows,
     """
     planes = ("Sagittal", "Coronal", "Axial")
     study_dir = Path(study_dir)
+    size = int(img_size)
     if rgb_neighbors:
         out = np.zeros(
-            (n_series, N_SLICES, 3, IMG_SIZE, IMG_SIZE), dtype=np.float32,
+            (n_series, N_SLICES, 3, size, size), dtype=np.float32,
         )
     else:
-        out = np.zeros((n_series, N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.float32)
+        out = np.zeros((n_series, N_SLICES, size, size), dtype=np.float32)
     used: set[str] = set()
 
     def _fill(i: int, pick) -> None:
@@ -227,7 +231,8 @@ def study_to_tensor(study_dir: str | Path, series_rows,
         if not series_dir.exists():
             return
         try:
-            vol = load_series_dicom(series_dir, rgb_neighbors=rgb_neighbors)
+            vol = load_series_dicom(
+                series_dir, rgb_neighbors=rgb_neighbors, img_size=size)
         except Exception as e:
             print(f"  [warn] serie {pick.SeriesInstanceUID}: {e}")
             return

@@ -53,6 +53,7 @@ def predict_studies(model, test_csv: str | Path,
         vol = study_to_tensor(
             study_dir, srows, n_series=int(getattr(model, "n_series", 3)),
             rgb_neighbors=bool(getattr(model, "rgb_neighbors", False)),
+            img_size=int(getattr(model, "img_size", 224)),
         )
         x0 = torch.from_numpy(vol).unsqueeze(0).to(device)
 

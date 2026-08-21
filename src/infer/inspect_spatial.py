@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
-"""Interpretabilite v14 : pooling spatial 7x7 (CAM appris).
+"""Interpretabilite v14+ : pooling spatial CAM (7x7, 14x14 ou 20x20).
 
 Le softmax coupe (attn_score) dit quelle image ; spatial_score dit ou
-dans la coupe. Uniforme 1/49 = encore un GAP (v11). Un pic = la tete
-a appris a localiser.
+dans la coupe. Uniforme 1/(H*W) = encore un GAP (v11). Un pic = la tete
+a appris a localiser. v15 score la coupe sur le token CAM. v16 = 14x14.
+v17 = v16 + BiLSTM. v17bis = v17 a 320 px (CAM 20x20).
 
 Usage :
   python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v14_crop130_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v16_crop130_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v17_crop130_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v17bis_crop130_320_subset.yaml
 """
 from __future__ import annotations
 
@@ -20,12 +24,9 @@ import torch
 import torch.nn.functional as F
 
 from src.infer.inspect_attention import (
-    build_loader, cam_token_slice_attn, load_ckpt_model, load_config, plane_names,
+    build_loader, cam_token_slice_attn, gap_token_slice_attn,
+    load_ckpt_model, load_config, plane_names,
 )
-from src.models.kneenet_v14 import MAP_HW
-
-UNIFORM_N = MAP_HW * MAP_HW  # 49
-UNIFORM_ENTROPY = float(np.log(UNIFORM_N))
 
 
 def upsample_cam(cam: np.ndarray, size: int = 224) -> np.ndarray:
@@ -46,12 +47,11 @@ def collect_spatial(model, loader, device: str, targets: list[str],
                     n_examples: int = 6, top_pos: int = 4):
     """Agrege CAM pondere par l'attention-coupe. Garde des etudes pour overlays."""
     if not hasattr(model, "interpret"):
-        raise SystemExit("ce modele n'a pas interpret() (v14 seulement)")
+        raise SystemExit("ce modele n'a pas interpret() (v14+)")
     n_series = int(model.n_series)
     n_targets = int(model.n_targets)
-    hw = MAP_HW
-    # moyenne ponderee des cartes 7x7
-    cam_sum = np.zeros((n_series, n_targets, hw, hw), dtype=np.float64)
+    hw = None
+    cam_sum = None
     cam_w = np.zeros((n_series, n_targets), dtype=np.float64)
     ent_sum = np.zeros(n_targets, dtype=np.float64)
     maxp_sum = np.zeros(n_targets, dtype=np.float64)
@@ -71,6 +71,10 @@ def collect_spatial(model, loader, device: str, targets: list[str],
         probs = torch.sigmoid(logits).numpy()
         y_np = y.numpy()
         b = x.size(0)
+        if hw is None:
+            hw = int(spatial.shape[-1])
+            cam_sum = np.zeros(
+                (n_series, n_targets, hw, hw), dtype=np.float64)
 
         for bi in range(b):
             w = slice_attn[bi] * valid[bi][..., None]  # S,D,T
@@ -108,6 +112,8 @@ def collect_spatial(model, loader, device: str, targets: list[str],
 
         print(f"  {n_studies} etudes", flush=True)
 
+    if cam_sum is None:
+        raise SystemExit("loader vide : pas de carte spatiale")
     mean_cam = cam_sum / np.maximum(cam_w[:, :, None, None], 1e-12)
     mean_ent = ent_sum / np.maximum(w_tgt, 1e-12)
     mean_maxp = maxp_sum / np.maximum(w_tgt, 1e-12)
@@ -125,6 +131,7 @@ def collect_spatial(model, loader, device: str, targets: list[str],
 
 
 def peakiness_table(agg: dict) -> pd.DataFrame:
+    uniforme = int(np.prod(agg["mean_cam"].shape[-2:]))
     rows = []
     for i, name in enumerate(agg["targets"]):
         neff = float(agg["neff"][i])
@@ -133,10 +140,10 @@ def peakiness_table(agg: dict) -> pd.DataFrame:
             "entropy": float(agg["mean_entropy"][i]),
             "neff": neff,
             "max_p": float(agg["mean_maxp"][i]),
-            "uniforme": UNIFORM_N,
+            "uniforme": uniforme,
             "lecture": (
-                "GAP (pas pique)" if neff > 35 else
-                "un peu pique" if neff > 20 else
+                "GAP (pas pique)" if neff > 0.70 * uniforme else
+                "un peu pique" if neff > 0.40 * uniforme else
                 "pique"
             ),
         })
@@ -214,13 +221,16 @@ def plot_mean_cams(agg: dict, out: Path | None = None):
             ax.imshow(mean_cam[p, t], cmap="magma", vmin=0, vmax=vmax)
             ax.set_xticks([])
             ax.set_yticks([])
-            draw_focus_squares(ax, mean_cam[p, t], img_hw=7, keep_mass=0.35)
+            draw_focus_squares(ax, mean_cam[p, t], keep_mass=0.35)
             if t == 0:
                 ax.set_title(pname, fontsize=9)
             if p == 0:
                 ax.set_ylabel(name, fontsize=8)
-    fig.suptitle("CAM moyen pondere par l'attention-coupe (7x7, carre = case max)",
-                 fontsize=11)
+    gh, gw = mean_cam.shape[-2:]
+    fig.suptitle(
+        f"CAM moyen pondere par l'attention-coupe ({gh}x{gw}, carre = case max)",
+        fontsize=11,
+    )
     fig.tight_layout()
     if out is not None:
         fig.savefig(out, dpi=130)
@@ -259,7 +269,7 @@ def plot_top_slices(ex: dict, target: str, targets: list[str],
         )
     fig.suptitle(
         f"{uid}…  {target}  p={ex['prob'][ti]:.2f}  y={lab}  "
-        f"(carre rouge = case 7x7 piquee)",
+        f"(carre rouge = case CAM piquee)",
         fontsize=10,
     )
     fig.tight_layout()
@@ -312,7 +322,7 @@ def _mass_d_from_sdt(mean_sdt: np.ndarray) -> np.ndarray:
 
 def summarize_gap_vs_cam(mean_gap: np.ndarray, mean_cam: np.ndarray,
                          targets: list[str], planes: list[str],
-                         n_studies: int) -> dict:
+                         n_studies: int, real: str = "gap") -> dict:
     mass_gap_d = _mass_d_from_sdt(mean_gap)
     mass_cam_d = _mass_d_from_sdt(mean_cam)
     rows = []
@@ -342,28 +352,35 @@ def summarize_gap_vs_cam(mean_gap: np.ndarray, mean_cam: np.ndarray,
         "mass_cam_d": mass_cam_d,
         "corr": [(r["target"], r["corr"]) for r in rows],
         "rows": rows,
+        "real": real,
     }
 
 
 def collect_gap_vs_cam_slice(model, loader, device: str, targets: list[str]):
-    """Masse par coupe : attn v14 (scores GAP) vs scores sur tokens CAM."""
+    """Masse par coupe : scores GAP vs scores sur tokens CAM."""
     n_series = int(model.n_series)
     sum_gap = None
     sum_cam = None
     n_studies = 0
+    real = str(getattr(model, "slice_score_on", "gap"))
     model.eval()
     for x, _y, _uids in loader:
         x = x.to(device, non_blocking=True)
         out = model.interpret(x)
-        gap = out["slice_attn"].float()
-        cam = cam_token_slice_attn(model, out["cam_tokens"], out["valid"]).float()
-        valid = out["valid"].unsqueeze(-1).float()
+        valid = out["valid"]
+        if "gap_tokens" in out:
+            gap = gap_token_slice_attn(model, out["gap_tokens"], valid).float()
+            cam = out["slice_attn"].float()
+        else:
+            gap = out["slice_attn"].float()
+            cam = cam_token_slice_attn(model, out["cam_tokens"], valid).float()
+        w = valid.unsqueeze(-1).float()
         if sum_gap is None:
             _b, s, _d, t = gap.shape
             sum_gap = torch.zeros(s, _d, t)
             sum_cam = torch.zeros(s, _d, t)
-        sum_gap += (gap * valid).sum(0).cpu()
-        sum_cam += (cam * valid).sum(0).cpu()
+        sum_gap += (gap * w).sum(0).cpu()
+        sum_cam += (cam * w).sum(0).cpu()
         n_studies += x.size(0)
         print(f"  compare {n_studies} etudes", flush=True)
     n = max(n_studies, 1)
@@ -371,6 +388,7 @@ def collect_gap_vs_cam_slice(model, loader, device: str, targets: list[str]):
     mean_cam = (sum_cam / n).numpy()
     return summarize_gap_vs_cam(
         mean_gap, mean_cam, targets, plane_names(n_series), n_studies,
+        real=real,
     )
 
 
@@ -379,8 +397,13 @@ def plot_gap_vs_cam_slice(cmp_: dict, out: Path | None = None):
     xs = np.arange(len(cmp_["mass_gap_d"]))
     fig, axes = plt.subplots(1, 2, figsize=(11, 4))
     ax = axes[0]
-    ax.plot(xs, cmp_["mass_gap_d"], marker="o", ms=3, label="v14 reel (score GAP)")
-    ax.plot(xs, cmp_["mass_cam_d"], marker="s", ms=3, label="contrefactuel (score token CAM)")
+    real = cmp_.get("real", "gap")
+    if real == "cam":
+        lab_gap, lab_cam = "contrefactuel (score GAP)", "v15 reel (score token CAM)"
+    else:
+        lab_gap, lab_cam = "reel (score GAP)", "contrefactuel (score token CAM)"
+    ax.plot(xs, cmp_["mass_gap_d"], marker="o", ms=3, label=lab_gap)
+    ax.plot(xs, cmp_["mass_cam_d"], marker="s", ms=3, label=lab_cam)
     ax.axhline(1.0 / len(xs), color="#888", ls="--", lw=1, label="uniforme 1/24")
     ax.set_xlabel("indice de coupe")
     ax.set_ylabel("masse (moy. plans et cibles)")
@@ -411,11 +434,15 @@ def plot_gap_vs_cam_heatmaps(cmp_: dict, out: Path | None = None):
     g_sd = g.mean(axis=2)
     c_sd = c.mean(axis=2)
     fig, axes = plt.subplots(2, 2, figsize=(12, 9))
+    if cmp_.get("real") == "cam":
+        gap_tag, cam_tag = "contrefactuel GAP", "v15 reel CAM"
+    else:
+        gap_tag, cam_tag = "reel GAP", "contrefactuel CAM"
     panels = (
-        (axes[0, 0], g_sd, planes, "v14 reel — plans (moy. tetes)"),
-        (axes[0, 1], c_sd, planes, "contrefactuel CAM — plans"),
-        (axes[1, 0], g_td, targets, "v14 reel — tetes (somme plans)"),
-        (axes[1, 1], c_td, targets, "contrefactuel CAM — tetes"),
+        (axes[0, 0], g_sd, planes, f"{gap_tag} — plans (moy. tetes)"),
+        (axes[0, 1], c_sd, planes, f"{cam_tag} — plans"),
+        (axes[1, 0], g_td, targets, f"{gap_tag} — tetes (somme plans)"),
+        (axes[1, 1], c_td, targets, f"{cam_tag} — tetes"),
     )
     for ax, mat, labels, title in panels:
         im = ax.imshow(mat, aspect="auto", cmap="magma")
@@ -454,7 +481,7 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
     print(f"ckpt {ckpt_path}", flush=True)
     model, epoch, val_auc = load_ckpt_model(cfg, ckpt_path, device)
     if not hasattr(model, "interpret"):
-        raise SystemExit(f"{cfg.get('model')} n'expose pas interpret() — v14 requis")
+        raise SystemExit(f"{cfg.get('model')} n'expose pas interpret() — v14+ requis")
     print(f"{cfg.get('model')} epoch {epoch} val AUC {val_auc} | split {split}",
           flush=True)
     loader, targets = build_loader(
@@ -463,6 +490,8 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
     print(f"{len(loader.dataset)} etudes, batch {batch_size}", flush=True)
     agg = collect_spatial(model, loader, device, targets, n_examples)
     table = peakiness_table(agg)
+    uniforme = int(np.prod(agg["mean_cam"].shape[-2:]))
+    uniform_entropy = float(np.log(max(uniforme, 1)))
     summary = {
         "run_name": cfg.get("run_name"),
         "model": cfg.get("model"),
@@ -471,8 +500,8 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
         "val_macro_auc": None if val_auc is None else float(val_auc),
         "split": split,
         "n_studies": agg["n_studies"],
-        "uniform_entropy": UNIFORM_ENTROPY,
-        "uniform_n": UNIFORM_N,
+        "uniform_entropy": uniform_entropy,
+        "uniform_n": uniforme,
         "targets": targets,
         "mean_entropy": agg["mean_entropy"].tolist(),
         "neff": agg["neff"].tolist(),
@@ -486,7 +515,8 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
     plot_mean_cams(agg, out_dir / "mean_cam.png")
     print("\n=== pic spatial (pondere par attention-coupe) ===")
     print(table.round(3).to_string(index=False))
-    print(f"\nuniforme 7x7 : entropy={UNIFORM_ENTROPY:.2f}  Neff={UNIFORM_N}")
+    gh, gw = agg["mean_cam"].shape[-2:]
+    print(f"\nuniforme {gh}x{gw} : entropy={uniform_entropy:.2f}  Neff={uniforme}")
     print(f"ecrit -> {out_dir}")
     return {"summary": summary, "agg": agg, "table": table}
 
