@@ -164,6 +164,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
         n_series=int(cfg.get("n_series", 3)),
         volume_index=volume_index,
         rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
+        img_size=int(cfg.get("img_size", 224)),
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=False,
                       num_workers=num_workers)
@@ -214,6 +215,31 @@ def _publish_ckpt(src: Path, dest: Path, retries: int = 8) -> None:
     ) from last_err
 
 
+def _disk_free_gb(path: Path) -> float:
+    try:
+        return shutil.disk_usage(path).free / (1024 ** 3)
+    except OSError:
+        return float("nan")
+
+
+def _torch_save_robust(obj, staging: Path) -> None:
+    """torch.save avec retry. Le zip PyTorch plante souvent disque plein
+    (`unexpected pos`) : 2e essai en pickle legacy."""
+    last: BaseException | None = None
+    for attempt, use_zip in enumerate((True, True, False)):
+        try:
+            staging.unlink(missing_ok=True)
+            torch.save(obj, staging, _use_new_zipfile_serialization=use_zip)
+            if staging.stat().st_size < 1_000_000:
+                raise RuntimeError(
+                    f"checkpoint trop petit : {staging.stat().st_size} o")
+            return
+        except (RuntimeError, OSError) as e:
+            last = e
+            time.sleep(1.5 * (attempt + 1))
+    raise last  # type: ignore[misc]
+
+
 def _atomic_torch_save(obj, path: Path, also: Path | None = None,
                        retries: int = 8) -> None:
     """torch.save dans %TEMP% (hors sync OneDrive), puis copie vers path.
@@ -222,11 +248,18 @@ def _atomic_torch_save(obj, path: Path, also: Path | None = None,
     .tmp deja pris par OneDrive pendant l'ecriture lente (~300 Mo)."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
+    free = _disk_free_gb(path)
+    if free == free and free < 1.0:
+        raise RuntimeError(
+            f"disque presque plein ({free:.2f} Go libres) : "
+            f"impossible d'ecrire {path}. Liberer de l'espace "
+            "(ex. checkpoints/*/last.pt des runs termines)."
+        )
     fd, raw = tempfile.mkstemp(suffix=".pt", prefix=f"{path.stem}_")
     os.close(fd)
     staging = Path(raw)
     try:
-        torch.save(obj, staging)
+        _torch_save_robust(obj, staging)
         _publish_ckpt(staging, path, retries=retries)
         if also is not None:
             _publish_ckpt(staging, also, retries=retries)
@@ -282,6 +315,7 @@ def main() -> None:
         train_frac=float(cfg.get("train_frac", 1.0)),
         train_frac_seed=int(cfg.get("train_frac_seed", 42)),
         rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
+        img_size=int(cfg.get("img_size", 224)),
     )
     n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
     print(f"train {n_train} | val {n_val} "
@@ -359,6 +393,7 @@ def main() -> None:
         f"dataset effectif : train {n_train} | val {n_val} "
         f"| n_series {int(cfg.get('n_series', 3))} "
         f"| train_frac {float(cfg.get('train_frac', 1.0)):g} "
+        f"| img_size {int(cfg.get('img_size', 224))} "
         f"| steps/epoch {steps_per_epoch}"
     )
     print(recap, flush=True)
@@ -470,14 +505,20 @@ def main() -> None:
         }
         (run_dir / "history.json").write_text(json.dumps(history, indent=2))
         last_p = run_dir / "last.pt"
+        saved = False
         try:
             _atomic_torch_save(
                 payload, last_p,
                 also=(run_dir / "best.pt") if improved else None)
+            saved = True
         except RuntimeError as e:
             print(f"  !! {e}", flush=True)
         if improved:
-            print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
+            if saved:
+                print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
+            else:
+                print(f"  -> best AUC {best_auc:.4f} en RAM, "
+                      "PAS ecrit sur disque", flush=True)
         elif patience > 0:
             print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
             if stale >= patience:
