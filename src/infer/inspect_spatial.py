@@ -182,9 +182,31 @@ def focus_cells(cam7: np.ndarray, keep_mass: float = 0.50,
     return cells
 
 
+def _slice_gray(x_sd: np.ndarray) -> np.ndarray:
+    """(H, W) ou (C, H, W) -> (H, W) dans [0, 1]."""
+    arr = np.asarray(x_sd, dtype=np.float32)
+    if arr.ndim == 3:
+        arr = arr[1] if arr.shape[0] == 3 else arr.mean(axis=0)
+    return np.clip(arr, 0.0, 1.0)
+
+
+def overlay_cam(ax, gray: np.ndarray, cam: np.ndarray,
+                alpha: float = 0.45):
+    """IRM + heatmap CAM upsamplee (jet). Retourne max_p du softmax spatial."""
+    gray = _slice_gray(gray)
+    cam = np.asarray(cam, dtype=np.float64)
+    cam = cam / max(float(cam.sum()), 1e-12)
+    heat = upsample_cam(cam, size=int(gray.shape[0]))
+    vmax = float(heat.max()) + 1e-12
+    ax.imshow(gray, cmap="gray", vmin=0, vmax=1)
+    ax.imshow(heat, cmap="jet", alpha=alpha, vmin=0, vmax=vmax,
+              interpolation="bilinear")
+    return float(cam.max())
+
+
 def draw_focus_squares(ax, cam7: np.ndarray, img_hw: int | None = None,
                        keep_mass: float = 0.50) -> int:
-    """Carres rouges sur l'image (imshow deja fait). Retourne le nb de cases."""
+    """Ancien overlay (carres). Prefere `overlay_cam` sur les IRM."""
     from matplotlib.patches import Rectangle
     cam = np.asarray(cam7, dtype=np.float64)
     gh, gw = cam.shape
@@ -218,17 +240,16 @@ def plot_mean_cams(agg: dict, out: Path | None = None):
         vmax = float(mean_cam[:, t].max()) + 1e-12
         for p, pname in enumerate(planes):
             ax = axes[t, p]
-            ax.imshow(mean_cam[p, t], cmap="magma", vmin=0, vmax=vmax)
+            ax.imshow(mean_cam[p, t], cmap="jet", vmin=0, vmax=vmax)
             ax.set_xticks([])
             ax.set_yticks([])
-            draw_focus_squares(ax, mean_cam[p, t], keep_mass=0.35)
             if t == 0:
                 ax.set_title(pname, fontsize=9)
             if p == 0:
                 ax.set_ylabel(name, fontsize=8)
     gh, gw = mean_cam.shape[-2:]
     fig.suptitle(
-        f"CAM moyen pondere par l'attention-coupe ({gh}x{gw}, carre = case max)",
+        f"CAM moyen pondere par l'attention-coupe ({gh}x{gw})",
         fontsize=11,
     )
     fig.tight_layout()
@@ -254,22 +275,20 @@ def plot_top_slices(ex: dict, target: str, targets: list[str],
     uid = ex["uid"][:18]
     for j, tok in enumerate(top):
         p, d = divmod(int(tok), attn.shape[1])
-        gray = np.clip(ex["x"][p, d], 0.0, 1.0)
         cam = ex["spatial"][p, d, ti]
         ax = axes[j]
-        ax.imshow(gray, cmap="gray", vmin=0, vmax=1)
-        nsq = draw_focus_squares(ax, cam)
+        mx = overlay_cam(ax, ex["x"][p, d], cam)
         ax.set_xticks([])
         ax.set_yticks([])
         neff = float(np.exp(entropy_hw(cam)))
-        note = f"{nsq} case(s)" if nsq else "diffus"
         ax.set_title(
-            f"{planes[p][:3]} {d}  {100*flat[tok]:.1f}%\n{note} Neff={neff:.0f}",
+            f"{planes[p][:3]} {d}  {100*flat[tok]:.1f}%\n"
+            f"max {100*mx:.0f}%  Neff={neff:.0f}",
             fontsize=8,
         )
     fig.suptitle(
         f"{uid}…  {target}  p={ex['prob'][ti]:.2f}  y={lab}  "
-        f"(carre rouge = case CAM piquee)",
+        f"(heatmap = CAM spatiale)",
         fontsize=10,
     )
     fig.tight_layout()
@@ -282,30 +301,30 @@ def plot_top_slices(ex: dict, target: str, targets: list[str],
 def plot_same_slice(ex: dict, targets: list[str], planes: list[str],
                     names: tuple[str, ...] = ("ACL", "Baker's", "Fracture"),
                     out: Path | None = None):
-    """Une coupe (max attn 1re tete) + carres rouges par tete spatiale."""
+    """Une coupe (max attn 1re tete) + heatmap CAM par tete spatiale."""
     import matplotlib.pyplot as plt
     t0 = targets.index(names[0]) if names[0] in targets else 0
     attn = ex["slice_attn"][:, :, t0] * ex["valid"]
     p, d = np.unravel_index(int(attn.argmax()), attn.shape)
-    gray = np.clip(ex["x"][p, d], 0.0, 1.0)
+    gray = ex["x"][p, d]
     cols = [n for n in names if n in targets]
     fig, axes = plt.subplots(1, 1 + len(cols), figsize=(3.2 * (1 + len(cols)), 3.2))
-    axes[0].imshow(gray, cmap="gray", vmin=0, vmax=1)
+    axes[0].imshow(_slice_gray(gray), cmap="gray", vmin=0, vmax=1)
     axes[0].set_title(f"{planes[p]} coupe {d}", fontsize=9)
     axes[0].axis("off")
     for ax, name in zip(axes[1:], cols):
         ti = targets.index(name)
-        ax.imshow(gray, cmap="gray", vmin=0, vmax=1)
-        nsq = draw_focus_squares(ax, ex["spatial"][p, d, ti])
-        note = f"{nsq} case(s)" if nsq else "diffus"
+        cam = ex["spatial"][p, d, ti]
+        mx = overlay_cam(ax, gray, cam)
         ax.set_title(
-            f"{name}  {note}\ncoupe {100*ex['slice_attn'][p, d, ti]:.1f}%  "
+            f"{name}  max {100*mx:.0f}%\n"
+            f"coupe {100*ex['slice_attn'][p, d, ti]:.1f}%  "
             f"p={ex['prob'][ti]:.2f}",
             fontsize=8,
         )
         ax.axis("off")
     fig.suptitle(
-        f"{ex['uid'][:20]}…  meme coupe, carres = focus spatial",
+        f"{ex['uid'][:20]}…  meme coupe, heatmap = focus spatial",
         fontsize=10,
     )
     fig.tight_layout()
@@ -474,6 +493,30 @@ def save_gap_vs_cam(cmp_: dict, out: Path) -> None:
     plot_gap_vs_cam_heatmaps(cmp_, out / "gap_vs_cam_heatmaps.png")
 
 
+def _save_overlays(agg: dict, out_dir: Path,
+                   show: tuple[str, ...] = (
+                       "ACL", "Baker's", "Contusion", "Fracture", "Effusion",
+                   )) -> None:
+    """IRM + carres CAM : top coupes gold+ et meme coupe / tetes."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    targets, planes = agg["targets"], agg["planes"]
+    for name in show:
+        if name not in targets:
+            continue
+        pool = agg["pos_examples"].get(name) or agg["examples"]
+        if not pool:
+            continue
+        safe = name.replace(" ", "_").replace("'", "")
+        plot_top_slices(
+            pool[0], name, targets, planes, k=6,
+            out=out_dir / f"top_{safe}.png",
+        )
+    for i, ex in enumerate(agg["examples"][:3]):
+        plot_same_slice(
+            ex, targets, planes, out=out_dir / f"same_ex{i}.png",
+        )
+
+
 def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
         device: str, batch_size: int, num_workers: int,
         max_studies: int | None, n_examples: int) -> dict:
@@ -513,6 +556,7 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
         json.dumps(summary, indent=2), encoding="utf-8",
     )
     plot_mean_cams(agg, out_dir / "mean_cam.png")
+    _save_overlays(agg, out_dir / "overlays")
     print("\n=== pic spatial (pondere par attention-coupe) ===")
     print(table.round(3).to_string(index=False))
     gh, gw = agg["mean_cam"].shape[-2:]
