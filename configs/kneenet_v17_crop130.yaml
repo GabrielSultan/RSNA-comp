@@ -1,5 +1,6 @@
 # v17 full train : CAM 14x14 dilated + BiLSTM (residu init 0, hidden 256).
-# Recette subset : val 0.838 / gold 0.875 @ ep10, 25 % du train.
+# Recette subset : val 0.838 / gold 0.875 / public LB 0.910 @ ep10, 25 % du train.
+# Full v17_crop130v1 ep12 : val 0.873 / gold 0.906 / public LB 0.934.
 # Meme hyperparams que le subset, 20 epochs comme v11 full.
 #   python -X utf8 -m src.train.train --config configs/kneenet_v17_crop130.yaml
 
