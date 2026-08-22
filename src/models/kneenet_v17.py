@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """KneeNet v17 — v16 (CAM 14x14) + BiLSTM sur la profondeur.
 
+Run de reference : v17_crop130v1 (public LB 0.934 a l'epoch 12).
+
 v16 : chaque coupe est scoree toute seule (Linear attn_score sur le GAP).
 v17 : un BiLSTM lit les 24 GAP **dans l'ordre**, par plan. Une projection
 residuelle (init 0) est ajoutee au GAP et au token CAM : a l'epoch 0 le
