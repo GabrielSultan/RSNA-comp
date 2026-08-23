@@ -80,7 +80,9 @@ def resolve_volume_source(zip_path: str) -> dict[str, str] | None:
         return None
     if not p.is_dir():
         raise FileNotFoundError(f"zip_path introuvable : {zip_path}")
-    mapping = _index_from_manifests(p) or _index_from_zips(p)
+    mapping = _index_from_manifests(p)
+    for sid, zp in _index_from_zips(p).items():
+        mapping.setdefault(sid, zp)
     if not mapping:
         raise FileNotFoundError(f"aucune serie NPZ dans {p}")
     n_z = len(set(mapping.values()))
