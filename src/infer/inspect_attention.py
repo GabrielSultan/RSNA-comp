@@ -83,7 +83,12 @@ def scores_to_attn(model, x: torch.Tensor,
     if abs(temp - 1.0) > 1e-8:
         s = s / temp
     n_series = s.size(1)
-    if hasattr(model, "t1_gate_logit") and n_series > T1_SLOT:
+    if n_series > T1_SLOT and getattr(model, "t1_fusion", "") == "residual":
+        # v18ter : T1 hors softmax fluide (residu ajoute apres le pool).
+        s = s.clone()
+        s[:, T1_SLOT] = -1.0e4
+    elif hasattr(model, "t1_gate_logit") and n_series > T1_SLOT:
+        # scalaire (v18) ou (T,) par cible (v18bis) — broadcast sur (B, D, T)
         log_g = F.logsigmoid(model.t1_gate_logit).to(dtype=s.dtype)
         s = s.clone()
         s[:, T1_SLOT] = s[:, T1_SLOT] + log_g
