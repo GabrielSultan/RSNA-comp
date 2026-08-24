@@ -44,6 +44,9 @@ MODELS: dict[str, str] = {
     "kneenet_v18bis": "src.models.kneenet_v18bis",
     "kneenet_v18ter": "src.models.kneenet_v18ter",
     "kneenet_v19": "src.models.kneenet_v19",
+    "kneenet_v20a": "src.models.kneenet_v20a",
+    "kneenet_v20b": "src.models.kneenet_v20b",
+    "kneenet_v20c": "src.models.kneenet_v20c",
 }
 
 DEFAULT_MODEL = "kneenet_v8"
