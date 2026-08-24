@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Dataset etude-level : 3 plans fluid (sag/cor/ax) + slot T1 optionnel.
+"""Dataset etude-level : 3 plans fluid, slot T1 optionnel, ou 6 slots proto.
 
 Sortie grayscale (S, 24, H, W) ou RGB DICOM (S, 24, 3, H, W)
 si `rgb_neighbors=True` (NPZ crop130_rgb25d). H=W=`img_size` (224 ou 320).
-S=3 (v8) ou S=4 (v9).
+S=3 (v8/v17), S=4 (v9/v18 T1 extra), S=6 (v20b protocole FS/T1 par plan).
 12 labels avec masque (-1 = masque). Lecture NPZ depuis un zip unique
 (`data/volumes.zip`) ou un dossier de shards (`data/crop130/*.zip`).
-Series dropout : un plan (ou le T1) mis a zero avec proba `series_drop_p`.
+Series dropout : un slot mis a zero avec proba `series_drop_p`.
 """
 from __future__ import annotations
 
@@ -21,6 +21,18 @@ import torch
 from torch.utils.data import Dataset
 
 PLANES = ["Sagittal", "Coronal", "Axial"]
+# v20b : contraste fixe par slot, pas de repli fluide -> T1.
+PROTOCOL_SLOTS: list[tuple[str, int]] = [
+    ("Sagittal", 1),
+    ("Coronal", 1),
+    ("Axial", 1),
+    ("Sagittal", 0),
+    ("Coronal", 0),
+    ("Axial", 0),
+]
+PROTOCOL_SLOT_NAMES = [
+    "SAG_FS", "COR_FS", "AX_FS", "SAG_T1", "COR_T1", "AX_T1",
+]
 N_SLICES = 24
 NORM_MEAN = 0.1648
 NORM_STD = 0.1941
@@ -100,7 +112,7 @@ def make_series_index(
 
 
 class StudySeriesIndex:
-    """Index etude -> candidats par plan (fluid d'abord)."""
+    """Index etude -> candidats par plan x contraste (FS vs T1)."""
 
     def __init__(
         self,
@@ -152,6 +164,21 @@ class StudySeriesIndex:
             return cands[int(rng.integers(len(cands)))]
         return None
 
+    def pick_protocol(
+        self, study_uid: str, plane: str, fluid: int,
+        rng: np.random.Generator | None,
+    ):
+        """Un contraste exact (FS ou T1) sur un plan. Pas de repli."""
+        plans = self.by_study.get(study_uid)
+        if plans is None:
+            return None
+        cands = plans[plane][int(fluid)]
+        if not cands:
+            return None
+        if rng is None:
+            return cands[0]
+        return cands[int(rng.integers(len(cands)))]
+
 
 class StudyDataset(Dataset):
     """items : liste de StudyInstanceUID. labels_df indexe par StudyInstanceUID,
@@ -186,8 +213,8 @@ class StudyDataset(Dataset):
         self.n_series = int(n_series)
         self.rgb_neighbors = bool(rgb_neighbors)
         self.img_size = int(img_size)
-        if self.n_series not in (3, 4):
-            raise ValueError(f"n_series={self.n_series} : attendu 3 ou 4")
+        if self.n_series not in (3, 4, 6):
+            raise ValueError(f"n_series={self.n_series} : attendu 3, 4 ou 6")
         if self.img_size < 32:
             raise ValueError(f"img_size={self.img_size} : trop petit")
 
@@ -233,21 +260,29 @@ class StudyDataset(Dataset):
         used: set[str] = set()
         vols = []
         pick_rng = rng if self.train else None
-        for plane in PLANES:
-            if self._maybe_drop():
-                vols.append(self._empty())
-                continue
-            sid = self.index.pick(uid, plane, pick_rng)
-            if sid is not None:
-                used.add(sid)
-            vols.append(self._load_sid(sid))
-        if self.n_series >= 4:
-            if self._maybe_drop():
-                vols.append(self._empty())
-            else:
-                vols.append(self._load_sid(
-                    self.index.pick_nonfluid(uid, used, pick_rng)))
-        x = torch.stack(vols)  # (3|4, 24, [3,] H, W)
+        if self.n_series == 6:
+            for plane, fluid in PROTOCOL_SLOTS:
+                if self._maybe_drop():
+                    vols.append(self._empty())
+                    continue
+                sid = self.index.pick_protocol(uid, plane, fluid, pick_rng)
+                vols.append(self._load_sid(sid))
+        else:
+            for plane in PLANES:
+                if self._maybe_drop():
+                    vols.append(self._empty())
+                    continue
+                sid = self.index.pick(uid, plane, pick_rng)
+                if sid is not None:
+                    used.add(sid)
+                vols.append(self._load_sid(sid))
+            if self.n_series >= 4:
+                if self._maybe_drop():
+                    vols.append(self._empty())
+                else:
+                    vols.append(self._load_sid(
+                        self.index.pick_nonfluid(uid, used, pick_rng)))
+        x = torch.stack(vols)  # (3|4|6, 24, [3,] H, W)
 
         if self.labels is None:
             return x, uid
@@ -345,7 +380,15 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
               flush=True)
     print(f"img_size={img_size}", flush=True)
 
-    if n_series >= 4:
+    if n_series == 6:
+        n_train = len(train_df)
+        for name, (plane, fluid) in zip(PROTOCOL_SLOT_NAMES, PROTOCOL_SLOTS):
+            n_ok = sum(
+                1 for uid in train_df.StudyInstanceUID
+                if index.pick_protocol(uid, plane, fluid, None) is not None
+            )
+            print(f"slot {name}: {n_ok}/{n_train} etudes train", flush=True)
+    elif n_series >= 4:
         n_t1 = sum(
             1 for uid in train_df.StudyInstanceUID
             if index.pick_nonfluid(uid, set(), None) is not None
