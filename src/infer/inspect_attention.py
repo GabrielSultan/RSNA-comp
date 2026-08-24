@@ -28,7 +28,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
-from src.data.dataset_npz import PLANES, make_loaders
+from src.data.dataset_npz import PLANES, PROTOCOL_SLOT_NAMES, make_loaders
 from src.infer.preprocess_dicom import BAND, N_SLICES
 from src.models.registry import build_model
 from src.nlp.lexicon import TARGETS
@@ -43,6 +43,8 @@ DEAD_TOPK_PCT = 0.03
 
 
 def plane_names(n_series: int) -> list[str]:
+    if n_series == 6:
+        return list(PROTOCOL_SLOT_NAMES)
     names = list(PLANES)
     if n_series >= 4:
         names = names + ["T1"]

@@ -19,6 +19,8 @@ from pathlib import Path
 import cv2
 import numpy as np
 
+from src.data.dataset_npz import PROTOCOL_SLOTS
+
 N_SLICES = 24
 IMG_SIZE = 224
 CROP_MM = 130.0
@@ -198,6 +200,22 @@ def _pick_nonfluid_row(series_rows, exclude: set[str]):
     return None
 
 
+def _pick_protocol_row(series_rows, plane: str, fluid: int):
+    """Un contraste exact (FS ou T1) sur un plan. Pas de repli."""
+    rows = series_rows[series_rows.Anatomical_Plane == plane]
+    if len(rows) == 0:
+        return None
+    if "Fluid_Sensitive" in rows.columns:
+        rows = rows[rows.Fluid_Sensitive == int(fluid)]
+    elif fluid == 1 and "Fat_Suppression" in rows.columns:
+        rows = rows[rows.Fat_Suppression == 1]
+    elif fluid == 0 and "Fat_Suppression" in rows.columns:
+        rows = rows[rows.Fat_Suppression == 0]
+    if len(rows) == 0:
+        return None
+    return rows.sort_values("SeriesInstanceUID").iloc[0]
+
+
 def study_to_tensor(study_dir: str | Path, series_rows,
                     n_series: int = 3,
                     rgb_neighbors: bool = False,
@@ -209,9 +227,9 @@ def study_to_tensor(study_dir: str | Path, series_rows,
 
     series_rows : DataFrame des series de l'etude (colonnes SeriesInstanceUID,
     Anatomical_Plane, Fluid_Sensitive, Fat_Suppression).
-    Slots 0-2 : sag / cor / ax, fluid-sensitive d'abord.
-    Slot 3 si n_series>=4 : non-fluide (T1), sagittal prioritaire, masque
-    (zeros) si absent.
+    n_series=3 : sag / cor / ax, fluid-sensitive d'abord.
+    n_series=4 : + T1 extra (sagittal prioritaire).
+    n_series=6 : 3 FS + 3 T1 par plan, sans repli (v20b).
     """
     planes = ("Sagittal", "Coronal", "Axial")
     study_dir = Path(study_dir)
@@ -238,6 +256,11 @@ def study_to_tensor(study_dir: str | Path, series_rows,
             return
         used.add(str(pick.SeriesInstanceUID))
         out[i] = vol.astype(np.float32) / 255.0
+
+    if n_series == 6:
+        for i, (plane, fluid) in enumerate(PROTOCOL_SLOTS):
+            _fill(i, _pick_protocol_row(series_rows, plane, fluid))
+        return out
 
     for i, plane in enumerate(planes):
         _fill(i, _pick_plane_row(series_rows, plane))
