@@ -193,6 +193,10 @@ def build_loader(cfg: dict, split: str, batch_size: int, num_workers: int,
             train_frac_seed=int(cfg.get("train_frac_seed", 42)),
             rgb_neighbors=rgb,
             img_size=int(cfg.get("img_size", 224)),
+            oof_fold=None if cfg.get("oof_fold") is None else int(cfg["oof_fold"]),
+            folds_csv=cfg.get("folds_csv"),
+            n_folds=int(cfg.get("n_folds", 3)),
+            fold_seed=int(cfg.get("fold_seed", 42)),
         )
         ds = train_ld.dataset if split == "train" else val_ld.dataset
         ds.train = False
