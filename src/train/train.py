@@ -291,6 +291,8 @@ def main() -> None:
                         help="reprend last.pt (sinon best.pt) du run_name")
     parser.add_argument("--ckpt", default=None,
                         help="checkpoint explicite (avec --resume)")
+    parser.add_argument("--fold", type=int, default=None,
+                        help="OOF : tenir ce fold a l'ecart (val + dump oof_preds.csv)")
     args = parser.parse_args()
     if args.list_models:
         for name in list_models():
@@ -301,6 +303,14 @@ def main() -> None:
         cfg["model"] = args.model
     cfg.setdefault("model", "kneenet_v8")
     cfg.setdefault("n_series", default_n_series(cfg["model"]))
+    if args.fold is not None:
+        cfg["oof_fold"] = int(args.fold)
+        cfg["dump_oof"] = True
+        base = str(cfg.get("run_name", "run"))
+        suffix = f"_fold{args.fold}"
+        if not base.endswith(suffix):
+            cfg["run_name"] = base + suffix
+        print(f"OOF fold {args.fold} -> run_name {cfg['run_name']}", flush=True)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     torch.backends.cudnn.benchmark = True
@@ -316,6 +326,10 @@ def main() -> None:
         train_frac_seed=int(cfg.get("train_frac_seed", 42)),
         rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
         img_size=int(cfg.get("img_size", 224)),
+        oof_fold=None if cfg.get("oof_fold") is None else int(cfg["oof_fold"]),
+        folds_csv=cfg.get("folds_csv"),
+        n_folds=int(cfg.get("n_folds", 3)),
+        fold_seed=int(cfg.get("fold_seed", 42)),
     )
     n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
     print(f"train {n_train} | val {n_val} "
@@ -394,6 +408,7 @@ def main() -> None:
         f"| n_series {int(cfg.get('n_series', 3))} "
         f"| train_frac {float(cfg.get('train_frac', 1.0)):g} "
         f"| img_size {int(cfg.get('img_size', 224))} "
+        f"| oof_fold {cfg.get('oof_fold', '-')} "
         f"| steps/epoch {steps_per_epoch}"
     )
     print(recap, flush=True)
@@ -542,6 +557,28 @@ def main() -> None:
         (run_dir / "gold_sanity.json").write_text(json.dumps(
             {"macro_auc": g_auc, "per_target": g_per, "epoch": ckpt["epoch"]},
             indent=2))
+
+    if cfg.get("dump_oof"):
+        best_p = run_dir / "best.pt"
+        if not best_p.is_file():
+            print("dump OOF ignore : pas de best.pt", flush=True)
+        else:
+            ckpt = torch.load(best_p, map_location=device, weights_only=False)
+            model.load_state_dict(ckpt["model"])
+            vp, vy, vuids, _ = evaluate(model, val_ld, device)
+            fold = int(cfg.get("oof_fold", -1))
+            recs = []
+            for i, uid in enumerate(vuids):
+                row = {"StudyInstanceUID": uid, "fold": fold,
+                       "epoch": int(ckpt.get("epoch", -1))}
+                for j, t in enumerate(targets):
+                    row[f"label_{t}"] = float(vy[i, j])
+                    row[f"proba_{t}"] = float(vp[i, j])
+                recs.append(row)
+            out_p = run_dir / "oof_preds.csv"
+            pd.DataFrame(recs).to_csv(out_p, index=False)
+            print(f"OOF dump {len(recs)} etudes (best epoch {ckpt.get('epoch')}) "
+                  f"-> {out_p}", flush=True)
 
     print(f"\ntermine. best val macro-AUC = {best_auc:.4f} -> {run_dir}")
 
