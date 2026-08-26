@@ -291,14 +291,27 @@ class StudyDataset(Dataset):
         return x, torch.from_numpy(y), uid
 
 
-def _exclude_gold(df: pd.DataFrame, labels_csv: str) -> pd.DataFrame:
-    """Les 58 gold restent hors train/val (reserve sanity-check)."""
+_META_COLS = ("StudyInstanceUID", "lang", "split", "fold")
+
+
+def _target_cols(df: pd.DataFrame) -> list[str]:
+    return [c for c in df.columns if c not in _META_COLS]
+
+
+def gold_uids_from_train_csv(labels_csv: str) -> set[str]:
     train_csv = Path(labels_csv).resolve().parent.parent / "csv" / "train.csv"
     if not train_csv.exists():
-        return df
+        return set()
     from src.nlp.lexicon import TARGETS
     train_df = pd.read_csv(train_csv, usecols=["StudyInstanceUID"] + TARGETS)
-    gold_uids = set(train_df[train_df[TARGETS].notna().all(axis=1)]["StudyInstanceUID"])
+    return set(train_df[train_df[TARGETS].notna().all(axis=1)]["StudyInstanceUID"])
+
+
+def _exclude_gold(df: pd.DataFrame, labels_csv: str) -> pd.DataFrame:
+    """Les 58 gold restent hors train/val (reserve sanity-check)."""
+    gold_uids = gold_uids_from_train_csv(labels_csv)
+    if not gold_uids:
+        return df
     n = int(df["StudyInstanceUID"].isin(gold_uids).sum())
     if n:
         print(f"gold exclus du train/val : {n} etudes", flush=True)
@@ -352,24 +365,102 @@ def _subsample_train(train_df: pd.DataFrame, targets: list[str],
     return out
 
 
+def assign_folds(df: pd.DataFrame, targets: list[str],
+                 n_folds: int = 3, seed: int = 42) -> pd.Series:
+    """Fold 0..n_folds-1, stratifie par nombre de positifs (meme bins que le 85/15)."""
+    rng = np.random.default_rng(seed)
+    n_pos = (df[targets] >= 0.5).sum(axis=1)
+    pos_bin = pd.cut(n_pos, bins=[-1, 0, 2, 4, 20], labels=["0", "1-2", "3-4", "5+"])
+    fold = pd.Series(-1, index=df.index, dtype=int)
+    for _, group in df.groupby(pos_bin, observed=False):
+        idx = group.index.to_numpy().copy()
+        rng.shuffle(idx)
+        for i, ix in enumerate(idx):
+            fold.loc[ix] = i % n_folds
+    return fold
+
+
+def write_folds_csv(labels_csv: str, series_csv: str, zip_path: str,
+                    out_csv: str, n_folds: int = 3, seed: int = 42) -> pd.DataFrame:
+    """Cree (ou reutilise) le CSV StudyInstanceUID,fold pour l'OOF, gold exclus."""
+    out_p = Path(out_csv)
+    df = pd.read_csv(labels_csv)
+    targets = _target_cols(df)
+    df = df.dropna(subset=targets, how="all")
+    df = _exclude_gold(df, labels_csv)
+    index, _vol = make_series_index(series_csv, zip_path)
+    df = df[df.StudyInstanceUID.isin(index.by_study.keys())].copy()
+    if out_p.is_file():
+        prev = pd.read_csv(out_p)
+        merged = df[["StudyInstanceUID"]].merge(prev, on="StudyInstanceUID", how="left")
+        if merged["fold"].isna().any():
+            raise SystemExit(
+                f"{out_csv} ne couvre pas toutes les etudes. "
+                "Supprimer le fichier pour le regenerer."
+            )
+        print(f"folds existants : {out_p} ({len(merged)} etudes)", flush=True)
+        return merged
+    folds = assign_folds(df, targets, n_folds=n_folds, seed=seed)
+    out = pd.DataFrame({
+        "StudyInstanceUID": df["StudyInstanceUID"].values,
+        "fold": folds.values,
+    })
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+    out.to_csv(out_p, index=False)
+    vc = out["fold"].value_counts().sort_index()
+    print(f"folds ecrits {out_p} : " + ", ".join(
+        f"fold{int(k)}={int(v)}" for k, v in vc.items()), flush=True)
+    return out
+
+
+def _apply_oof_fold(df: pd.DataFrame, targets: list[str], oof_fold: int,
+                    folds_csv: str | None, n_folds: int, seed: int) -> pd.DataFrame:
+    if oof_fold < 0 or oof_fold >= n_folds:
+        raise ValueError(f"oof_fold={oof_fold} hors [0, {n_folds})")
+    if folds_csv:
+        fmap = pd.read_csv(folds_csv)
+    else:
+        fmap = pd.DataFrame({
+            "StudyInstanceUID": df["StudyInstanceUID"].values,
+            "fold": assign_folds(df, targets, n_folds=n_folds, seed=seed).values,
+        })
+    out = df.merge(fmap[["StudyInstanceUID", "fold"]], on="StudyInstanceUID", how="inner")
+    if len(out) < len(df):
+        missing = len(df) - len(out)
+        print(f"attention : {missing} etudes absentes de {folds_csv}", flush=True)
+    out = out.copy()
+    out["split"] = np.where(out["fold"] == oof_fold, "val", "train")
+    n_tr = int((out.split == "train").sum())
+    n_va = int((out.split == "val").sum())
+    print(f"OOF fold {oof_fold}/{n_folds} : train {n_tr} | val {n_va} "
+          f"(tenue a l'ecart)", flush=True)
+    return out
+
+
 def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  series_csv: str = "data/csv/train_series.csv",
                  zip_path: str = "data/volumes.zip",
                  batch_size: int = 8, num_workers: int = 4,
                  n_series: int = 3, train_frac: float = 1.0,
                  train_frac_seed: int = 42, rgb_neighbors: bool = False,
-                 img_size: int = 224):
+                 img_size: int = 224, oof_fold: int | None = None,
+                 folds_csv: str | None = None, n_folds: int = 3,
+                 fold_seed: int = 42):
     from torch.utils.data import DataLoader
 
     df = pd.read_csv(labels_csv)
-    targets = [c for c in df.columns if c not in ("StudyInstanceUID", "lang", "split")]
+    targets = _target_cols(df)
     df = df.dropna(subset=targets, how="all")  # etudes sans aucun label : exclues
     df = _exclude_gold(df, labels_csv)
 
     index, volume_index = make_series_index(series_csv, zip_path)
     # ne garder que les etudes ayant au moins une serie indexee
     df = df[df.StudyInstanceUID.isin(index.by_study.keys())]
-    df = _ensure_split(df, targets)
+    if oof_fold is not None:
+        df = _apply_oof_fold(
+            df, targets, int(oof_fold), folds_csv, int(n_folds), int(fold_seed))
+    else:
+        df = _ensure_split(df, targets)
 
     train_df = df[df.split == "train"]
     val_df = df[df.split == "val"]
