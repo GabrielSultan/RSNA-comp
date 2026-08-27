@@ -291,7 +291,8 @@ class StudyDataset(Dataset):
         return x, torch.from_numpy(y), uid
 
 
-_META_COLS = ("StudyInstanceUID", "lang", "split", "fold")
+_META_COLS = ("StudyInstanceUID", "lang", "split", "fold", "is_gold",
+              "sample_weight")
 
 
 def _target_cols(df: pd.DataFrame) -> list[str]:
@@ -321,9 +322,18 @@ def _exclude_gold(df: pd.DataFrame, labels_csv: str) -> pd.DataFrame:
 
 def _ensure_split(df: pd.DataFrame, targets: list[str],
                   val_frac: float = 0.15, seed: int = 42) -> pd.DataFrame:
-    """Split 85/15 si le CSV n'a pas de colonne split (ex. blend candidat)."""
+    """Split 85/15 si le CSV n'a pas de colonne split (ex. blend candidat).
+
+    val_frac <= 0 : tout le monde en train (retrain 100 %, epoch figee).
+    """
     if "split" in df.columns:
         return df
+    if val_frac <= 0:
+        out = df.copy()
+        out["split"] = "train"
+        print(f"split : train {len(out)} | val 0 (val_frac={val_frac:g})",
+              flush=True)
+        return out
     rng = np.random.default_rng(seed)
     n_pos = (df[targets] >= 0.5).sum(axis=1)
     pos_bin = pd.cut(n_pos, bins=[-1, 0, 2, 4, 20], labels=["0", "1-2", "3-4", "5+"])
@@ -445,13 +455,17 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  train_frac_seed: int = 42, rgb_neighbors: bool = False,
                  img_size: int = 224, oof_fold: int | None = None,
                  folds_csv: str | None = None, n_folds: int = 3,
-                 fold_seed: int = 42):
+                 fold_seed: int = 42, include_gold: bool = False,
+                 val_frac: float = 0.15):
     from torch.utils.data import DataLoader
 
     df = pd.read_csv(labels_csv)
     targets = _target_cols(df)
     df = df.dropna(subset=targets, how="all")  # etudes sans aucun label : exclues
-    df = _exclude_gold(df, labels_csv)
+    if include_gold:
+        print("gold inclus dans le train (plus un hold-out)", flush=True)
+    else:
+        df = _exclude_gold(df, labels_csv)
 
     index, volume_index = make_series_index(series_csv, zip_path)
     # ne garder que les etudes ayant au moins une serie indexee
@@ -460,7 +474,13 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
         df = _apply_oof_fold(
             df, targets, int(oof_fold), folds_csv, int(n_folds), int(fold_seed))
     else:
-        df = _ensure_split(df, targets)
+        if val_frac <= 0 and "split" in df.columns:
+            df = df.copy()
+            df["split"] = "train"
+            print(f"split force train : {len(df)} etudes (val_frac={val_frac:g})",
+                  flush=True)
+        else:
+            df = _ensure_split(df, targets, val_frac=val_frac)
 
     train_df = df[df.split == "train"]
     val_df = df[df.split == "val"]
