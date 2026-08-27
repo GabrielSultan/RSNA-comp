@@ -36,7 +36,9 @@ import torch.nn.functional as F
 import yaml
 from torch.utils.data import DataLoader
 
-from src.data.dataset_npz import StudyDataset, make_loaders, make_series_index
+from src.data.dataset_npz import (
+    StudyDataset, gold_uids_from_train_csv, make_loaders, make_series_index,
+)
 from src.data.transforms import augment_batch
 from src.models.registry import (
     build_model, count_params, default_n_series, list_models,
@@ -85,7 +87,8 @@ def compute_prior_logits(labels_csv: str, targets: list[str],
 
 
 def masked_bce(logits: torch.Tensor, y: torch.Tensor,
-               pos_weight: torch.Tensor, smoothing: float = 0.02) -> torch.Tensor:
+               pos_weight: torch.Tensor, smoothing: float = 0.02,
+               sample_weight: torch.Tensor | None = None) -> torch.Tensor:
     mask = y >= 0
     if mask.sum() == 0:
         return logits.sum() * 0.0
@@ -95,7 +98,10 @@ def masked_bce(logits: torch.Tensor, y: torch.Tensor,
         logits, yc, reduction="none",
         pos_weight=pos_weight.to(logits.device).unsqueeze(0),
     )
-    return (loss_mat * mask).sum() / mask.sum().clamp(min=1)
+    w = mask.float()
+    if sample_weight is not None:
+        w = w * sample_weight.to(logits.device).float().unsqueeze(1)
+    return (loss_mat * w).sum() / w.sum().clamp(min=1)
 
 
 def lr_at(step: int, total: int, base: float, warmup: int) -> float:
@@ -330,6 +336,8 @@ def main() -> None:
         folds_csv=cfg.get("folds_csv"),
         n_folds=int(cfg.get("n_folds", 3)),
         fold_seed=int(cfg.get("fold_seed", 42)),
+        include_gold=bool(cfg.get("include_gold", False)),
+        val_frac=float(cfg.get("val_frac", 0.15)),
     )
     n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
     print(f"train {n_train} | val {n_val} "
@@ -377,18 +385,37 @@ def main() -> None:
     rewarm_steps = 0
     unfreeze_step = None
 
-    epochs = cfg["epochs"]
+    epochs = int(cfg["epochs"])
     steps_per_epoch = len(train_ld)
-    total_steps = epochs * steps_per_epoch
+    cosine_epochs = int(cfg.get("cosine_epochs") or epochs)
+    total_steps = cosine_epochs * steps_per_epoch
     warmup = int(0.05 * total_steps)
+    if cosine_epochs != epochs:
+        print(f"cosine calcule sur {cosine_epochs} epochs "
+              f"(train stop a {epochs})", flush=True)
+
+    gold_w = float(cfg.get("gold_sample_weight") or 1.0)
+    gold_uids: set[str] = set()
+    if gold_w != 1.0:
+        gold_uids = gold_uids_from_train_csv(cfg["labels_csv"])
+        print(f"gold sample_weight x{gold_w:g} "
+              f"({len(gold_uids)} uids)", flush=True)
+
+    save_epochs = {int(e) for e in (cfg.get("save_epochs") or [])}
+    if save_epochs:
+        print("snapshots epochs : " +
+              ", ".join(str(e) for e in sorted(save_epochs)), flush=True)
 
     # Gold = 58 etudes : 0 worker. Sinon, sous Windows, train+val+gold
     # ouvrent chacun 3 processus qui mmap les zip -> OOM CPU (~14 Mo
     # refusés alors que le tenseur est petit).
+    gold_in_train = bool(cfg.get("include_gold", False))
     gold_ld = make_gold_loader(cfg, cfg["batch_size"], num_workers=0)
     if gold_ld is not None:
+        hold = ("DANS le train, AUC n'est plus un hold-out"
+                if gold_in_train else "loggee, jamais pour le checkpoint")
         print(f"gold sanity loader : {len(gold_ld.dataset)} etudes "
-              "(loggee, jamais pour le checkpoint)", flush=True)
+              f"({hold})", flush=True)
     else:
         print("gold sanity loader : indisponible", flush=True)
 
@@ -407,8 +434,10 @@ def main() -> None:
         f"dataset effectif : train {n_train} | val {n_val} "
         f"| n_series {int(cfg.get('n_series', 3))} "
         f"| train_frac {float(cfg.get('train_frac', 1.0)):g} "
+        f"| val_frac {float(cfg.get('val_frac', 0.15)):g} "
         f"| img_size {int(cfg.get('img_size', 224))} "
         f"| oof_fold {cfg.get('oof_fold', '-')} "
+        f"| include_gold {int(bool(cfg.get('include_gold', False)))} "
         f"| steps/epoch {steps_per_epoch}"
     )
     print(recap, flush=True)
@@ -467,9 +496,16 @@ def main() -> None:
                 else:
                     g["lr"] = lr_at(step, total_steps, cfg["lr_head"], warmup)
 
+            sw = None
+            if gold_uids:
+                sw = torch.tensor(
+                    [gold_w if u in gold_uids else 1.0 for u in _uid],
+                    device=device, dtype=torch.float32)
+
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
                 logits = model(x)
-                loss = masked_bce(logits, y, pos_weight, smoothing)
+                loss = masked_bce(logits, y, pos_weight, smoothing,
+                                  sample_weight=sw)
             optim.zero_grad(set_to_none=True)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -480,22 +516,28 @@ def main() -> None:
             step += 1
 
         train_loss = running / max(nb, 1)
-        vp, vy, _, val_loss = evaluate(
-            model, val_ld, device, pos_weight=pos_weight, smoothing=smoothing)
-        val_auc, per_target = macro_auc(vy, vp, targets)
+        per_target: dict[str, float] = {}
         gold_auc = None
+        if n_val > 0:
+            vp, vy, _, val_loss = evaluate(
+                model, val_ld, device, pos_weight=pos_weight, smoothing=smoothing)
+            val_auc, per_target = macro_auc(vy, vp, targets)
+            pstd = float(vp.std())
+        else:
+            val_loss, val_auc, pstd = float("nan"), float("nan"), float("nan")
         if gold_ld is not None:
             gp, gy, _, _ = evaluate(
                 model, gold_ld, device, pos_weight=pos_weight, smoothing=smoothing)
             gold_auc, _ = macro_auc(gy, gp, TARGETS)
-        pstd = float(vp.std())
         dt = time.time() - t0
         gold_txt = f" | gold AUC {gold_auc:.4f}" if gold_auc is not None else ""
+        val_txt = (f"val {val_loss:.4f} | val AUC {val_auc:.4f}"
+                   if n_val > 0 else "val -")
+        pstd_txt = f"{pstd:.4f}" if pstd == pstd else "-"
         print(f"epoch {epoch+1}/{epochs} | train {train_loss:.4f} | "
-              f"val {val_loss:.4f} | val AUC {val_auc:.4f}{gold_txt} | "
-              f"proba std {pstd:.4f} | {dt:.0f}s",
+              f"{val_txt}{gold_txt} | proba std {pstd_txt} | {dt:.0f}s",
               flush=True)
-        if pstd < 0.005:
+        if pstd == pstd and pstd < 0.005:
             print(f"  !! proba std {pstd:.2e} : probas presque constantes, "
                   "le modele s'effondre (graphe casse)", flush=True)
         rec = {"epoch": epoch + 1, "loss": train_loss, "val_loss": val_loss,
@@ -505,7 +547,7 @@ def main() -> None:
             rec["gold_macro_auc"] = gold_auc
         history.append(rec)
 
-        if val_auc > best_auc:
+        if n_val > 0 and val_auc > best_auc:
             best_auc = val_auc
             stale = 0
             improved = True
@@ -528,13 +570,21 @@ def main() -> None:
             saved = True
         except RuntimeError as e:
             print(f"  !! {e}", flush=True)
+        ep_num = epoch + 1
+        if saved and ep_num in save_epochs:
+            snap = run_dir / f"epoch{ep_num}.pt"
+            try:
+                _publish_ckpt(last_p, snap)
+                print(f"  -> snapshot {snap.name}", flush=True)
+            except RuntimeError as e:
+                print(f"  !! snapshot {snap.name} : {e}", flush=True)
         if improved:
             if saved:
                 print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
             else:
                 print(f"  -> best AUC {best_auc:.4f} en RAM, "
                       "PAS ecrit sur disque", flush=True)
-        elif patience > 0:
+        elif patience > 0 and n_val > 0:
             print(f"  -> pas de gain val AUC ({stale}/{patience})", flush=True)
             if stale >= patience:
                 print(f"early stop a l'epoch {epoch+1} "
@@ -545,20 +595,28 @@ def main() -> None:
 
     # Sanity gold du meilleur checkpoint (jamais utilise pour piloter)
     if gold_ld is not None:
-        ckpt = torch.load(run_dir / "best.pt", map_location=device, weights_only=False)
-        model.load_state_dict(ckpt["model"])
-        gp, gy, _, _ = evaluate(
-            model, gold_ld, device, pos_weight=pos_weight, smoothing=smoothing)
-        g_auc, g_per = macro_auc(gy, gp, TARGETS)
-        print(f"\n=== SANITY GOLD (58 etudes, jamais vues, best epoch {ckpt['epoch']}) ===")
-        print(f"macro-AUC gold : {g_auc:.4f}")
-        for k, v in sorted(g_per.items(), key=lambda kv: -kv[1]):
-            print(f"  {k:<18} {v:.3f}")
-        (run_dir / "gold_sanity.json").write_text(json.dumps(
-            {"macro_auc": g_auc, "per_target": g_per, "epoch": ckpt["epoch"]},
-            indent=2))
+        ckpt_p = run_dir / "best.pt"
+        if not ckpt_p.is_file():
+            ckpt_p = run_dir / "last.pt"
+        if ckpt_p.is_file():
+            ckpt = torch.load(ckpt_p, map_location=device, weights_only=False)
+            model.load_state_dict(ckpt["model"])
+            gp, gy, _, _ = evaluate(
+                model, gold_ld, device, pos_weight=pos_weight, smoothing=smoothing)
+            g_auc, g_per = macro_auc(gy, gp, TARGETS)
+            seen = "dans le train" if gold_in_train else "jamais vues"
+            print(f"\n=== SANITY GOLD (58 etudes, {seen}, "
+                  f"epoch {ckpt['epoch']}, {ckpt_p.name}) ===")
+            print(f"macro-AUC gold : {g_auc:.4f}")
+            for k, v in sorted(g_per.items(), key=lambda kv: -kv[1]):
+                print(f"  {k:<18} {v:.3f}")
+            (run_dir / "gold_sanity.json").write_text(json.dumps(
+                {"macro_auc": g_auc, "per_target": g_per,
+                 "epoch": ckpt["epoch"], "ckpt": str(ckpt_p),
+                 "gold_in_train": gold_in_train},
+                indent=2))
 
-    if cfg.get("dump_oof"):
+    if cfg.get("dump_oof") and n_val > 0:
         best_p = run_dir / "best.pt"
         if not best_p.is_file():
             print("dump OOF ignore : pas de best.pt", flush=True)
