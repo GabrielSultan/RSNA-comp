@@ -15,6 +15,10 @@ Usage :
   python -X utf8 -m src.data.patch_synovitis_from_effusion
   python -X utf8 -m src.data.patch_synovitis_from_effusion --mask-silent
   python -X utf8 -m src.data.patch_synovitis_from_effusion --dry-run
+  python -X utf8 -m src.data.patch_synovitis_from_effusion --mask-silent --protect-gold \\
+      --labels data/labels/labels_llm_gpt56sol_oofmask_v20b.csv \\
+      --effusion-from data/labels/labels_llm_gpt56sol.csv \\
+      --out data/labels/labels_llm_gpt56sol_oofmask_v20b_syn.csv
 """
 from __future__ import annotations
 
@@ -70,8 +74,15 @@ def patch_synovitis(
     soft: float = 0.60,
     effusion_min: float = 0.50,
     mask_silent: bool = False,
+    protect_gold: bool = False,
+    effusion: pd.Series | None = None,
 ) -> tuple[pd.DataFrame, dict[str, int]]:
-    """Nouvelle copie : seule la colonne Synovitis peut changer."""
+    """Nouvelle copie : seule la colonne Synovitis peut changer.
+
+    `effusion` : Series indexee par StudyInstanceUID pour la regle
+    silence+epanchement. Defaut = colonne Effusion du CSV labels
+    (un NaN OOF compterait comme 0).
+    """
     out = labels.copy()
     counts = {
         "n": 0,
@@ -79,11 +90,16 @@ def patch_synovitis(
         "silent_eff_soft": 0,
         "silent_no_eff": 0,
         "missing_report": 0,
+        "gold_kept": 0,
     }
     new_syn = out[SYN_COL].astype(float).copy()
+    has_gold = protect_gold and "is_gold" in out.columns
     for idx, row in out.iterrows():
         counts["n"] += 1
         uid = row["StudyInstanceUID"]
+        if has_gold and int(row.get("is_gold", 0) or 0) == 1:
+            counts["gold_kept"] += 1
+            continue
         report = reports.get(uid)
         if report is None or (isinstance(report, float) and pd.isna(report)):
             counts["missing_report"] += 1
@@ -91,7 +107,13 @@ def patch_synovitis(
         if synovitis_written(report):
             counts["written_keep"] += 1
             continue
-        eff = float(row[EFF_COL]) if pd.notna(row[EFF_COL]) else 0.0
+        if effusion is not None and uid in effusion.index:
+            raw_eff = effusion.loc[uid]
+        else:
+            raw_eff = row[EFF_COL]
+        if isinstance(raw_eff, pd.Series):
+            raw_eff = raw_eff.iloc[0]
+        eff = float(raw_eff) if pd.notna(raw_eff) else 0.0
         if eff >= effusion_min:
             new_syn.at[idx] = soft
             counts["silent_eff_soft"] += 1
@@ -106,10 +128,11 @@ def _print_counts(counts: dict[str, int], labels: pd.DataFrame, patched: pd.Data
     n = max(counts["n"], 1)
     print("=== patch synovite <- epanchement ===")
     for key, label in (
-        ("written_keep", "mot present, GPT-sol conserve"),
+        ("written_keep", "mot present, label source conserve"),
         ("silent_eff_soft", "silence + epanchement -> molle"),
         ("silent_no_eff", "silence sans epanchement"),
         ("missing_report", "rapport manquant (inchange)"),
+        ("gold_kept", "gold inchanges (protect-gold)"),
     ):
         k = counts[key]
         print(f"  {label:40s} {k:5d}  ({100 * k / n:5.1f}%)")
@@ -153,6 +176,15 @@ def main() -> None:
         help="Sans epanchement et sans mot : NaN (masque en loss) au lieu de 0.",
     )
     parser.add_argument(
+        "--protect-gold", action="store_true",
+        help="Ne pas patcher les lignes is_gold=1 (labels radiologue).",
+    )
+    parser.add_argument(
+        "--effusion-from", default="",
+        help="CSV dont la colonne Effusion sert a la regle (defaut : --labels). "
+             "Sur un oofmask, passer gpt56sol pour ne pas traiter un NaN OOF comme 0.",
+    )
+    parser.add_argument(
         "--dry-run", action="store_true",
         help="Compte les cas, n'ecrit pas de fichier.",
     )
@@ -174,15 +206,28 @@ def main() -> None:
     for col in ("StudyInstanceUID", SYN_COL, EFF_COL):
         if col not in labels.columns:
             raise SystemExit(f"colonne manquante dans {labels_path}: {col}")
+    if args.protect_gold and "is_gold" not in labels.columns:
+        raise SystemExit(f"--protect-gold : pas de colonne is_gold dans {labels_path}")
 
     train = pd.read_csv(train_path, usecols=["StudyInstanceUID", "Report"])
     reports = train.drop_duplicates("StudyInstanceUID").set_index("StudyInstanceUID")["Report"]
+
+    effusion = None
+    if args.effusion_from:
+        eff_path = (ROOT / args.effusion_from).resolve()
+        eff_df = pd.read_csv(eff_path, usecols=["StudyInstanceUID", EFF_COL])
+        effusion = (eff_df.drop_duplicates("StudyInstanceUID")
+                    .set_index("StudyInstanceUID")[EFF_COL])
+        print(f"Effusion pour la regle : {eff_path} ({len(effusion)} etudes)",
+              flush=True)
 
     patched, counts = patch_synovitis(
         labels, reports,
         soft=args.soft,
         effusion_min=args.effusion_min,
         mask_silent=args.mask_silent,
+        protect_gold=args.protect_gold,
+        effusion=effusion,
     )
     _print_counts(counts, labels, patched)
     n_changed = int((patched[SYN_COL].fillna(-1) != labels[SYN_COL].astype(float).fillna(-1)).sum())
