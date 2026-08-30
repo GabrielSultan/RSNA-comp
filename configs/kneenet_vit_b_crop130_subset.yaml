@@ -1,6 +1,8 @@
-# KneeNet-ViT-b subset : CLS pour les coupes + bias prior + pas de gel.
+# KneeNet-ViT-b subset : GAP patches (comme v1) + CLS residuel init 0
+# + bias prior. Recette = v1 (freeze 1, lr_backbone 3e-5, dropout 0.4).
+# Ne PAS remettre lr 1e-4 sans gel : DINOv3 s'effondre (val 0.62 @ ep2).
 # Meme 25 % seed 42 / gpt56sol / crop130 6 slots que v20b et vit v1.
-# Ne pas relancer configs/kneenet_vit_crop130_subset.yaml (v1, freeze+3e-5).
+# Ne pas relancer configs/kneenet_vit_crop130_subset.yaml (v1, FIGEE).
 # Juger vs subset_v20b_crop130_frac025 ET subset_vit_dinov3_crop130_frac025
 # (val ET gold, Δ > 0.01). Epoch 4 : train < 0.45, val > 0.78, std > 0.22.
 #   python -X utf8 -m src.train.train --config configs/kneenet_vit_b_crop130_subset.yaml
@@ -24,15 +26,14 @@ batch_size: 2
 encode_chunk: 4
 num_workers: 2
 epochs: 10
-cosine_epochs: 20
 early_stop_patience: 3
 skip_gold: false
-freeze_encoder_epochs: 0
+freeze_encoder_epochs: 1
 
-lr_backbone: 0.0001
+lr_backbone: 0.00003
 lr_head: 0.0003
 weight_decay: 0.05
 label_smoothing: 0.0
 pos_weight_max: null
 head_dim: 512
-dropout: 0.2
+dropout: 0.4
