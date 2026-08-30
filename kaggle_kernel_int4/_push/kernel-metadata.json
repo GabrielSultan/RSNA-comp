@@ -1,0 +1,19 @@
+{
+  "id": "sultent/rsna-knee-efficiency-int4",
+  "title": "RSNA Knee Efficiency INT4",
+  "code_file": "submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "machine_shape": "NvidiaTeslaT4",
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "sultent/rsna-knee-v20b-int4-weights"
+  ],
+  "category_ids": []
+}

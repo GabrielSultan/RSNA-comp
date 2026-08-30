@@ -1,0 +1,36 @@
+[{"stream_name":"stderr","time":7.007121395,"data":"/usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.\n"}
+,{"stream_name":"stderr","time":7.007161178,"data":"  validate(nb)\n"}
+,{"stream_name":"stderr","time":7.924867899,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.924897255,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.924902662,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.924906384,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":8.529552244,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":8.529592059,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":8.529597464,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":8.529601339,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":10.482205924,"data":"contenu /kaggle/input : ['competitions', 'datasets']\n"}
+,{"stream_name":"stdout","time":16.165562973,"data":"competition dir : /kaggle/input/competitions/rsna-knee-abnormality-detection\n"}
+,{"stream_name":"stdout","time":16.165601004,"data":"poids           : /kaggle/input/datasets/sultent/rsna-knee-v20b-int4-weights/v20b_ep8_int4.pt | existe : True\n"}
+,{"stream_name":"stdout","time":16.165612888,"data":"device          : cuda\n"}
+,{"stream_name":"stdout","time":16.16561655,"data":"encode_chunk    : 64\n"}
+,{"stream_name":"stdout","time":16.165619616,"data":"TTA             : off\n"}
+,{"stream_name":"stdout","time":24.034544741,"data":"checkpoint INT4 {'bits': 4, 'scheme': 'groupwise_symmetric', 'group_size': 64, 'qmin': -8, 'qmax': 7, 'min_numel': 256, 'n_quantized': 53, 'n_kept': 290, 'quantized_params': 23454912, 'kept_params': 7125853}\n"}
+,{"stream_name":"stdout","time":24.340306832,"data":"modele kneenet_v20b | epoch 8 | n_series 6 | dtype torch.float16\n"}
+,{"stream_name":"stdout","time":25.447999272,"data":"3 etudes a predire | TTA off | prefetch DICOM\n"}
+,{"stream_name":"stdout","time":34.381907526,"data":"3 predictions | 0.14 min\n"}
+,{"stream_name":"stdout","time":34.442342431,"data":"ecrit /kaggle/working/submission.csv | lignes 3 | existe True\n"}
+,{"stream_name":"stdout","time":34.442375805,"data":"(3, 13) | colonnes OK : True\n"}
+,{"stream_name":"stdout","time":34.4423828,"data":"        ACL    MCL  Medial Meniscus  Lateral Meniscus  Medial OA  Lateral OA  PF OA  Effusion  Synovitis  Baker's  Contusion  Fracture\n"}
+,{"stream_name":"stdout","time":34.442388698,"data":"mean  0.013  0.010            0.456             0.020      0.881       0.639  0.955     0.472      0.045    0.335      0.009     0.005\n"}
+,{"stream_name":"stdout","time":34.442394311,"data":"std   0.011  0.005            0.484             0.026      0.157       0.127  0.069     0.262      0.043    0.574      0.007     0.005\n"}
+,{"stream_name":"stdout","time":34.442400303,"data":"min   0.005  0.004            0.011             0.004      0.701       0.556  0.876     0.242      0.019    0.002      0.005     0.002\n"}
+,{"stream_name":"stdout","time":34.442421654,"data":"max   0.025  0.013            0.971             0.049      0.989       0.785  0.996     0.757      0.096    0.997      0.017     0.011\n"}
+,{"stream_name":"stderr","time":40.242909793,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":40.242962092,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":40.404013547,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":40.404051329,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":41.056379661,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":41.357252653,"data":"[NbConvertApp] Writing 40085 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":43.784810513,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":44.694291929,"data":"[NbConvertApp] Writing 408668 bytes to __results__.html\n"}
+]
