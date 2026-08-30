@@ -1,0 +1,41 @@
+[{"stream_name":"stderr","time":7.1332502,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.13329805,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.133303595,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.1333075,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":7.720210837,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":7.720240622,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":7.720246232,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":7.720250365,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":9.536425349,"data":"contenu /kaggle/input : ['competitions', 'datasets']\n"}
+,{"stream_name":"stdout","time":14.855195578,"data":"competition dir : /kaggle/input/competitions/rsna-knee-abnormality-detection\n"}
+,{"stream_name":"stdout","time":14.855237731,"data":"poids v17       : /kaggle/input/datasets/sultent/rsna-knee-ensemble-weights/v17_ep10.pt | existe : True\n"}
+,{"stream_name":"stdout","time":14.855244472,"data":"poids v20b      : /kaggle/input/datasets/sultent/rsna-knee-ensemble-weights/v20b_ep8.pt | existe : True\n"}
+,{"stream_name":"stdout","time":14.855251316,"data":"device          : cuda\n"}
+,{"stream_name":"stdout","time":14.855260623,"data":"TTA variantes   : ((0.0, 1.0), (5.0, 1.0), (-5.0, 1.0), (0.0, 0.95), (0.0, 1.05))\n"}
+,{"stream_name":"stdout","time":14.85526425,"data":"v17 cibles      : ('Lateral Meniscus', 'PF OA', 'Fracture')\n"}
+,{"stream_name":"stdout","time":24.427295443,"data":"modele kneenet_v17 | epoch 10 | val macro-AUC local : -1.0 | n_series 3\n"}
+,{"stream_name":"stdout","time":26.208495492,"data":"modele kneenet_v20b | epoch 8 | val macro-AUC local : -1.0 | n_series 6\n"}
+,{"stream_name":"stdout","time":27.778187587,"data":"1.2.826.0.1.3680043.8.498.77212768576945... shape (24, 224, 224) mean 50.5 (NPZ~42.0) std 40.1 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":28.250091897,"data":"1.2.826.0.1.3680043.8.498.10028715832304... shape (24, 224, 224) mean 127.4 (NPZ~42.0) std 56.1 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":28.250131189,"data":"1.2.826.0.1.3680043.8.498.15127037221336... shape (24, 224, 224) mean 66.0 (NPZ~42.0) std 58.5 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":29.308236393,"data":"1.2.826.0.1.3680043.8.498.10994427898459... shape (24, 224, 224) mean 72.6 (NPZ~42.0) std 49.4 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":29.32108984,"data":"1.2.826.0.1.3680043.8.498.11464124303928... shape (24, 224, 224) mean 77.7 (NPZ~42.0) std 66.0 (NPZ~49.5)\n"}
+,{"stream_name":"stdout","time":29.521178702,"data":"3 etudes a predire | TTA x5 | mix cible\n"}
+,{"stream_name":"stdout","time":29.521217807,"data":"v17 -\u003e ['Lateral Meniscus', 'PF OA', 'Fracture']\n"}
+,{"stream_name":"stdout","time":29.521222264,"data":"v20b -\u003e ['ACL', 'MCL', 'Medial Meniscus', 'Medial OA', 'Lateral OA', 'Effusion', 'Synovitis', \"Baker's\", 'Contusion']\n"}
+,{"stream_name":"stdout","time":57.858353783,"data":"ecrit /kaggle/working/submission.csv | lignes 3 | existe True\n"}
+,{"stream_name":"stdout","time":57.858392869,"data":"(3, 13) | colonnes OK : True\n"}
+,{"stream_name":"stdout","time":57.858399952,"data":"        ACL    MCL  Medial Meniscus  Lateral Meniscus  Medial OA  Lateral OA  PF OA  Effusion  Synovitis  Baker's  Contusion  Fracture\n"}
+,{"stream_name":"stdout","time":57.858417496,"data":"mean  0.009  0.011            0.536             0.016      0.824       0.537  0.842     0.492      0.034    0.334      0.011     0.009\n"}
+,{"stream_name":"stdout","time":57.858422543,"data":"std   0.008  0.007            0.488             0.011      0.222       0.128  0.264     0.293      0.035    0.574      0.009     0.014\n"}
+,{"stream_name":"stdout","time":57.858435429,"data":"min   0.004  0.003            0.011             0.009      0.569       0.453  0.537     0.184      0.011    0.001      0.004     0.001\n"}
+,{"stream_name":"stdout","time":57.858439536,"data":"max   0.018  0.017            0.976             0.029      0.977       0.684  0.998     0.768      0.075    0.996      0.021     0.026\n"}
+,{"stream_name":"stderr","time":63.446965778,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":63.447008627,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":63.600297009,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":63.600329373,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":64.263111613,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":64.570206876,"data":"[NbConvertApp] Writing 49961 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":67.101858022,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":68.055292436,"data":"[NbConvertApp] Writing 442346 bytes to __results__.html\n"}
+]
