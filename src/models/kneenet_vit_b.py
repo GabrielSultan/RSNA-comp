@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-"""KneeNet-ViT-b — v1 + CLS pour les scores de coupe + bias prior.
+"""KneeNet-ViT-b — v1 + bias prior + CLS residuel init 0.
 
 Meme corps que kneenet_vit (6 slots, CAM patch, BiLSTM init 0, stem gris x3).
-Changements vs le subset v1 (freeze + lr 3e-5, GAP des patches, pas de prior) :
 
-  - CLS DINOv3 -> LSTM / attn_score (quelle coupe)
-  - grille patches -> spatial_score (ou dans la coupe)
+Le B initial (CLS brut -> LSTM/attn, lr 1e-4, pas de gel) cassait deux
+choses : (1) residu LSTM du CLS ajoute aux tokens CAM (espaces
+differents), (2) fine-tune DINOv3 trop fort des l'epoch 1 (val 0.62 vs
+0.69 v1 gele). Recette = v1 (freeze 1, lr 3e-5).
+
+  - GAP patches -> LSTM / attn_score (meme espace que la CAM)
+  - CLS DINOv3 via scalaire init 0 (peut se melanger s'il aide)
   - out_bias = logit des prevalences train (comme v8bis)
-  - pas de gel encodeur ; lr_backbone 1e-4 (YAML)
 
 Poids : `weights/dinov3-vitb16-lvd1689m/model.safetensors`
 Entree : (B, 6, 24, H, W) grayscale [0, 1]. Slots = v20b.
@@ -75,7 +78,7 @@ class _Dinov3VitEncoder(nn.Module):
         self.backbone.set_grad_checkpointing(True)
         self.num_features = int(self.backbone.num_features)
         self.patch_size = PATCH_SIZE
-        self.n_prefix = N_PREFIX
+        self.n_prefix = int(getattr(self.backbone, "num_prefix_tokens", N_PREFIX))
 
     def forward(self, x: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
         """x (N, 3, H, W) -> maps (N, C, h, w), cls (N, C)."""
@@ -137,6 +140,7 @@ class KneeNet(nn.Module):
         nn.init.zeros_(self.lstm_proj.bias)
 
         self.norm = nn.LayerNorm(feat_dim)
+        self.cls_scale = nn.Parameter(torch.zeros(()))
         self.out_bias = nn.Parameter(torch.zeros(n_targets))
         self.head = nn.Sequential(
             nn.Linear(feat_dim, head_dim),
@@ -157,7 +161,7 @@ class KneeNet(nn.Module):
         self._init_head()
         print(
             f"KneeNet-ViT-b | CAM patch {PATCH_SIZE} | dim {feat_dim} "
-            f"| CLS+BiLSTM | bias_init {bias_init is not None} "
+            f"| GAP+CLS(scale=0) | bias_init {bias_init is not None} "
             f"| slots {self.n_series}",
             flush=True,
         )
@@ -209,8 +213,9 @@ class KneeNet(nn.Module):
         return torch.cat(maps_out, dim=0), torch.cat(cls_out, dim=0)
 
     def _spatial_pool(self, maps: torch.Tensor, return_attn: bool = False):
-        """maps (N, C, H, W) -> local (N, T, C) [, attn]."""
+        """maps (N, C, H, W) -> gap (N, C), local (N, T, C) [, attn]."""
         n, c, h, w = maps.shape
+        gap = maps.mean(dim=(-2, -1))
         logits = self.spatial_score(maps)
         attn = torch.softmax(
             logits.float().reshape(n, self.n_targets, h * w), dim=-1,
@@ -218,8 +223,8 @@ class KneeNet(nn.Module):
         flat = maps.reshape(n, c, h * w)
         local = torch.einsum("nth,nch->ntc", attn, flat)
         if return_attn:
-            return local, attn.reshape(n, self.n_targets, h, w)
-        return local
+            return gap, local, attn.reshape(n, self.n_targets, h, w)
+        return gap, local
 
     def _stem_rgb(self, x: torch.Tensor, idx: torch.Tensor) -> torch.Tensor:
         """Coupe centrale x3 + ImageNet. x (B,S,D,H,W), idx plat."""
@@ -234,7 +239,7 @@ class KneeNet(nn.Module):
 
     def _temporal_delta(self, gaps: torch.Tensor, b: int, s: int,
                         d: int) -> torch.Tensor:
-        """gaps (BSD, C) = CLS -> residu LSTM (B, S, D, C). Epoch 0 : 0."""
+        """gaps (BSD, C) = GAP(+CLS) -> residu LSTM (B, S, D, C). Epoch 0 : 0."""
         c = gaps.size(-1)
         seq = gaps.reshape(b * s, d, c)
         with torch.autocast("cuda", enabled=False):
@@ -244,7 +249,7 @@ class KneeNet(nn.Module):
 
     def _slice_pool(self, x: torch.Tensor, valid: torch.Tensor,
                     gaps: torch.Tensor, local: torch.Tensor):
-        """CLS+LSTM (gaps) et tokens CAM (local) -> logits (B, T)."""
+        """GAP(+CLS)+LSTM (gaps) et tokens CAM (local) -> logits (B, T)."""
         b, s, d = valid.shape
         delta = self._temporal_delta(gaps, b, s, d)
         pe = self.plane_embed[:s].view(1, s, 1, -1)
@@ -276,15 +281,16 @@ class KneeNet(nn.Module):
         if idx.numel() > 0:
             maps, cls = self._encode_chunks(self._stem_rgb(x, idx))
             if return_spatial:
-                loc, spat = self._spatial_pool(maps, return_attn=True)
+                gap, loc, spat = self._spatial_pool(maps, return_attn=True)
             else:
-                loc = self._spatial_pool(maps)
+                gap, loc = self._spatial_pool(maps)
                 spat = None
-            if gaps.dtype != cls.dtype:
-                gaps = gaps.to(dtype=cls.dtype)
+            slice_tok = gap + self.cls_scale.to(dtype=gap.dtype) * cls
+            if gaps.dtype != slice_tok.dtype:
+                gaps = gaps.to(dtype=slice_tok.dtype)
             if local.dtype != loc.dtype:
                 local = local.to(dtype=loc.dtype)
-            gaps[idx] = cls
+            gaps[idx] = slice_tok
             local[idx] = loc
             if spatial is not None and spat is not None:
                 if spatial.dtype != spat.dtype:
