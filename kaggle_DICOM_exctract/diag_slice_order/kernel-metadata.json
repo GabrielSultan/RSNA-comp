@@ -1,0 +1,17 @@
+{
+  "id": "sultent/rsna-knee-diag-slice-order",
+  "title": "RSNA Knee diag slice order",
+  "code_file": "diag.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}
