@@ -47,6 +47,19 @@ from src.nlp.lexicon import TARGETS
 from src.train.metrics import macro_auc
 
 
+def _json_safe(obj):
+    """NaN/Inf -> null (JSON strict ; json.dumps ecrirait sinon NaN)."""
+    if isinstance(obj, dict):
+        return {k: _json_safe(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [_json_safe(v) for v in obj]
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    if isinstance(obj, np.generic):
+        return _json_safe(obj.item())
+    return obj
+
+
 def load_config(path: str) -> dict:
     with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f)
@@ -467,7 +480,8 @@ def main() -> None:
         print(f"encodeur gele jusqu'a l'epoch {freeze_epochs} "
               "(linear probing)", flush=True)
 
-    rewarm_steps = int(0.25 * steps_per_epoch)
+    rewarm_frac = float(cfg.get("unfreeze_rewarm_frac", 0.25) or 0.25)
+    rewarm_steps = int(rewarm_frac * steps_per_epoch)
 
     for epoch in range(start_epoch, epochs):
         if encoder_frozen and epoch >= freeze_epochs:
@@ -560,7 +574,8 @@ def main() -> None:
             "config": cfg, "val_macro_auc": best_auc, "epoch": epoch + 1,
             "step": step, "stale": stale, "targets": targets,
         }
-        (run_dir / "history.json").write_text(json.dumps(history, indent=2))
+        (run_dir / "history.json").write_text(
+            json.dumps(_json_safe(history), indent=2, allow_nan=False))
         last_p = run_dir / "last.pt"
         saved = False
         try:
@@ -591,7 +606,8 @@ def main() -> None:
                       f"(meilleur val AUC {best_auc:.4f})", flush=True)
                 break
 
-    (run_dir / "history.json").write_text(json.dumps(history, indent=2))
+    (run_dir / "history.json").write_text(
+        json.dumps(_json_safe(history), indent=2, allow_nan=False))
 
     # Sanity gold du meilleur checkpoint (jamais utilise pour piloter)
     if gold_ld is not None:
@@ -611,10 +627,10 @@ def main() -> None:
             for k, v in sorted(g_per.items(), key=lambda kv: -kv[1]):
                 print(f"  {k:<18} {v:.3f}")
             (run_dir / "gold_sanity.json").write_text(json.dumps(
-                {"macro_auc": g_auc, "per_target": g_per,
-                 "epoch": ckpt["epoch"], "ckpt": str(ckpt_p),
-                 "gold_in_train": gold_in_train},
-                indent=2))
+                _json_safe({"macro_auc": g_auc, "per_target": g_per,
+                            "epoch": ckpt["epoch"], "ckpt": str(ckpt_p),
+                            "gold_in_train": gold_in_train}),
+                indent=2, allow_nan=False))
 
     if cfg.get("dump_oof") and n_val > 0:
         best_p = run_dir / "best.pt"
