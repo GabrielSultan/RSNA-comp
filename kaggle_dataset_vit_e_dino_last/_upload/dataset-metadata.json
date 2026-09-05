@@ -1,0 +1,9 @@
+{
+  "title": "RSNA Knee ViT-e (DINOv3) last.pt weights",
+  "id": "sultent/rsna-knee-vit-e-dino-last-weights",
+  "licenses": [
+    {
+      "name": "CC0-1.0"
+    }
+  ]
+}
