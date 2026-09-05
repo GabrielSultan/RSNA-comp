@@ -28,14 +28,16 @@ def cell_code(text: str) -> dict:
     }
 
 
-MD0 = """# RSNA Knee — ViT-e DINOv3 (last.pt) — TTA x5
+MD0 = """# RSNA Knee — ViT-e DINOv3 (last.pt oofmask_full) — TTA x5
 
 Notebook Kaggle **self-contained** (internet off) :
 - lecture DICOM test → volumes crop 130 mm + bande 20–80 % (24, 224, 224)
 - protocole 6 slots (FS/T1, identique v20b)
-- KneeNet **ViT-e** : `checkpoints/vit_e_crop130v1/last.pt`
+- KneeNet **ViT-e** : `checkpoints/vit_e_crop130_oofmask_full/epoch9.pt`
 - TTA affine (rotation ±5° + scale 0.95/1.05, hflip off) ×5
-- écrit `/kaggle/working/submission.csv`
+- écrit `/kaggle/working/submission.csv` (cwd aussi)
+
+Le kernel **doit** écrire `submission.csv`.
 """
 
 
@@ -72,10 +74,10 @@ if KAGGLE:
                     return hits[0]
         raise FileNotFoundError(f'{names} introuvable (dataset weights attache ?)')
 
-    WEIGHTS_PATH = _find_weight(('last.pt', 'best.pt'))
+    WEIGHTS_PATH = _find_weight(('last.pt',))
 else:
     COMP_DIR = Path('../data/csv')
-    WEIGHTS_PATH = Path('../checkpoints/vit_e_crop130v1/last.pt')
+    WEIGHTS_PATH = Path('../kaggle_dataset_vit_e_dino_last/_upload/last.pt')
 
 TEST_CSV = COMP_DIR / 'test.csv'
 TEST_SERIES_CSV = COMP_DIR / 'test_series.csv'
@@ -226,17 +228,11 @@ def load_model(weights_path: str | Path) -> tuple[torch.nn.Module, dict]:
     )
     missing, unexpected = model.load_state_dict(ckpt["model"], strict=False)
     print('load_state_dict missing :', len(missing), '| unexpected :', len(unexpected))
+    print('modele', cfg.get('model'), '| epoch', ckpt.get('epoch'),
+          '| val macro-AUC :', round(float(ckpt.get('val_macro_auc', float('nan'))), 4),
+          '| n_series', n_series)
     model.to(DEVICE).eval()
     return model, cfg
-
-
-def write_submission(pred: pd.DataFrame, sample_submission: str | Path,
-                      out: str | Path = "/kaggle/working/submission.csv") -> None:
-    sample = pd.read_csv(sample_submission)
-    pred = pred.set_index("StudyInstanceUID").loc[sample.StudyInstanceUID]
-    pred = pred.reset_index()[list(sample.columns)]
-    pred.to_csv(out, index=False)
-    print(f"submission ecrite -> {out} ({len(pred)} lignes)")
 """
 
     infer_code_rest = r"""test = pd.read_csv(TEST_CSV)
@@ -277,13 +273,26 @@ for i, uid in enumerate(test.StudyInstanceUID):
 
 pred = pd.DataFrame(rows, columns=["StudyInstanceUID"] + TARGETS)
 
-out_csv = Path("/kaggle/working/submission.csv") if Path("/kaggle/working").exists() else Path("submission.csv")
-write_submission(pred, SAMPLE_SUB, out=out_csv)
+# --- submission.csv au format exact de sample_submission --------------------
+sample = pd.read_csv(SAMPLE_SUB)
+sub = pred.set_index('StudyInstanceUID').reindex(sample.StudyInstanceUID).reset_index()
+sub = sub[list(sample.columns)]
+prior = sub[TARGETS].mean()
+sub[TARGETS] = sub[TARGETS].fillna(prior)
 
-# sanity checks
-assert out_csv.exists() and out_csv.stat().st_size > 0, "submission.csv manquant ou vide"
-assert not pred[TARGETS].isna().any().any(), "NaN dans pred"
-print(pred[TARGETS].describe().loc[['mean','std','min','max']].round(3))
+out_dir = Path('/kaggle/working') if Path('/kaggle/working').exists() else Path('.')
+out_csv = out_dir / 'submission.csv'
+sub.to_csv(out_csv, index=False)
+cwd_csv = Path('submission.csv')
+if cwd_csv.resolve() != out_csv.resolve():
+    sub.to_csv(cwd_csv, index=False)
+
+print('ecrit', out_csv.resolve(), '| lignes', len(sub), '| existe', out_csv.exists())
+print(sub.shape, '| colonnes OK :', list(sub.columns) == list(sample.columns))
+print(sub[TARGETS].describe().loc[['mean', 'std', 'min', 'max']].round(3).to_string())
+assert out_csv.exists() and out_csv.stat().st_size > 0, 'submission.csv manquant'
+assert not sub[TARGETS].isna().any().any(), 'NaN dans la submission !'
+assert list(sub.columns) == list(sample.columns), 'colonnes != sample_submission'
 """
 
     notebook = {
