@@ -271,8 +271,8 @@ sub.head()
 """
 
 
-def _patch_v17(src: str) -> str:
-    src = src.replace("class KneeNet(nn.Module):", "class KneeNetV17(nn.Module):")
+def _patch_v20b(src: str) -> str:
+    src = src.replace("class KneeNet(nn.Module):", "class KneeNetV20b(nn.Module):")
     old = "        base = resnet50(weights=None)"
     new = (
         "        try:\n"
@@ -281,7 +281,7 @@ def _patch_v17(src: str) -> str:
         "            base = resnet50(pretrained=False)"
     )
     if old not in src:
-        raise RuntimeError("patch resnet50 introuvable dans kneenet_v17.py")
+        raise RuntimeError("patch resnet50 introuvable dans kneenet_v20b.py")
     return src.replace(old, new, 1)
 
 
@@ -292,34 +292,41 @@ def _patch_vite(src: str) -> str:
 
 def main() -> None:
     mix = json.loads(MIX_PATH.read_text(encoding="utf-8"))
-    v17_targets = tuple(mix["v17_targets"])
+    v20b_targets = tuple(mix["v20b_targets"])
     vite_targets = tuple(mix["vit_e_targets"])
-    v17_ep = int(mix["v17_epoch"])
+    v20b_ep = int(mix["v20b_epoch"])
     vite_ep = int(mix["vit_e_epoch"])
+    ev = mix.get("specialist_evidence", {}).get("table", {})
 
     rows = []
-    for t, rec in mix["table"].items():
-        rows.append(
-            f"- `{t}` : **{rec['winner']}** "
-            f"(gold v17 {rec['v17']:.3f} / ViT-e {rec['vit_e']:.3f}, "
-            f"Δ {rec['delta']:+.3f})"
-        )
+    for t in vite_targets:
+        rec = ev.get(t, {})
+        if rec:
+            rows.append(
+                f"- `{t}` : **vit_e** "
+                f"(gold hold-out vs v17 : v17 {rec['v17']:.3f} / ViT-e {rec['vit_e']:.3f}, "
+                f"Δ {rec['delta']:+.3f})"
+            )
+        else:
+            rows.append(f"- `{t}` : **vit_e**")
+    for t in v20b_targets:
+        rows.append(f"- `{t}` : **v20b** (ancre public LB {mix['v20b_lb']})")
     mix_lines = "\n".join(rows)
 
-    md0 = f"""# RSNA Knee — Ensemble ciblé v17 fold1 + ViT-e
+    md0 = f"""# RSNA Knee — Ensemble ciblé v20b + ViT-e spécialiste
 
 Notebook **self-contained** pour Kaggle (internet off) :
 DICOM test → crop 130 mm + bande 20–80 % → volumes (24, 224, 224) → **switch dur par cible**
-entre **KneeNet v17** (3 plans FS, `v17_crop130_oof_fold1` best epoch {v17_ep}, val {mix['v17_val']:.3f} / gold {mix['v17_gold']:.3f})
-et **KneeNet ViT-e** (6 slots FS/T1, DINOv3 ViT-B/16, `vit_e_crop130v1` best epoch {vite_ep}, val {mix['vit_e_val']:.3f} / gold {mix['vit_e_gold']:.3f})
+entre **KneeNet v20b** (6 slots FS/T1, ResNet-50 RadImageNet, `v20b_crop130_oofmask_full` epoch {v20b_ep}, public LB {mix['v20b_lb']})
+et **KneeNet ViT-e** spécialiste (DINOv3 ViT-B/16, `vit_e_crop130_oofmask_full` epoch {vite_ep}, public LB {mix['vit_e_lb']})
 → TTA affine ×5 → `submission.csv`.
 
 Poids (dataset `sultent/rsna-knee-ensemble-weights`) :
-- `v17_fold1.pt` — `v17_crop130_oof_fold1/best.pt`
-- `vit_e_best.pt` — `vit_e_crop130v1/best.pt` (copie pendant le train, optimizer retiré)
+- `v20b_ep8.pt` — `v20b_crop130_oofmask_full/epoch8.pt` (optimizer retiré)
+- `vit_e_ep7.pt` — `vit_e_crop130_oofmask_full/epoch7.pt` (optimizer retiré)
 
-**Mix (gold 58 études, ViT-e si Δ ≥ 0,01, sinon v17) :**
-- **v17** : {", ".join(v17_targets)}
+**Mix : v20b partout, ViT-e seulement sur 3 cibles** (celles où il battait v17 sur le gold hold-out, Δ ≥ 0,01) :
+- **v20b** : {", ".join(v20b_targets)}
 - **ViT-e** : {", ".join(vite_targets)}
 
 {mix_lines}
@@ -328,7 +335,7 @@ TTA : identité + rotation ±5° + scale 0.95/1.05. **Pas de hflip**.
 Le kernel **doit** écrire `submission.csv` (cwd / `/kaggle/working`).
 """
 
-    v17_tuple = repr(v17_targets)
+    v20b_tuple = repr(v20b_targets)
     config_code = f"""import os
 from pathlib import Path
 
@@ -359,12 +366,12 @@ if KAGGLE:
                 return hits[0]
         raise FileNotFoundError(f'{{name}} introuvable (dataset ensemble attache ?)')
 
-    WEIGHTS_V17 = _find_weight('v17_fold1.pt')
-    WEIGHTS_VITE = _find_weight('vit_e_best.pt')
+    WEIGHTS_V20B = _find_weight('v20b_ep8.pt')
+    WEIGHTS_VITE = _find_weight('vit_e_ep7.pt')
 else:
     COMP_DIR = Path('../data/csv')
-    WEIGHTS_V17 = Path('../kaggle_dataset_ensemble/_upload/v17_fold1.pt')
-    WEIGHTS_VITE = Path('../kaggle_dataset_ensemble/_upload/vit_e_best.pt')
+    WEIGHTS_V20B = Path('../kaggle_dataset_ensemble/_upload/v20b_ep8.pt')
+    WEIGHTS_VITE = Path('../kaggle_dataset_ensemble/_upload/vit_e_ep7.pt')
 
 TEST_CSV = COMP_DIR / 'test.csv'
 TEST_SERIES_CSV = COMP_DIR / 'test_series.csv'
@@ -407,15 +414,15 @@ TTA_VARIANTS = (
     (0.0, 0.95),
     (0.0, 1.05),
 )
-# Switch dur par cible : gold 58, ViT-e si delta >= 0.01, sinon v17.
-V17_TARGETS = {v17_tuple}
+# Switch dur : v20b par defaut, ViT-e specialiste MCL / menisque medial / effusion.
+V20B_TARGETS = {v20b_tuple}
 
 print('competition dir :', COMP_DIR)
-print('poids v17       :', WEIGHTS_V17, '| existe :', WEIGHTS_V17.exists())
+print('poids v20b      :', WEIGHTS_V20B, '| existe :', WEIGHTS_V20B.exists())
 print('poids vit_e     :', WEIGHTS_VITE, '| existe :', WEIGHTS_VITE.exists())
 print('device          :', DEVICE)
 print('TTA variantes   :', TTA_VARIANTS)
-print('v17 cibles      :', V17_TARGETS)
+print('v20b cibles     :', V20B_TARGETS)
 """
 
     load_code = r"""TARGETS = ['ACL', 'MCL', 'Medial Meniscus', 'Lateral Meniscus', 'Medial OA',
@@ -423,22 +430,22 @@ print('v17 cibles      :', V17_TARGETS)
            'Contusion', 'Fracture']
 
 
-def load_v17(weights_path):
+def load_v20b(weights_path):
     ckpt = torch.load(str(weights_path), map_location=DEVICE, weights_only=False)
     cfg = ckpt.get('config', {})
-    model = KneeNetV17(
+    model = KneeNetV20b(
         backbone=cfg.get('backbone', 'resnet50'),
-        n_series=int(cfg.get('n_series', 3)),
+        n_series=int(cfg.get('n_series', 6)),
         head_dim=int(cfg.get('head_dim', 512)),
         dropout=float(cfg.get('dropout', 0.4)),
-        encode_chunk=int(cfg.get('encode_chunk', 8)),
+        encode_chunk=max(8, int(cfg.get('encode_chunk', 8))),
         lstm_hidden=int(cfg.get('lstm_hidden', 256)),
         pretrained=False,
     )
     model.load_state_dict(ckpt['model'], strict=True)
     model.to(DEVICE).eval()
     print('modele', cfg.get('model'), '| epoch', ckpt.get('epoch'),
-          '| val macro-AUC local :', round(float(ckpt.get('val_macro_auc', float('nan'))), 4),
+          '| gold macro-AUC :', round(float(ckpt.get('gold_macro_auc', float('nan'))), 4),
           '| n_series', model.n_series)
     return model, cfg
 
@@ -457,27 +464,28 @@ def load_vite(weights_path):
     model.load_state_dict(ckpt['model'], strict=True)
     model.to(DEVICE).eval()
     print('modele', cfg.get('model'), '| epoch', ckpt.get('epoch'),
-          '| val macro-AUC local :', round(float(ckpt.get('val_macro_auc', float('nan'))), 4),
+          '| gold macro-AUC :', round(float(ckpt.get('gold_macro_auc', float('nan'))), 4),
           '| n_series', model.n_series)
     return model, cfg
 
 
-model_v17, cfg_v17 = load_v17(WEIGHTS_V17)
+model_v20b, cfg_v20b = load_v20b(WEIGHTS_V20B)
 model_vite, cfg_vite = load_vite(WEIGHTS_VITE)
-assert int(model_v17.n_series) == 3, model_v17.n_series
+assert int(model_v20b.n_series) == 6, model_v20b.n_series
 assert int(model_vite.n_series) == 6, model_vite.n_series
+assert int(model_v20b.n_series) == int(model_vite.n_series)
 """
 
-    infer_code = r"""# --- Inference : TTA puis switch dur par cible (v17 vs ViT-e) ------------
+    infer_code = r"""# --- Inference : TTA puis switch dur par cible (v20b vs ViT-e specialiste) -
 import time
 import torch.nn.functional as F
 
 test = pd.read_csv(TEST_CSV)
 test_series = pd.read_csv(TEST_SERIES_CSV)
-v17_idx = torch.tensor([t in V17_TARGETS for t in TARGETS], dtype=torch.bool)
+v20b_idx = torch.tensor([t in V20B_TARGETS for t in TARGETS], dtype=torch.bool)
 print(f'{len(test)} etudes a predire | TTA x{len(TTA_VARIANTS)} | mix cible')
-print('v17   ->', [TARGETS[i] for i, u in enumerate(v17_idx) if u])
-print('vit_e ->', [TARGETS[i] for i, u in enumerate(v17_idx) if not u])
+print('v20b  ->', [TARGETS[i] for i, u in enumerate(v20b_idx) if u])
+print('vit_e ->', [TARGETS[i] for i, u in enumerate(v20b_idx) if not u])
 
 
 def apply_affine(x, angle_deg=0.0, scale=1.0):
@@ -500,8 +508,8 @@ def apply_affine(x, angle_deg=0.0, scale=1.0):
     return xf.reshape(b, s, d, h, w)
 
 
-def _forward(model, x, use_amp=False):
-    global DEVICE, model_v17, model_vite
+def _forward(model, x, use_amp=True):
+    global DEVICE, model_v20b, model_vite
     try:
         if use_amp and DEVICE == 'cuda':
             with torch.autocast('cuda', dtype=AMP_DTYPE):
@@ -517,31 +525,31 @@ def _forward(model, x, use_amp=False):
             return model(x)
         except RuntimeError:
             DEVICE = 'cpu'
-            model_v17 = model_v17.to('cpu')
+            model_v20b = model_v20b.to('cpu')
             model_vite = model_vite.to('cpu')
             return model.to('cpu')(x.cpu())
 
 
 rows = []
 t0 = time.time()
-v17_idx_dev = v17_idx.to(DEVICE)
+v20b_idx_dev = v20b_idx.to(DEVICE)
+n_series = int(model_v20b.n_series)
 with torch.no_grad():
     for i, uid in enumerate(test.StudyInstanceUID):
         _SERIES_CACHE.clear()
         srows = test_series[test_series.StudyInstanceUID == uid]
         sdir = TEST_SERIES_DIR / uid
-        vol17 = study_to_tensor(sdir, srows, n_series=model_v17.n_series)
-        vole = study_to_tensor(sdir, srows, n_series=model_vite.n_series)
-        x17 = torch.from_numpy(vol17).unsqueeze(0).to(DEVICE)
-        xe = torch.from_numpy(vole).unsqueeze(0).to(DEVICE)
-        p17s, pes = [], []
+        vol = study_to_tensor(sdir, srows, n_series=n_series)
+        x = torch.from_numpy(vol).unsqueeze(0).to(DEVICE)
+        p20s, pes = [], []
         for angle_deg, scale in TTA_VARIANTS:
-            p17s.append(torch.sigmoid(_forward(model_v17, apply_affine(x17, angle_deg, scale), use_amp=False).float()))
-            pes.append(torch.sigmoid(_forward(model_vite, apply_affine(xe, angle_deg, scale), use_amp=True).float()))
-        p17 = torch.stack(p17s, dim=0).mean(dim=0)
+            xa = apply_affine(x, angle_deg, scale)
+            p20s.append(torch.sigmoid(_forward(model_v20b, xa, use_amp=True).float()))
+            pes.append(torch.sigmoid(_forward(model_vite, xa, use_amp=True).float()))
+        p20 = torch.stack(p20s, dim=0).mean(dim=0)
         pe = torch.stack(pes, dim=0).mean(dim=0)
-        mask = v17_idx_dev.to(pe.device).view(1, -1)
-        prob = torch.where(mask, p17, pe).cpu().numpy()[0]
+        mask = v20b_idx_dev.to(pe.device).view(1, -1)
+        prob = torch.where(mask, p20, pe).cpu().numpy()[0]
         rows.append([uid] + prob.tolist())
         if (i + 1) % 50 == 0:
             print(f'{i+1}/{len(test)} | {(time.time()-t0)/60:.1f} min', flush=True)
@@ -550,8 +558,8 @@ pred = pd.DataFrame(rows, columns=['StudyInstanceUID'] + TARGETS)
 pred.head()
 """
 
-    v17_code = _patch_v17(
-        (ROOT / "src" / "models" / "kneenet_v17.py").read_text(encoding="utf-8")
+    v20b_code = _patch_v20b(
+        (ROOT / "src" / "models" / "kneenet_v20b.py").read_text(encoding="utf-8")
     )
     vite_code = _patch_vite(
         (ROOT / "src" / "models" / "kneenet_vit_e.py").read_text(encoding="utf-8")
@@ -573,8 +581,8 @@ pred.head()
             cell_code(config_code),
             cell_code(PREPROCESS_CODE),
             cell_code(
-                "# --- KneeNet v17 (copie self-contained de src/models/kneenet_v17.py) ---\n"
-                + v17_code
+                "# --- KneeNet v20b (copie self-contained de src/models/kneenet_v20b.py) ---\n"
+                + v20b_code
             ),
             cell_code(
                 "# --- KneeNet ViT-e (copie self-contained de src/models/kneenet_vit_e.py) ---\n"

@@ -1,6 +1,6 @@
 {
-  "id": "sultent/rsna-knee-ensemble-v17-vit-e",
-  "title": "RSNA Knee Ensemble v17 ViT-e",
+  "id": "sultent/rsna-knee-ensemble-v20b-vit-e",
+  "title": "RSNA Knee Ensemble v20b ViT-e",
   "code_file": "ensemble.ipynb",
   "language": "python",
   "kernel_type": "notebook",

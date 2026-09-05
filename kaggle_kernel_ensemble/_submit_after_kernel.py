@@ -5,9 +5,9 @@ import sys
 import time
 from pathlib import Path
 
-KERNEL = "sultent/rsna-knee-ensemble-v17-vit-e"
+KERNEL = "sultent/rsna-knee-ensemble-v20b-vit-e"
 COMPETITION = "rsna-knee-abnormality-detection"
-OUT_DIR = Path("kaggle_kernel_ensemble/_out_goldmix")
+OUT_DIR = Path("kaggle_kernel_ensemble/_out_v20b_vite")
 
 POLL_EVERY_S = 300
 MAX_WAIT_S = 8 * 3600
@@ -42,7 +42,7 @@ def main() -> None:
 
     # Save & Run All n'a que ~3 etudes test : ne PAS uploader ce CSV.
     # Soumission code : Kaggle relance le kernel sur le vrai test.
-    msg = "Ensemble v17-fold1 + ViT-e gold-mix (MCL, Medial Meniscus, Effusion)"
+    msg = "Ensemble v20b ep8 + ViT-e ep7 specialist (MCL, Medial Meniscus, Effusion)"
     _kaggle(
         "competitions",
         "submit",
@@ -50,7 +50,7 @@ def main() -> None:
         "-k",
         KERNEL,
         "-v",
-        "4",
+        "1",
         "-f",
         "submission.csv",
         "-m",
