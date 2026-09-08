@@ -1,0 +1,39 @@
+# v20f = v20b + gate d'intensite par slot sur le stem :
+#   out = (1-σ) * stem_mix(A+B) + σ * (k,k,k)
+#   σ = sigmoid(-4 + delta_s), delta init 0 -> epoch 0 ≈ v20b.
+# Un run : les 6 σ disent si le fluide FS veut l'intensite (vs T1).
+# Recette subset = v20b : gpt56sol, frac 0.25, seed 42.
+# Juger vs subset_v20b_crop130_frac025 (val ET gold, Δ > 0.01), surtout
+# Effusion / MCL / Medial Meniscus. Lire stem_gate_* dans history.json.
+#   python -X utf8 -m src.train.train --config configs/kneenet_v20f_crop130_subset.yaml
+
+run_name: subset_v20f_crop130_frac025
+model: kneenet_v20f
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: weights/ResNet50.pt
+lstm_hidden: 256
+stem_intensity_logit: -4.0
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 10
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
