@@ -290,6 +290,13 @@ def _patch_vite(src: str) -> str:
     return src
 
 
+TARGETS_ORDER = [
+    "ACL", "MCL", "Medial Meniscus", "Lateral Meniscus", "Medial OA",
+    "Lateral OA", "PF OA", "Effusion", "Synovitis", "Baker's",
+    "Contusion", "Fracture",
+]
+
+
 def main() -> None:
     mix = json.loads(MIX_PATH.read_text(encoding="utf-8"))
     v20b_targets = tuple(mix["v20b_targets"])
@@ -297,38 +304,48 @@ def main() -> None:
     v20b_ep = int(mix["v20b_epoch"])
     vite_ep = int(mix["vit_e_epoch"])
     ev = mix.get("specialist_evidence", {}).get("table", {})
+    w_vite = mix["weights_vite"]
+    missing = [t for t in TARGETS_ORDER if t not in w_vite]
+    if missing:
+        raise KeyError(f"weights_vite incomplet : {missing}")
+    w_tuple = tuple(float(w_vite[t]) for t in TARGETS_ORDER)
+    blend_name = str(mix.get("blend_name", "blend"))
 
     rows = []
-    for t in vite_targets:
+    for t in TARGETS_ORDER:
+        wv = float(w_vite[t])
+        w20 = 1.0 - wv
+        winner = "vit_e" if wv >= w20 else "v20b"
         rec = ev.get(t, {})
+        extra = ""
         if rec:
-            rows.append(
-                f"- `{t}` : **vit_e** "
-                f"(gold hold-out vs v17 : v17 {rec['v17']:.3f} / ViT-e {rec['vit_e']:.3f}, "
-                f"Δ {rec['delta']:+.3f})"
+            extra = (
+                f" ; gold vs v17 Δ {rec['delta']:+.3f}"
             )
-        else:
-            rows.append(f"- `{t}` : **vit_e**")
-    for t in v20b_targets:
-        rows.append(f"- `{t}` : **v20b** (ancre public LB {mix['v20b_lb']})")
+        rows.append(
+            f"- `{t}` : **{winner}** {w20:.0%} v20b / {wv:.0%} ViT-e{extra}"
+        )
     mix_lines = "\n".join(rows)
 
-    md0 = f"""# RSNA Knee — Ensemble ciblé v20b + ViT-e spécialiste
+    md0 = f"""# RSNA Knee — Ensemble lissé v20b + ViT-e (`{blend_name}`)
 
 Notebook **self-contained** pour Kaggle (internet off) :
-DICOM test → crop 130 mm + bande 20–80 % → volumes (24, 224, 224) → **switch dur par cible**
-entre **KneeNet v20b** (6 slots FS/T1, ResNet-50 RadImageNet, `v20b_crop130_oofmask_full` epoch {v20b_ep}, public LB {mix['v20b_lb']})
-et **KneeNet ViT-e** spécialiste (DINOv3 ViT-B/16, `vit_e_crop130_oofmask_full` epoch {vite_ep}, public LB {mix['vit_e_lb']})
+DICOM test → crop 130 mm + bande 20–80 % → volumes (24, 224, 224) → **blend par cible**
+entre **KneeNet v20b distillé** (6 slots FS/T1, ResNet-50 RadImageNet, `{mix['v20b_run']}` epoch {v20b_ep}, gold macro-AUC {mix['v20b_lb']})
+et **KneeNet ViT-e** (DINOv3 ViT-B/16, `vit_e_crop130_oofmask_full` epoch {vite_ep}, public LB {mix['vit_e_lb']})
 → TTA affine ×5 → `submission.csv`.
 
 Poids (dataset `sultent/rsna-knee-ensemble-weights`) :
-- `v20b_ep8.pt` — `v20b_crop130_oofmask_full/epoch8.pt` (optimizer retiré)
+- `v20b_distil_lam03.pt` — `{mix['v20b_run']}/best.pt` (optimizer retiré, distil λ=0.3)
 - `vit_e_ep7.pt` — `vit_e_crop130_oofmask_full/epoch7.pt` (optimizer retiré)
 
-**Mix : v20b partout, ViT-e seulement sur 3 cibles** (celles où il battait v17 sur le gold hold-out, Δ ≥ 0,01) :
+Le switch dur (ViT-e 100 % sur MCL / ménisque médial / épanchement) a fait **{mix.get('hard_switch_lb', 0.956)}** public. Ici on **lisse** : le modèle fort sur la cible garde l'avantage, l'autre apporte 10–20 %.
+
+Gagnants (même assignment) :
 - **v20b** : {", ".join(v20b_targets)}
 - **ViT-e** : {", ".join(vite_targets)}
 
+**Mix `{blend_name}`** (poids = part ViT-e ; v20b = 1 − w) :
 {mix_lines}
 
 TTA : identité + rotation ±5° + scale 0.95/1.05. **Pas de hflip**.
@@ -336,6 +353,7 @@ Le kernel **doit** écrire `submission.csv` (cwd / `/kaggle/working`).
 """
 
     v20b_tuple = repr(v20b_targets)
+    w_repr = repr(w_tuple)
     config_code = f"""import os
 from pathlib import Path
 
@@ -366,11 +384,11 @@ if KAGGLE:
                 return hits[0]
         raise FileNotFoundError(f'{{name}} introuvable (dataset ensemble attache ?)')
 
-    WEIGHTS_V20B = _find_weight('v20b_ep8.pt')
+    WEIGHTS_V20B = _find_weight('v20b_distil_lam03.pt')
     WEIGHTS_VITE = _find_weight('vit_e_ep7.pt')
 else:
     COMP_DIR = Path('../data/csv')
-    WEIGHTS_V20B = Path('../kaggle_dataset_ensemble/_upload/v20b_ep8.pt')
+    WEIGHTS_V20B = Path('../kaggle_dataset_ensemble/_upload_distil/v20b_distil_lam03.pt')
     WEIGHTS_VITE = Path('../kaggle_dataset_ensemble/_upload/vit_e_ep7.pt')
 
 TEST_CSV = COMP_DIR / 'test.csv'
@@ -414,15 +432,19 @@ TTA_VARIANTS = (
     (0.0, 0.95),
     (0.0, 1.05),
 )
-# Switch dur : v20b par defaut, ViT-e specialiste MCL / menisque medial / effusion.
+# Blend par cible : poids ViT-e (v20b = 1 - w). Gagnant 90/10 ou mix adaptatif.
 V20B_TARGETS = {v20b_tuple}
+BLEND_NAME = {blend_name!r}
+MIX_W_VITE = {w_repr}
 
 print('competition dir :', COMP_DIR)
 print('poids v20b      :', WEIGHTS_V20B, '| existe :', WEIGHTS_V20B.exists())
 print('poids vit_e     :', WEIGHTS_VITE, '| existe :', WEIGHTS_VITE.exists())
 print('device          :', DEVICE)
 print('TTA variantes   :', TTA_VARIANTS)
+print('blend           :', BLEND_NAME)
 print('v20b cibles     :', V20B_TARGETS)
+print('w_vite          :', MIX_W_VITE)
 """
 
     load_code = r"""TARGETS = ['ACL', 'MCL', 'Medial Meniscus', 'Lateral Meniscus', 'Medial OA',
@@ -476,16 +498,16 @@ assert int(model_vite.n_series) == 6, model_vite.n_series
 assert int(model_v20b.n_series) == int(model_vite.n_series)
 """
 
-    infer_code = r"""# --- Inference : TTA puis switch dur par cible (v20b vs ViT-e specialiste) -
+    infer_code = r"""# --- Inference : TTA puis blend lisse par cible (v20b vs ViT-e) -----------
 import time
 import torch.nn.functional as F
 
 test = pd.read_csv(TEST_CSV)
 test_series = pd.read_csv(TEST_SERIES_CSV)
-v20b_idx = torch.tensor([t in V20B_TARGETS for t in TARGETS], dtype=torch.bool)
-print(f'{len(test)} etudes a predire | TTA x{len(TTA_VARIANTS)} | mix cible')
-print('v20b  ->', [TARGETS[i] for i, u in enumerate(v20b_idx) if u])
-print('vit_e ->', [TARGETS[i] for i, u in enumerate(v20b_idx) if not u])
+assert len(MIX_W_VITE) == len(TARGETS), (len(MIX_W_VITE), len(TARGETS))
+print(f'{len(test)} etudes a predire | TTA x{len(TTA_VARIANTS)} | blend {BLEND_NAME}')
+for t, w in zip(TARGETS, MIX_W_VITE):
+    print(f'  {t:<18} v20b {1.0 - w:.2f} | vit_e {w:.2f}')
 
 
 def apply_affine(x, angle_deg=0.0, scale=1.0):
@@ -532,7 +554,7 @@ def _forward(model, x, use_amp=True):
 
 rows = []
 t0 = time.time()
-v20b_idx_dev = v20b_idx.to(DEVICE)
+w_vite = torch.tensor(MIX_W_VITE, dtype=torch.float32)
 n_series = int(model_v20b.n_series)
 with torch.no_grad():
     for i, uid in enumerate(test.StudyInstanceUID):
@@ -548,8 +570,8 @@ with torch.no_grad():
             pes.append(torch.sigmoid(_forward(model_vite, xa, use_amp=True).float()))
         p20 = torch.stack(p20s, dim=0).mean(dim=0)
         pe = torch.stack(pes, dim=0).mean(dim=0)
-        mask = v20b_idx_dev.to(pe.device).view(1, -1)
-        prob = torch.where(mask, p20, pe).cpu().numpy()[0]
+        w = w_vite.to(pe.device).view(1, -1)
+        prob = ((1.0 - w) * p20 + w * pe).cpu().numpy()[0]
         rows.append([uid] + prob.tolist())
         if (i + 1) % 50 == 0:
             print(f'{i+1}/{len(test)} | {(time.time()-t0)/60:.1f} min', flush=True)

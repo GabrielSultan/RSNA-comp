@@ -42,7 +42,7 @@ def main() -> None:
 
     # Save & Run All n'a que ~3 etudes test : ne PAS uploader ce CSV.
     # Soumission code : Kaggle relance le kernel sur le vrai test.
-    msg = "Ensemble v20b ep8 + ViT-e ep7 specialist (MCL, Medial Meniscus, Effusion)"
+    msg = "Ensemble v20b distil ViT-e lam03 ep9 + ViT-e ep7 mix adaptatif 80/20"
     _kaggle(
         "competitions",
         "submit",
@@ -50,7 +50,7 @@ def main() -> None:
         "-k",
         KERNEL,
         "-v",
-        "1",
+        "4",
         "-f",
         "submission.csv",
         "-m",

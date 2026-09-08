@@ -1,0 +1,49 @@
+{
+  "blend_name": "adaptive_80_20_distil_lam03",
+  "criterion": "meme mix adaptatif, v20b remplace par le student distille ViT-e (lambda 0.3, subset 25 %). Effusion 90/10 ViT-e; MCL et menisque medial 80/20 ViT-e; les 9 cibles v20b en 80/20 student.",
+  "v20b_epoch": 9,
+  "vit_e_epoch": 7,
+  "v20b_run": "subset_v20b_distil_vite_lam03_frac025",
+  "vit_e_run": "vit_e_crop130_oofmask_full",
+  "v20b_lb": 0.882,
+  "vit_e_lb": 0.928,
+  "hard_switch_lb": 0.956,
+  "v20b_targets": [
+    "ACL",
+    "Lateral Meniscus",
+    "Medial OA",
+    "Lateral OA",
+    "PF OA",
+    "Synovitis",
+    "Baker's",
+    "Contusion",
+    "Fracture"
+  ],
+  "vit_e_targets": [
+    "MCL",
+    "Medial Meniscus",
+    "Effusion"
+  ],
+  "weights_vite": {
+    "ACL": 0.20,
+    "MCL": 0.80,
+    "Medial Meniscus": 0.80,
+    "Lateral Meniscus": 0.20,
+    "Medial OA": 0.20,
+    "Lateral OA": 0.20,
+    "PF OA": 0.20,
+    "Effusion": 0.90,
+    "Synovitis": 0.20,
+    "Baker's": 0.20,
+    "Contusion": 0.20,
+    "Fracture": 0.20
+  },
+  "specialist_evidence": {
+    "vs": "v17_crop130_oof_fold1 gold hold-out vs vit_e_crop130v1 epoch 8",
+    "table": {
+      "MCL": {"v17": 0.8956916099773242, "vit_e": 0.9115646258503401, "delta": 0.015873015873015928},
+      "Medial Meniscus": {"v17": 0.9242788461538461, "vit_e": 0.9447115384615384, "delta": 0.02043269230769229},
+      "Effusion": {"v17": 0.8869565217391304, "vit_e": 0.9416149068322982, "delta": 0.05465838509316773}
+    }
+  }
+}

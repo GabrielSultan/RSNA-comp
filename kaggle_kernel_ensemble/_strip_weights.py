@@ -43,21 +43,29 @@ def strip_ckpt(src: Path, dst: Path) -> dict:
 
 def main() -> None:
     UPLOAD.mkdir(parents=True, exist_ok=True)
-    v20_src = ROOT / "checkpoints" / "v20b_crop130_oofmask_full" / "epoch8.pt"
+    v20_src = (
+        ROOT / "checkpoints" / "subset_v20b_distil_vite_lam03_frac025" / "best.pt"
+    )
     vite_src = ROOT / "checkpoints" / "vit_e_crop130_oofmask_full" / "epoch7.pt"
     v20_dst = UPLOAD / "v20b_ep8.pt"
     vite_dst = UPLOAD / "vit_e_ep7.pt"
 
-    tmp_v20 = UPLOAD / "_tmp_v20b_ep8_full.pt"
-    tmp_vite = UPLOAD / "_tmp_vit_e_ep7_full.pt"
+    tmp_v20 = UPLOAD / "_tmp_v20b_distil_full.pt"
     shutil.copy2(v20_src, tmp_v20)
-    shutil.copy2(vite_src, tmp_vite)
-    print("copied tmp", tmp_v20.stat().st_size, tmp_vite.stat().st_size, flush=True)
+    print("copied tmp v20b", tmp_v20.stat().st_size, flush=True)
 
     sd20 = strip_ckpt(tmp_v20, v20_dst)
-    sde = strip_ckpt(tmp_vite, vite_dst)
     tmp_v20.unlink(missing_ok=True)
-    tmp_vite.unlink(missing_ok=True)
+
+    if vite_dst.exists() and vite_dst.stat().st_size > 0:
+        print("reuse stripped vit_e", vite_dst, vite_dst.stat().st_size, flush=True)
+        sde = torch.load(vite_dst, map_location="cpu", weights_only=False)
+    else:
+        tmp_vite = UPLOAD / "_tmp_vit_e_ep7_full.pt"
+        shutil.copy2(vite_src, tmp_vite)
+        print("copied tmp vite", tmp_vite.stat().st_size, flush=True)
+        sde = strip_ckpt(tmp_vite, vite_dst)
+        tmp_vite.unlink(missing_ok=True)
 
     print("--- verify load ---", flush=True)
     cfg20 = sd20["config"]

@@ -14,7 +14,8 @@
     "rsna-knee-abnormality-detection"
   ],
   "dataset_sources": [
-    "sultent/rsna-knee-ensemble-weights"
+    "sultent/rsna-knee-ensemble-weights",
+    "sultent/rsna-knee-v20b-distil-lam03"
   ],
   "category_ids": []
 }

@@ -1,13 +1,13 @@
 {
-  "criterion": "v20b ancre (public LB 0.945), ViT-e specialiste uniquement sur MCL / Medial Meniscus / Effusion — seules cibles ou ViT-e battait v17 sur le gold hold-out (delta >= 0.01)",
-  "v20b_epoch": 8,
+  "blend_name": "adaptive_80_20_distil_lam03",
+  "criterion": "meme mix adaptatif, v20b remplace par le student distille ViT-e (lambda 0.3, subset 25 %). Effusion 90/10 ViT-e; MCL et menisque medial 80/20 ViT-e; les 9 cibles v20b en 80/20 student.",
+  "v20b_epoch": 9,
   "vit_e_epoch": 7,
-  "v20b_run": "v20b_crop130_oofmask_full",
+  "v20b_run": "subset_v20b_distil_vite_lam03_frac025",
   "vit_e_run": "vit_e_crop130_oofmask_full",
-  "v20b_lb": 0.945,
+  "v20b_lb": 0.882,
   "vit_e_lb": 0.928,
-  "v20b_gold": 0.9593223634133367,
-  "vit_e_gold": 0.9396891096531154,
+  "hard_switch_lb": 0.956,
   "v20b_targets": [
     "ACL",
     "Lateral Meniscus",
@@ -24,6 +24,20 @@
     "Medial Meniscus",
     "Effusion"
   ],
+  "weights_vite": {
+    "ACL": 0.20,
+    "MCL": 0.80,
+    "Medial Meniscus": 0.80,
+    "Lateral Meniscus": 0.20,
+    "Medial OA": 0.20,
+    "Lateral OA": 0.20,
+    "PF OA": 0.20,
+    "Effusion": 0.90,
+    "Synovitis": 0.20,
+    "Baker's": 0.20,
+    "Contusion": 0.20,
+    "Fracture": 0.20
+  },
   "specialist_evidence": {
     "vs": "v17_crop130_oof_fold1 gold hold-out vs vit_e_crop130v1 epoch 8",
     "table": {
