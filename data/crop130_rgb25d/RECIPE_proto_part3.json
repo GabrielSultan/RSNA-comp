@@ -1,0 +1,35 @@
+{
+  "crop_mm": 130.0,
+  "crop_rel": 0.7,
+  "band": [
+    0.2,
+    0.8
+  ],
+  "n_slices": 24,
+  "img_size": 224,
+  "planes": [
+    "Sagittal",
+    "Coronal",
+    "Axial"
+  ],
+  "n_protocol_slots": 6,
+  "slots": [
+    "SAG_FS",
+    "COR_FS",
+    "AX_FS",
+    "SAG_T1",
+    "COR_T1",
+    "AX_T1"
+  ],
+  "shard_id": 3,
+  "n_shards": 6,
+  "n_jobs": 3583,
+  "shape": [
+    24,
+    3,
+    224,
+    224
+  ],
+  "rgb": "dicom_neighbors",
+  "note": "6 slots protocole v20b (FS/T1 par plan), contraste exact, pas de repli. Crop 130 mm (PixelSpacing) sinon centre 70 %. Bande 20-80 %, linspace 24 centres. Pour chaque centre k dans le volume ORIGINAL : R=k-1, G=k, B=k+1 (1 coupe DICOM d'ecart, clamp aux bords). Resize 224, uint8. PAS les voisins des 24 linspace."
+}
