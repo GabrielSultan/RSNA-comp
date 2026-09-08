@@ -1,0 +1,14 @@
+{
+  "csv": "data\\labels\\teacher_vite_subset_e.csv",
+  "teacher_config": "configs/kneenet_vit_e_crop130_subset.yaml",
+  "ckpt": "checkpoints\\subset_vit_dinov3_e_crop130_frac025\\best.pt",
+  "epoch": 7,
+  "val_macro_auc_ckpt": 0.8074592141344493,
+  "run_name": "subset_vit_dinov3_e_crop130_frac025",
+  "model": "kneenet_vit_e",
+  "splits": {
+    "train": 924
+  },
+  "n": 924,
+  "tta": false
+}
