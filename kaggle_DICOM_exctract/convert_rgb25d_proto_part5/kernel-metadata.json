@@ -1,0 +1,17 @@
+{
+  "id": "sultent/rsna-knee-convert-rgb-2-5d-proto-part5",
+  "title": "RSNA Knee Convert RGB 2.5D proto part5",
+  "code_file": "convert.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}
