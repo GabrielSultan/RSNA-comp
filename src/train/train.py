@@ -3,6 +3,8 @@
 
 - Loss : BCEWithLogits masquee (y == -1 ignore) + pos_weight par cible
   (n_neg/n_pos sur le train garde, clampe) + label smoothing.
+- Distillation optionnelle : YAML `distil_csv` + `distil_targets` +
+  `distil_lambda` (BCE molle / KL teacher, voir src.train.distill).
 - Optim : AdamW, lr backbone < lr tete, cosine + warmup, AMP bf16.
 - Augmentation GPU dans la boucle ; normalisation ImageNet dans KneeNet.
 - Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
@@ -44,6 +46,7 @@ from src.models.registry import (
     build_model, count_params, default_n_series, list_models,
 )
 from src.nlp.lexicon import TARGETS
+from src.train.distill import coverage, load_distil, masked_kd, teacher_batch
 from src.train.metrics import macro_auc
 
 
@@ -358,6 +361,35 @@ def main() -> None:
     (run_dir / "train_uids.txt").write_text(
         "\n".join(train_ld.dataset.items), encoding="utf-8")
 
+    distil = load_distil(cfg, targets)
+    if distil is not None:
+        hit, n_uid = coverage(train_ld.dataset.items, distil)
+        pct = 100.0 * hit / max(n_uid, 1)
+        print(
+            f"distil {distil.csv} | λ={distil.lam:g} T={distil.temp:g} "
+            f"| cibles {distil.names} | teacher {distil.n} UID "
+            f"| couverture train {hit}/{n_uid} ({pct:.1f}%)",
+            flush=True,
+        )
+        if hit / max(n_uid, 1) < 0.95:
+            raise SystemExit(
+                f"distil : couverture train {pct:.1f}% < 95 % — "
+                "re-dumper le teacher sur le meme split "
+                "(train_frac / seed identiques)."
+            )
+        (run_dir / "distil.json").write_text(
+            json.dumps({
+                "csv": str(distil.csv),
+                "lambda": distil.lam,
+                "temp": distil.temp,
+                "targets": distil.names,
+                "teacher_n": distil.n,
+                "train_hit": hit,
+                "train_n": n_uid,
+            }, indent=2),
+            encoding="utf-8",
+        )
+
     resume_path = _ckpt_path(run_dir, args.ckpt) if args.resume else None
     if args.resume and resume_path is None:
         raise SystemExit("aucun checkpoint (last.pt / best.pt) pour --resume")
@@ -493,6 +525,7 @@ def main() -> None:
         model.train()
         t0 = time.time()
         running = 0.0
+        running_kd = 0.0
         nb = 0
         for x, y, _uid in train_ld:
             x = x.to(device, non_blocking=True)
@@ -516,20 +549,32 @@ def main() -> None:
                     [gold_w if u in gold_uids else 1.0 for u in _uid],
                     device=device, dtype=torch.float32)
 
+            tlog = None
+            if distil is not None:
+                tlog = teacher_batch(_uid, distil, len(targets), device)
+
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
                 logits = model(x)
                 loss = masked_bce(logits, y, pos_weight, smoothing,
                                   sample_weight=sw)
+                kd = None
+                if distil is not None:
+                    kd = masked_kd(
+                        logits, tlog, distil.idx, distil.temp, sw)
+                    loss = loss + distil.lam * kd
             optim.zero_grad(set_to_none=True)
             loss.backward()
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optim.step()
 
             running += loss.item()
+            if kd is not None:
+                running_kd += float(kd.detach())
             nb += 1
             step += 1
 
         train_loss = running / max(nb, 1)
+        train_kd = running_kd / max(nb, 1) if distil is not None else None
         per_target: dict[str, float] = {}
         gold_auc = None
         if n_val > 0:
@@ -548,7 +593,8 @@ def main() -> None:
         val_txt = (f"val {val_loss:.4f} | val AUC {val_auc:.4f}"
                    if n_val > 0 else "val -")
         pstd_txt = f"{pstd:.4f}" if pstd == pstd else "-"
-        print(f"epoch {epoch+1}/{epochs} | train {train_loss:.4f} | "
+        kd_txt = f" | kd {train_kd:.4f}" if train_kd is not None else ""
+        print(f"epoch {epoch+1}/{epochs} | train {train_loss:.4f}{kd_txt} | "
               f"{val_txt}{gold_txt} | proba std {pstd_txt} | {dt:.0f}s",
               flush=True)
         if pstd == pstd and pstd < 0.005:
@@ -557,8 +603,19 @@ def main() -> None:
         rec = {"epoch": epoch + 1, "loss": train_loss, "val_loss": val_loss,
                "val_macro_auc": val_auc, "proba_std": pstd,
                **{f"auc_{k}": v for k, v in per_target.items()}}
+        if train_kd is not None:
+            rec["distil_loss"] = train_kd
         if gold_auc is not None:
             rec["gold_macro_auc"] = gold_auc
+        if hasattr(model, "extra_log"):
+            extra = model.extra_log()
+            rec.update(extra)
+            if extra:
+                bits = " ".join(
+                    f"{k[10:] if k.startswith('stem_gate_') else k}={v:.3f}"
+                    for k, v in extra.items()
+                )
+                print(f"  extra : {bits}", flush=True)
         history.append(rec)
 
         if n_val > 0 and val_auc > best_auc:
