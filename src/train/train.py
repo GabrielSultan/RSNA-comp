@@ -2,10 +2,15 @@
 """Boucle d'entrainement KneeNet sur pseudo-labels masques.
 
 - Loss : BCEWithLogits masquee (y == -1 ignore) + pos_weight par cible
-  (n_neg/n_pos sur le train garde, clampe) + label smoothing.
+  (n_neg/n_pos sur le train garde, clampe) + poids par cible
+  (`target_weight: inv_sqrt`) + label smoothing.
 - Distillation optionnelle : YAML `distil_csv` + `distil_targets` +
   `distil_lambda` (BCE molle / KL teacher, voir src.train.distill).
 - Optim : AdamW, lr backbone < lr tete, cosine + warmup, AMP bf16.
+- Seed : `seed` YAML (defaut = train_frac_seed = 42). RNG Python / NumPy /
+  Torch / CUDA, cuDNN det, DataLoader shuffle, drop de serie et pick
+  candidat (hash UID stable, pas PYTHONHASHSEED). grid_sample CUDA peut
+  encore jitter (warn_only).
 - Augmentation GPU dans la boucle ; normalisation ImageNet dans KneeNet.
 - Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
 - Early stopping sur la val AUC (patience dans le YAML).
@@ -24,6 +29,7 @@ import argparse
 import json
 import math
 import os
+import random
 import shutil
 import sys
 import tempfile
@@ -43,11 +49,12 @@ from src.data.dataset_npz import (
 )
 from src.data.transforms import augment_batch
 from src.models.registry import (
-    build_model, count_params, default_n_series, list_models,
+    build_model, count_params, default_n_series, get_model_class, list_models,
 )
 from src.nlp.lexicon import TARGETS
 from src.train.distill import coverage, load_distil, masked_kd, teacher_batch
 from src.train.metrics import macro_auc
+from src.train.param_groups import backbone_lr_range, build_optimizer, set_group_lrs
 
 
 def _json_safe(obj):
@@ -66,6 +73,22 @@ def _json_safe(obj):
 def load_config(path: str) -> dict:
     with open(path, encoding="utf-8") as f:
         return yaml.safe_load(f)
+
+
+def set_run_seed(seed: int) -> None:
+    """Figé le RNG du process. A appeler avant DataLoader / CUDA."""
+    seed = int(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.use_deterministic_algorithms(True, warn_only=True)
+    print(f"seed {seed} (cudnn det, shuffle + pick UID stables)", flush=True)
 
 
 def compute_pos_weight(labels_csv: str, targets: list[str],
@@ -102,9 +125,54 @@ def compute_prior_logits(labels_csv: str, targets: list[str],
     return priors
 
 
+def compute_target_weight(labels_csv: str, targets: list[str],
+                          uids: list[str] | None = None,
+                          lo: float = 1.0, hi: float = 3.0) -> torch.Tensor:
+    """Poids inter-cibles : 1/sqrt(prevalence), clip [lo, hi], moyenne 1.
+
+    Distinct de `pos_weight` (qui rebalance pos vs neg *dans* une cible).
+    Ici on rebalance les 12 tetes entre elles : la BCE moyenne est sinon
+    dominee par Effusion / OA (prevalences hautes) au detriment de
+    Fracture / Synovitis / MCL. La macro-AUC, elle, pese les 12 a egalite.
+    """
+    df = pd.read_csv(labels_csv)
+    if uids is not None:
+        df = df[df["StudyInstanceUID"].isin(set(uids))]
+    elif "split" in df.columns:
+        df = df[df.split == "train"]
+    raw = []
+    for t in targets:
+        p = float(df[t].dropna().mean()) if t in df.columns else 0.0
+        raw.append(1.0 / math.sqrt(max(p, 1e-4)))
+    w = np.clip(np.asarray(raw, dtype=np.float64), lo, hi)
+    w = w / max(float(w.mean()), 1e-8)
+    return torch.tensor(w, dtype=torch.float32)
+
+
+def resolve_target_weight(cfg: dict, targets: list[str],
+                          uids: list[str] | None = None) -> torch.Tensor:
+    """YAML `target_weight` : null | inv_sqrt | liste de 12 floats."""
+    spec = cfg.get("target_weight")
+    if spec in (None, False, "", "none", "off"):
+        return torch.ones(len(targets))
+    if isinstance(spec, str) and spec.lower().replace("_", "") in ("invsqrt",):
+        return compute_target_weight(cfg["labels_csv"], targets, uids=uids)
+    if isinstance(spec, (list, tuple)):
+        if len(spec) != len(targets):
+            raise SystemExit(
+                f"target_weight : {len(spec)} valeurs, {len(targets)} cibles")
+        w = np.asarray(spec, dtype=np.float64)
+        if not np.isfinite(w).all() or (w <= 0).any():
+            raise SystemExit("target_weight : valeurs strictement positives")
+        w = w / max(float(w.mean()), 1e-8)
+        return torch.tensor(w, dtype=torch.float32)
+    raise SystemExit(f"target_weight inconnu : {spec!r}")
+
+
 def masked_bce(logits: torch.Tensor, y: torch.Tensor,
                pos_weight: torch.Tensor, smoothing: float = 0.02,
-               sample_weight: torch.Tensor | None = None) -> torch.Tensor:
+               sample_weight: torch.Tensor | None = None,
+               target_weight: torch.Tensor | None = None) -> torch.Tensor:
     mask = y >= 0
     if mask.sum() == 0:
         return logits.sum() * 0.0
@@ -117,6 +185,8 @@ def masked_bce(logits: torch.Tensor, y: torch.Tensor,
     w = mask.float()
     if sample_weight is not None:
         w = w * sample_weight.to(logits.device).float().unsqueeze(1)
+    if target_weight is not None:
+        w = w * target_weight.to(logits.device).float().unsqueeze(0)
     return (loss_mat * w).sum() / w.sum().clamp(min=1)
 
 
@@ -187,6 +257,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
         volume_index=volume_index,
         rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
         img_size=int(cfg.get("img_size", 224)),
+        rgb_as_gray=bool(cfg.get("rgb_as_gray", False)),
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=False,
                       num_workers=num_workers)
@@ -315,6 +386,8 @@ def main() -> None:
                         help="checkpoint explicite (avec --resume)")
     parser.add_argument("--fold", type=int, default=None,
                         help="OOF : tenir ce fold a l'ecart (val + dump oof_preds.csv)")
+    parser.add_argument("--check-optim", action="store_true",
+                        help="modele + AdamW, affiche les groupes LLRD, quitte (pas de data)")
     args = parser.parse_args()
     if args.list_models:
         for name in list_models():
@@ -325,6 +398,12 @@ def main() -> None:
         cfg["model"] = args.model
     cfg.setdefault("model", "kneenet_v8")
     cfg.setdefault("n_series", default_n_series(cfg["model"]))
+    seed = int(cfg.get("seed", cfg.get("train_frac_seed", 42)))
+    cfg["seed"] = seed
+    set_run_seed(seed)
+    if getattr(get_model_class(cfg["model"]), "rgb_neighbors", False):
+        cfg["rgb_neighbors"] = True
+        print("rgb_neighbors force par l'archi", flush=True)
     if args.fold is not None:
         cfg["oof_fold"] = int(args.fold)
         cfg["dump_oof"] = True
@@ -334,8 +413,19 @@ def main() -> None:
             cfg["run_name"] = base + suffix
         print(f"OOF fold {args.fold} -> run_name {cfg['run_name']}", flush=True)
 
+    if args.check_optim:
+        model = build_model(cfg, pretrained=False)
+        optim = build_optimizer(model, cfg)
+        n_t = sum(len(g["params"]) for g in optim.param_groups)
+        lo, hi = backbone_lr_range(optim)
+        print(
+            f"check-optim : {len(optim.param_groups)} groupes | "
+            f"{n_t} tenseurs | lr backbone [{lo:.3e}, {hi:.3e}]",
+            flush=True,
+        )
+        return
+
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    torch.backends.cudnn.benchmark = True
     run_dir = Path("checkpoints") / cfg["run_name"]
     run_dir.mkdir(parents=True, exist_ok=True)
 
@@ -354,6 +444,8 @@ def main() -> None:
         fold_seed=int(cfg.get("fold_seed", 42)),
         include_gold=bool(cfg.get("include_gold", False)),
         val_frac=float(cfg.get("val_frac", 0.15)),
+        rgb_as_gray=bool(cfg.get("rgb_as_gray", False)),
+        seed=seed,
     )
     n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
     print(f"train {n_train} | val {n_val} "
@@ -413,12 +505,20 @@ def main() -> None:
         print(f"pos_weight (max {max_pw}):",
               [round(w, 2) for w in pos_weight.tolist()], flush=True)
 
-    backbone_params = list(model.encoder_parameters())
-    head_params = list(model.head_parameters())
-    optim = torch.optim.AdamW([
-        {"params": backbone_params, "lr": cfg["lr_backbone"]},
-        {"params": head_params, "lr": cfg["lr_head"]},
-    ], weight_decay=cfg["weight_decay"])
+    target_w = resolve_target_weight(cfg, targets, uids=train_ld.dataset.items)
+    if float((target_w - 1).abs().max()) > 1e-6:
+        print(
+            "target_weight:",
+            {t: round(w, 3) for t, w in zip(targets, target_w.tolist())},
+            flush=True,
+        )
+        if max_pw is not None:
+            print("attention : pos_weight ET target_weight actifs "
+                  "(deux rebalances, un seul levier prefere)", flush=True)
+    else:
+        target_w = None
+
+    optim = build_optimizer(model, cfg)
 
     # Linear probing : encodeur gele au debut (features stables pour le
     # head/attention), degel a l'epoch `freeze_encoder_epochs`.
@@ -432,9 +532,19 @@ def main() -> None:
 
     epochs = int(cfg["epochs"])
     steps_per_epoch = len(train_ld)
+    accum_steps = max(1, int(cfg.get("accum_steps", 1) or 1))
+    opt_steps_per_epoch = math.ceil(steps_per_epoch / accum_steps)
     cosine_epochs = int(cfg.get("cosine_epochs") or epochs)
-    total_steps = cosine_epochs * steps_per_epoch
+    total_steps = cosine_epochs * opt_steps_per_epoch
     warmup = int(0.05 * total_steps)
+    if accum_steps > 1:
+        print(
+            f"accumulation x{accum_steps} | batch {cfg['batch_size']} "
+            f"| effectif {int(cfg['batch_size']) * accum_steps} "
+            f"| opt steps/epoch {opt_steps_per_epoch} "
+            f"(micro {steps_per_epoch})",
+            flush=True,
+        )
     if cosine_epochs != epochs:
         print(f"cosine calcule sur {cosine_epochs} epochs "
               f"(train stop a {epochs})", flush=True)
@@ -483,6 +593,8 @@ def main() -> None:
         f"| img_size {int(cfg.get('img_size', 224))} "
         f"| oof_fold {cfg.get('oof_fold', '-')} "
         f"| include_gold {int(bool(cfg.get('include_gold', False)))} "
+        f"| drop_path {float(cfg.get('drop_path_rate') or 0):g} "
+        f"| seed {seed} "
         f"| steps/epoch {steps_per_epoch}"
     )
     print(recap, flush=True)
@@ -513,7 +625,7 @@ def main() -> None:
               "(linear probing)", flush=True)
 
     rewarm_frac = float(cfg.get("unfreeze_rewarm_frac", 0.25) or 0.25)
-    rewarm_steps = int(rewarm_frac * steps_per_epoch)
+    rewarm_steps = int(rewarm_frac * opt_steps_per_epoch)
 
     for epoch in range(start_epoch, epochs):
         if encoder_frozen and epoch >= freeze_epochs:
@@ -522,26 +634,29 @@ def main() -> None:
             unfreeze_step = step
             print(f"epoch {epoch + 1} : encodeur degele "
                   f"(re-warmup {rewarm_steps} steps)", flush=True)
+        if hasattr(train_ld.dataset, "set_epoch"):
+            train_ld.dataset.set_epoch(epoch)
+        if getattr(train_ld, "generator", None) is not None:
+            train_ld.generator.manual_seed(seed + epoch)
+        torch.manual_seed(seed + epoch * 100_003)
+        if device == "cuda":
+            torch.cuda.manual_seed_all(seed + epoch * 100_003)
         model.train()
         t0 = time.time()
         running = 0.0
         running_kd = 0.0
         nb = 0
-        for x, y, _uid in train_ld:
+        n_micro = steps_per_epoch
+        optim.zero_grad(set_to_none=True)
+        for micro_i, (x, y, _uid) in enumerate(train_ld):
             x = x.to(device, non_blocking=True)
             y = y.to(device, non_blocking=True)
             x = augment_batch(x)
 
-            for g in optim.param_groups:
-                if g is optim.param_groups[0]:
-                    base = cfg["lr_backbone"]
-                    if (unfreeze_step is not None
-                            and step - unfreeze_step < rewarm_steps):
-                        g["lr"] = base * (step - unfreeze_step + 1) / rewarm_steps
-                    else:
-                        g["lr"] = lr_at(step, total_steps, base, warmup)
-                else:
-                    g["lr"] = lr_at(step, total_steps, cfg["lr_head"], warmup)
+            set_group_lrs(
+                optim, step, total_steps, warmup, unfreeze_step,
+                rewarm_steps, lr_at,
+            )
 
             sw = None
             if gold_uids:
@@ -553,25 +668,29 @@ def main() -> None:
             if distil is not None:
                 tlog = teacher_batch(_uid, distil, len(targets), device)
 
+            win0 = (micro_i // accum_steps) * accum_steps
+            win_n = min(accum_steps, n_micro - win0)
             with torch.autocast("cuda", dtype=torch.bfloat16, enabled=device == "cuda"):
                 logits = model(x)
                 loss = masked_bce(logits, y, pos_weight, smoothing,
-                                  sample_weight=sw)
+                                  sample_weight=sw, target_weight=target_w)
                 kd = None
                 if distil is not None:
                     kd = masked_kd(
                         logits, tlog, distil.idx, distil.temp, sw)
                     loss = loss + distil.lam * kd
-            optim.zero_grad(set_to_none=True)
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            optim.step()
+            (loss / win_n).backward()
 
             running += loss.item()
             if kd is not None:
                 running_kd += float(kd.detach())
             nb += 1
-            step += 1
+            do_step = ((micro_i + 1) % accum_steps == 0) or (micro_i + 1 == n_micro)
+            if do_step:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                optim.step()
+                optim.zero_grad(set_to_none=True)
+                step += 1
 
         train_loss = running / max(nb, 1)
         train_kd = running_kd / max(nb, 1) if distil is not None else None
@@ -603,6 +722,9 @@ def main() -> None:
         rec = {"epoch": epoch + 1, "loss": train_loss, "val_loss": val_loss,
                "val_macro_auc": val_auc, "proba_std": pstd,
                **{f"auc_{k}": v for k, v in per_target.items()}}
+        lr_lo, lr_hi = backbone_lr_range(optim)
+        rec["lr_backbone_min"] = lr_lo
+        rec["lr_backbone_max"] = lr_hi
         if train_kd is not None:
             rec["distil_loss"] = train_kd
         if gold_auc is not None:
