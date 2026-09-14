@@ -58,10 +58,12 @@ MODELS: dict[str, str] = {
     "kneenet_vit_c": "src.models.kneenet_vit_c",
     "kneenet_vit_d": "src.models.kneenet_vit_d",
     "kneenet_vit_e": "src.models.kneenet_vit_e",
+    "kneenet_vit_e_d": "src.models.kneenet_vit_e_d",
     "kneenet_vit_f": "src.models.kneenet_vit_f",
     "kneenet_vit_g": "src.models.kneenet_vit_g",
     "kneenet_vit_h": "src.models.kneenet_vit_h",
     "kneenet_vit_i": "src.models.kneenet_vit_i",
+    "kneenet_vit_j": "src.models.kneenet_vit_j",
 }
 
 DEFAULT_MODEL = "kneenet_v8"
