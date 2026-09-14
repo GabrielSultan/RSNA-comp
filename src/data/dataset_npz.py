@@ -10,8 +10,10 @@ Series dropout : un slot mis a zero avec proba `series_drop_p`.
 """
 from __future__ import annotations
 
+import hashlib
 import io
 import os
+import random
 import zipfile
 from pathlib import Path
 
@@ -37,6 +39,20 @@ N_SLICES = 24
 NORM_MEAN = 0.1648
 NORM_STD = 0.1941
 
+
+def _stable_uid_int(uid: str) -> int:
+    """Entier stable (pas hash() Python, salé par process)."""
+    digest = hashlib.blake2b(uid.encode("utf-8"), digest_size=8).digest()
+    return int.from_bytes(digest, "little") & 0xFFFFFFFF
+
+
+def _dataloader_worker_init(worker_id: int) -> None:
+    s = torch.initial_seed() % (2**32)
+    np.random.seed(s)
+    random.seed(s)
+    torch.manual_seed(s)
+
+
 # ZipFile partage par processus worker (pas picklable -> lazy par pid + chemin)
 _ZIPS: dict[tuple[int, str], zipfile.ZipFile] = {}
 _VOLUME_SOURCE_CACHE: dict[str, dict[str, str] | None] = {}
@@ -58,7 +74,7 @@ def load_volume(zip_file: str, series_uid: str) -> np.ndarray:
 def _index_from_manifests(dir_path: Path) -> dict[str, str]:
     """manifest_partN.csv + *partN.zip -> SeriesInstanceUID -> chemin zip."""
     mapping: dict[str, str] = {}
-    for man in sorted(dir_path.glob("manifest_part*.csv")):
+    for man in sorted(dir_path.glob("manifest*part*.csv")):
         part = man.stem.replace("manifest_", "")
         zips = sorted(dir_path.glob(f"*{part}.zip"))
         if not zips:
@@ -200,6 +216,7 @@ class StudyDataset(Dataset):
         volume_index: dict[str, str] | None = None,
         rgb_neighbors: bool = False,
         img_size: int = 224,
+        rgb_as_gray: bool = False,
     ) -> None:
         self.items = items
         self.labels = (
@@ -212,15 +229,20 @@ class StudyDataset(Dataset):
         self.series_drop_p = series_drop_p
         self.n_series = int(n_series)
         self.rgb_neighbors = bool(rgb_neighbors)
+        self.rgb_as_gray = bool(rgb_as_gray)
         self.img_size = int(img_size)
+        self.epoch = 0
         if self.n_series not in (3, 4, 6):
             raise ValueError(f"n_series={self.n_series} : attendu 3, 4 ou 6")
         if self.img_size < 32:
             raise ValueError(f"img_size={self.img_size} : trop petit")
 
+    def set_epoch(self, epoch: int) -> None:
+        self.epoch = int(epoch)
+
     def _empty(self) -> torch.Tensor:
         s = self.img_size
-        if self.rgb_neighbors:
+        if self.rgb_neighbors and not self.rgb_as_gray:
             return torch.zeros(N_SLICES, 3, s, s)
         return torch.zeros(N_SLICES, s, s)
 
@@ -247,29 +269,31 @@ class StudyDataset(Dataset):
                 f"{sid}: grayscale attend (D, H, W), recu {vol.shape} "
                 "(activer rgb_neighbors pour les NPZ crop130_rgb25d)"
             )
-        return torch.from_numpy(vol.astype(np.float32) / 255.0)
+        t = torch.from_numpy(vol.astype(np.float32) / 255.0)
+        if self.rgb_as_gray:
+            return t[:, 1]
+        return t
 
-    def _maybe_drop(self) -> bool:
-        return self.train and torch.rand(()).item() < self.series_drop_p
+    def _maybe_drop(self, rng: np.random.Generator) -> bool:
+        return self.train and float(rng.random()) < self.series_drop_p
 
     def __getitem__(self, i: int):
         uid = self.items[i]
-        rng = np.random.default_rng(
-            (hash(uid) & 0xFFFFFFFF) ^ (np.random.randint(0, 2**31) if self.train else 0)
-        )
+        mix = _stable_uid_int(uid) ^ ((int(self.epoch) * 1_000_003 + int(i)) & 0xFFFFFFFF)
+        rng = np.random.default_rng(mix)
         used: set[str] = set()
         vols = []
         pick_rng = rng if self.train else None
         if self.n_series == 6:
             for plane, fluid in PROTOCOL_SLOTS:
-                if self._maybe_drop():
+                if self._maybe_drop(rng):
                     vols.append(self._empty())
                     continue
                 sid = self.index.pick_protocol(uid, plane, fluid, pick_rng)
                 vols.append(self._load_sid(sid))
         else:
             for plane in PLANES:
-                if self._maybe_drop():
+                if self._maybe_drop(rng):
                     vols.append(self._empty())
                     continue
                 sid = self.index.pick(uid, plane, pick_rng)
@@ -277,7 +301,7 @@ class StudyDataset(Dataset):
                     used.add(sid)
                 vols.append(self._load_sid(sid))
             if self.n_series >= 4:
-                if self._maybe_drop():
+                if self._maybe_drop(rng):
                     vols.append(self._empty())
                 else:
                     vols.append(self._load_sid(
@@ -456,7 +480,8 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  img_size: int = 224, oof_fold: int | None = None,
                  folds_csv: str | None = None, n_folds: int = 3,
                  fold_seed: int = 42, include_gold: bool = False,
-                 val_frac: float = 0.15):
+                 val_frac: float = 0.15, rgb_as_gray: bool = False,
+                 seed: int = 42):
     from torch.utils.data import DataLoader
 
     df = pd.read_csv(labels_csv)
@@ -489,6 +514,8 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
     if rgb_neighbors:
         print("rgb_neighbors : volumes (D, 3, H, W) DICOM k-1/k/k+1",
               flush=True)
+    if rgb_as_gray:
+        print("rgb_as_gray : canal G (equivalent crop130 linspace)", flush=True)
     print(f"img_size={img_size}", flush=True)
 
     if n_series == 6:
@@ -511,19 +538,26 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
         train_df.StudyInstanceUID.tolist(), train_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=True, series_drop_p=0.15, n_series=n_series,
         volume_index=volume_index, rgb_neighbors=rgb_neighbors,
-        img_size=img_size,
+        img_size=img_size, rgb_as_gray=rgb_as_gray,
     )
     val_ds = StudyDataset(
         val_df.StudyInstanceUID.tolist(), val_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=False, series_drop_p=0.0, n_series=n_series,
         volume_index=volume_index, rgb_neighbors=rgb_neighbors,
-        img_size=img_size,
+        img_size=img_size, rgb_as_gray=rgb_as_gray,
     )
 
-    train_ld = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
-                          num_workers=num_workers, pin_memory=True,
-                          persistent_workers=num_workers > 0, drop_last=True)
-    val_ld = DataLoader(val_ds, batch_size=batch_size, shuffle=False,
-                        num_workers=num_workers, pin_memory=True,
-                        persistent_workers=num_workers > 0)
+    train_ld = DataLoader(
+        train_ds, batch_size=batch_size, shuffle=True,
+        num_workers=num_workers, pin_memory=True,
+        persistent_workers=False, drop_last=True,
+        generator=torch.Generator().manual_seed(int(seed)),
+        worker_init_fn=_dataloader_worker_init if num_workers > 0 else None,
+    )
+    val_ld = DataLoader(
+        val_ds, batch_size=batch_size, shuffle=False,
+        num_workers=num_workers, pin_memory=True,
+        persistent_workers=False,
+        worker_init_fn=_dataloader_worker_init if num_workers > 0 else None,
+    )
     return train_ld, val_ld, targets
