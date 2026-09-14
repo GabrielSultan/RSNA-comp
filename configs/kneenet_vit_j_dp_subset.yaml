@@ -1,0 +1,46 @@
+# Run 8-style : ViT-j + drop-path 0.1. Recette k (LLRD 0.8), graphe j.
+# Un levier : stochastic depth. Head dropout reste 0.4 (deja haut).
+# DropPath OFF pendant freeze 1 (epoch 1 = identity e), ON au degel.
+# Juger vs k / j sans dp : gold ne doit plus chuter apres ep8 ;
+# val_loss ne doit plus exploser (k : 0.41 -> 0.61). Snapshots 7-10.
+#   python -X utf8 -m src.train.train --config configs/kneenet_vit_j_dp_subset.yaml
+
+run_name: subset_vit_j_dp01_frac025
+model: kneenet_vit_j
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+drop_path_rate: 0.1
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+rgb_as_gray: true
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 14
+early_stop_patience: 5
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
