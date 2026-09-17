@@ -197,6 +197,9 @@ def build_loader(cfg: dict, split: str, batch_size: int, num_workers: int,
             folds_csv=cfg.get("folds_csv"),
             n_folds=int(cfg.get("n_folds", 3)),
             fold_seed=int(cfg.get("fold_seed", 42)),
+            include_gold=bool(cfg.get("include_gold", False)),
+            val_frac=float(cfg.get("val_frac", 0.15)),
+            rgb_as_gray=bool(cfg.get("rgb_as_gray", False)),
         )
         ds = train_ld.dataset if split == "train" else val_ld.dataset
         ds.train = False
@@ -235,13 +238,7 @@ def collect_attention(model, loader, device: str, targets: list[str],
             out = model.interpret(x)
             attn = out["slice_attn"]
             valid = out["valid"]
-            if "gap_tokens" in out:
-                alt = gap_token_slice_attn(model, out["gap_tokens"], valid)
-            elif "cam_tokens" in out:
-                alt = cam_token_slice_attn(model, out["cam_tokens"], valid)
-            else:
-                alt = None
-            cam_np = None if alt is None else alt.float().cpu().numpy()
+            cam_np = None
         else:
             _, attn, valid = forward_with_attn(model, x)
             cam_np = None
