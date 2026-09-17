@@ -11,6 +11,8 @@ qui a marche.
   - LayerScale gele (recette c/d)
 
 Recette : freeze 1, lr_backbone 3e-5 (v1 tenait), re-warmup 1 epoch.
+Option `drop_path_rate` (YAML) : stochastic depth timm, OFF pendant
+le freeze (epoch 1 = identity e). Defaut 0 = graphe e inchange.
 Poids : `weights/dinov3-vitb16-lvd1689m/model.safetensors`
 Entree : (B, 6, 24, H, W) grayscale [0, 1]. Slots = v20b.
 """
@@ -54,13 +56,17 @@ class _Dinov3VitEncoder(nn.Module):
     """ViT-B/16 DINOv3 -> cartes (N, 768, H/16, W/16)."""
 
     def __init__(self, weights_path: str = DEFAULT_WEIGHTS,
-                 pretrained: bool = True) -> None:
+                 pretrained: bool = True,
+                 drop_path_rate: float = 0.0) -> None:
         super().__init__()
         kwargs = dict(
             num_classes=0,
             global_pool="",
             dynamic_img_size=True,
         )
+        dp = float(drop_path_rate or 0.0)
+        if dp > 0:
+            kwargs["drop_path_rate"] = dp
         if pretrained:
             ckpt = _weights_file(weights_path)
             self.backbone = timm.create_model(
@@ -79,6 +85,17 @@ class _Dinov3VitEncoder(nn.Module):
         self.patch_size = PATCH_SIZE
         self.n_prefix = int(getattr(
             self.backbone, "num_prefix_tokens", N_PREFIX))
+        self.drop_path_rate = dp
+        self._drop_path: list[tuple[nn.Module, float]] = []
+        for m in self.backbone.modules():
+            if m.__class__.__name__ == "DropPath":
+                self._drop_path.append((m, float(m.drop_prob)))
+        if dp > 0:
+            print(
+                f"drop_path {dp:g} | {len(self._drop_path)} modules "
+                f"(off pendant freeze)",
+                flush=True,
+            )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """x (N, 3, H, W) -> (N, C, h, w) patch tokens."""
@@ -103,7 +120,8 @@ class KneeNet(nn.Module):
                  dropout: float = 0.2, pretrained: bool = True,
                  encode_chunk: int = 4, max_depth: int = 64,
                  backbone_weights: str = DEFAULT_WEIGHTS,
-                 lstm_hidden: int = LSTM_HIDDEN) -> None:
+                 lstm_hidden: int = LSTM_HIDDEN,
+                 drop_path_rate: float = 0.0) -> None:
         super().__init__()
         self.n_series = n_series
         self.n_targets = n_targets
@@ -111,9 +129,11 @@ class KneeNet(nn.Module):
         self.backbone_name = str(backbone)
         self.patch_size = PATCH_SIZE
         self.lstm_hidden = int(lstm_hidden)
+        self.drop_path_rate = float(drop_path_rate or 0.0)
 
         self.encoder = _Dinov3VitEncoder(
             weights_path=backbone_weights, pretrained=pretrained,
+            drop_path_rate=self.drop_path_rate,
         )
         self._freeze_layer_scale()
         feat_dim = self.encoder.num_features
@@ -156,9 +176,11 @@ class KneeNet(nn.Module):
             torch.tensor(IMAGENET_STD).view(1, 3, 1, 1),
             persistent=True,
         )
+        dp_txt = (f" | drop_path {self.drop_path_rate:g}"
+                  if self.drop_path_rate > 0 else "")
         print(
             f"KneeNet-ViT-e | CAM patch {PATCH_SIZE} | BiLSTM "
-            f"| RGB k-1/k/k+1 | dim {feat_dim} | slots {self.n_series}",
+            f"| RGB k-1/k/k+1{dp_txt} | dim {feat_dim} | slots {self.n_series}",
             flush=True,
         )
 
@@ -184,6 +206,10 @@ class KneeNet(nn.Module):
         for name, p in self.encoder.named_parameters():
             p.requires_grad = (not flag) and not self._is_layerscale(name)
         self.stem_mix.weight.requires_grad = not flag
+        # DropPath stochastique seulement une fois l'encodeur degele,
+        # sinon l'epoch 1 n'est plus identity-e.
+        for m, p0 in self.encoder._drop_path:
+            m.drop_prob = 0.0 if flag else p0
 
     def encoder_parameters(self):
         for p in self.encoder.parameters():
