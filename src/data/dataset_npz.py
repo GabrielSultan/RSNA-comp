@@ -183,6 +183,7 @@ class StudySeriesIndex:
     def pick_protocol(
         self, study_uid: str, plane: str, fluid: int,
         rng: np.random.Generator | None,
+        which: str = "first",
     ):
         """Un contraste exact (FS ou T1) sur un plan. Pas de repli."""
         plans = self.by_study.get(study_uid)
@@ -192,7 +193,7 @@ class StudySeriesIndex:
         if not cands:
             return None
         if rng is None:
-            return cands[0]
+            return cands[-1] if which == "last" else cands[0]
         return cands[int(rng.integers(len(cands)))]
 
 
@@ -230,6 +231,8 @@ class StudyDataset(Dataset):
         self.n_series = int(n_series)
         self.rgb_neighbors = bool(rgb_neighbors)
         self.rgb_as_gray = bool(rgb_as_gray)
+        self.rgb_channel = 1
+        self.cand_pick = "first"
         self.img_size = int(img_size)
         self.epoch = 0
         if self.n_series not in (3, 4, 6):
@@ -271,7 +274,10 @@ class StudyDataset(Dataset):
             )
         t = torch.from_numpy(vol.astype(np.float32) / 255.0)
         if self.rgb_as_gray:
-            return t[:, 1]
+            ch = int(self.rgb_channel)
+            if ch < 0 or ch > 2:
+                raise ValueError(f"rgb_channel={ch}, attendu 0/1/2")
+            return t[:, ch]
         return t
 
     def _maybe_drop(self, rng: np.random.Generator) -> bool:
@@ -289,7 +295,9 @@ class StudyDataset(Dataset):
                 if self._maybe_drop(rng):
                     vols.append(self._empty())
                     continue
-                sid = self.index.pick_protocol(uid, plane, fluid, pick_rng)
+                which = self.cand_pick if pick_rng is None else "first"
+                sid = self.index.pick_protocol(
+                    uid, plane, fluid, pick_rng, which=which)
                 vols.append(self._load_sid(sid))
         else:
             for plane in PLANES:
