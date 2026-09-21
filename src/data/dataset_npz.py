@@ -22,6 +22,8 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 
+from src.data.laterality import normalise_laterality
+
 PLANES = ["Sagittal", "Coronal", "Axial"]
 # v20b : contraste fixe par slot, pas de repli fluide -> T1.
 PROTOCOL_SLOTS: list[tuple[str, int]] = [
@@ -196,6 +198,16 @@ class StudySeriesIndex:
             return cands[-1] if which == "last" else cands[0]
         return cands[int(rng.integers(len(cands)))]
 
+    def plane_of(self, study_uid: str, sid: str | None) -> str | None:
+        if sid is None:
+            return None
+        plans = self.by_study.get(study_uid) or {}
+        for plane, contr in plans.items():
+            for sids in contr.values():
+                if sid in sids:
+                    return plane
+        return None
+
 
 class StudyDataset(Dataset):
     """items : liste de StudyInstanceUID. labels_df indexe par StudyInstanceUID,
@@ -218,6 +230,7 @@ class StudyDataset(Dataset):
         rgb_neighbors: bool = False,
         img_size: int = 224,
         rgb_as_gray: bool = False,
+        laterality_map: dict[str, str | None] | None = None,
     ) -> None:
         self.items = items
         self.labels = (
@@ -234,7 +247,17 @@ class StudyDataset(Dataset):
         self.rgb_channel = 1
         self.cand_pick = "first"
         self.img_size = int(img_size)
+        self.laterality_map = laterality_map
         self.epoch = 0
+        if self.laterality_map:
+            n_r = sum(1 for u in items if self.laterality_map.get(u) == "R")
+            n_l = sum(1 for u in items if self.laterality_map.get(u) == "L")
+            n_miss = sum(1 for u in items if u not in self.laterality_map)
+            print(
+                f"laterality dataset : {len(items)} uids | L {n_l} | "
+                f"R {n_r} (flip) | hors csv {n_miss}",
+                flush=True,
+            )
         if self.n_series not in (3, 4, 6):
             raise ValueError(f"n_series={self.n_series} : attendu 3, 4 ou 6")
         if self.img_size < 32:
@@ -252,7 +275,8 @@ class StudyDataset(Dataset):
     def __len__(self) -> int:
         return len(self.items)
 
-    def _load_sid(self, sid: str | None) -> torch.Tensor:
+    def _load_sid(self, sid: str | None, plane: str | None = None,
+                   study_uid: str | None = None) -> torch.Tensor:
         if sid is None:
             return self._empty()
         src = self.zip_path if self.volume_index is None else self.volume_index.get(sid)
@@ -277,7 +301,10 @@ class StudyDataset(Dataset):
             ch = int(self.rgb_channel)
             if ch < 0 or ch > 2:
                 raise ValueError(f"rgb_channel={ch}, attendu 0/1/2")
-            return t[:, ch]
+            t = t[:, ch]
+        if self.laterality_map and study_uid is not None:
+            t = normalise_laterality(
+                t, plane, self.laterality_map.get(study_uid))
         return t
 
     def _maybe_drop(self, rng: np.random.Generator) -> bool:
@@ -298,7 +325,7 @@ class StudyDataset(Dataset):
                 which = self.cand_pick if pick_rng is None else "first"
                 sid = self.index.pick_protocol(
                     uid, plane, fluid, pick_rng, which=which)
-                vols.append(self._load_sid(sid))
+                vols.append(self._load_sid(sid, plane=plane, study_uid=uid))
         else:
             for plane in PLANES:
                 if self._maybe_drop(rng):
@@ -307,13 +334,15 @@ class StudyDataset(Dataset):
                 sid = self.index.pick(uid, plane, pick_rng)
                 if sid is not None:
                     used.add(sid)
-                vols.append(self._load_sid(sid))
+                vols.append(self._load_sid(sid, plane=plane, study_uid=uid))
             if self.n_series >= 4:
                 if self._maybe_drop(rng):
                     vols.append(self._empty())
                 else:
+                    sid = self.index.pick_nonfluid(uid, used, pick_rng)
                     vols.append(self._load_sid(
-                        self.index.pick_nonfluid(uid, used, pick_rng)))
+                        sid, plane=self.index.plane_of(uid, sid),
+                        study_uid=uid))
         x = torch.stack(vols)  # (3|4|6, 24, [3,] H, W)
 
         if self.labels is None:
@@ -328,12 +357,29 @@ _META_COLS = ("StudyInstanceUID", "lang", "split", "fold", "is_gold",
 
 
 def _target_cols(df: pd.DataFrame) -> list[str]:
+    """12 cibles lexicon si presentes (ignore Axial/Coronal/... d'un manifest)."""
+    from src.nlp.lexicon import TARGETS
+    if all(c in df.columns for c in TARGETS):
+        return list(TARGETS)
     return [c for c in df.columns if c not in _META_COLS]
 
 
+def competition_train_csv(labels_csv: str | Path | None = None) -> Path | None:
+    """data/csv/train.csv, en remontant depuis labels_csv (sous-dossiers ok)."""
+    p = Path(labels_csv).resolve().parent if labels_csv else Path.cwd()
+    for _ in range(8):
+        cand = p / "csv" / "train.csv"
+        if cand.is_file():
+            return cand
+        if p.parent == p:
+            break
+        p = p.parent
+    return None
+
+
 def gold_uids_from_train_csv(labels_csv: str) -> set[str]:
-    train_csv = Path(labels_csv).resolve().parent.parent / "csv" / "train.csv"
-    if not train_csv.exists():
+    train_csv = competition_train_csv(labels_csv)
+    if train_csv is None:
         return set()
     from src.nlp.lexicon import TARGETS
     train_df = pd.read_csv(train_csv, usecols=["StudyInstanceUID"] + TARGETS)
@@ -489,7 +535,8 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  folds_csv: str | None = None, n_folds: int = 3,
                  fold_seed: int = 42, include_gold: bool = False,
                  val_frac: float = 0.15, rgb_as_gray: bool = False,
-                 seed: int = 42):
+                 seed: int = 42,
+                 laterality_map: dict[str, str | None] | None = None):
     from torch.utils.data import DataLoader
 
     df = pd.read_csv(labels_csv)
@@ -547,12 +594,14 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
         index, zip_path, train=True, series_drop_p=0.15, n_series=n_series,
         volume_index=volume_index, rgb_neighbors=rgb_neighbors,
         img_size=img_size, rgb_as_gray=rgb_as_gray,
+        laterality_map=laterality_map,
     )
     val_ds = StudyDataset(
         val_df.StudyInstanceUID.tolist(), val_df[["StudyInstanceUID"] + targets],
         index, zip_path, train=False, series_drop_p=0.0, n_series=n_series,
         volume_index=volume_index, rgb_neighbors=rgb_neighbors,
         img_size=img_size, rgb_as_gray=rgb_as_gray,
+        laterality_map=laterality_map,
     )
 
     train_ld = DataLoader(
