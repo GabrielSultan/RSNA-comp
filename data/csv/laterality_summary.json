@@ -1,0 +1,13 @@
+{
+  "n_studies": 4407,
+  "n_L": 2043,
+  "n_R": 2292,
+  "n_unresolved": 72,
+  "n_from_tag": 2203,
+  "n_from_geo": 2132,
+  "n_disagree_tag_geo": 30,
+  "n_header_fail": 0,
+  "n_missing_dir": 0,
+  "canon": "L",
+  "rule": "tag then image-center X, deadzone 20 mm"
+}
