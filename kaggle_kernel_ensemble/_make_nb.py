@@ -173,27 +173,102 @@ def _pick_protocol_row(series_rows, plane, fluid):
     return rows.sort_values('SeriesInstanceUID').iloc[0]
 
 
-def study_to_tensor(study_dir, series_rows, n_series=3):
+LAT_MIN_OFFSET_MM = 20.0
+
+
+def _lat_side_tag(v):
+    if v is None:
+        return None
+    s = str(v).strip().upper()
+    return s[0] if s and s[0] in ('L', 'R') else None
+
+
+def _lat_center_x(ipp, iop, ps, rows, cols):
+    try:
+        ipp = np.asarray(list(ipp), dtype=np.float64)
+        iop = np.asarray(list(iop), dtype=np.float64)
+        ps = np.asarray(list(ps), dtype=np.float64)
+        rows, cols = float(rows), float(cols)
+    except (TypeError, ValueError):
+        return None
+    if ipp.size < 3 or iop.size < 6 or ps.size < 2:
+        return None
+    c = ipp[:3] + iop[:3] * ps[1] * cols / 2.0 + iop[3:6] * ps[0] * rows / 2.0
+    x = float(c[0])
+    return x if np.isfinite(x) else None
+
+
+def laterality_from_study_dir(study_dir):
+    '''Canon L : tag Laterality, sinon X centre (zone morte 20 mm).'''
+    study_dir = Path(study_dir)
+    xs, tags = [], []
+    if not study_dir.is_dir():
+        return None
+    for series in sorted(p for p in study_dir.iterdir() if p.is_dir()):
+        files = sorted(series.glob('*.dcm'))
+        if not files:
+            continue
+        try:
+            ds = pydicom.dcmread(str(files[len(files) // 2]),
+                                 stop_before_pixels=True, force=True)
+        except Exception:
+            continue
+        t = _lat_side_tag(getattr(ds, 'Laterality', None))
+        if t:
+            tags.append(t)
+        x = _lat_center_x(
+            getattr(ds, 'ImagePositionPatient', None),
+            getattr(ds, 'ImageOrientationPatient', None),
+            getattr(ds, 'PixelSpacing', None),
+            getattr(ds, 'Rows', None), getattr(ds, 'Columns', None))
+        if x is not None:
+            xs.append(x)
+    if tags:
+        return tags[0]
+    if not xs:
+        return None
+    m = float(np.median(xs))
+    if abs(m) < LAT_MIN_OFFSET_MM:
+        return None
+    return 'R' if m < 0 else 'L'
+
+
+def normalise_laterality(vol, plane, lat):
+    if lat != 'R':
+        return vol
+    plane_c = str(plane or '').strip().capitalize()
+    if plane_c in ('Coronal', 'Axial'):
+        return np.ascontiguousarray(np.flip(vol, axis=-1))
+    if plane_c == 'Sagittal':
+        return np.ascontiguousarray(np.flip(vol, axis=0))
+    return vol
+
+
+def study_to_tensor(study_dir, series_rows, n_series=3, laterality=False):
     '''(n_series, 24, 224, 224) ; n_series=6 : 3 FS + 3 T1, sans repli.'''
     planes = ['Sagittal', 'Coronal', 'Axial']
     out = np.zeros((n_series, N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.float32)
     used = set()
+    lat = laterality_from_study_dir(study_dir) if laterality else None
 
-    def _fill(i, pick):
+    def _fill(i, pick, plane):
         if pick is None:
             return
         sdir = Path(study_dir) / pick.SeriesInstanceUID
         if not sdir.exists():
             return
         try:
-            out[i] = load_series_dicom(sdir).astype(np.float32) / 255.0
+            vol = load_series_dicom(sdir).astype(np.float32) / 255.0
+            if laterality:
+                vol = normalise_laterality(vol, plane, lat)
+            out[i] = vol
             used.add(str(pick.SeriesInstanceUID))
         except Exception as e:
             print(f'  [warn] {pick.SeriesInstanceUID}: {e}')
 
     if n_series == 6:
         for i, (plane, fluid) in enumerate(PROTOCOL_SLOTS):
-            _fill(i, _pick_protocol_row(series_rows, plane, fluid))
+            _fill(i, _pick_protocol_row(series_rows, plane, fluid), plane)
         return out
 
     for i, plane in enumerate(planes):
@@ -204,7 +279,7 @@ def study_to_tensor(study_dir, series_rows, n_series=3):
         if len(fluid) == 0 and 'Fat_Suppression' in rows:
             fluid = rows[rows.Fat_Suppression == 1]
         pick = (fluid if len(fluid) else rows).sort_values('SeriesInstanceUID').iloc[0]
-        _fill(i, pick)
+        _fill(i, pick, plane)
     if n_series >= 4:
         t1 = None
         for plane in planes:
@@ -215,7 +290,8 @@ def study_to_tensor(study_dir, series_rows, n_series=3):
             if len(rows):
                 t1 = rows.sort_values('SeriesInstanceUID').iloc[0]
                 break
-        _fill(3, t1)
+        pl = None if t1 is None else str(t1.Anatomical_Plane)
+        _fill(3, t1, pl)
     return out
 """
 
@@ -432,6 +508,9 @@ TTA_VARIANTS = (
     (0.0, 0.95),
     (0.0, 1.05),
 )
+# True seulement si TOUS les bras du blend ont ete trains avec laterality: true.
+# Ne pas mixer un ckpt flipped et un ckpt non-flipped sur le meme tenseur.
+LATERALITY_CANON_L = False
 # Blend par cible : poids ViT-e (v20b = 1 - w). Gagnant 90/10 ou mix adaptatif.
 V20B_TARGETS = {v20b_tuple}
 BLEND_NAME = {blend_name!r}
@@ -561,7 +640,8 @@ with torch.no_grad():
         _SERIES_CACHE.clear()
         srows = test_series[test_series.StudyInstanceUID == uid]
         sdir = TEST_SERIES_DIR / uid
-        vol = study_to_tensor(sdir, srows, n_series=n_series)
+        vol = study_to_tensor(sdir, srows, n_series=n_series,
+                              laterality=LATERALITY_CANON_L)
         x = torch.from_numpy(vol).unsqueeze(0).to(DEVICE)
         p20s, pes = [], []
         for angle_deg, scale in TTA_VARIANTS:
