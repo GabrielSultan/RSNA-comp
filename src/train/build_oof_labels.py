@@ -187,11 +187,18 @@ def main() -> None:
     parser.add_argument(
         "--oofmask", default="data/labels/labels_llm_gpt56sol_oofmask.csv",
         help="CSV oofmask source (avec --restore-acl)")
+    parser.add_argument(
+        "--thresh", type=float, default=None,
+        help="seuil unique |label-OOF| pour les 12 cibles "
+             "(sinon ACL 0.95 / Syn Frac 0.90 / 0.80)")
     args = parser.parse_args()
     if args.restore_acl:
         restore_acl_for_v20b(args.oofmask, args.labels, args.out)
         return
-    thresh = _thresh_map()
+    if args.thresh is not None:
+        thresh = {t: float(args.thresh) for t in TARGETS}
+    else:
+        thresh = _thresh_map()
     print("seuils :", thresh, flush=True)
     build_oof_labels(args.labels, args.oof, args.train_csv, args.out, thresh)
 

@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """Enchaine les 3 folds OOF puis concatene oof_preds.csv.
 
+La concat ecrit cfg['oof_preds_csv'] (sinon data/labels/oof_preds_<run_name>.csv).
+Toujours fixer oof_preds_csv sur un nouveau run pour ne pas ecraser v17.
+
 Usage :
   python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v17_crop130_oof.yaml
+  python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v20h_crop130_oof.yaml
   python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v17_crop130_oof.yaml --from-fold 1
 """
 from __future__ import annotations
@@ -22,6 +26,12 @@ def _fold_dir(run_name: str, fold: int) -> Path:
     return Path("checkpoints") / f"{run_name}_fold{fold}"
 
 
+def _oof_out(cfg: dict) -> Path:
+    if cfg.get("oof_preds_csv"):
+        return Path(str(cfg["oof_preds_csv"]))
+    return Path("data/labels") / f"oof_preds_{cfg['run_name']}.csv"
+
+
 def _merge_oof(cfg: dict, n_folds: int) -> Path:
     run_name = str(cfg["run_name"])
     parts = []
@@ -34,7 +44,7 @@ def _merge_oof(cfg: dict, n_folds: int) -> Path:
     dups = all_df["StudyInstanceUID"].duplicated().sum()
     if dups:
         raise SystemExit(f"UID dupliques dans l'OOF : {dups}")
-    out = Path("data/labels") / "oof_preds_v17.csv"
+    out = _oof_out(cfg)
     out.parent.mkdir(parents=True, exist_ok=True)
     all_df.to_csv(out, index=False)
     vc = all_df["fold"].value_counts().sort_index()

@@ -45,8 +45,10 @@ import yaml
 from torch.utils.data import DataLoader
 
 from src.data.dataset_npz import (
-    StudyDataset, gold_uids_from_train_csv, make_loaders, make_series_index,
+    StudyDataset, competition_train_csv, gold_uids_from_train_csv,
+    make_loaders, make_series_index,
 )
+from src.data.laterality import laterality_map_from_cfg
 from src.data.transforms import augment_batch
 from src.models.registry import (
     build_model, count_params, default_n_series, get_model_class, list_models,
@@ -238,8 +240,8 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
     """58 etudes gold depuis train.csv, ou None si indisponible."""
     if cfg.get("skip_gold"):
         return None
-    train_csv = Path(cfg["labels_csv"]).parent.parent / "csv" / "train.csv"
-    if not train_csv.exists():
+    train_csv = competition_train_csv(cfg["labels_csv"])
+    if train_csv is None:
         return None
     train_df = pd.read_csv(train_csv)
     gold = train_df[train_df[TARGETS].notna().all(axis=1)]
@@ -258,6 +260,7 @@ def make_gold_loader(cfg: dict, batch_size: int, num_workers: int):
         rgb_neighbors=bool(cfg.get("rgb_neighbors", False)),
         img_size=int(cfg.get("img_size", 224)),
         rgb_as_gray=bool(cfg.get("rgb_as_gray", False)),
+        laterality_map=laterality_map_from_cfg(cfg),
     )
     return DataLoader(ds, batch_size=batch_size, shuffle=False,
                       num_workers=num_workers)
@@ -446,6 +449,7 @@ def main() -> None:
         val_frac=float(cfg.get("val_frac", 0.15)),
         rgb_as_gray=bool(cfg.get("rgb_as_gray", False)),
         seed=seed,
+        laterality_map=laterality_map_from_cfg(cfg),
     )
     n_train, n_val = len(train_ld.dataset), len(val_ld.dataset)
     print(f"train {n_train} | val {n_val} "
@@ -594,6 +598,7 @@ def main() -> None:
         f"| oof_fold {cfg.get('oof_fold', '-')} "
         f"| include_gold {int(bool(cfg.get('include_gold', False)))} "
         f"| drop_path {float(cfg.get('drop_path_rate') or 0):g} "
+        f"| laterality {int(bool(cfg.get('laterality')))} "
         f"| seed {seed} "
         f"| steps/epoch {steps_per_epoch}"
     )
