@@ -258,6 +258,76 @@ def _pick_protocol_row(series_rows, plane, fluid):
     return rows.sort_values('SeriesInstanceUID').iloc[0]
 
 
+LAT_MIN_OFFSET_MM = 20.0
+
+
+def _lat_side_tag(v):
+    if v is None:
+        return None
+    s = str(v).strip().upper()
+    return s[0] if s and s[0] in ('L', 'R') else None
+
+
+def _lat_center_x(ipp, iop, ps, rows, cols):
+    try:
+        ipp = np.asarray(list(ipp), dtype=np.float64)
+        iop = np.asarray(list(iop), dtype=np.float64)
+        ps = np.asarray(list(ps), dtype=np.float64)
+        rows, cols = float(rows), float(cols)
+    except (TypeError, ValueError):
+        return None
+    if ipp.size < 3 or iop.size < 6 or ps.size < 2:
+        return None
+    c = ipp[:3] + iop[:3] * ps[1] * cols / 2.0 + iop[3:6] * ps[0] * rows / 2.0
+    x = float(c[0])
+    return x if np.isfinite(x) else None
+
+
+def laterality_from_study_dir(study_dir):
+    study_dir = Path(study_dir)
+    xs, tags = [], []
+    if not study_dir.is_dir():
+        return None
+    for series in sorted(p for p in study_dir.iterdir() if p.is_dir()):
+        files = sorted(series.glob('*.dcm'))
+        if not files:
+            continue
+        try:
+            ds = pydicom.dcmread(str(files[len(files) // 2]),
+                                 stop_before_pixels=True, force=True)
+        except Exception:
+            continue
+        t = _lat_side_tag(getattr(ds, 'Laterality', None))
+        if t:
+            tags.append(t)
+        x = _lat_center_x(
+            getattr(ds, 'ImagePositionPatient', None),
+            getattr(ds, 'ImageOrientationPatient', None),
+            getattr(ds, 'PixelSpacing', None),
+            getattr(ds, 'Rows', None), getattr(ds, 'Columns', None))
+        if x is not None:
+            xs.append(x)
+    if tags:
+        return tags[0]
+    if not xs:
+        return None
+    m = float(np.median(xs))
+    if abs(m) < LAT_MIN_OFFSET_MM:
+        return None
+    return 'R' if m < 0 else 'L'
+
+
+def normalise_laterality(vol, plane, lat):
+    if lat != 'R':
+        return vol
+    plane_c = str(plane or '').strip().capitalize()
+    if plane_c in ('Coronal', 'Axial'):
+        return np.ascontiguousarray(np.flip(vol, axis=-1))
+    if plane_c == 'Sagittal':
+        return np.ascontiguousarray(np.flip(vol, axis=0))
+    return vol
+
+
 def _load_slot(study_dir, pick):
     if pick is None:
         return None
@@ -271,7 +341,7 @@ def _load_slot(study_dir, pick):
         return None
 
 
-def study_to_tensor(study_dir, series_rows, n_series=6):
+def study_to_tensor(study_dir, series_rows, n_series=6, laterality=False):
     # (n_series, 24, 224, 224) ; 6 slots protocole FS/T1, sans repli.
     out = np.zeros((n_series, N_SLICES, IMG_SIZE, IMG_SIZE), dtype=np.float32)
     picks = [_pick_protocol_row(series_rows, plane, fluid)
@@ -279,6 +349,7 @@ def study_to_tensor(study_dir, series_rows, n_series=6):
     jobs = [(i, picks[i]) for i in range(n_series) if picks[i] is not None]
     if not jobs:
         return out
+    lat = laterality_from_study_dir(study_dir) if laterality else None
 
     def _one(job):
         i, pick = job
@@ -292,6 +363,8 @@ def study_to_tensor(study_dir, series_rows, n_series=6):
             results = list(ex.map(_one, jobs))
     for i, vol in results:
         if vol is not None:
+            if laterality:
+                vol = normalise_laterality(vol, PROTOCOL_SLOTS[i][0], lat)
             out[i] = vol
     return out
 """
@@ -544,6 +617,7 @@ def _prep(uid):
         TEST_SERIES_DIR / uid,
         series_map.get(uid, empty_rows),
         n_series=model.n_series,
+        laterality=bool(cfg.get('laterality')),
     )
 
 
