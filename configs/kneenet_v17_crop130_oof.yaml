@@ -20,6 +20,7 @@ train_frac: 1.0
 n_folds: 3
 fold_seed: 42
 folds_csv: data/labels/folds3_gpt56sol.csv
+oof_preds_csv: data/labels/oof_preds_v17.csv
 dump_oof: true
 
 batch_size: 4

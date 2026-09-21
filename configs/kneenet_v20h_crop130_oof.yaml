@@ -1,0 +1,47 @@
+# v20h OOF 3 folds sur labels coolin blend (soft).
+# Gold exclus du train/val (sanity 58). Meme folds que v17 (folds3_gpt56sol).
+# Concat -> data/labels/oof_preds_v20h_coolin_blend.csv (ne touche pas v17).
+# Apres les 3 folds, inspecter les taux masques puis :
+#   python -X utf8 -m src.train.build_oof_labels \
+#     --labels data/labels/coolin/train_manifest_blend.csv \
+#     --oof data/labels/oof_preds_v20h_coolin_blend.csv \
+#     --out data/labels/labels_coolin_blend_oofmask.csv
+# Pas de --restore-acl (c'etait un correctif OOF v17 trop conservateur).
+#   python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v20h_crop130_oof.yaml
+# ou un fold seul :
+#   python -X utf8 -m src.train.train --config configs/kneenet_v20h_crop130_oof.yaml --fold 0
+
+run_name: v20h_crop130_oof
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: weights/ResNet50.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/train_manifest_blend.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+n_folds: 3
+fold_seed: 42
+folds_csv: data/labels/folds3_gpt56sol.csv
+oof_preds_csv: data/labels/oof_preds_v20h_coolin_blend.csv
+dump_oof: true
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
