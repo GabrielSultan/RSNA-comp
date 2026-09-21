@@ -20,6 +20,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from src.data.dataset_npz import PROTOCOL_SLOT_NAMES, PROTOCOL_SLOTS, make_loaders
+from src.data.laterality import laterality_map_from_cfg
 from src.infer.inspect_attention import load_ckpt_model, load_config, run as run_attn
 from src.nlp.lang_detect import detect_lang
 from src.nlp.lexicon import TARGETS
@@ -390,6 +391,7 @@ def _make_tta_dataset(cfg: dict, batch_size: int, *, rgb_neighbors: bool,
         rgb_neighbors=rgb_neighbors,
         img_size=int(cfg.get("img_size", 224)),
         rgb_as_gray=rgb_as_gray,
+        laterality_map=laterality_map_from_cfg(cfg),
     )
     ds = val_ld.dataset
     ds.train = False

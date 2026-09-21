@@ -26,6 +26,7 @@ def load_model(weights_path: str | Path, device: str = "cuda"):
     model = build_model(cfg, pretrained=False)
     model.load_state_dict(ckpt["model"], strict=False)
     model.to(device).eval()
+    model.train_cfg = cfg
     return model
 
 
@@ -45,6 +46,10 @@ def predict_studies(model, test_csv: str | Path,
     test_series_dir = Path(test_series_dir)
     variants = TTA_VARIANTS if tta else ((0.0, 1.0),)
     print(f"TTA : {len(variants)} variantes (hflip off)", flush=True)
+    cfg = getattr(model, "train_cfg", {}) or {}
+    use_lat = bool(cfg.get("laterality"))
+    if use_lat:
+        print("laterality canon L (flip R, tag puis centre 20 mm)", flush=True)
 
     rows = []
     for uid in test.StudyInstanceUID:
@@ -54,6 +59,7 @@ def predict_studies(model, test_csv: str | Path,
             study_dir, srows, n_series=int(getattr(model, "n_series", 3)),
             rgb_neighbors=bool(getattr(model, "rgb_neighbors", False)),
             img_size=int(getattr(model, "img_size", 224)),
+            laterality=use_lat,
         )
         x0 = torch.from_numpy(vol).unsqueeze(0).to(device)
 

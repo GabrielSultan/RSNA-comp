@@ -29,6 +29,7 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 
 from src.data.dataset_npz import PLANES, PROTOCOL_SLOT_NAMES, make_loaders
+from src.data.laterality import laterality_map_from_cfg
 from src.infer.preprocess_dicom import BAND, N_SLICES
 from src.models.registry import build_model
 from src.nlp.lexicon import TARGETS
@@ -200,6 +201,7 @@ def build_loader(cfg: dict, split: str, batch_size: int, num_workers: int,
             include_gold=bool(cfg.get("include_gold", False)),
             val_frac=float(cfg.get("val_frac", 0.15)),
             rgb_as_gray=bool(cfg.get("rgb_as_gray", False)),
+            laterality_map=laterality_map_from_cfg(cfg),
         )
         ds = train_ld.dataset if split == "train" else val_ld.dataset
         ds.train = False

@@ -20,6 +20,7 @@ import cv2
 import numpy as np
 
 from src.data.dataset_npz import PROTOCOL_SLOTS
+from src.data.laterality import laterality_from_study_dir, normalise_laterality
 
 N_SLICES = 24
 IMG_SIZE = 224
@@ -219,7 +220,8 @@ def _pick_protocol_row(series_rows, plane: str, fluid: int):
 def study_to_tensor(study_dir: str | Path, series_rows,
                     n_series: int = 3,
                     rgb_neighbors: bool = False,
-                    img_size: int = IMG_SIZE) -> np.ndarray:
+                    img_size: int = IMG_SIZE,
+                    laterality: bool = False) -> np.ndarray:
     """Une etude -> float32 dans [0, 1].
 
     Grayscale : (n_series, 24, S, S) avec S=`img_size`.
@@ -230,6 +232,7 @@ def study_to_tensor(study_dir: str | Path, series_rows,
     n_series=3 : sag / cor / ax, fluid-sensitive d'abord.
     n_series=4 : + T1 extra (sagittal prioritaire).
     n_series=6 : 3 FS + 3 T1 par plan, sans repli (v20b).
+    laterality=True : canon gauche (flip R), meme recette que le train.
     """
     planes = ("Sagittal", "Coronal", "Axial")
     study_dir = Path(study_dir)
@@ -241,8 +244,9 @@ def study_to_tensor(study_dir: str | Path, series_rows,
     else:
         out = np.zeros((n_series, N_SLICES, size, size), dtype=np.float32)
     used: set[str] = set()
+    lat = laterality_from_study_dir(study_dir) if laterality else None
 
-    def _fill(i: int, pick) -> None:
+    def _fill(i: int, pick, plane: str | None) -> None:
         if pick is None:
             return
         series_dir = study_dir / pick.SeriesInstanceUID
@@ -255,15 +259,21 @@ def study_to_tensor(study_dir: str | Path, series_rows,
             print(f"  [warn] serie {pick.SeriesInstanceUID}: {e}")
             return
         used.add(str(pick.SeriesInstanceUID))
-        out[i] = vol.astype(np.float32) / 255.0
+        vol = vol.astype(np.float32) / 255.0
+        if laterality:
+            pl = plane or getattr(pick, "Anatomical_Plane", None)
+            vol = normalise_laterality(vol, pl, lat)
+        out[i] = vol
 
     if n_series == 6:
         for i, (plane, fluid) in enumerate(PROTOCOL_SLOTS):
-            _fill(i, _pick_protocol_row(series_rows, plane, fluid))
+            _fill(i, _pick_protocol_row(series_rows, plane, fluid), plane)
         return out
 
     for i, plane in enumerate(planes):
-        _fill(i, _pick_plane_row(series_rows, plane))
+        _fill(i, _pick_plane_row(series_rows, plane), plane)
     if n_series >= 4:
-        _fill(3, _pick_nonfluid_row(series_rows, used))
+        pick = _pick_nonfluid_row(series_rows, used)
+        pl = None if pick is None else str(pick.Anatomical_Plane)
+        _fill(3, pick, pl)
     return out
