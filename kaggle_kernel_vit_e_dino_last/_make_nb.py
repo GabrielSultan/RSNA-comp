@@ -28,14 +28,17 @@ def cell_code(text: str) -> dict:
     }
 
 
-MD0 = """# RSNA Knee — ViT-e DINOv3 (last.pt oofmask_full) — TTA x5
+MD0 = """# RSNA Knee — ViT-k LLRD 0.8 (epoch 7) — T4 — TTA x5
 
-Notebook Kaggle **self-contained** (internet off) :
+Notebook Kaggle **self-contained** (internet off, GPU **T4**) :
 - lecture DICOM test → volumes crop 130 mm + bande 20–80 % (24, 224, 224)
 - protocole 6 slots (FS/T1, identique v20b)
-- KneeNet **ViT-e** : `checkpoints/vit_e_crop130_oofmask_full/epoch9.pt`
+- KneeNet **ViT-k** : graphe ViT-e (DINOv3 ViT-B/16, CAM+BiLSTM, stem RGB),
+  train `vit_k_llrd08_det_oofmask_full` **epoch 7**
+  (gold in-sample 0.931). Poids `last.pt` (optimizer retiré),
+  dataset `sultent/rsna-knee-vit-e-dino-last-weights`
 - TTA affine (rotation ±5° + scale 0.95/1.05, hflip off) ×5
-- écrit `/kaggle/working/submission.csv` (cwd aussi)
+- écrit `/kaggle/working/submission.csv` (et le cwd)
 
 Le kernel **doit** écrire `submission.csv`.
 """
@@ -228,8 +231,10 @@ def load_model(weights_path: str | Path) -> tuple[torch.nn.Module, dict]:
     )
     missing, unexpected = model.load_state_dict(ckpt["model"], strict=False)
     print('load_state_dict missing :', len(missing), '| unexpected :', len(unexpected))
-    print('modele', cfg.get('model'), '| epoch', ckpt.get('epoch'),
-          '| val macro-AUC :', round(float(ckpt.get('val_macro_auc', float('nan'))), 4),
+    gold = ckpt.get('gold_macro_auc')
+    gold_txt = 'n/a' if gold is None else round(float(gold), 4)
+    print('modele', cfg.get('model'), '| run', cfg.get('run_name'),
+          '| epoch', ckpt.get('epoch'), '| gold in-sample', gold_txt,
           '| n_series', n_series)
     model.to(DEVICE).eval()
     return model, cfg

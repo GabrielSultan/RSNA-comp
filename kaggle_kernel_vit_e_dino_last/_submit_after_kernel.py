@@ -41,7 +41,7 @@ def main() -> None:
             sys.exit(3)
         time.sleep(POLL_EVERY_S)
 
-    msg = "KneeNet ViT-e oofmask_full epoch9.pt (TTA x5)"
+    msg = "ViT-k LLRD 0.8 oofmask full epoch7 (gold in-sample 0.931, TTA x5, T4)"
     args = [
         "competitions", "submit", COMPETITION,
         "-k", KERNEL,
