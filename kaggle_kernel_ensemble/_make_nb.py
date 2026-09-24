@@ -347,8 +347,7 @@ sub.head()
 """
 
 
-def _patch_v20b(src: str) -> str:
-    src = src.replace("class KneeNet(nn.Module):", "class KneeNetV20b(nn.Module):")
+def _patch_resnet50(src: str, filename: str) -> str:
     old = "        base = resnet50(weights=None)"
     new = (
         "        try:\n"
@@ -357,8 +356,18 @@ def _patch_v20b(src: str) -> str:
         "            base = resnet50(pretrained=False)"
     )
     if old not in src:
-        raise RuntimeError("patch resnet50 introuvable dans kneenet_v20b.py")
+        raise RuntimeError(f"patch resnet50 introuvable dans {filename}")
     return src.replace(old, new, 1)
+
+
+def _patch_v20b(src: str) -> str:
+    src = src.replace("class KneeNet(nn.Module):", "class KneeNetV20b(nn.Module):")
+    return _patch_resnet50(src, "kneenet_v20b.py")
+
+
+def _patch_v20h(src: str) -> str:
+    src = src.replace("class KneeNet(nn.Module):", "class KneeNetV20h(nn.Module):")
+    return _patch_resnet50(src, "kneenet_v20h.py")
 
 
 def _patch_vite(src: str) -> str:

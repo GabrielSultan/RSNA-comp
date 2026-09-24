@@ -1,0 +1,22 @@
+{
+  "id": "sultent/rsna-knee-v20h-lat-solo-ep11",
+  "title": "rsna-knee-v20h-lat-solo-ep11",
+  "code_file": "submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "machine_shape": "NvidiaTeslaT4",
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "sultent/rsna-knee-v20h-ep11-12-lat"
+  ],
+  "category_ids": []
+}
