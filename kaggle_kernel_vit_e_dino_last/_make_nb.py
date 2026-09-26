@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-OUT_PUSH = ROOT / "kaggle_kernel_vit_e_dino_last" / "_push" / "submit.ipynb"
+KERNEL_DIR = ROOT / "kaggle_kernel_vit_e_dino_last"
 
 
 def cell_md(text: str) -> dict:
@@ -28,14 +29,15 @@ def cell_code(text: str) -> dict:
     }
 
 
-MD0 = """# RSNA Knee — ViT-k LLRD 0.8 (epoch 7) — T4 — TTA x5
+def _md(epoch: int, gold: float, weight: str) -> str:
+    return f"""# RSNA Knee — ViT-k LLRD 0.8 (epoch {epoch}) — T4 — TTA x5
 
 Notebook Kaggle **self-contained** (internet off, GPU **T4**) :
 - lecture DICOM test → volumes crop 130 mm + bande 20–80 % (24, 224, 224)
-- protocole 6 slots (FS/T1, identique v20b)
+- protocole 6 slots (FS/T1, identique v20b). Pas de flip latéralité (train k sans canon L)
 - KneeNet **ViT-k** : graphe ViT-e (DINOv3 ViT-B/16, CAM+BiLSTM, stem RGB),
-  train `vit_k_llrd08_det_oofmask_full` **epoch 7**
-  (gold in-sample 0.931). Poids `last.pt` (optimizer retiré),
+  train `vit_k_llrd08_det_oofmask_full` **epoch {epoch}**
+  (gold in-sample {gold:.3f}). Poids `{weight}` (optimizer retiré),
   dataset `sultent/rsna-knee-vit-e-dino-last-weights`
 - TTA affine (rotation ±5° + scale 0.95/1.05, hflip off) ×5
 - écrit `/kaggle/working/submission.csv` (et le cwd)
@@ -77,10 +79,10 @@ if KAGGLE:
                     return hits[0]
         raise FileNotFoundError(f'{names} introuvable (dataset weights attache ?)')
 
-    WEIGHTS_PATH = _find_weight(('last.pt',))
+    WEIGHTS_PATH = _find_weight(('__WEIGHT__',))
 else:
     COMP_DIR = Path('../data/csv')
-    WEIGHTS_PATH = Path('../kaggle_dataset_vit_e_dino_last/_upload/last.pt')
+    WEIGHTS_PATH = Path('../kaggle_dataset_vit_e_dino_last/_upload/__WEIGHT__')
 
 TEST_CSV = COMP_DIR / 'test.csv'
 TEST_SERIES_CSV = COMP_DIR / 'test_series.csv'
@@ -122,7 +124,9 @@ print('device           :', DEVICE)
 # - le modèle ViT-e (copie de src/models/kneenet_vit_e.py)
 
 
-def main() -> None:
+def build(epoch: int, gold: float, weight: str) -> None:
+    out_push = KERNEL_DIR / f"_push_ep{epoch}"
+    nb_path = out_push / "submit.ipynb"
     model_code = (ROOT / "src" / "models" / "kneenet_vit_e.py").read_text(
         encoding="utf-8"
     )
@@ -141,6 +145,16 @@ def main() -> None:
         '    ("Coronal", 0),\n'
         '    ("Axial", 0),\n'
         ']\n',
+    )
+    # Train k : laterality off. Les symboles ne sont pas appeles
+    # (study_to_tensor laterality=False). Pas de package src sur Kaggle.
+    preprocess_code = preprocess_code.replace(
+        "from src.data.laterality import laterality_from_study_dir, normalise_laterality",
+        "def laterality_from_study_dir(study_dir):\n"
+        "    raise RuntimeError('laterality off sur ce kernel')\n"
+        "\n"
+        "def normalise_laterality(vol, plane, lat):\n"
+        "    raise RuntimeError('laterality off sur ce kernel')\n",
     )
 
     INFER_CODE = r"""import numpy as np
@@ -312,20 +326,48 @@ assert list(sub.columns) == list(sample.columns), 'colonnes != sample_submission
             "language_info": {"name": "python", "version": "3.12"},
         },
         "cells": [
-            cell_md(MD0),
-            cell_code(CONFIG_CODE),
+            cell_md(_md(epoch, gold, weight)),
+            cell_code(CONFIG_CODE.replace("__WEIGHT__", weight)),
             cell_code(preprocess_code),
             cell_code(model_code),
             cell_code(INFER_CODE + "\n" + infer_code_rest),
         ],
     }
 
-    OUT_PUSH.parent.mkdir(parents=True, exist_ok=True)
-    OUT_PUSH.write_text(
+    nb_path.parent.mkdir(parents=True, exist_ok=True)
+    nb_path.write_text(
         json.dumps(notebook, indent=1, ensure_ascii=False),
         encoding="utf-8",
     )
-    print("ecrit", OUT_PUSH)
+    meta = {
+        "id": f"sultent/rsna-knee-vit-k-llrd-ep{epoch}-tta-x5",
+        "title": f"RSNA Knee ViT-k LLRD ep{epoch} TTA x5",
+        "code_file": "submit.ipynb",
+        "language": "python",
+        "kernel_type": "notebook",
+        "is_private": True,
+        "enable_gpu": True,
+        "enable_tpu": False,
+        "enable_internet": False,
+        "keywords": ["gpu"],
+        "machine_shape": "NvidiaTeslaT4",
+        "competition_sources": ["rsna-knee-abnormality-detection"],
+        "dataset_sources": ["sultent/rsna-knee-vit-e-dino-last-weights"],
+        "category_ids": [],
+    }
+    (nb_path.parent / "kernel-metadata.json").write_text(
+        json.dumps(meta, indent=2) + "\n", encoding="utf-8"
+    )
+    print("ecrit", nb_path)
+
+
+def main() -> None:
+    p = argparse.ArgumentParser()
+    p.add_argument("--epoch", type=int, required=True)
+    p.add_argument("--gold", type=float, required=True)
+    p.add_argument("--weight", required=True)
+    args = p.parse_args()
+    build(args.epoch, args.gold, args.weight)
 
 
 if __name__ == "__main__":

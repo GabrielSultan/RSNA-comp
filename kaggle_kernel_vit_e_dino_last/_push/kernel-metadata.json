@@ -1,5 +1,5 @@
 {
-  "id": "sultent/rsna-knee-vit-e-dino-last-pt-tta-x5",
+  "id": "sultent/rsna-knee-vit-k-llrd-ep7-tta-x5",
   "title": "RSNA Knee ViT-k LLRD ep7 TTA x5",
   "code_file": "submit.ipynb",
   "language": "python",

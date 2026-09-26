@@ -5,7 +5,7 @@ import sys
 import time
 from pathlib import Path
 
-KERNEL = "sultent/rsna-knee-vit-e-dino-last-pt-tta-x5"
+KERNEL = "sultent/rsna-knee-vit-k-llrd-ep7-tta-x5"
 COMPETITION = "rsna-knee-abnormality-detection"
 OUT_DIR = Path("kaggle_kernel_vit_e_dino_last/_out")
 VERSION_FILE = Path("kaggle_kernel_vit_e_dino_last/_push_version.txt")
