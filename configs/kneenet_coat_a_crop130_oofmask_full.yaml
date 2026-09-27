@@ -1,0 +1,53 @@
+# CoAt-a retrain 100 % crop130. A lancer SEULEMENT apres le verdict de
+# subset_coat_a_llrd08_det_frac025 (gain macro vs v20b det, ou tetes
+# specialistes utiles en ensemble). Meme graphe / recette que ce subset
+# (LLRD 0.8 par bloc, no_decay, freeze 1 / re-warmup 1).
+# Recette full etablie (v20b / ViT-k full) : masque OOF v17 + ACL
+# restauree, gold x4, pas de val, cosine 20 stop 12, snapshots 6-12
+# (pas de best.pt pilote). Pas de laterality (levier v20h, pas coat).
+# ~2 h / epoch sur la 3070 (estimation), ~27 h pour 12 epochs.
+#
+# Labels deja prets (ne pas re-masquer / --restore-acl) :
+#   data/labels/labels_llm_gpt56sol_oofmask_v20b.csv
+# Train (plus tard) :
+#   python -X utf8 -m src.train.train --config configs/kneenet_coat_a_crop130_oofmask_full.yaml
+
+run_name: coat_a_crop130_oofmask_full
+model: kneenet_coat_a
+n_series: 6
+backbone: coatnet_0_rw_224.sw_in1k
+pretrained: true
+backbone_weights: weights/coatnet_0_rw_224-sw_in1k
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol_oofmask_v20b.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+cosine_epochs: 20
+save_epochs: [6, 7, 8, 9, 10, 11, 12]
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

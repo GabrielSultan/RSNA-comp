@@ -1,0 +1,49 @@
+# ARRETE ep6 (27/09) : val 0.7913 / gold 0.7894, encore en pente, non relance.
+# Successeur en cours : kneenet_coat_b_llrd09_det_subset.yaml.
+# CoAt-a baseline, recette Transformer du repo (ViT-k) : LLRD 0.8 par bloc
+# + no_decay, pic 1e-4 sur le dernier bloc, freeze 1 / re-warmup 1.
+# CoAtNet-0 = 14 blocs (stages 2/3/7/2) numerotes globalement : stage 3
+# ~1e-4, Transformer stage 2 ~1.7e-5 -> 6.4e-5, MBConv 6.9e-6 -> 1.7e-5,
+# stem 4.4e-6. Remplace le lr 1e-4 uniforme (mort au degel, voir
+# kneenet_coat_a_det_subset.yaml). Graphe / data / split identiques :
+# CoAtNet-0 224 dans le graphe ViT-e / v20b (6 slots, CAM 7x7 + BiLSTM),
+# stem 2.5D R=k-1 / G=k / B=k+1 linspace crop130, stem_mix init G.
+# Juger vs subset_v20b_crop130_det_frac025 (val 0.8364 / gold 0.8842) :
+# Δ > 0.01 val ET gold. Sinon lire par cible (specialiste d'ensemble).
+#   python -X utf8 -m src.train.train --config configs/kneenet_coat_a_llrd_det_subset.yaml
+
+run_name: subset_coat_a_llrd08_det_frac025
+model: kneenet_coat_a
+n_series: 6
+backbone: coatnet_0_rw_224.sw_in1k
+pretrained: true
+backbone_weights: weights/coatnet_0_rw_224-sw_in1k
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+early_stop_patience: 4
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
