@@ -1,4 +1,4 @@
-"""Upload des poids, push T4 ep7+ep8, submit seulement si submission.csv existe."""
+"""Upload des poids, push T4 ep9+ep10, submit seulement si submission.csv existe."""
 from __future__ import annotations
 
 import re
@@ -15,16 +15,16 @@ OUT = ROOT / "kaggle_kernel_vit_e_dino_last" / "_out_submit"
 
 JOBS = [
     {
-        "epoch": 7,
-        "kernel": "sultent/rsna-knee-vit-k-llrd-ep7-tta-x5",
-        "push": ROOT / "kaggle_kernel_vit_e_dino_last" / "_push_ep7",
-        "msg": "ViT-k LLRD 0.8 oofmask full epoch7 (gold in-sample 0.931, TTA x5, T4)",
+        "epoch": 9,
+        "kernel": "sultent/rsna-knee-vit-k-llrd-ep9-tta-x5",
+        "push": ROOT / "kaggle_kernel_vit_e_dino_last" / "_push_ep9",
+        "msg": "ViT-k LLRD 0.8 oofmask full epoch9 (gold in-sample 0.943, TTA x5, T4)",
     },
     {
-        "epoch": 8,
-        "kernel": "sultent/rsna-knee-vit-k-llrd-ep8-tta-x5",
-        "push": ROOT / "kaggle_kernel_vit_e_dino_last" / "_push_ep8",
-        "msg": "ViT-k LLRD 0.8 oofmask full epoch8 (gold in-sample 0.940, TTA x5, T4)",
+        "epoch": 10,
+        "kernel": "sultent/rsna-knee-vit-k-llrd-ep10-tta-x5",
+        "push": ROOT / "kaggle_kernel_vit_e_dino_last" / "_push_ep10",
+        "msg": "ViT-k LLRD 0.8 oofmask full epoch10 (gold in-sample 0.960, TTA x5, T4)",
     },
 ]
 
@@ -40,7 +40,7 @@ def kaggle(*args: str) -> str:
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
-    for name in ("last.pt", "vit_k_ep8.pt"):
+    for name in ("last.pt", "vit_k_ep8.pt", "vit_k_ep9.pt", "vit_k_ep10.pt"):
         p = UPLOAD / name
         if not p.exists() or p.stat().st_size < 100_000_000:
             raise SystemExit(f"poids manquant: {p}")
@@ -57,7 +57,7 @@ def main() -> None:
     print(kaggle(
         "datasets", "version",
         "-p", str(UPLOAD),
-        "-m", "ViT-k LLRD epoch7 last.pt + epoch8 vit_k_ep8.pt",
+        "-m", "ViT-k LLRD epoch9 vit_k_ep9.pt + epoch10 vit_k_ep10.pt",
     ), flush=True)
 
     t0 = time.time()
@@ -132,7 +132,7 @@ def main() -> None:
         if pending:
             time.sleep(POLL_S)
 
-    print("OK ep7 + ep8", flush=True)
+    print("OK ep9 + ep10", flush=True)
 
 
 if __name__ == "__main__":
