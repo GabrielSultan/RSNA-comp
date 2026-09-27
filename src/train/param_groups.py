@@ -4,6 +4,8 @@
 LLRD : lr_bloc = lr_backbone * (llrd ** (n_blocks - layer_id)).
 layer 0 = patch-embed / tokens / stem_mix, layer 1..12 = blocks,
 layer 12 aussi pour le LN final. Pic (bloc 12) = `lr_backbone`.
+Hybrides timm (CoAtNet : `stages.S.blocks.B`) : blocs numerotes
+globalement dans l'ordre (stage, bloc), stem = 0.
 
 Sans `llrd` : un groupe backbone + un groupe head (recette actuelle),
 mais chaque groupe porte `base_lr` + `role` pour le re-warmup.
@@ -17,6 +19,7 @@ import torch
 from torch.optim import AdamW
 
 _BLOCK_RE = re.compile(r"\.blocks\.(\d+)\.")
+_STAGE_BLOCK_RE = re.compile(r"\.stages\.(\d+)\.blocks\.(\d+)\.")
 
 
 def is_no_decay(name: str, param: torch.Tensor) -> bool:
@@ -42,11 +45,27 @@ def _n_blocks(named: list[tuple[str, torch.nn.Parameter]]) -> int:
     return (max(ids) + 1) if ids else 0
 
 
-def vit_layer_id(name: str, n_blocks: int) -> int:
+def _stage_block_ids(names: list[str]) -> dict[tuple[int, int], int]:
+    """(stage, bloc) -> index global 1..N, vide si pas d'encodeur par stages."""
+    keys = set()
+    for name in names:
+        m = _STAGE_BLOCK_RE.search(name)
+        if m:
+            keys.add((int(m.group(1)), int(m.group(2))))
+    return {k: i + 1 for i, k in enumerate(sorted(keys))}
+
+
+def vit_layer_id(name: str, n_blocks: int,
+                 stage_ids: dict[tuple[int, int], int] | None = None) -> int:
     """0 = embed, 1..n_blocks = bloc Transformer, n_blocks = LN final."""
-    m = _BLOCK_RE.search(name)
-    if m:
-        return int(m.group(1)) + 1
+    if stage_ids:
+        m = _STAGE_BLOCK_RE.search(name)
+        if m:
+            return stage_ids[(int(m.group(1)), int(m.group(2)))]
+    else:
+        m = _BLOCK_RE.search(name)
+        if m:
+            return int(m.group(1)) + 1
     if n_blocks and (".backbone.norm." in name or name.endswith("backbone.norm.weight")
                       or name.endswith("backbone.norm.bias")):
         return n_blocks
@@ -74,7 +93,8 @@ def build_param_groups(model: torch.nn.Module, cfg: dict) -> list[dict]:
     named = list(iter_named_trainable(model))
     bb = [(n, p) for n, p in named if _is_backbone(n)]
     hd = [(n, p) for n, p in named if not _is_backbone(n)]
-    n_blocks = _n_blocks(bb)
+    stage_ids = _stage_block_ids([n for n, _ in bb])
+    n_blocks = len(stage_ids) if stage_ids else _n_blocks(bb)
 
     groups: list[dict] = []
     if llrd is not None and n_blocks == 0:
@@ -84,7 +104,7 @@ def build_param_groups(model: torch.nn.Module, cfg: dict) -> list[dict]:
     if llrd is not None:
         buckets: dict[tuple[int, bool], list[torch.nn.Parameter]] = defaultdict(list)
         for name, p in bb:
-            lid = vit_layer_id(name, n_blocks)
+            lid = vit_layer_id(name, n_blocks, stage_ids)
             buckets[(lid, is_no_decay(name, p) if split_nd else False)].append(p)
         for (lid, nd) in sorted(buckets):
             scale = llrd ** (n_blocks - lid)
