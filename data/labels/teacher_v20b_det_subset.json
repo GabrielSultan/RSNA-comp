@@ -1,0 +1,14 @@
+{
+  "csv": "data\\labels\\teacher_v20b_det_subset.csv",
+  "teacher_config": "configs/kneenet_v20b_crop130_det_subset.yaml",
+  "ckpt": "checkpoints\\subset_v20b_crop130_det_frac025\\best.pt",
+  "epoch": 10,
+  "val_macro_auc_ckpt": 0.8364401414621483,
+  "run_name": "subset_v20b_crop130_det_frac025",
+  "model": "kneenet_v20b",
+  "splits": {
+    "train": 924
+  },
+  "n": 924,
+  "tta": false
+}
