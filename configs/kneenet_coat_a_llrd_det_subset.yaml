@@ -1,5 +1,6 @@
 # ARRETE ep6 (27/09) : val 0.7913 / gold 0.7894, encore en pente, non relance.
-# Successeur en cours : kneenet_coat_b_llrd09_det_subset.yaml.
+# LLRD 0.9 (coat_b) sous ce run a l'ep4 (0.7507/0.7281 vs 0.7714/0.7637).
+# Test symetrique : kneenet_coat_a_llrd07_det_subset.yaml.
 # CoAt-a baseline, recette Transformer du repo (ViT-k) : LLRD 0.8 par bloc
 # + no_decay, pic 1e-4 sur le dernier bloc, freeze 1 / re-warmup 1.
 # CoAtNet-0 = 14 blocs (stages 2/3/7/2) numerotes globalement : stage 3

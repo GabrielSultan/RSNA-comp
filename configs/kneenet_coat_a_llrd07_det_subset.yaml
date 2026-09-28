@@ -1,0 +1,48 @@
+# CoAt-a + un seul levier : llrd 0.7 (pic 1e-4 inchange).
+# 0.9 a baisse (ep4 0.7507/0.7281 vs 0.8 ep4 0.7714/0.7637) en montant
+# le lr du bas : stem 2.3e-5 contre 4.4e-6. 0.7 fait l'inverse :
+# stem 6.8e-7, bloc1 9.7e-7, bloc8 1.2e-5, bloc12 4.9e-5, pic 1e-4.
+# Le bas bouge ~6x moins qu'a 0.8. Ce n'est pas plus d'adaptation,
+# c'est le test symetrique : 0.8 bougeait-il encore trop le pretrained.
+# Meme modele, data, split, schedule que coat_a.
+# Juger vs subset_coat_a_llrd08_det_frac025 a epoch egale (arrete ep6 :
+# 0.7913 / 0.7894). Si ep4 est encore ~0.02 sous coat_a, 0.8 est le pic
+# et on arrete le balayage LLRD.
+# Un seul train a la fois sur la 3070 :
+#   python -X utf8 -m src.train.train --config configs/kneenet_coat_a_llrd07_det_subset.yaml
+
+run_name: subset_coat_a_llrd07_det_frac025
+model: kneenet_coat_a
+n_series: 6
+backbone: coatnet_0_rw_224.sw_in1k
+pretrained: true
+backbone_weights: weights/coatnet_0_rw_224-sw_in1k
+lstm_hidden: 256
+
+llrd: 0.7
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+early_stop_patience: 4
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
