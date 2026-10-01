@@ -1,0 +1,38 @@
+# v20h subset, meme recette que kneenet_v20b_crop130_det_v3b_subset.yaml.
+# Seule difference vs un v20h RadImageNet sur ce CSV : l'encodeur
+# vient du SimCLR crop130, epoch 6 (last_ep6.pt == encoder_ep6.pt).
+# CSV deja sous-echantillonne -> train_frac 1.0.
+#   train 924 | val 652. Gold 58 (train.csv), hors split.
+# Val AUC = v3b binarise a 0.5. Le chiffre comparable est le gold.
+#   python -X utf8 -m src.train.train --config configs/kneenet_v20h_crop130_ssl_ep6_v3b_subset.yaml
+
+run_name: subset_v20h_crop130_ssl_ep6_v3b_frac025
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_from_pod/encoder_ep6.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/targets_v3b_det_frac025.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 10
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

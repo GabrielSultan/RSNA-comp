@@ -1,0 +1,57 @@
+# DINO in-domain pour l'encodeur v20h.
+# 2 vues globales (aire 40-100 %) eleve + professeur,
+# 6 vues locales (aire 10-40 %) eleve seul, 4096 categories.
+# Init RadImageNet. La tete est jetee.
+# Sortie chargeable par v20h : checkpoints/v20h_ssl_dino/encoder.pt
+#
+# lr 0.004 = 0.03 du ResNet-50 DINO (batch 512) ramene a 64 images / step.
+# OOM sur 96 Go -> series_batch: 4. Sur le pod 32 vCPU, num_workers: 16.
+# Loss uniforme = ln(4096) ~ 8.32. Collee a 8 ou tombee a 0 : collapse.
+# encoder.pt est reecrit a chaque epoch.
+#
+#   python -X utf8 -m src.train.ssl_dino --config configs/ssl_v20h_dino.yaml
+# Reprise :
+#   python -X utf8 -m src.train.ssl_dino --config configs/ssl_v20h_dino.yaml --resume
+
+run_name: v20h_ssl_dino
+out_dir: checkpoints/v20h_ssl_dino
+init_weights: weights/ResNet50.pt
+
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+img_size: 224
+
+epochs: 100
+warmup_epochs: 10
+series_batch: 8
+slices_per_series: 8
+num_workers: 8
+seed: 42
+log_every: 50
+forward_chunk: 64
+
+global_crops_scale: [0.4, 1.0]
+local_crops_scale: [0.1, 0.4]
+local_crops_number: 6
+max_rotate_deg: 12
+brightness: 0.4
+contrast: 0.4
+gamma_range: [0.8, 1.2]
+
+out_dim: 4096
+hidden_dim: 2048
+bottleneck_dim: 256
+use_bn_in_head: true
+norm_last_layer: true
+freeze_last_layer: 1
+
+lr: 0.004
+min_lr: 0.000001
+weight_decay: 0.0001
+clip_grad: 3.0
+momentum_teacher: 0.996
+teacher_temp: 0.04
+warmup_teacher_temp: 0.04
+warmup_teacher_temp_epochs: 0
+student_temp: 0.1
+center_momentum: 0.9
