@@ -398,6 +398,36 @@ def _exclude_gold(df: pd.DataFrame, labels_csv: str) -> pd.DataFrame:
     return df
 
 
+def _append_missing_gold(df: pd.DataFrame, labels_csv: str,
+                         targets: list[str]) -> pd.DataFrame:
+    """Ajoute les gold absents du CSV (labels radiologue de train.csv).
+
+    include_gold ne faisait qu'eviter l'exclusion. targets_v3b ne contient
+    pas les 58 : sans cet ajout, gold_sample_weight ne pese sur personne.
+    """
+    gold_uids = gold_uids_from_train_csv(labels_csv)
+    if not gold_uids:
+        print("gold inclus demande, mais aucun gold dans train.csv", flush=True)
+        return df
+    have = set(df["StudyInstanceUID"]) & gold_uids
+    missing = gold_uids - set(df["StudyInstanceUID"])
+    print(f"gold inclus dans le train (plus un hold-out) : "
+          f"{len(have)} deja dans le CSV, {len(missing)} ajoutes depuis train.csv",
+          flush=True)
+    if not missing:
+        return df
+    train_csv = competition_train_csv(labels_csv)
+    gold = pd.read_csv(train_csv, usecols=["StudyInstanceUID"] + targets)
+    gold = gold[gold.StudyInstanceUID.isin(missing)].copy()
+    if "split" in df.columns:
+        gold["split"] = "train"
+    for c in df.columns:
+        if c not in gold.columns:
+            gold[c] = np.nan
+    gold = gold[list(df.columns)]
+    return pd.concat([df, gold], ignore_index=True)
+
+
 def _ensure_split(df: pd.DataFrame, targets: list[str],
                   val_frac: float = 0.15, seed: int = 42) -> pd.DataFrame:
     """Split 85/15 si le CSV n'a pas de colonne split (ex. blend candidat).
@@ -543,7 +573,7 @@ def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
     targets = _target_cols(df)
     df = df.dropna(subset=targets, how="all")  # etudes sans aucun label : exclues
     if include_gold:
-        print("gold inclus dans le train (plus un hold-out)", flush=True)
+        df = _append_missing_gold(df, labels_csv, targets)
     else:
         df = _exclude_gold(df, labels_csv)
 
