@@ -1,0 +1,48 @@
+# v20h OOF 3 folds : predictions seulement. Le seuil de filtrage viendra apres.
+# Meme squelette que kneenet_v20h_crop130_oof.yaml (OOF v17 de la recette v20b).
+# Differences : encodeur DINO crop130 epoch 11, labels targets_v3b.
+# Gold absents de targets_v3b (58, train.csv) : exclus du train/val.
+# Meme decoupage que v17 : data/labels/folds3_gpt56sol.csv couvre les 4348 UID.
+# Pas de laterality : l'OOF v20h coolin blend n'en avait pas.
+# Concat -> data/labels/oof_preds_v20h_dino_ep11_v3b.csv
+# (ne touche ni oof_preds_v17.csv ni oof_preds_v20h_coolin_blend.csv).
+#
+# Enchainement des 3 folds (reprend last.pt si un fold est coupe) :
+#   python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v20h_crop130_dino_ep11_oof_v3b.yaml
+# un fold seul :
+#   python -X utf8 -m src.train.train --config configs/kneenet_v20h_crop130_dino_ep11_oof_v3b.yaml --fold 0
+
+run_name: v20h_crop130_dino_ep11_oof_v3b
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_dino_screen/encoder_ep11.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/targets_v3b.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+n_folds: 3
+fold_seed: 42
+folds_csv: data/labels/folds3_gpt56sol.csv
+oof_preds_csv: data/labels/oof_preds_v20h_dino_ep11_v3b.csv
+dump_oof: true
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

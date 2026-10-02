@@ -1,0 +1,50 @@
+# Reprise du screen DINO a l'epoch 12, horizon 50.
+# last.pt = checkpoints/v20h_ssl_dino_screen/last_ep12.pt
+# Le cosine est recalcule sur 50 epochs : au step de reprise le lr
+# remonte vers ~0.0036 (il etait 0.00165 en fin d'epoch 12 sur 20).
+# Les poids, le professeur, le centre et le momentum SGD sont repris.
+#
+#   python -X utf8 -m src.train.ssl_dino --config configs/ssl_v20h_dino_to50.yaml --resume
+
+run_name: v20h_ssl_dino_screen
+out_dir: checkpoints/v20h_ssl_dino_screen
+init_weights: weights/ResNet50.pt
+
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+img_size: 224
+
+epochs: 50
+warmup_epochs: 2
+series_batch: 8
+slices_per_series: 8
+num_workers: 8
+seed: 42
+log_every: 50
+forward_chunk: 64
+
+global_crops_scale: [0.4, 1.0]
+local_crops_scale: [0.1, 0.4]
+local_crops_number: 6
+max_rotate_deg: 12
+brightness: 0.4
+contrast: 0.4
+gamma_range: [0.8, 1.2]
+
+out_dim: 4096
+hidden_dim: 2048
+bottleneck_dim: 256
+use_bn_in_head: true
+norm_last_layer: true
+freeze_last_layer: 1
+
+lr: 0.004
+min_lr: 0.000001
+weight_decay: 0.0001
+clip_grad: 3.0
+momentum_teacher: 0.996
+teacher_temp: 0.04
+warmup_teacher_temp: 0.04
+warmup_teacher_temp_epochs: 0
+student_temp: 0.1
+center_momentum: 0.9
