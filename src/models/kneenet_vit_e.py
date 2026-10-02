@@ -69,13 +69,24 @@ class _Dinov3VitEncoder(nn.Module):
             kwargs["drop_path_rate"] = dp
         if pretrained:
             ckpt = _weights_file(weights_path)
-            self.backbone = timm.create_model(
-                TIMM_NAME,
-                pretrained=True,
-                pretrained_cfg_overlay={"file": str(ckpt)},
-                **kwargs,
-            )
-            print(f"DINOv3 ViT-B/16 charge : {ckpt}", flush=True)
+            if ckpt.suffix == ".pt":
+                self.backbone = timm.create_model(
+                    TIMM_NAME, pretrained=False, **kwargs,
+                )
+                sd = torch.load(ckpt, map_location="cpu", weights_only=False)
+                self.load_state_dict(sd, strict=True)
+                print(
+                    f"DINOv3 ViT-B/16 charge : {ckpt} | {len(sd)} tenseurs",
+                    flush=True,
+                )
+            else:
+                self.backbone = timm.create_model(
+                    TIMM_NAME,
+                    pretrained=True,
+                    pretrained_cfg_overlay={"file": str(ckpt)},
+                    **kwargs,
+                )
+                print(f"DINOv3 ViT-B/16 charge : {ckpt}", flush=True)
         else:
             self.backbone = timm.create_model(
                 TIMM_NAME, pretrained=False, **kwargs,
