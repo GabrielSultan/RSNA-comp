@@ -7,10 +7,13 @@ est une moyenne mobile de l'eleve. Il produit une loi sur 4096 categories.
 L'eleve s'en rapproche, y compris depuis un petit morceau de la coupe.
 
 La tete est jetee. Sortie : checkpoints/<run>/encoder.pt
-State dict brut, cles `backbone.*`, chargeable par KneeNet v20h.
-BN de l'eleve en train : v20h les gele ensuite.
+State dict brut, cles `backbone.*`.
+`encoder: resnet50` (defaut) : chargeable par KneeNet v20h.
+`encoder: vit_dinov3` : chargeable par ViT-k (`backbone_weights` en `.pt`).
+BN de l'eleve en train : v20h les gele ensuite. Le ViT n'a pas de BN.
 
 Entree : R=G=B = coupe dans [0, 1]. Pas de flip horizontal.
+ViT-k : ensuite la meme normalisation ImageNet que KneeNet-ViT-e.
 
 Usage :
   python -X utf8 -m src.train.ssl_dino --config configs/ssl_v20h_dino.yaml
@@ -302,6 +305,45 @@ def _cancel_last_layer_grad(head: DINOHead) -> None:
         p.grad = None
 
 
+def _freeze_layerscale(encoder: nn.Module) -> None:
+    """gamma DINOv3 : ViT-k les gele aussi au finetuning."""
+    n = 0
+    for name, p in encoder.named_parameters():
+        if name.rsplit(".", 1)[-1].startswith("gamma"):
+            p.requires_grad = False
+            n += 1
+    if n:
+        print(f"LayerScale gele : {n} tenseurs gamma", flush=True)
+
+
+def _new_encoder(cfg: dict, load: bool) -> nn.Module:
+    kind = str(cfg.get("encoder", "resnet50"))
+    if kind == "resnet50":
+        enc = _ResNet50Encoder()
+        if load:
+            _load_init(enc, cfg["init_weights"])
+        return enc
+    if kind == "vit_dinov3":
+        from src.models.kneenet_vit_e import _Dinov3VitEncoder
+        if load:
+            enc = _Dinov3VitEncoder(
+                weights_path=cfg["init_weights"], pretrained=True,
+            )
+        else:
+            enc = _Dinov3VitEncoder(pretrained=False)
+        _freeze_layerscale(enc)
+        return enc
+    raise SystemExit(f"encoder SSL inconnu : {kind}")
+
+
+def _imagenet_norm(views: list[torch.Tensor]) -> list[torch.Tensor]:
+    from src.models.kneenet_vit_e import IMAGENET_MEAN, IMAGENET_STD
+    ref = views[0]
+    mean = ref.new_tensor(IMAGENET_MEAN).view(1, 3, 1, 1)
+    std = ref.new_tensor(IMAGENET_STD).view(1, 3, 1, 1)
+    return [(v - mean) / std for v in views]
+
+
 def main() -> None:
     from src.train.train import _atomic_torch_save, load_config
 
@@ -349,7 +391,7 @@ def main() -> None:
     )
     print(f"DINO uniforme ln({out_dim}) = {uniform:.3f}", flush=True)
 
-    encoder = _ResNet50Encoder().to(device)
+    encoder = _new_encoder(cfg, load=True).to(device)
     head = DINOHead(
         in_dim=encoder.num_features,
         out_dim=out_dim,
@@ -358,9 +400,8 @@ def main() -> None:
         use_bn=bool(cfg.get("use_bn_in_head", True)),
         norm_last_layer=bool(cfg.get("norm_last_layer", True)),
     ).to(device)
-    _load_init(encoder, cfg["init_weights"])
 
-    teacher_encoder = _ResNet50Encoder().to(device)
+    teacher_encoder = _new_encoder(cfg, load=False).to(device)
     teacher_head = DINOHead(
         in_dim=encoder.num_features,
         out_dim=out_dim,
@@ -388,14 +429,18 @@ def main() -> None:
             no_decay.append(p)
         else:
             decay.append(p)
-    optim = torch.optim.SGD(
-        [
-            {"params": decay, "weight_decay": wd},
-            {"params": no_decay, "weight_decay": 0.0},
-        ],
-        lr=lr,
-        momentum=0.9,
-    )
+    groups = [
+        {"params": decay, "weight_decay": wd},
+        {"params": no_decay, "weight_decay": 0.0},
+    ]
+    opt_name = str(cfg.get("optim", "sgd")).lower()
+    if opt_name == "sgd":
+        optim = torch.optim.SGD(groups, lr=lr, momentum=0.9)
+    elif opt_name == "adamw":
+        optim = torch.optim.AdamW(groups, lr=lr, betas=(0.9, 0.999))
+    else:
+        raise SystemExit(f"optim SSL inconnu : {opt_name}")
+    print(f"optim {opt_name} | lr {lr:g} | wd {wd:g}", flush=True)
     criterion = DINOLoss(
         out_dim=out_dim,
         ncrops=n_crops,
@@ -425,7 +470,23 @@ def main() -> None:
         head.load_state_dict(ckpt["head"], strict=True)
         teacher_encoder.load_state_dict(ckpt["teacher_encoder"], strict=True)
         teacher_head.load_state_dict(ckpt["teacher_head"], strict=True)
-        criterion.load_state_dict(ckpt["criterion"])
+        crit_sd = ckpt["criterion"]
+        key = "teacher_temp_schedule"
+        cur = criterion.state_dict()[key]
+        old = crit_sd[key]
+        if old.shape != cur.shape:
+            extended = cur.clone()
+            n = min(int(old.numel()), int(extended.numel()))
+            extended[:n] = old[:n].to(device=extended.device, dtype=extended.dtype)
+            if extended.numel() > old.numel():
+                extended[n:] = old[-1].to(device=extended.device, dtype=extended.dtype)
+            crit_sd = dict(crit_sd)
+            crit_sd[key] = extended
+            print(
+                f"teacher_temp_schedule {tuple(old.shape)} -> {tuple(extended.shape)}",
+                flush=True,
+            )
+        criterion.load_state_dict(crit_sd)
         if "optim" in ckpt:
             optim.load_state_dict(ckpt["optim"])
         start_epoch = int(ckpt["epoch"])
@@ -451,6 +512,8 @@ def main() -> None:
             slices = sample_slices(vol, slices_per)
             flat = slices.reshape(-1, slices.size(-2), slices.size(-1))
             views = make_views(flat, cfg)
+            if cfg.get("imagenet_norm"):
+                views = _imagenet_norm(views)
             lr_now = _lr_at(step, total_steps, lr, warmup_steps, min_lr)
             for group in optim.param_groups:
                 group["lr"] = lr_now
