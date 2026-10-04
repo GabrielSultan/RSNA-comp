@@ -1,0 +1,151 @@
+{
+  "out_csv": "data\\labels\\coolin\\targets_v3b_oofmask.csv",
+  "oof_csv": "data\\labels\\oof_preds_v20h_dino_ep11_v3b.csv",
+  "n_studies": 4348,
+  "n_masked": 31,
+  "n_cells": 52176,
+  "rule": {
+    "lo": 0.15,
+    "hi": 0.85,
+    "tight_lo": 0.1,
+    "tight_hi": 0.9,
+    "pct_cap": 5.0,
+    "acl_mask_label_high_model_low": true,
+    "acl_label_high_model_low_n": 4
+  },
+  "gold_acl": {
+    "n_gold": 58,
+    "n_acl_pos": 24,
+    "acl_recall_at_0.5": 0.9166666666666666,
+    "acl_mean_proba_pos": 0.8133435249328613,
+    "acl_fpr_at_0.5": 0.058823529411764705,
+    "under_calls": false
+  },
+  "per_target": [
+    {
+      "target": "ACL",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 4,
+      "n_label_low_model_high": 4,
+      "n_masked": 8,
+      "pct": 0.18399264029438822
+    },
+    {
+      "target": "MCL",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 3,
+      "n_label_low_model_high": 0,
+      "n_masked": 3,
+      "pct": 0.06899724011039558
+    },
+    {
+      "target": "Medial Meniscus",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 1,
+      "n_label_low_model_high": 0,
+      "n_masked": 1,
+      "pct": 0.022999080036798528
+    },
+    {
+      "target": "Lateral Meniscus",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 8,
+      "n_label_low_model_high": 2,
+      "n_masked": 10,
+      "pct": 0.22999080036798528
+    },
+    {
+      "target": "Medial OA",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 0,
+      "n_label_low_model_high": 0,
+      "n_masked": 0,
+      "pct": 0.0
+    },
+    {
+      "target": "Lateral OA",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 0,
+      "n_label_low_model_high": 0,
+      "n_masked": 0,
+      "pct": 0.0
+    },
+    {
+      "target": "PF OA",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 4,
+      "n_label_low_model_high": 0,
+      "n_masked": 4,
+      "pct": 0.09199632014719411
+    },
+    {
+      "target": "Effusion",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 0,
+      "n_label_low_model_high": 0,
+      "n_masked": 0,
+      "pct": 0.0
+    },
+    {
+      "target": "Synovitis",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 0,
+      "n_label_low_model_high": 0,
+      "n_masked": 0,
+      "pct": 0.0
+    },
+    {
+      "target": "Baker's",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 2,
+      "n_label_low_model_high": 3,
+      "n_masked": 5,
+      "pct": 0.11499540018399264
+    },
+    {
+      "target": "Contusion",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 0,
+      "n_label_low_model_high": 0,
+      "n_masked": 0,
+      "pct": 0.0
+    },
+    {
+      "target": "Fracture",
+      "lo": 0.15,
+      "hi": 0.85,
+      "tightened": false,
+      "n_label_high_model_low": 0,
+      "n_label_low_model_high": 0,
+      "n_masked": 0,
+      "pct": 0.0
+    }
+  ],
+  "epochs_by_fold": {
+    "0": 11,
+    "1": 3,
+    "2": 3
+  }
+}
