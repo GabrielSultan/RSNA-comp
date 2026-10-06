@@ -65,21 +65,22 @@ def download_one(url: str, dest: Path) -> None:
 
 def main() -> None:
     dump = Path(sys.argv[1])
+    out = Path(sys.argv[2]) if len(sys.argv) > 2 else OUT
     items = json.loads(dump.read_text(encoding="utf-8"))
-    OUT.mkdir(parents=True, exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)
     todo = []
     for it in items:
-        dest = OUT / it["name"]
+        dest = out / it["name"]
         if dest.exists() and dest.stat().st_size > 1000:
             print("skip", dest.name, dest.stat().st_size, flush=True)
             continue
         todo.append((it["url"], dest))
-    print(f"download {len(todo)}/{len(items)} files -> {OUT}", flush=True)
+    print(f"download {len(todo)}/{len(items)} files -> {out}", flush=True)
     with ThreadPoolExecutor(max_workers=3) as ex:
         futs = [ex.submit(download_one, url, dest) for url, dest in todo]
         for fut in as_completed(futs):
             fut.result()
-    zips = list(OUT.glob("*.zip"))
+    zips = list(out.glob("*.zip"))
     print(f"done zips={len(zips)} bytes={sum(p.stat().st_size for p in zips)}", flush=True)
 
 
