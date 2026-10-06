@@ -1,0 +1,53 @@
+# Full train ViT-k LLRD 0.8 sur targets_v3b masque par l'OOF des 3 folds.
+# Meme squelette que kneenet_vit_k_llrd08_oof_v3b.yaml (DINOv3 brut, canal G,
+# llrd 0.8, no_decay, freeze 1, re-warmup 1, batch 2, pas de laterality).
+# Labels : data/labels/coolin/targets_v3b_oofmask_vitk.csv
+#   (contradiction franche seulement ; gold non injectes dans le CSV).
+# Gold (58, train.csv) ajoutes au train, poids x4. Pas de val.
+# Cosine sur 20 epochs, stop a 12. Snapshots epoch 5 a 12.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_vit_k_llrd08_v3b_oofmask_full.yaml
+
+run_name: vit_k_llrd08_v3b_oofmask_full
+model: kneenet_vit_e
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/coolin/targets_v3b_oofmask_vitk.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+rgb_as_gray: true
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+
+batch_size: 2
+# Un seul forward encodeur par pas (batch 2 x 6 series x 24 coupes).
+# 4 etait le plafond de la GPU 8 Go ; ici la carte a 96 Go.
+encode_chunk: 288
+num_workers: 8
+epochs: 12
+cosine_epochs: 20
+save_epochs: [5, 6, 7, 8, 9, 10, 11, 12]
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+seed: 42
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
