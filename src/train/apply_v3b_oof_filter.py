@@ -88,8 +88,32 @@ def _dump_fold(cfg: dict, fold: int, device: str) -> tuple[pd.DataFrame, dict[st
     return pd.DataFrame(rows), gold_map
 
 
-def _gold_acl(gold_by_fold: list[dict[str, np.ndarray]]) -> dict:
-    train_csv = competition_train_csv(LABELS)
+def _gold_fold(cfg: dict, run: str, fold: int, device: str) -> dict[str, np.ndarray]:
+    """Probas gold du best.pt, sans rejouer la val OOF."""
+    ckpt_path = Path("checkpoints") / f"{run}_fold{fold}" / "best.pt"
+    if not ckpt_path.is_file():
+        raise SystemExit(f"manque {ckpt_path}")
+    ckpt = torch.load(ckpt_path, map_location=device, weights_only=False)
+    epoch = int(ckpt.get("epoch", -1))
+    print(f"gold fold {fold} : {ckpt_path.name} epoch {epoch}", flush=True)
+    model = build_model(cfg, pretrained=False).to(device)
+    model.load_state_dict(ckpt["model"], strict=True)
+    model.eval()
+    gold_ld = make_gold_loader(cfg, int(cfg["batch_size"]), num_workers=0)
+    if gold_ld is None:
+        raise SystemExit("gold loader indisponible")
+    gp, _gy, guids, _ = evaluate(model, gold_ld, device)
+    gold_map = {uid: gp[i] for i, uid in enumerate(guids)}
+    del gold_ld, model, ckpt
+    gc.collect()
+    if device == "cuda":
+        torch.cuda.empty_cache()
+    return gold_map
+
+
+def _gold_acl(gold_by_fold: list[dict[str, np.ndarray]],
+              labels: Path = LABELS) -> dict:
+    train_csv = competition_train_csv(labels)
     gold = pd.read_csv(train_csv, usecols=["StudyInstanceUID", "ACL"])
     gold = gold[gold.ACL.notna()].copy()
     uids = gold.StudyInstanceUID.tolist()
@@ -135,8 +159,10 @@ def _directions(y: np.ndarray, p: np.ndarray, lo: float, hi: float):
     return high_low, low_high
 
 
-def apply_mask(oof: pd.DataFrame, gold_acl: dict) -> None:
-    src = pd.read_csv(LABELS)
+def apply_mask(oof: pd.DataFrame, gold_acl: dict,
+               labels: Path = LABELS, mask_out: Path = MASK_OUT,
+               oof_out: Path = OOF_OUT) -> None:
+    src = pd.read_csv(labels)
     if src[TARGETS].isna().any().any():
         raise SystemExit("targets_v3b a des NaN inattendus")
     merged = src.merge(
@@ -196,11 +222,11 @@ def apply_mask(oof: pd.DataFrame, gold_acl: dict) -> None:
             "pct": pct,
         })
 
-    MASK_OUT.parent.mkdir(parents=True, exist_ok=True)
-    out.to_csv(MASK_OUT, index=False)
+    mask_out.parent.mkdir(parents=True, exist_ok=True)
+    out.to_csv(mask_out, index=False)
     n_cells = len(out) * len(TARGETS)
     n_nan = int(out[TARGETS].isna().sum().sum())
-    print(f"\n=== masque -> {MASK_OUT} ===", flush=True)
+    print(f"\n=== masque -> {mask_out} ===", flush=True)
     print(f"etudes {len(out)} | NaN {n_nan} / {n_cells} "
           f"({100.0 * n_nan / n_cells:.2f} %)", flush=True)
     print(f"{'cible':20s} {'lo':>5} {'hi':>5} {'haut->bas':>9} {'bas->haut':>9} "
@@ -212,8 +238,8 @@ def apply_mask(oof: pd.DataFrame, gold_acl: dict) -> None:
               flush=True)
 
     meta = {
-        "out_csv": str(MASK_OUT),
-        "oof_csv": str(OOF_OUT),
+        "out_csv": str(mask_out),
+        "oof_csv": str(oof_out),
         "n_studies": int(len(out)),
         "n_masked": n_mask_total,
         "n_cells": n_cells,
@@ -231,30 +257,57 @@ def apply_mask(oof: pd.DataFrame, gold_acl: dict) -> None:
             oof.groupby("fold")["epoch"].first().items()
         },
     }
-    meta_p = MASK_OUT.with_suffix(".oof_filter.json")
+    meta_p = mask_out.with_suffix(".oof_filter.json")
     meta_p.write_text(json.dumps(meta, indent=2), encoding="utf-8")
     print(f"meta -> {meta_p}", flush=True)
 
 
 def main() -> None:
-    cfg = load_config(CONFIG)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default=CONFIG)
+    parser.add_argument("--run", default=RUN)
+    parser.add_argument("--labels", default=str(LABELS))
+    parser.add_argument("--oof-out", default=str(OOF_OUT))
+    parser.add_argument("--mask-out", default=str(MASK_OUT))
+    parser.add_argument(
+        "--from-dumps", action="store_true",
+        help="lit checkpoints/<run>_fold{k}/oof_preds.csv au lieu de rejouer la val")
+    args = parser.parse_args()
+    labels = Path(args.labels)
+    oof_out = Path(args.oof_out)
+    mask_out = Path(args.mask_out)
+    cfg = load_config(args.config)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     parts = []
     gold_by_fold = []
-    for fold in range(3):
-        part, gold_map = _dump_fold(cfg, fold, device)
-        parts.append(part)
-        gold_by_fold.append(gold_map)
+    if args.from_dumps:
+        for fold in range(3):
+            p = Path("checkpoints") / f"{args.run}_fold{fold}" / "oof_preds.csv"
+            if not p.is_file():
+                raise SystemExit(f"manque {p}")
+            parts.append(pd.read_csv(p))
+            print(f"lu {p} ({len(parts[-1])} etudes)", flush=True)
+        for fold in range(3):
+            gold_by_fold.append(_gold_fold(cfg, args.run, fold, device))
+    else:
+        if args.run != RUN:
+            raise SystemExit("--run hors defaut exige --from-dumps "
+                             "(le dump val est cable sur le run v20h)")
+        for fold in range(3):
+            part, gold_map = _dump_fold(cfg, fold, device)
+            parts.append(part)
+            gold_by_fold.append(gold_map)
     oof = pd.concat(parts, ignore_index=True)
     if oof["StudyInstanceUID"].duplicated().any():
         raise SystemExit("UID dupliques dans l'OOF concatene")
-    OOF_OUT.parent.mkdir(parents=True, exist_ok=True)
-    oof.to_csv(OOF_OUT, index=False)
-    print(f"OOF concat {len(oof)} -> {OOF_OUT}", flush=True)
+    oof_out.parent.mkdir(parents=True, exist_ok=True)
+    oof.to_csv(oof_out, index=False)
+    print(f"OOF concat {len(oof)} -> {oof_out}", flush=True)
     vc = oof["fold"].value_counts().sort_index()
     print("par fold :", {int(k): int(v) for k, v in vc.items()}, flush=True)
-    gold_acl = _gold_acl(gold_by_fold)
-    apply_mask(oof, gold_acl)
+    gold_acl = _gold_acl(gold_by_fold, labels)
+    apply_mask(oof, gold_acl, labels, mask_out, oof_out)
     print("filtre termine.", flush=True)
 
 
