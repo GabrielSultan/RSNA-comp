@@ -1,0 +1,19 @@
+{
+  "crop_mm": 130.0,
+  "crop_rel": 0.7,
+  "band": [
+    0.2,
+    0.8
+  ],
+  "n_slices": 24,
+  "img_size": 320,
+  "planes": [
+    "Sagittal",
+    "Coronal",
+    "Axial"
+  ],
+  "shard_id": 0,
+  "n_shards": 2,
+  "n_jobs": 1988,
+  "note": "1 COR_T1 + 1 AX_T1, UID figes depuis crop130 224. Crop 130 mm (PixelSpacing) sinon centre 70 %. Bande profondeur 20-80 %, linspace 24, resize 320, uint8."
+}
