@@ -305,6 +305,11 @@ class StudyDataset(Dataset):
         if self.laterality_map and study_uid is not None:
             t = normalise_laterality(
                 t, plane, self.laterality_map.get(study_uid))
+        if t.shape[-2] != self.img_size or t.shape[-1] != self.img_size:
+            raise ValueError(
+                f"{sid}: volume {tuple(int(v) for v in t.shape[-2:])} != "
+                f"img_size {self.img_size} (zip_path={self.zip_path})"
+            )
         return t
 
     def _maybe_drop(self, rng: np.random.Generator) -> bool:
