@@ -1,0 +1,17 @@
+{
+  "id": "sultent/rsna-knee-convert-rgb-2-5d-320-part8",
+  "title": "RSNA Knee Convert RGB 2.5D 320 part8",
+  "code_file": "convert.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}
