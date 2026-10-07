@@ -36,6 +36,7 @@ def _md(
     run_name: str,
     dataset: str,
     tta: bool,
+    img_size: int = 224,
 ) -> str:
     head = (
         f"# RSNA Knee — ViT-k LLRD 0.8 (epoch {epoch}) — T4 — TTA x5"
@@ -50,7 +51,7 @@ def _md(
     return f"""{head}
 
 Notebook Kaggle **self-contained** (internet off, GPU **T4**) :
-- lecture DICOM test → volumes crop 130 mm + bande 20–80 % (24, 224, 224)
+- lecture DICOM test → volumes crop 130 mm + bande 20–80 % (24, {img_size}, {img_size})
 - protocole 6 slots (FS/T1, identique v20b). Pas de flip latéralité (train k sans canon L)
 - KneeNet **ViT-k** : graphe ViT-e (DINOv3 ViT-B/16, CAM+BiLSTM, stem RGB),
   train `{run_name}` **epoch {epoch}**
@@ -154,6 +155,8 @@ def build(
     out_dir: Path | None = None,
     kernel_id: str | None = None,
     title: str | None = None,
+    img_size: int = 224,
+    encode_chunk_cap: int = 4,
 ) -> Path:
     out_push = out_dir or (KERNEL_DIR / f"_push_ep{epoch}")
     nb_path = out_push / "submit.ipynb"
@@ -261,7 +264,7 @@ def load_model(weights_path: str | Path) -> tuple[torch.nn.Module, dict]:
     n_series = int(cfg.get("n_series", 6))
     encode_chunk_cfg = int(cfg.get("encode_chunk", 4))
     # T4 16 Go : le full train 96 Go peut avoir encode_chunk 288.
-    encode_chunk = 4 if encode_chunk_cfg > 16 else encode_chunk_cfg
+    encode_chunk = __CHUNK_CAP__ if encode_chunk_cfg > 16 else encode_chunk_cfg
     if encode_chunk != encode_chunk_cfg:
         print(f"encode_chunk {encode_chunk_cfg} -> {encode_chunk} (T4)")
     head_dim = int(cfg.get("head_dim", 512))
@@ -340,7 +343,7 @@ for i, uid in enumerate(test.StudyInstanceUID):
         srows,
         n_series=n_series,
         rgb_neighbors=False,
-        img_size=224,
+        img_size=__IMG_SIZE__,
     )
     x0 = torch.from_numpy(vol).unsqueeze(0).to(device=DEVICE, dtype=torch.float32)
 
@@ -366,7 +369,7 @@ for i, uid in enumerate(test.StudyInstanceUID):
         srows,
         n_series=n_series,
         rgb_neighbors=False,
-        img_size=224,
+        img_size=__IMG_SIZE__,
     )
     x0 = torch.from_numpy(vol).unsqueeze(0).to(device=DEVICE, dtype=torch.float32)
     logits = _predict_logits(model, x0)
@@ -375,7 +378,28 @@ for i, uid in enumerate(test.StudyInstanceUID):
     if (i + 1) % 25 == 0:
         print(f"{i+1}/{len(test)} ok", flush=True)
 """
-    infer_body = INFER_CODE.replace("__RUN__", run_name).replace("__EPOCH__", str(epoch))
+    infer_body = (
+        INFER_CODE.replace("__RUN__", run_name)
+        .replace("__EPOCH__", str(epoch))
+        .replace("__CHUNK_CAP__", str(int(encode_chunk_cap)))
+    )
+    if int(img_size) == 320:
+        infer_body = infer_body.replace(
+            '    if str(cfg.get("run_name")) != "__RUN__":\n'.replace("__RUN__", run_name),
+            '    if str(cfg.get("model")) != "kneenet_vit_k320":\n'
+            '        raise RuntimeError(f"model inattendu {cfg.get(\'model\')}")\n'
+            '    if int(cfg.get("img_size", 0)) != 320:\n'
+            '        raise RuntimeError(f"img_size inattendu {cfg.get(\'img_size\')}")\n'
+            '    if str(cfg.get("run_name")) != "__RUN__":\n'.replace("__RUN__", run_name),
+        )
+        infer_body = infer_body.replace(
+            "print('load_state_dict missing :', len(missing), '| unexpected :', len(unexpected))\n",
+            "print('load_state_dict missing :', len(missing), '| unexpected :', len(unexpected))\n"
+            "    if missing or unexpected:\n"
+            "        raise RuntimeError('state dict incompatible')\n",
+        )
+        if "kneenet_vit_k320" not in infer_body or "state dict incompatible" not in infer_body:
+            raise RuntimeError("patch 320 incomplet")
     if not tta:
         start = infer_body.find("# TTA affine")
         end = infer_body.find("@torch.no_grad()")
@@ -383,9 +407,8 @@ for i, uid in enumerate(test.StudyInstanceUID):
             raise RuntimeError("bloc TTA introuvable")
         infer_body = infer_body[:start] + infer_body[end:]
         infer_body = infer_body.replace("import torch.nn.functional as F\n\n", "")
-    infer_src = infer_body + "\n" + infer_code_rest.replace(
-        "__LOOP__", tta_loop if tta else plain_loop
-    )
+    loop = (tta_loop if tta else plain_loop).replace("__IMG_SIZE__", str(int(img_size)))
+    infer_src = infer_body + "\n" + infer_code_rest.replace("__LOOP__", loop)
 
     notebook = {
         "nbformat": 4,
@@ -399,7 +422,7 @@ for i, uid in enumerate(test.StudyInstanceUID):
             "language_info": {"name": "python", "version": "3.12"},
         },
         "cells": [
-            cell_md(_md(epoch, gold, weight, run_name, dataset, tta)),
+            cell_md(_md(epoch, gold, weight, run_name, dataset, tta, img_size)),
             cell_code(
                 CONFIG_CODE.replace("__WEIGHT__", weight).replace("__LOCAL__", local_dir)
             ),
@@ -459,6 +482,10 @@ def main() -> None:
     p.add_argument("--local-dir", default="../kaggle_dataset_vit_e_dino_last/_upload")
     p.add_argument("--no-tta", action="store_true")
     p.add_argument("--out-dir", default="")
+    p.add_argument("--img-size", type=int, default=224)
+    p.add_argument("--encode-chunk-cap", type=int, default=4)
+    p.add_argument("--kernel-id", default="")
+    p.add_argument("--title", default="")
     args = p.parse_args()
     build(
         args.epoch,
@@ -469,6 +496,10 @@ def main() -> None:
         local_dir=args.local_dir,
         tta=not args.no_tta,
         out_dir=Path(args.out_dir) if args.out_dir else None,
+        kernel_id=args.kernel_id or None,
+        title=args.title or None,
+        img_size=args.img_size,
+        encode_chunk_cap=args.encode_chunk_cap,
     )
 
 
