@@ -12,9 +12,10 @@ KEY = os.path.expanduser(r"~/.ssh/id_ed25519_runpod")
 def main() -> None:
     remote = open(sys.argv[1], encoding="utf-8").read().replace("\r", "").strip()
     cmd = [
-        "ssh", "-p", "15596", "-i", KEY,
+        "ssh", "-p", "11242", "-i", KEY,
         "-o", "ConnectTimeout=20",
-        "root@103.196.86.127",
+        "-o", "StrictHostKeyChecking=accept-new",
+        "root@157.254.50.91",
         remote,
     ]
     proc = subprocess.run(cmd, text=True, timeout=90)

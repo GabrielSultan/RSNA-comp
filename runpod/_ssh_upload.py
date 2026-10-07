@@ -7,8 +7,8 @@ import subprocess
 import sys
 import time
 
-HOST = "root@103.196.86.127"
-PORT = "15596"
+HOST = "root@157.254.50.91"
+PORT = "11242"
 KEY = os.path.expanduser(r"~/.ssh/id_ed25519_runpod")
 
 
@@ -17,6 +17,7 @@ def upload(local: str, remote: str) -> None:
     cmd = [
         "ssh", "-p", PORT, "-i", KEY,
         "-o", "ConnectTimeout=20",
+        "-o", "StrictHostKeyChecking=accept-new",
         "-o", "ServerAliveInterval=15",
         HOST, f"cat > {remote}",
     ]
