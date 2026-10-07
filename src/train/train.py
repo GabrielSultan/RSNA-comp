@@ -631,6 +631,7 @@ def main() -> None:
 
     rewarm_frac = float(cfg.get("unfreeze_rewarm_frac", 0.25) or 0.25)
     rewarm_steps = int(rewarm_frac * opt_steps_per_epoch)
+    log_every = int(cfg.get("log_every", 0) or 0)
 
     for epoch in range(start_epoch, epochs):
         if encoder_frozen and epoch >= freeze_epochs:
@@ -687,6 +688,9 @@ def main() -> None:
             (loss / win_n).backward()
 
             running += loss.item()
+            if log_every and (micro_i + 1) % log_every == 0:
+                print(f"  step {micro_i + 1}/{n_micro} | "
+                      f"{time.time() - t0:.0f}s", flush=True)
             if kd is not None:
                 running_kd += float(kd.detach())
             nb += 1
