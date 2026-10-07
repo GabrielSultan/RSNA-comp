@@ -1,0 +1,28 @@
+{
+  "id": "sultent/rsna-knee-vit-k-v3b-resume-ep9",
+  "title": "RSNA Knee ViT-k v3b resume ep9",
+  "code_file": "train.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": ["gpu"],
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [
+    "sultent/rsna-knee-vitk-v3b-resume-code",
+    "sultent/rsna-knee-vit-k-v3b-ep9-resume",
+    "sultent/rsna-knee-kaggle-api"
+  ],
+  "kernel_sources": [
+    "sultent/rsna-knee-convert-rgb-2-5d-proto-part0",
+    "sultent/rsna-knee-convert-rgb-2-5d-proto-part1",
+    "sultent/rsna-knee-convert-rgb-2-5d-proto-part2",
+    "sultent/rsna-knee-convert-rgb-2-5d-proto-part3",
+    "sultent/rsna-knee-convert-rgb-2-5d-proto-part4",
+    "sultent/rsna-knee-convert-rgb-2-5d-proto-part5"
+  ],
+  "competition_sources": [],
+  "category_ids": []
+}
