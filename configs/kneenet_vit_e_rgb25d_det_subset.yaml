@@ -1,0 +1,50 @@
+# ViT-e_d det, subset 224. Recette e, pas la recette k.
+# Levier = voisins DICOM vrais (crop130_rgb25d, stem_mix init G).
+# Pas de LLRD, pas de rgb_as_gray, pas de v3b, pas de 320.
+#
+# Labels et split = subset_vit_k_llrd08_det_frac025 :
+#   labels_llm_gpt56sol.csv, train_frac 0.25, train_frac_seed 42.
+# Le seed 42 fige le RNG (train.py deterministe depuis le 14 sept).
+# Ne pas ecraser subset_vit_e_rgb25d_frac025 (e_d non-det, 10 sept).
+#
+# Parent du levier : subset_vit_dinov3_e_det_frac025
+#   (meme lr 3e-5, meme freeze, linspace crop130).
+# Pas subset_vit_k_llrd08_det_frac025 : il a LLRD 0.8 et lr pic 1e-4.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_vit_e_rgb25d_det_subset.yaml
+
+run_name: subset_vit_e_rgb25d_det_frac025
+model: kneenet_vit_e_d
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 224
+rgb_neighbors: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 10
+early_stop_patience: 3
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.00003
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

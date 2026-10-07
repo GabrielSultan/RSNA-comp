@@ -1,0 +1,60 @@
+# Full train ViT-k LLRD 0.8 a 320, labels targets_v3b masques par l'OOF v20h.
+# Meme squelette que kneenet_vit_k_llrd08_v3b_oofmask_full.yaml
+# (DINOv3 brut, llrd 0.8, no_decay, freeze 1, re-warmup 1, batch 2,
+# gold x4, pas de val, cosine 20 / stop 15, snapshots 5-15, pas de laterality).
+# Seule la resolution change : kneenet_vit_k320, crop130_320, encode_chunk 1.
+#
+# Labels : data/labels/coolin/targets_v3b_oofmask.csv
+#   OOF v20h DINO ep11 (oof_preds_v20h_dino_ep11_v3b.csv).
+#   31 cellules masquees / 52176. Gold ACL recall 0.92, pas d'under-call.
+#   Les 58 gold ne sont pas dans le CSV ; include_gold les ajoute au train.
+# Ne pas utiliser targets_v3b_oofmask_vitk.csv : les folds ViT-k ont ete
+# stoppes a 3 epochs (194 cellules masquees, gold ACL recall 0.42).
+#
+# Donnees : crop130_320 grayscale (D, H, W). Pas de rgb_neighbors.
+# Le stem k-1/k/k+1 est le meme que le det 224 (canal G de crop130_rgb25d).
+# encode_chunk 1 : 20x20 tokens, un chunk de 1 a 320 tient la place d'un
+# chunk de 4 a 224 sur la 8 Go. Le gradient ne change pas.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_vit_k_llrd08_320_v3b_oofmask_v20h_full.yaml
+
+run_name: vit_k_llrd08_320_v3b_oofmask_v20h_full
+model: kneenet_vit_k320
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 320
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/coolin/targets_v3b_oofmask.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_320
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 2
+encode_chunk: 1
+num_workers: 2
+epochs: 15
+cosine_epochs: 20
+save_epochs: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
