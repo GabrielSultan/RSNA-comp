@@ -19,7 +19,15 @@ from __future__ import annotations
 
 import torch
 
-from src.models.kneenet_vit_e import PATCH_SIZE, KneeNet as KneeNetE
+from src.models.kneenet_vit_e import (
+    DEFAULT_WEIGHTS,
+    LSTM_HIDDEN,
+    N_PROTOCOL_SLOTS,
+    N_TARGETS,
+    PATCH_SIZE,
+    TIMM_NAME,
+    KneeNet as KneeNetE,
+)
 
 IMG_SIZE = 320
 
@@ -27,8 +35,25 @@ IMG_SIZE = 320
 class KneeNet(KneeNetE):
     arch_id = "kneenet_vit_k320"
 
-    def __init__(self, img_size: int = IMG_SIZE, **kwargs) -> None:
-        super().__init__(**kwargs)
+    # Signature explicite : build_model ne transmet que les cles YAML
+    # nommees ici. Avec **kwargs, encode_chunk / dropout du YAML etaient
+    # ignores (defauts 4 / 0.2).
+    def __init__(self, img_size: int = IMG_SIZE, backbone: str = TIMM_NAME,
+                 n_series: int = N_PROTOCOL_SLOTS,
+                 n_targets: int = N_TARGETS, head_dim: int = 512,
+                 dropout: float = 0.2, pretrained: bool = True,
+                 encode_chunk: int = 4, max_depth: int = 64,
+                 backbone_weights: str = DEFAULT_WEIGHTS,
+                 lstm_hidden: int = LSTM_HIDDEN,
+                 drop_path_rate: float = 0.0,
+                 grad_checkpoint: bool = True) -> None:
+        super().__init__(
+            backbone=backbone, n_series=n_series, n_targets=n_targets,
+            head_dim=head_dim, dropout=dropout, pretrained=pretrained,
+            encode_chunk=encode_chunk, max_depth=max_depth,
+            backbone_weights=backbone_weights, lstm_hidden=lstm_hidden,
+            drop_path_rate=drop_path_rate, grad_checkpoint=grad_checkpoint,
+        )
         self.img_size = int(img_size)
         if self.img_size % PATCH_SIZE:
             raise ValueError(
@@ -37,7 +62,9 @@ class KneeNet(KneeNetE):
         grid = self.img_size // PATCH_SIZE
         print(
             f"KneeNet-ViT-k320 | entree {self.img_size} | "
-            f"CAM {grid}x{grid} (RoPE DINOv3 renormalise, pas de pos embed)",
+            f"CAM {grid}x{grid} (RoPE DINOv3 renormalise, pas de pos embed) | "
+            f"encode_chunk {self.encode_chunk} | dropout {dropout:g} | "
+            f"grad_checkpoint {int(self.grad_checkpoint)}",
             flush=True,
         )
 

@@ -57,7 +57,8 @@ class _Dinov3VitEncoder(nn.Module):
 
     def __init__(self, weights_path: str = DEFAULT_WEIGHTS,
                  pretrained: bool = True,
-                 drop_path_rate: float = 0.0) -> None:
+                 drop_path_rate: float = 0.0,
+                 grad_checkpoint: bool = True) -> None:
         super().__init__()
         kwargs = dict(
             num_classes=0,
@@ -91,7 +92,7 @@ class _Dinov3VitEncoder(nn.Module):
             self.backbone = timm.create_model(
                 TIMM_NAME, pretrained=False, **kwargs,
             )
-        self.backbone.set_grad_checkpointing(True)
+        self.backbone.set_grad_checkpointing(bool(grad_checkpoint))
         self.num_features = int(self.backbone.num_features)
         self.patch_size = PATCH_SIZE
         self.n_prefix = int(getattr(
@@ -132,11 +133,15 @@ class KneeNet(nn.Module):
                  encode_chunk: int = 4, max_depth: int = 64,
                  backbone_weights: str = DEFAULT_WEIGHTS,
                  lstm_hidden: int = LSTM_HIDDEN,
-                 drop_path_rate: float = 0.0) -> None:
+                 drop_path_rate: float = 0.0,
+                 grad_checkpoint: bool = True) -> None:
         super().__init__()
         self.n_series = n_series
         self.n_targets = n_targets
         self.encode_chunk = int(encode_chunk)
+        # False sur grosse carte : sinon le ViT est decoupe en petits
+        # lancements et le GPU attend Python entre deux blocs.
+        self.grad_checkpoint = bool(grad_checkpoint)
         self.backbone_name = str(backbone)
         self.patch_size = PATCH_SIZE
         self.lstm_hidden = int(lstm_hidden)
@@ -145,6 +150,7 @@ class KneeNet(nn.Module):
         self.encoder = _Dinov3VitEncoder(
             weights_path=backbone_weights, pretrained=pretrained,
             drop_path_rate=self.drop_path_rate,
+            grad_checkpoint=self.grad_checkpoint,
         )
         self._freeze_layer_scale()
         feat_dim = self.encoder.num_features
@@ -246,7 +252,7 @@ class KneeNet(nn.Module):
         chunk = max(1, self.encode_chunk)
         for i in range(0, n, chunk):
             part = rgb[i:i + chunk]
-            if self.training:
+            if self.training and self.grad_checkpoint:
                 feats = checkpoint(self.encoder, part, use_reentrant=False)
             else:
                 feats = self.encoder(part)
