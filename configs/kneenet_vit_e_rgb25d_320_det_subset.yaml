@@ -1,0 +1,51 @@
+# ViT-e_d det, subset, 320. Meme recette que kneenet_vit_e_rgb25d_det_subset.yaml.
+# Seule la resolution change : img_size 320, zip crop130_rgb25d_320.
+#
+# Pas de LLRD, pas de rgb_as_gray, pas de v3b.
+# Labels et split = vit_k_llrd08_det : gpt56sol, frac 0.25, seed 42.
+# Le zip doit contenir les 21332 series proto (pas seulement les 924) :
+# le subset est tire au lancement depuis l'index complet.
+#
+# encode_chunk 1 : tient sur 8 Go (comme ViT-k 320). Sur une PRO 6000, 4.
+# Parent du levier : subset_vit_e_rgb25d_det_frac025 (meme recette, 224).
+#
+# Donnees : lancer d'abord les kernels convert_rgb25d_320_part*,
+# puis python -X utf8 kaggle_DICOM_exctract/download_rgb25d_320.py
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_vit_e_rgb25d_320_det_subset.yaml
+
+run_name: subset_vit_e_rgb25d_320_det_frac025
+model: kneenet_vit_e_d
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 320
+rgb_neighbors: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d_320
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 1
+num_workers: 2
+epochs: 10
+early_stop_patience: 3
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.00003
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
