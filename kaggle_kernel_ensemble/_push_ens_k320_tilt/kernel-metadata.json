@@ -1,0 +1,24 @@
+{
+  "id": "sultent/rsna-knee-ens-k320e9-hdino6-bdino8-tilt",
+  "title": "rsna-knee-ens-k320e9-hdino6-bdino8-tilt",
+  "code_file": "submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "machine_shape": "NvidiaTeslaT4",
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "sultent/rsna-knee-vit-k320-v3b-ep9",
+    "sultent/rsna-knee-v20h-dino-full-ep6",
+    "sultent/rsna-knee-v20b-dino-full-ep8"
+  ],
+  "category_ids": []
+}
