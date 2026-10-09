@@ -16,6 +16,7 @@ import re
 import shutil
 import subprocess
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -32,6 +33,7 @@ RUNS = [
 EPOCHS = 3
 N_BATCHES = 12
 FREE_MARGIN = 3_000_000_000
+STALL_S = 90
 LOCK = ROOT / "data" / "oai" / "_pull.lock"
 HIST_SEEN: dict[str, tuple[int, float]] = {}
 LISTING = (
@@ -60,14 +62,21 @@ def remote_listing() -> tuple[float, dict[str, tuple[int, float]]]:
     return float(lines[0]), files
 
 
-def plan(now: float, files: dict[str, tuple[int, float]], shards: str) -> list[tuple[str, int]]:
-    """Fichiers a tirer, par priorite ; history.json seulement s'il a change."""
+def plan(now: float, files: dict[str, tuple[int, float]], shards: str,
+         full: bool = False) -> list[tuple[str, int]]:
+    """Fichiers a tirer, par priorite ; history.json seulement s'il a change.
+    Par defaut les copies allegees epochN_w.pt (slim.py), pas les epochN.pt."""
     snaps, hist, sh224, sh320 = [], [], [], []
     for p, (size, mtime) in files.items():
         local = ROOT / p
         if local.is_file() and local.stat().st_size == size and not p.endswith("history.json"):
             continue
         if p.endswith(".pt"):
+            slim = p.endswith("_w.pt")
+            if slim and (ROOT / p.replace("_w.pt", ".pt")).is_file():
+                continue
+            if slim != (not full):
+                continue
             snaps.append((p, size))
         elif p.endswith("history.json"):
             if now - mtime > 10 and HIST_SEEN.get(p) != (size, mtime):
@@ -85,6 +94,19 @@ def plan(now: float, files: dict[str, tuple[int, float]], shards: str) -> list[t
     return sorted(snaps, key=key) + hist + sorted(sh224, key=key) + sorted(sh320, key=key)
 
 
+def _watchdog(proc: subprocess.Popen, got: list[int], rel: str) -> None:
+    """Un ssh cat peut rester ouvert sans rien transmettre : on le tue."""
+    seen, since = -1, time.time()
+    while proc.poll() is None:
+        time.sleep(10)
+        if got[0] != seen:
+            seen, since = got[0], time.time()
+        elif time.time() - since > STALL_S:
+            log(f"{rel} : rien recu depuis {STALL_S} s, ssh tue")
+            proc.kill()
+            return
+
+
 def pull(rel: str, size: int) -> bool:
     dest = ROOT / rel
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -97,21 +119,22 @@ def pull(rel: str, size: int) -> bool:
     t0 = time.time()
     proc = subprocess.Popen(ssh_cmd(f"cat /workspace/{rel}"), stdout=subprocess.PIPE)
     assert proc.stdout is not None
-    got = 0
+    got = [0]
+    threading.Thread(target=_watchdog, args=(proc, got, rel), daemon=True).start()
     try:
         with open(tmp, "wb") as handle:
             while buf := proc.stdout.read(1024 * 1024):
                 handle.write(buf)
-                got += len(buf)
+                got[0] += len(buf)
     except OSError:
         proc.kill()
         proc.wait()
         tmp.unlink(missing_ok=True)
         raise
     rc = proc.wait()
-    if rc != 0 or got != size:
+    if rc != 0 or got[0] != size:
         tmp.unlink(missing_ok=True)
-        raise RuntimeError(f"{rel} incomplet {got}/{size} rc={rc}")
+        raise RuntimeError(f"{rel} incomplet {got[0]}/{size} rc={rc}")
     for _ in range(30):
         try:
             os.replace(tmp, dest)
@@ -129,6 +152,7 @@ def pull(rel: str, size: int) -> bool:
 
 def complete(shards: str) -> bool:
     snaps = all((ROOT / "checkpoints" / r / f"epoch{e}.pt").is_file()
+                or (ROOT / "checkpoints" / r / f"epoch{e}_w.pt").is_file()
                 for r in RUNS for e in range(1, EPOCHS + 1))
     n224 = len(list((ROOT / "data/crop130").glob("oai_crop130_b*.zip")))
     n320 = len(list((ROOT / "data/crop130_320").glob("oai_crop130_320_b*.zip")))
@@ -142,6 +166,8 @@ def main() -> None:
     ap.add_argument("--shards", choices=["224", "all", "none"], default="224",
                     help="shards OAI a rapatrier (defaut : 224 seulement, place sur C:)")
     ap.add_argument("--every", type=int, default=60)
+    ap.add_argument("--full", action="store_true",
+                    help="epochN.pt complets (avec AdamW) au lieu des copies epochN_w.pt")
     args = ap.parse_args()
     shards = args.shards
 
@@ -156,7 +182,7 @@ def main() -> None:
     while True:
         try:
             now, files = remote_listing()
-            todo = plan(now, files, shards)
+            todo = plan(now, files, shards, args.full)
             for rel, size in todo:
                 if pull(rel, size):
                     if rel.endswith("history.json"):
