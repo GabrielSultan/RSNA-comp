@@ -23,6 +23,7 @@ import time
 import traceback
 import zipfile
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from multiprocessing import get_context
 from pathlib import Path
 from queue import Queue
 
@@ -214,7 +215,10 @@ def main() -> None:
     th.start()
     summary, t_all = [], time.time()
     try:
-        with ProcessPoolExecutor(max_workers=args.workers, initializer=_worker_init) as pool:
+        # spawn : un worker cree par fork() pendant un Popen du thread de
+        # telechargement herite du pipe d'erreur d'exec, et Popen bloque.
+        with ProcessPoolExecutor(max_workers=args.workers, initializer=_worker_init,
+                                 mp_context=get_context("spawn")) as pool:
             while (item := ready.get()) is not None:
                 b, n_miss = item
                 n_rows = int((series.batch == b).sum())

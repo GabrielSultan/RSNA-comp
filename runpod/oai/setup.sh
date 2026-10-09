@@ -7,7 +7,7 @@ set -euo pipefail
 cd /workspace
 mkdir -p logs data/crop130 data/crop130_320
 
-python -m pip install -q --root-user-action=ignore \
+python -m pip install -q --root-user-action=ignore --break-system-packages \
   "timm==1.0.28" "pydicom==3.0.2" "opencv-python-headless==5.0.0.93" \
   "scikit-learn==1.6.1" "pandas==2.2.3" pyyaml safetensors requests \
   "nda-tools==0.7.0" keyrings.alt
