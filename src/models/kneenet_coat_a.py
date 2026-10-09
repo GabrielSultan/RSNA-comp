@@ -53,16 +53,19 @@ class _CoatEncoder(nn.Module):
 
     def __init__(self, name: str = TIMM_NAME,
                  weights_path: str = DEFAULT_WEIGHTS,
-                 pretrained: bool = True) -> None:
+                 pretrained: bool = True,
+                 img_size: int = 224) -> None:
         super().__init__()
-        kwargs = dict(num_classes=0, global_pool="")
+        self.img_size = int(img_size)
+        kwargs = dict(num_classes=0, global_pool="", img_size=self.img_size)
         if pretrained:
             ckpt = _weights_file(weights_path)
             self.backbone = timm.create_model(
                 name, pretrained=True,
                 pretrained_cfg_overlay={"file": str(ckpt)}, **kwargs,
             )
-            print(f"CoAtNet charge : {name} | {ckpt}", flush=True)
+            print(f"CoAtNet charge : {name} | {ckpt} | entree {self.img_size}",
+                  flush=True)
         else:
             self.backbone = timm.create_model(name, pretrained=False, **kwargs)
         self.num_features = int(self.backbone.num_features)
@@ -83,17 +86,19 @@ class KneeNet(nn.Module):
                  dropout: float = 0.2, pretrained: bool = True,
                  encode_chunk: int = 8, max_depth: int = 64,
                  backbone_weights: str = DEFAULT_WEIGHTS,
-                 lstm_hidden: int = LSTM_HIDDEN) -> None:
+                 lstm_hidden: int = LSTM_HIDDEN,
+                 img_size: int = 224) -> None:
         super().__init__()
         self.n_series = n_series
         self.n_targets = n_targets
         self.encode_chunk = int(encode_chunk)
         self.backbone_name = str(backbone)
         self.lstm_hidden = int(lstm_hidden)
+        self.img_size = int(img_size)
 
         self.encoder = _CoatEncoder(
             name=self.backbone_name, weights_path=backbone_weights,
-            pretrained=pretrained,
+            pretrained=pretrained, img_size=self.img_size,
         )
         feat_dim = self.encoder.num_features
 

@@ -68,6 +68,7 @@ MODELS: dict[str, str] = {
     "kneenet_vit_j": "src.models.kneenet_vit_j",
     "kneenet_vit_k320": "src.models.kneenet_vit_k320",
     "kneenet_coat_a": "src.models.kneenet_coat_a",
+    "kneenet_coat_a320": "src.models.kneenet_coat_a320",
     "kneenet_coat_d": "src.models.kneenet_coat_d",
 }
 
