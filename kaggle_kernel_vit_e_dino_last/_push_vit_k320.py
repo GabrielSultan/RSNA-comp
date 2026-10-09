@@ -30,6 +30,7 @@ IMG_SIZE = 320
 CHUNK_CAP = 2
 EPOCHS = (10, 9, 8, 7)
 KEEP = ("model", "config", "epoch", "gold_macro_auc")
+USE_TTA = True
 
 
 def kaggle(*args: str) -> str:
@@ -54,7 +55,8 @@ def dataset_id(epoch: int) -> str:
 
 
 def kernel_id(epoch: int) -> str:
-    return f"sultent/rsna-knee-vit-k320-v3b-ep{epoch}-tta-x5"
+    tag = "tta-x5" if USE_TTA else "sans-tta"
+    return f"sultent/rsna-knee-vit-k320-v3b-ep{epoch}-{tag}"
 
 
 def upload_dir(epoch: int) -> Path:
@@ -62,11 +64,13 @@ def upload_dir(epoch: int) -> Path:
 
 
 def push_dir(epoch: int) -> Path:
-    return KERNEL_DIR / f"_push_k320_ep{epoch}"
+    tag = "" if USE_TTA else "_sans_tta"
+    return KERNEL_DIR / f"_push_k320_ep{epoch}{tag}"
 
 
 def out_dir(epoch: int) -> Path:
-    return KERNEL_DIR / f"_out_k320_ep{epoch}"
+    tag = "" if USE_TTA else "_sans_tta"
+    return KERNEL_DIR / f"_out_k320_ep{epoch}{tag}"
 
 
 def weight_name(epoch: int) -> str:
@@ -128,7 +132,11 @@ def strip_epoch(epoch: int) -> float:
 
 def write_notebook(epoch: int, gold: float) -> None:
     local = str(upload_dir(epoch).relative_to(ROOT)).replace("\\", "/")
-    subprocess.check_call([
+    title = (
+        f"RSNA Knee ViT-k320 v3b ep{epoch} TTA x5"
+        if USE_TTA else f"RSNA Knee ViT-k320 v3b ep{epoch} sans TTA"
+    )
+    cmd = [
         sys.executable, "-X", "utf8", str(MAKE),
         "--epoch", str(epoch),
         "--gold", f"{gold:.6f}",
@@ -140,13 +148,20 @@ def write_notebook(epoch: int, gold: float) -> None:
         "--img-size", str(IMG_SIZE),
         "--encode-chunk-cap", str(CHUNK_CAP),
         "--kernel-id", kernel_id(epoch),
-        "--title", f"RSNA Knee ViT-k320 v3b ep{epoch} TTA x5",
-    ])
+        "--title", title,
+    ]
+    if not USE_TTA:
+        cmd.append("--no-tta")
+    subprocess.check_call(cmd)
     nb = (push_dir(epoch) / "submit.ipynb").read_text(encoding="utf-8")
-    if "img_size=320" not in nb or "TTA_VARIANTS" not in nb:
+    if "img_size=320" not in nb:
         raise SystemExit(f"notebook ep{epoch} incomplet")
     if "img_size=224" in nb:
         raise SystemExit(f"notebook ep{epoch} encore en 224")
+    if USE_TTA and "TTA_VARIANTS" not in nb:
+        raise SystemExit(f"TTA absent ep{epoch}")
+    if not USE_TTA and ("sans TTA" not in nb or "TTA_VARIANTS" in nb):
+        raise SystemExit(f"notebook ep{epoch} a encore le TTA")
 
 
 def _status_dataset(epoch: int) -> str:
@@ -254,11 +269,12 @@ def wait_kernel(epoch: int) -> None:
         time.sleep(POLL_S)
 
 
-def submit(epoch: int, version: str) -> None:
+def collect(epoch: int, version: str, *, submit_comp: bool) -> None:
     gold = gold_of(epoch)
+    tag = "TTA x5" if USE_TTA else "sans TTA"
     msg = (
         f"ViT-k320 LLRD 0.8 v3b oofmask v20h full epoch {epoch} "
-        f"(gold in-sample {gold:.3f}, pas de flip, TTA x5, T4)"
+        f"(gold in-sample {gold:.3f}, pas de flip, {tag}, T4)"
     )
     dest = out_dir(epoch)
     dest.mkdir(parents=True, exist_ok=True)
@@ -270,10 +286,16 @@ def submit(epoch: int, version: str) -> None:
     if log is None:
         raise SystemExit(f"log absent: {dest}")
     text = log.read_text(encoding="utf-8", errors="replace")
-    if "TTA x5" not in text or "kneenet_vit_k320" not in text:
+    if "kneenet_vit_k320" not in text or "lignes 3" not in text:
         raise SystemExit(f"log ep{epoch} inattendu")
-    if "lignes 3" not in text:
-        raise SystemExit(f"submission ep{epoch} pas 3 lignes")
+    if USE_TTA and "TTA x5" not in text:
+        raise SystemExit(f"log ep{epoch} sans TTA")
+    if not USE_TTA and ("sans TTA" not in text or "TTA x5" in text):
+        raise SystemExit(f"log ep{epoch} a encore le TTA")
+    if not submit_comp:
+        print("KERNEL_PRET", kernel_id(epoch), "version", version, "|", msg, flush=True)
+        print("pas de soumission competition", flush=True)
+        return
     print(kaggle(
         "competitions", "submit", COMPETITION,
         "-k", kernel_id(epoch), "-v", version,
@@ -283,19 +305,28 @@ def submit(epoch: int, version: str) -> None:
 
 
 def main() -> None:
+    global USE_TTA
     p = argparse.ArgumentParser()
     p.add_argument("--epoch", type=int, nargs="*", default=list(EPOCHS))
     p.add_argument("--skip-make", action="store_true")
+    p.add_argument("--no-tta", action="store_true")
+    p.add_argument("--no-submit", action="store_true")
     args = p.parse_args()
+    USE_TTA = not args.no_tta
     if not args.skip_make:
         for epoch in args.epoch:
-            gold = strip_epoch(epoch)
+            pt = upload_dir(epoch) / weight_name(epoch)
+            if pt.is_file() and pt.stat().st_size > 50_000_000:
+                print("poids deja strippes", pt.name, pt.stat().st_size, flush=True)
+                gold = gold_of(epoch)
+            else:
+                gold = strip_epoch(epoch)
             write_notebook(epoch, gold)
     for epoch in args.epoch:
         ensure_dataset(epoch)
         version = push_kernel(epoch)
         wait_kernel(epoch)
-        submit(epoch, version)
+        collect(epoch, version, submit_comp=not args.no_submit)
         print("DONE", epoch, version, flush=True)
 
 
