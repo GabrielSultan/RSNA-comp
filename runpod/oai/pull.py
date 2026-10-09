@@ -115,26 +115,28 @@ def pull(rel: str, size: int) -> bool:
         log(f"attente disque : {rel} ({size / 1e9:.2f} Go, {free / 1e9:.1f} Go libres)")
         return False
     tmp = dest.with_name(dest.name + ".partial")
-    tmp.unlink(missing_ok=True)
+    have = tmp.stat().st_size if tmp.is_file() else 0
+    if have and (have > size or size < 10_000_000):
+        tmp.unlink()
+        have = 0
     t0 = time.time()
-    proc = subprocess.Popen(ssh_cmd(f"cat /workspace/{rel}"), stdout=subprocess.PIPE)
+    remote = f"cat /workspace/{rel}" if have == 0 else f"tail -c +{have + 1} /workspace/{rel}"
+    proc = subprocess.Popen(ssh_cmd(remote), stdout=subprocess.PIPE)
     assert proc.stdout is not None
-    got = [0]
+    got = [have]
     threading.Thread(target=_watchdog, args=(proc, got, rel), daemon=True).start()
     try:
-        with open(tmp, "wb") as handle:
-            while buf := proc.stdout.read(1024 * 1024):
+        with open(tmp, "ab") as handle:
+            while buf := proc.stdout.read1(1024 * 1024):
                 handle.write(buf)
                 got[0] += len(buf)
     except OSError:
         proc.kill()
         proc.wait()
-        tmp.unlink(missing_ok=True)
         raise
     rc = proc.wait()
-    if rc != 0 or got[0] != size:
-        tmp.unlink(missing_ok=True)
-        raise RuntimeError(f"{rel} incomplet {got[0]}/{size} rc={rc}")
+    if got[0] != size:
+        raise RuntimeError(f"{rel} incomplet {got[0]}/{size} rc={rc} (reprise au prochain essai)")
     for _ in range(30):
         try:
             os.replace(tmp, dest)
@@ -146,7 +148,8 @@ def pull(rel: str, size: int) -> bool:
         raise RuntimeError(f"rename {rel}")
     dt = max(time.time() - t0, 1e-3)
     if size > 10_000_000:
-        log(f"OK {rel} ({size / 1e9:.2f} Go, {size / dt / 1e6:.0f} Mo/s)")
+        log(f"OK {rel} ({size / 1e9:.2f} Go, {(size - have) / dt / 1e6:.2f} Mo/s"
+            + (f", repris a {have / 1e6:.0f} Mo)" if have else ")"))
     return True
 
 
