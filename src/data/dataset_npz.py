@@ -52,7 +52,9 @@ def _dataloader_worker_init(worker_id: int) -> None:
     s = torch.initial_seed() % (2**32)
     np.random.seed(s)
     random.seed(s)
-    torch.manual_seed(s)
+    # Pas de torch.manual_seed : il appelle cuda.manual_seed_all et ouvre
+    # un contexte CUDA dans chaque worker. Sur 8 Go ca sature la carte
+    # avant le premier batch (le tirage GPU est dans le process principal).
 
 
 # ZipFile partage par processus worker (pas picklable -> lazy par pid + chemin)
