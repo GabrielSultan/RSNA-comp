@@ -1,0 +1,30 @@
+{
+ "data/crop130": {
+  "volumes_crop130_part0.zip": 6369063023,
+  "volumes_crop130_part1.zip": 6356536064,
+  "volumes_crop130_proto_part0.zip": 1931346236,
+  "volumes_crop130_proto_part1.zip": 1931914317,
+  "volumes_crop130_t1_part0.zip": 2266705956,
+  "volumes_crop130_t1_part1.zip": 2266404234,
+  "manifest_part0.csv": 1421705,
+  "manifest_part1.csv": 1423370,
+  "manifest_proto_part0.csv": 436465,
+  "manifest_proto_part1.csv": 435254,
+  "manifest_t1_part0.csv": 472248,
+  "manifest_t1_part1.csv": 472174
+ },
+ "data/crop130_320": {
+  "volumes_crop130_320_part0.zip": 12570944973,
+  "volumes_crop130_320_part1.zip": 12543163263,
+  "volumes_crop130_320_proto_part0.zip": 3807161659,
+  "volumes_crop130_320_proto_part1.zip": 3810370939,
+  "volumes_crop130_320_t1_part0.zip": 4494213418,
+  "volumes_crop130_320_t1_part1.zip": 4495868866,
+  "manifest_part0.csv": 1425798,
+  "manifest_part1.csv": 1427503,
+  "manifest_proto_part0.csv": 437648,
+  "manifest_proto_part1.csv": 436363,
+  "manifest_t1_part0.csv": 488287,
+  "manifest_t1_part1.csv": 488172
+ }
+}

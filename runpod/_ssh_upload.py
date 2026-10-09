@@ -1,27 +1,21 @@
 # -*- coding: utf-8 -*-
-"""Envoie un fichier local vers le pod via ssh cat. Ne logge pas la cle."""
+"""Envoie un fichier local vers le pod via ssh cat (pas de SCP sur le proxy
+RunPod), puis compare la taille distante. Ne logge pas la cle."""
 from __future__ import annotations
 
 import os
 import subprocess
 import sys
 import time
+from pathlib import Path
 
-HOST = "root@157.254.50.91"
-PORT = "11242"
-KEY = os.path.expanduser(r"~/.ssh/id_ed25519_runpod")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _pod import ssh, ssh_cmd  # noqa: E402
 
 
 def upload(local: str, remote: str) -> None:
     size = os.path.getsize(local)
-    cmd = [
-        "ssh", "-p", PORT, "-i", KEY,
-        "-o", "ConnectTimeout=20",
-        "-o", "StrictHostKeyChecking=accept-new",
-        "-o", "ServerAliveInterval=15",
-        HOST, f"cat > {remote}",
-    ]
-    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+    proc = subprocess.Popen(ssh_cmd(f"cat > {remote}.partial"), stdin=subprocess.PIPE)
     sent = 0
     t0 = time.time()
     last = t0
@@ -46,7 +40,10 @@ def upload(local: str, remote: str) -> None:
     rc = proc.wait()
     if rc != 0:
         raise SystemExit(f"ssh cat {local} -> {remote} rc={rc}")
-    print(f"OK {remote}", flush=True)
+    got = ssh(f"stat -c %s {remote}.partial && mv -f {remote}.partial {remote}")
+    if got.returncode != 0 or int(got.stdout.split()[0]) != size:
+        raise SystemExit(f"taille distante {got.stdout.strip()} != {size} pour {remote}")
+    print(f"OK {remote} ({size} octets)", flush=True)
 
 
 if __name__ == "__main__":

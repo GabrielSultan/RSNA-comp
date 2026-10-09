@@ -16,6 +16,8 @@
 - Early stopping sur la val AUC (patience dans le YAML).
 - Val loss (BCE, pas d'aug) loggee chaque epoch pour comparer a la train loss.
 - Macro-AUC gold (58) loggee chaque epoch, jamais utilisee pour piloter.
+- `init_ckpt` : depart des poids d'un checkpoint (SWA, epochN), AdamW neuf,
+  epoch 0. `oai_sample_weight` : poids des etudes OAI_* (cumule au gold).
 
 Usage :
   python -X utf8 -m src.train.train --config configs/kneenet_v8.yaml
@@ -57,6 +59,9 @@ from src.nlp.lexicon import TARGETS
 from src.train.distill import coverage, load_distil, masked_kd, teacher_batch
 from src.train.metrics import macro_auc
 from src.train.param_groups import backbone_lr_range, build_optimizer, set_group_lrs
+
+OAI_PREFIX = "OAI_"
+BENCH_WARMUP = 10
 
 
 def _json_safe(obj):
@@ -190,6 +195,17 @@ def masked_bce(logits: torch.Tensor, y: torch.Tensor,
     if target_weight is not None:
         w = w * target_weight.to(logits.device).float().unsqueeze(0)
     return (loss_mat * w).sum() / w.sum().clamp(min=1)
+
+
+def load_init_weights(model: torch.nn.Module, path: str, arch: str) -> None:
+    """YAML `init_ckpt` : poids seuls (SWA, epochN.pt), AdamW neuf, epoch 0."""
+    ckpt = torch.load(path, map_location="cpu", weights_only=False)
+    src_arch = (ckpt.get("config") or {}).get("model")
+    if src_arch and src_arch != arch:
+        raise SystemExit(f"init_ckpt {path} : modele {src_arch}, attendu {arch}")
+    model.load_state_dict(ckpt["model"], strict=True)
+    print(f"init_ckpt {path} | source epoch {ckpt.get('epoch', '?')} "
+          f"| AdamW neuf, epoch 0", flush=True)
 
 
 def lr_at(step: int, total: int, base: float, warmup: int) -> float:
@@ -391,6 +407,8 @@ def main() -> None:
                         help="OOF : tenir ce fold a l'ecart (val + dump oof_preds.csv)")
     parser.add_argument("--check-optim", action="store_true",
                         help="modele + AdamW, affiche les groupes LLRD, quitte (pas de data)")
+    parser.add_argument("--max-steps", type=int, default=0,
+                        help="banc : N steps reels, s/step et VRAM, quitte sans sauvegarde")
     args = parser.parse_args()
     if args.list_models:
         for name in list_models():
@@ -415,6 +433,10 @@ def main() -> None:
         if not base.endswith(suffix):
             cfg["run_name"] = base + suffix
         print(f"OOF fold {args.fold} -> run_name {cfg['run_name']}", flush=True)
+    if args.max_steps:
+        if args.max_steps <= BENCH_WARMUP:
+            raise SystemExit(f"--max-steps doit depasser {BENCH_WARMUP}")
+        cfg["run_name"] = f"{cfg.get('run_name', 'run')}_bench"
 
     if args.check_optim:
         model = build_model(cfg, pretrained=False)
@@ -491,11 +513,15 @@ def main() -> None:
         raise SystemExit("aucun checkpoint (last.pt / best.pt) pour --resume")
 
     arch = cfg.get("model", "kneenet_v8")
+    init_path = cfg.get("init_ckpt") if resume_path is None else None
     prior_logits = compute_prior_logits(cfg["labels_csv"], targets)
     model = build_model(
-        cfg, pretrained=bool(cfg.get("pretrained", True)) and resume_path is None,
+        cfg, pretrained=(bool(cfg.get("pretrained", True))
+                         and resume_path is None and not init_path),
         bias_init=prior_logits,
     ).to(device)
+    if init_path:
+        load_init_weights(model, init_path, arch)
     print(f"{arch} ({cfg.get('backbone', '?')}) : {count_params(model)} params",
           flush=True)
 
@@ -559,6 +585,11 @@ def main() -> None:
         gold_uids = gold_uids_from_train_csv(cfg["labels_csv"])
         print(f"gold sample_weight x{gold_w:g} "
               f"({len(gold_uids)} uids)", flush=True)
+    oai_cfg = cfg.get("oai_sample_weight")
+    oai_w = 1.0 if oai_cfg is None else float(oai_cfg)
+    if oai_w != 1.0:
+        n_oai = sum(1 for u in train_ld.dataset.items if u.startswith(OAI_PREFIX))
+        print(f"oai sample_weight x{oai_w:g} ({n_oai} etudes OAI)", flush=True)
 
     save_epochs = {int(e) for e in (cfg.get("save_epochs") or [])}
     if save_epochs:
@@ -665,9 +696,10 @@ def main() -> None:
             )
 
             sw = None
-            if gold_uids:
+            if gold_uids or oai_w != 1.0:
                 sw = torch.tensor(
-                    [gold_w if u in gold_uids else 1.0 for u in _uid],
+                    [(gold_w if u in gold_uids else 1.0)
+                     * (oai_w if u.startswith(OAI_PREFIX) else 1.0) for u in _uid],
                     device=device, dtype=torch.float32)
 
             tlog = None
@@ -700,6 +732,21 @@ def main() -> None:
                 optim.step()
                 optim.zero_grad(set_to_none=True)
                 step += 1
+            if args.max_steps:
+                if micro_i + 1 == BENCH_WARMUP:
+                    if device == "cuda":
+                        torch.cuda.synchronize()
+                    t_bench = time.time()
+                if micro_i + 1 == args.max_steps:
+                    if device == "cuda":
+                        torch.cuda.synchronize()
+                    n_b = args.max_steps - BENCH_WARMUP
+                    vram = torch.cuda.max_memory_allocated() / 1e9 if device == "cuda" else 0.0
+                    print(f"bench : {(time.time() - t_bench) / max(n_b, 1):.3f} s/step "
+                          f"(steps {BENCH_WARMUP + 1}-{args.max_steps}) | VRAM max {vram:.1f} Go "
+                          f"| loss {running / max(nb, 1):.4f} | {steps_per_epoch} steps/epoch",
+                          flush=True)
+                    return
 
         train_loss = running / max(nb, 1)
         train_kd = running_kd / max(nb, 1) if distil is not None else None

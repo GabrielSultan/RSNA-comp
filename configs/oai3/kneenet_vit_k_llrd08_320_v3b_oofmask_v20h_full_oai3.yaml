@@ -1,0 +1,54 @@
+# 3 epochs de plus pour le SWA ViT-k320 (ep7-10) sur RSNA + OAI (MOAKS V00).
+# Squelette : configs/kneenet_vit_k_llrd08_320_v3b_oofmask_v20h_full.yaml.
+# Depart : poids du SWA (init_ckpt), AdamW neuf, warmup 5 % de 4 epochs.
+# LR de pic 5e-5 / 1.5e-4 ~ LR de la fenetre SWA du run d'origine (cosine 20,
+# epochs 7-10 : 7.7e-5 -> 5.4e-5). Cosine sur 4 epochs, stop a 3.
+# Etudes OAI_* : poids 0.5 (gold x4 inchange). Labels OAI : src/data/oai_tables.py.
+# Pod RTX PRO 6000 : encode_chunk 288, grad_checkpoint false (~54 Go).
+#
+#   python -X utf8 -m src.train.train --config configs/oai3/kneenet_vit_k_llrd08_320_v3b_oofmask_v20h_full_oai3.yaml
+
+run_name: vit_k_llrd08_320_v3b_oofmask_v20h_full_oai3
+init_ckpt: checkpoints/oai3_init/vit_k_llrd08_320_v3b_oofmask_v20h_full.pt
+model: kneenet_vit_k320
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 320
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/oai/derived/targets_v3b_oofmask_oai.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path: data/crop130_320
+oai_sample_weight: 0.5
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 2
+encode_chunk: 288
+grad_checkpoint: false
+log_every: 100
+num_workers: 8
+epochs: 3
+cosine_epochs: 4
+save_epochs: [1, 2, 3]
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 0
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.00005
+lr_head: 0.00015
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

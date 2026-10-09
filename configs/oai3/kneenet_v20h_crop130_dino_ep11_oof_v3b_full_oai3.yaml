@@ -1,0 +1,46 @@
+# 3 epochs de plus pour le SWA v20h DINO (ep6-7) sur RSNA + OAI (MOAKS V00).
+# Squelette : configs/kneenet_v20h_crop130_dino_ep11_oof_v3b_full.yaml.
+# Depart : poids du SWA (init_ckpt), AdamW neuf, warmup 5 % de 4 epochs.
+# LR de pic 5e-5 / 1.5e-4, cosine sur 4 epochs, stop a 3.
+# Etudes OAI_* : poids 0.5 (gold x4 inchange). Labels OAI : src/data/oai_tables.py.
+# Pod RTX PRO 6000 : encode_chunk 576 (un forward ResNet par pas), 8 workers.
+#
+#   python -X utf8 -m src.train.train --config configs/oai3/kneenet_v20h_crop130_dino_ep11_oof_v3b_full_oai3.yaml
+
+run_name: v20h_crop130_dino_ep11_oof_v3b_full_oai3
+init_ckpt: checkpoints/oai3_init/v20h_crop130_dino_ep11_oof_v3b_full.pt
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_dino_screen/encoder_ep11.pt
+lstm_hidden: 256
+
+labels_csv: data/oai/derived/targets_v3b_oofmask_oai.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path: data/crop130
+oai_sample_weight: 0.5
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 4
+encode_chunk: 576
+log_every: 100
+num_workers: 8
+epochs: 3
+cosine_epochs: 4
+save_epochs: [1, 2, 3]
+early_stop_patience: 0
+skip_gold: false
+
+lr_backbone: 0.00005
+lr_head: 0.00015
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

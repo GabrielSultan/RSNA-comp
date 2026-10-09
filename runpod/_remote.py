@@ -1,24 +1,20 @@
 # -*- coding: utf-8 -*-
-"""Lance une commande distante. Argument: la commande bash."""
+"""Lance une commande distante lue dans un fichier (evite le quoting
+PowerShell). Usage : python runpod/_remote.py cmd.txt [timeout_s]"""
 from __future__ import annotations
 
-import os
 import subprocess
 import sys
+from pathlib import Path
 
-KEY = os.path.expanduser(r"~/.ssh/id_ed25519_runpod")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _pod import ssh_cmd  # noqa: E402
 
 
 def main() -> None:
     remote = open(sys.argv[1], encoding="utf-8").read().replace("\r", "").strip()
-    cmd = [
-        "ssh", "-p", "11242", "-i", KEY,
-        "-o", "ConnectTimeout=20",
-        "-o", "StrictHostKeyChecking=accept-new",
-        "root@157.254.50.91",
-        remote,
-    ]
-    proc = subprocess.run(cmd, text=True, timeout=90)
+    timeout = int(sys.argv[2]) if len(sys.argv) > 2 else 90
+    proc = subprocess.run(ssh_cmd(remote), text=True, timeout=timeout)
     raise SystemExit(proc.returncode)
 
 
