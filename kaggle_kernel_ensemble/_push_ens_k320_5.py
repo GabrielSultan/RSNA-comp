@@ -22,7 +22,7 @@ DATASETS = [
 COMPETITION = "rsna-knee-abnormality-detection"
 MSG = (
     "ens ViT-k320 ep9 + v20h DINO ep6 + v20b DINO ep8 + v20h lat ep7 + ViT-k ep7 "
-    "(softmax subset, plancher 10%, sans TTA, T4)"
+    "(baseline ViT-k320 40%, plancher 10%, sans TTA, T4)"
 )
 ACCEL = "NvidiaTeslaT4"
 
@@ -111,6 +111,8 @@ def main() -> None:
         raise SystemExit("lat mal charge")
     if "vit_k_llrd08_det_oofmask_full" not in text or "vk " not in text:
         raise SystemExit("vit-k absent du log")
+    if "vit 0.41" not in text:
+        raise SystemExit("baseline ViT-k320 absente du log")
     if text.count("lat False") < 2:
         raise SystemExit("flip inattendu sur un modele non lat")
     csv = OUT / "submission.csv"

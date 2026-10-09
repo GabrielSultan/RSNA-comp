@@ -109,7 +109,7 @@ Notebook **self-contained** (internet off, **T4**). **Sans TTA.**
 - **v20h lat** : `v20h_crop130_oofmask_v20b_lat_full` epoch 7 (gold in-sample {g_lat:.3f}). Entrée 224. **Canon L** (flip des genoux droits).
 - **ViT-k** : `vit_k_llrd08_det_oofmask_full` epoch 7 (gold in-sample {g_vk:.3f}). Entrée 224. Pas de flip.
 
-Mix par finding = softmax des AUC val du **best** subset (température 0.05), puis plancher **10 %**.
+**ViT-k320 est la baseline** : au moins **40 %** sur chaque finding. La masse libre (20 %) suit le softmax des AUC val du best subset (température 0.05). Les quatre autres gardent au moins **10 %**.
 Subsets : `subset_vit_k_llrd08_det_320_frac025`, `subset_v20b_crop130_det_frac025`, `subset_v20h_crop130_dino_ep11_frac025`, `subset_v20h_crop130_det_frac025`, `subset_vit_k_llrd08_det_frac025`.
 
 **Mix** (ViT-k320 / v20b DINO / v20h DINO / v20h lat / ViT-k) :
@@ -204,7 +204,8 @@ AMP_DTYPE = (torch.bfloat16
              if (DEVICE == 'cuda' and torch.cuda.is_bf16_supported())
              else torch.float16)
 
-# (ViT-k320, v20b DINO, v20h DINO, v20h lat, ViT-k 224). Somme 1, plancher 0.10.
+# (ViT-k320, v20b DINO, v20h DINO, v20h lat, ViT-k 224).
+# ViT-k320 baseline >= 0.40, les autres >= 0.10, somme 1.
 MIX = [
     {mix}
 ]
@@ -368,7 +369,7 @@ test = pd.read_csv(TEST_CSV)
 test_series = pd.read_csv(TEST_SERIES_CSV)
 print(len(test), 'etudes | sans TTA | v20h lat canon L')
 for t, w in zip(TARGETS, MIX):
-    if abs(sum(w) - 1.0) > 1e-6 or min(w) < 0.10 - 1e-6 or len(w) != 5:
+    if abs(sum(w) - 1.0) > 1e-6 or min(w) < 0.10 - 1e-6 or w[0] < 0.40 - 1e-6 or len(w) != 5:
         raise RuntimeError((t, w))
     print(
         f'  {t:<18} vit {w[0]:.2f} v20b {w[1]:.2f} v20h {w[2]:.2f}'
