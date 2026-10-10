@@ -1,0 +1,14 @@
+{
+  "seed": 42,
+  "frac": 0.25,
+  "oai_share": 0.25,
+  "n_rsna_eligible": 4348,
+  "n_oai_eligible": 2399,
+  "n_total": 6747,
+  "n_train": 1687,
+  "n_train_rsna": 1265,
+  "n_train_oai": 422,
+  "n_val_rsna": 652,
+  "val_source": "data/labels/coolin/targets_v3b_det_frac025.csv",
+  "csv": "data/labels/coolin/targets_v3b_hybrid025.csv"
+}
