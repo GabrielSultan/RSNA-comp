@@ -1,0 +1,26 @@
+{
+  "id": "sultent/rsna-knee-ens-swa-k320-hd-bd-lat-vk",
+  "title": "rsna-knee-ens-swa-k320-hd-bd-lat-vk",
+  "code_file": "submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "machine_shape": "NvidiaTeslaT4",
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "sultent/rsna-knee-vit-k320-v3b-swa",
+    "sultent/rsna-knee-v20h-dino-full-swa",
+    "sultent/rsna-knee-v20b-dino-full-swa",
+    "sultent/rsna-knee-v20h-v3b-lat-swa",
+    "sultent/rsna-knee-vit-k-det-swa"
+  ],
+  "category_ids": []
+}
