@@ -10,6 +10,7 @@ verifiee, puis rename. Un verrou empeche deux pullers de se battre sur un .parti
 from __future__ import annotations
 
 import argparse
+import json
 import msvcrt
 import os
 import re
@@ -31,6 +32,15 @@ RUNS = [
     "vit_k_llrd08_320_v3b_oofmask_v20h_full_oai3",
 ]
 EPOCHS = 3
+# Ces runs n'ont pas de snapshot a rapatrier : history.json seulement,
+# et le puller ne s'arrete qu'une fois les 7 epochs ecrites.
+HIST_ONLY = [
+    "subset_v20b_dino_ep11_v3b_hybrid025",
+    "subset_v20h_dino_ep11_v3b_hybrid025",
+    "subset_coat_a_llrd08_v3b_hybrid025",
+    "subset_vit_k_llrd08_320_v3b_hybrid025",
+]
+HIST_EPOCHS = 7
 N_BATCHES = 12
 FREE_MARGIN = 3_000_000_000
 STALL_S = 90
@@ -38,7 +48,8 @@ LOCK = ROOT / "data" / "oai" / "_pull.lock"
 HIST_SEEN: dict[str, tuple[int, float]] = {}
 LISTING = (
     "cd /workspace && date +%s && "
-    "find checkpoints -mindepth 2 -maxdepth 2 -path '*_oai3/*' "
+    "find checkpoints -mindepth 2 -maxdepth 2 "
+    "\\( -path '*_oai3/*' -o -path '*hybrid025/*' \\) "
     "\\( -name 'epoch*.pt' -o -name history.json \\) -printf '%p %s %T@\\n'; "
     "find data/crop130 data/crop130_320 -maxdepth 1 "
     "\\( -name 'oai_crop130*_b*.zip' -o -name 'oai_manifest_b*.csv' \\) -printf '%p %s %T@\\n'"
@@ -72,6 +83,9 @@ def plan(now: float, files: dict[str, tuple[int, float]], shards: str,
         if local.is_file() and local.stat().st_size == size and not p.endswith("history.json"):
             continue
         if p.endswith(".pt"):
+            run = p.split("/")[1] if "/" in p else ""
+            if run in HIST_ONLY:
+                continue
             slim = p.endswith("_w.pt")
             if slim and (ROOT / p.replace("_w.pt", ".pt")).is_file():
                 continue
@@ -153,13 +167,25 @@ def pull(rel: str, size: int) -> bool:
     return True
 
 
+def _hist_epochs(run: str) -> int:
+    path = ROOT / "checkpoints" / run / "history.json"
+    if not path.is_file():
+        return 0
+    try:
+        hist = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return 0
+    return len(hist) if isinstance(hist, list) else 0
+
+
 def complete(shards: str) -> bool:
     snaps = all((ROOT / "checkpoints" / r / f"epoch{e}.pt").is_file()
                 or (ROOT / "checkpoints" / r / f"epoch{e}_w.pt").is_file()
                 for r in RUNS for e in range(1, EPOCHS + 1))
     n224 = len(list((ROOT / "data/crop130").glob("oai_crop130_b*.zip")))
     n320 = len(list((ROOT / "data/crop130_320").glob("oai_crop130_320_b*.zip")))
-    return (snaps and (shards == "none" or n224 == N_BATCHES)
+    hist_ok = all(_hist_epochs(r) >= HIST_EPOCHS for r in HIST_ONLY)
+    return (snaps and hist_ok and (shards == "none" or n224 == N_BATCHES)
             and (shards != "all" or n320 == N_BATCHES))
 
 

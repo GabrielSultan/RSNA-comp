@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 import numpy as np  # noqa: E402
+import pandas as pd  # noqa: E402
 import torch  # noqa: E402
 
 from src.data.dataset_npz import (  # noqa: E402
@@ -61,22 +62,26 @@ def check(cfg_path: Path, args) -> list[str]:
     errors: list[str] = []
     cfg = load_config(str(cfg_path))
     print(f"\n=== {cfg_path.name} -> {cfg['run_name']}")
-    init_p = ROOT / cfg["init_ckpt"]
-    if not init_p.is_file():
-        if not args.write_init:
-            return [f"{init_p} absent (relancer avec --write-init)"]
-        write_init(init_p)
+    if cfg.get("init_ckpt"):
+        init_p = ROOT / cfg["init_ckpt"]
+        if not init_p.is_file():
+            if not args.write_init:
+                return [f"{init_p} absent (relancer avec --write-init)"]
+            write_init(init_p)
 
-    init = torch.load(init_p, map_location="cpu", weights_only=False)
-    accepted = set(inspect.signature(get_model_class(cfg["model"]).__init__).parameters)
-    diff = {k: (init["config"].get(k), cfg.get(k)) for k in sorted(accepted)
-            if k in cfg and init["config"].get(k) != cfg.get(k)}
-    print(f"  ecarts vs SWA ({init['epoch']}) : {diff or 'aucun'}")
-    for k in set(diff) - EXPECTED_DIFF:
-        errors.append(f"argument modele {k} different du SWA : {diff[k]}")
+        init = torch.load(init_p, map_location="cpu", weights_only=False)
+        accepted = set(inspect.signature(get_model_class(cfg["model"]).__init__).parameters)
+        diff = {k: (init["config"].get(k), cfg.get(k)) for k in sorted(accepted)
+                if k in cfg and init["config"].get(k) != cfg.get(k)}
+        print(f"  ecarts vs SWA ({init['epoch']}) : {diff or 'aucun'}")
+        for k in set(diff) - EXPECTED_DIFF:
+            errors.append(f"argument modele {k} different du SWA : {diff[k]}")
 
-    model = build_model(cfg, pretrained=False)
-    load_init_weights(model, str(init_p), cfg["model"])
+        model = build_model(cfg, pretrained=False)
+        load_init_weights(model, str(init_p), cfg["model"])
+    else:
+        print("  from scratch (pas d'init_ckpt)")
+        model = build_model(cfg, pretrained=False)
     attrs = {a: getattr(model, a) for a in ("encode_chunk", "grad_checkpoint", "img_size")
              if hasattr(model, a)}
     print(f"  modele {cfg['model']} | {attrs}")
@@ -100,17 +105,35 @@ def check(cfg_path: Path, args) -> list[str]:
     if not oai:
         errors.append("aucune serie OAI indexee")
 
-    train_ld, _val, targets = make_loaders(
+    train_ld, val_ld, targets = make_loaders(
         labels_csv=cfg["labels_csv"], series_csv=cfg["series_csv"],
         zip_path=cfg["zip_path"], batch_size=cfg["batch_size"], num_workers=0,
         n_series=int(cfg["n_series"]), img_size=int(cfg.get("img_size", 224)),
+        train_frac=float(cfg.get("train_frac", 1.0)),
+        train_frac_seed=int(cfg.get("train_frac_seed", 42)),
         include_gold=bool(cfg.get("include_gold")), val_frac=float(cfg.get("val_frac", 0.15)),
         seed=int(cfg.get("seed", 42)))
     ds = train_ld.dataset
     ds.series_drop_p = 0.0
     items = ds.items
     n_oai = sum(u.startswith(OAI_PREFIX) for u in items)
-    print(f"  train {len(items)} etudes (OAI {n_oai}) | {len(train_ld)} steps/epoch")
+    val_items = val_ld.dataset.items
+    n_oai_val = sum(u.startswith(OAI_PREFIX) for u in val_items)
+    print(f"  train {len(items)} etudes (OAI {n_oai}) | val {len(val_items)} "
+          f"(OAI {n_oai_val}) | {len(train_ld)} steps/epoch")
+    if n_oai_val:
+        errors.append(f"{n_oai_val} etudes OAI dans la val")
+    if float(cfg.get("val_frac", 0.15)) > 0:
+        lab = pd.read_csv(ROOT / cfg["labels_csv"])
+        if "split" in lab.columns:
+            expect_tr = set(lab.loc[lab.split == "train", "StudyInstanceUID"].astype(str))
+            expect_va = set(lab.loc[lab.split == "val", "StudyInstanceUID"].astype(str))
+            if set(items) != expect_tr:
+                errors.append(
+                    f"train {len(items)} != csv {len(expect_tr)} (volumes manquants)")
+            if set(val_items) != expect_va:
+                errors.append(
+                    f"val {len(val_items)} != csv {len(expect_va)} (volumes manquants)")
 
     rng = np.random.default_rng(0)
     pick = {"RSNA": [u for u in items if not u.startswith(OAI_PREFIX)],
