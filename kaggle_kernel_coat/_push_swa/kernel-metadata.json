@@ -1,0 +1,22 @@
+{
+  "id": "sultent/rsna-knee-coat-a-v3b-swa-sans-tta",
+  "title": "RSNA Knee CoAt-a v3b SWA sans TTA",
+  "code_file": "submit.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "machine_shape": "NvidiaTeslaT4",
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "sultent/rsna-knee-coat-a-v3b-swa"
+  ],
+  "category_ids": []
+}
