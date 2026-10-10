@@ -1,0 +1,42 @@
+# v20h DINO ep11, from scratch (pas de SWA), subset hybride v3b.
+# Meme CSV que v20b : 1265 RSNA + 422 OAI en train, val = 652 RSNA.
+# Aucune etude OAI en validation. Gold hors split, score dans history.json.
+# 7 epochs, pas de snapshot epochN.pt. LR 1e-4 / 3e-4, cosine sur 7.
+# 3070 8 Go : encode_chunk 8, 3 workers (le pod avait 576 / 8).
+#
+#   python -X utf8 -m src.train.train --config configs/hybrid025/kneenet_v20h_crop130_dino_ep11_v3b_hybrid025.yaml
+
+run_name: subset_v20h_dino_ep11_v3b_hybrid025
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_dino_screen/encoder_ep11.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/targets_v3b_hybrid025.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+val_frac: 0.15
+include_gold: false
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+log_every: 100
+num_workers: 3
+epochs: 7
+cosine_epochs: 7
+save_epochs: []
+early_stop_patience: 0
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
