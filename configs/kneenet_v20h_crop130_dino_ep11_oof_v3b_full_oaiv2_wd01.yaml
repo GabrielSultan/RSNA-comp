@@ -1,0 +1,46 @@
+# Meme recette que kneenet_v20h_crop130_dino_ep11_oof_v3b_full_oaiv2.yaml :
+# full v20h DINO ep11, gold in-sample x4, 2399 OAI des l'epoch 0 (poids x0.5),
+# pas de val, LR 1e-4 / 3e-4, cosine sur 20, stop a 7, snapshots 5 a 7.
+# Seul ecart : regularisation du subset wd01
+# (subset_v20h_dino_ep11_v3b_hybrid025_wd01) : weight_decay 0.01, dropout 0.2
+# au lieu de 0.05 / 0.4. Pas le schedule de ce subset (8 epochs, cosine 10).
+# 3070 8 Go : encode_chunk 8, 3 workers.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_v20h_crop130_dino_ep11_oof_v3b_full_oaiv2_wd01.yaml
+
+run_name: v20h_crop130_dino_ep11_oof_v3b_full_oaiv2_wd01
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_dino_screen/encoder_ep11.pt
+lstm_hidden: 256
+
+labels_csv: data/oai/derived/targets_v3b_oofmask_oai.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path: data/crop130
+oai_sample_weight: 0.5
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+log_every: 100
+num_workers: 3
+epochs: 7
+cosine_epochs: 20
+save_epochs: [5, 6, 7]
+early_stop_patience: 0
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.01
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.2
