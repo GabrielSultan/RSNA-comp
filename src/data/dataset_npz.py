@@ -101,30 +101,71 @@ def _index_from_zips(dir_path: Path) -> dict[str, str]:
     return mapping
 
 
-def resolve_volume_source(zip_path: str) -> dict[str, str] | None:
-    """None = un seul zip (lecture directe). dict = sid -> zip (dossier shards)."""
-    p = Path(zip_path)
-    cache_key = str(p.resolve()) if p.exists() else zip_path
-    if cache_key in _VOLUME_SOURCE_CACHE:
-        return _VOLUME_SOURCE_CACHE[cache_key]
+def _as_zip_paths(zip_path: str | Path | list | tuple) -> list[str]:
+    if isinstance(zip_path, (list, tuple)):
+        paths = [str(p) for p in zip_path if str(p).strip()]
+    else:
+        paths = [str(zip_path)]
+    if not paths:
+        raise FileNotFoundError("zip_path vide")
+    return paths
+
+
+def _index_one_source(p: Path) -> dict[str, str] | None:
+    """None = un zip unique (lecture directe). dict = sid -> zip."""
     if p.is_file():
-        _VOLUME_SOURCE_CACHE[cache_key] = None
         return None
     if not p.is_dir():
-        raise FileNotFoundError(f"zip_path introuvable : {zip_path}")
+        raise FileNotFoundError(f"zip_path introuvable : {p}")
     mapping = _index_from_manifests(p)
     for sid, zp in _index_from_zips(p).items():
         mapping.setdefault(sid, zp)
+    return mapping
+
+
+def resolve_volume_source(
+    zip_path: str | Path | list | tuple,
+) -> dict[str, str] | None:
+    """None = un seul zip (lecture directe). dict = sid -> zip (dossier shards).
+
+    `zip_path` peut etre une liste : premiere source prioritaire, les suivantes
+    completent (T1 / OAI d'un autre crop, sans ecraser les NPZ deja vus).
+    """
+    paths = _as_zip_paths(zip_path)
+    cache_key = "\n".join(
+        str(Path(p).resolve()) if Path(p).exists() else p for p in paths
+    )
+    if cache_key in _VOLUME_SOURCE_CACHE:
+        return _VOLUME_SOURCE_CACHE[cache_key]
+    if len(paths) == 1:
+        mapping = _index_one_source(Path(paths[0]))
+        if mapping is None:
+            _VOLUME_SOURCE_CACHE[cache_key] = None
+            return None
+    else:
+        mapping = {}
+        for p in paths:
+            chunk = _index_one_source(Path(p))
+            if chunk is None:
+                zp = str(Path(p))
+                with zipfile.ZipFile(zp) as z:
+                    for name in z.namelist():
+                        if name.endswith(".npz"):
+                            mapping.setdefault(Path(name).stem, zp)
+                continue
+            for sid, zp in chunk.items():
+                mapping.setdefault(sid, zp)
     if not mapping:
-        raise FileNotFoundError(f"aucune serie NPZ dans {p}")
+        raise FileNotFoundError(f"aucune serie NPZ dans {paths}")
     n_z = len(set(mapping.values()))
-    print(f"volumes {p} : {len(mapping)} series dans {n_z} zip(s)", flush=True)
+    label = " + ".join(paths)
+    print(f"volumes {label} : {len(mapping)} series dans {n_z} zip(s)", flush=True)
     _VOLUME_SOURCE_CACHE[cache_key] = mapping
     return mapping
 
 
 def make_series_index(
-    series_csv: str | Path, zip_path: str,
+    series_csv: str | Path, zip_path: str | Path | list | tuple,
 ) -> tuple["StudySeriesIndex", dict[str, str] | None]:
     volume_index = resolve_volume_source(zip_path)
     keep = None if volume_index is None else set(volume_index)
@@ -224,7 +265,7 @@ class StudyDataset(Dataset):
         items: list[str],
         labels_df: pd.DataFrame | None,
         index: StudySeriesIndex,
-        zip_path: str = "data/volumes.zip",
+        zip_path: str | Path | list | tuple = "data/volumes.zip",
         train: bool = True,
         series_drop_p: float = 0.15,
         n_series: int = 3,
@@ -239,7 +280,10 @@ class StudyDataset(Dataset):
             labels_df.set_index("StudyInstanceUID") if labels_df is not None else None
         )
         self.index = index
-        self.zip_path = zip_path
+        if isinstance(zip_path, (list, tuple)):
+            self.zip_path = str(zip_path[0]) if zip_path else ""
+        else:
+            self.zip_path = zip_path
         self.volume_index = volume_index
         self.train = train
         self.series_drop_p = series_drop_p
@@ -505,7 +549,8 @@ def assign_folds(df: pd.DataFrame, targets: list[str],
     return fold
 
 
-def write_folds_csv(labels_csv: str, series_csv: str, zip_path: str,
+def write_folds_csv(labels_csv: str, series_csv: str,
+                    zip_path: str | Path | list | tuple,
                     out_csv: str, n_folds: int = 3, seed: int = 42) -> pd.DataFrame:
     """Cree (ou reutilise) le CSV StudyInstanceUID,fold pour l'OOF, gold exclus."""
     out_p = Path(out_csv)
@@ -564,7 +609,7 @@ def _apply_oof_fold(df: pd.DataFrame, targets: list[str], oof_fold: int,
 
 def make_loaders(labels_csv: str = "data/labels/train_val_labels.csv",
                  series_csv: str = "data/csv/train_series.csv",
-                 zip_path: str = "data/volumes.zip",
+                 zip_path: str | Path | list | tuple = "data/volumes.zip",
                  batch_size: int = 8, num_workers: int = 4,
                  n_series: int = 3, train_frac: float = 1.0,
                  train_frac_seed: int = 42, rgb_neighbors: bool = False,
