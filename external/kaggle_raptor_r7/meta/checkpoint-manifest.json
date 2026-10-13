@@ -1,0 +1,16 @@
+{
+  "accuracy": {
+    "filename": "raptor_ft_alldata_t16_blendjev_oai_d96_r384_swa.pt",
+    "sha256": "7e5315dad125b99fc65b340b3de41de628e9be51ff5835355dd61c86472244ef",
+    "source_sha256": "bcd864cbf349882e876959b49cb348cbb89b4c62fc204d4e4261049c5e3a79c5",
+    "submission": 56906959,
+    "public_score": "0.949"
+  },
+  "efficiency": {
+    "filename": "raptor_ft_alldata_t16_blendjev_oai_d96_c08_r224_swa.pt",
+    "sha256": "3394fdd7e668286956e85af2554bef0386df5cd79d1c1af223b095c828b815d6",
+    "source_sha256": "e85d994fa93caf1bbc2df04f396649207a69d2463924c41fa3b05ba8801cd38c",
+    "submission": 56707773,
+    "public_score": "0.945"
+  }
+}
