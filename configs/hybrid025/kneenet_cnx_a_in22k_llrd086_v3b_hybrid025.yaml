@@ -1,0 +1,51 @@
+# CNX-a (ConvNeXt-T stride 32, carte 7x7, graphe v20h), poids supervises IN-22k -> 1k,
+# from scratch (pas de SWA), subset hybride v3b.
+# Jumeau de kneenet_cnx_a_dinov3_llrd086_v3b_hybrid025.yaml : seuls
+# `backbone` / `backbone_weights` / `run_name` changent. Pre-entrainement
+# absent de l'ensemble (RadImageNet, DINOv3, IN-1k) : pari diversite.
+# Juger vs subset_vit_k_llrd08_320_v3b_hybrid025 (val 0.9241 / gold 0.8693)
+# et ACL / MCL vs ViT-k (0.874 / 0.812), delta > 0.01.
+# 3070 8 Go : encode_chunk 8, 3 workers.
+#
+#   python -X utf8 -m src.train.train --config configs/hybrid025/kneenet_cnx_a_in22k_llrd086_v3b_hybrid025.yaml --check-optim
+#   python -X utf8 -m src.train.train --config configs/hybrid025/kneenet_cnx_a_in22k_llrd086_v3b_hybrid025.yaml
+
+run_name: subset_cnx_a_in22k_llrd086_v3b_hybrid025
+model: kneenet_cnx_a
+n_series: 6
+backbone: convnext_tiny.fb_in22k_ft_in1k
+pretrained: true
+backbone_weights: weights/convnext_tiny-fb_in22k_ft_in1k
+lstm_hidden: 256
+
+llrd: 0.86
+no_decay: true
+
+labels_csv: data/labels/coolin/targets_v3b_hybrid025.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+val_frac: 0.15
+include_gold: false
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+log_every: 100
+num_workers: 3
+epochs: 7
+cosine_epochs: 7
+save_epochs: []
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 0
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
