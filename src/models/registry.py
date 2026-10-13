@@ -70,6 +70,8 @@ MODELS: dict[str, str] = {
     "kneenet_coat_a": "src.models.kneenet_coat_a",
     "kneenet_coat_a320": "src.models.kneenet_coat_a320",
     "kneenet_coat_d": "src.models.kneenet_coat_d",
+    "kneenet_cnx_a": "src.models.kneenet_cnx_a",
+    "kneenet_cnx_r7": "src.models.kneenet_cnx_r7",
 }
 
 DEFAULT_MODEL = "kneenet_v8"
