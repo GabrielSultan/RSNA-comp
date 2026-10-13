@@ -5,7 +5,8 @@ LLRD : lr_bloc = lr_backbone * (llrd ** (n_blocks - layer_id)).
 layer 0 = patch-embed / tokens / stem_mix, layer 1..12 = blocks,
 layer 12 aussi pour le LN final. Pic (bloc 12) = `lr_backbone`.
 Hybrides timm (CoAtNet : `stages.S.blocks.B`) : blocs numerotes
-globalement dans l'ordre (stage, bloc), stem = 0.
+globalement dans l'ordre (stage, bloc), stem = 0. ConvNeXt timm :
+`stages.S.downsample` = 1er bloc du stage S, `head.norm` = dernier bloc.
 
 Sans `llrd` : un groupe backbone + un groupe head (recette actuelle),
 mais chaque groupe porte `base_lr` + `role` pour le re-warmup.
@@ -20,6 +21,8 @@ from torch.optim import AdamW
 
 _BLOCK_RE = re.compile(r"\.blocks\.(\d+)\.")
 _STAGE_BLOCK_RE = re.compile(r"\.stages\.(\d+)\.blocks\.(\d+)\.")
+_STAGE_DOWN_RE = re.compile(r"\.stages\.(\d+)\.downsample\.")
+_HEAD_NORM_RE = re.compile(r"\.backbone\.head\.norm\.")
 
 
 def is_no_decay(name: str, param: torch.Tensor) -> bool:
@@ -62,6 +65,11 @@ def vit_layer_id(name: str, n_blocks: int,
         m = _STAGE_BLOCK_RE.search(name)
         if m:
             return stage_ids[(int(m.group(1)), int(m.group(2)))]
+        m = _STAGE_DOWN_RE.search(name)
+        if m:
+            return stage_ids[(int(m.group(1)), 0)]
+        if _HEAD_NORM_RE.search(name):
+            return n_blocks
     else:
         m = _BLOCK_RE.search(name)
         if m:
