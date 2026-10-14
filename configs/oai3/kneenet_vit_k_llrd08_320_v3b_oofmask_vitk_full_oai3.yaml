@@ -1,0 +1,62 @@
+# Full train ViT-k LLRD 0.8 a 320, FROM SCRATCH (pas d'init_ckpt : backbone
+# DINOv3 pretrained, tete neuve), sur RSNA (labels v3b filtres par l'OOF
+# ViT-k 5 epochs) + etudes OAI (MOAKS V00, poids 0.5) + gold x4.
+# Squelette : configs/kneenet_vit_k_llrd08_320_v3b_oofmask_v20h_full.yaml
+# (15 epochs, cosine 20, snapshots 5-15, lr 1e-4/3e-4, pas de val, pas de
+# gel). Ajouts OAI repris de configs/oai3/*_oai3.yaml (series_csv,
+# oai_sample_weight). run_name en *_oai3 : reconnu par runpod/oai/pull.py
+# et slim.py.
+#
+# Labels : data/oai/derived/targets_v3b_oofmask_oai.csv RECONSTRUIT apres le
+#   filtre vitk 5 epochs (python -m src.data.oai_tables --labels-rsna
+#   data/labels/coolin/targets_v3b_oofmask_vitk.csv). Ne pas lancer avec la
+#   version au masque v20h : verifier la date / le compte de NaN du CSV.
+# Pod RTX PRO 6000 : encode_chunk 288, grad_checkpoint false (~54 Go VRAM),
+# attendu ~440 W / step ~0,75 s. Verifier la ligne recap au demarrage :
+#   KneeNet-ViT-k320 | entree 320 | ... | encode_chunk 288 | dropout 0.4 | grad_checkpoint 0
+#
+#   python -X utf8 -m src.train.train --config configs/oai3/kneenet_vit_k_llrd08_320_v3b_oofmask_vitk_full_oai3.yaml
+
+run_name: vit_k_llrd08_320_v3b_oofmask_vitk_full_oai3
+model: kneenet_vit_k320
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 320
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/oai/derived/targets_v3b_oofmask_oai.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path: data/crop130_320
+oai_sample_weight: 0.5
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 2
+encode_chunk: 288
+grad_checkpoint: false
+log_every: 100
+num_workers: 8
+epochs: 15
+cosine_epochs: 20
+save_epochs: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 0
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
