@@ -1,0 +1,55 @@
+# Variante POD 5 epochs de kneenet_vit_k_llrd08_oof_v3b.yaml.
+# Les 3 folds ont 3 epochs en local (best.pt epoch 3, AdamW inclus) : on les
+# pousse a 5 sur pod. Meme run_name -> les fold dirs sont retrouves ;
+# --resume prend best.pt (pas de last.pt). encode_chunk 288 +
+# grad_checkpoint false + num_workers 8 = vitesse seule, maths identiques
+# (RTX PRO 6000, ~30 Go VRAM a 224). Le cosinus passe de 3 a 5 epochs
+# (cosine_epochs absent -> = epochs) : c'est voulu ("2 epochs de plus").
+# freeze_encoder_epochs: 1 est inerte a la reprise (epoch 3 deja passee).
+# dump_oof: true re-ecrit oof_preds.csv a la fin de chaque fold.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_vit_k_llrd08_oof_v3b_5ep_pod.yaml --fold 0 --resume
+
+run_name: vit_k_llrd08_oof_v3b
+model: kneenet_vit_e
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/coolin/targets_v3b.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+rgb_as_gray: true
+
+train_frac: 1.0
+n_folds: 3
+fold_seed: 42
+folds_csv: data/labels/folds3_gpt56sol.csv
+oof_preds_csv: data/labels/oof_preds_vit_k_llrd08_v3b.csv
+dump_oof: true
+seed: 42
+
+batch_size: 2
+encode_chunk: 288
+grad_checkpoint: false
+log_every: 100
+num_workers: 8
+epochs: 5
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
