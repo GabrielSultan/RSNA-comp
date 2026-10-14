@@ -6,7 +6,7 @@
 # Gold hors train/val, sanity gold_macro_auc dans history.json.
 # 7 epochs, pas de snapshot epochN.pt (last.pt / best.pt seulement, reprise).
 # LR from scratch 1e-4 / 3e-4. Cosine sur les 7 epochs.
-# Pod : encode_chunk 576, 8 workers (meme carte que le full oai3).
+# 3070 8 Go : encode_chunk 8, 2 workers (le pod avait 576 / 8).
 #
 #   python -X utf8 -m src.train.train --config configs/hybrid025/kneenet_v20b_crop130_dino_ep11_v3b_hybrid025.yaml
 
@@ -28,9 +28,9 @@ include_gold: false
 seed: 42
 
 batch_size: 4
-encode_chunk: 576
+encode_chunk: 8
 log_every: 100
-num_workers: 8
+num_workers: 2
 epochs: 7
 cosine_epochs: 7
 save_epochs: []
