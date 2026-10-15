@@ -73,6 +73,7 @@ MODELS: dict[str, str] = {
     "kneenet_cnx_a": "src.models.kneenet_cnx_a",
     "kneenet_cnx_r7": "src.models.kneenet_cnx_r7",
     "kneenet_mvlqm": "src.models.kneenet_mvlqm",
+    "kneenet_mrx": "src.models.kneenet_mrx",
 }
 
 DEFAULT_MODEL = "kneenet_v8"

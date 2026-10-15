@@ -53,13 +53,15 @@ def _weights_file(path: str | Path) -> Path:
 
 
 class _Dinov3VitEncoder(nn.Module):
-    """ViT-B/16 DINOv3 -> cartes (N, 768, H/16, W/16)."""
+    """DINOv3 patch-16 -> cartes (N, C, H/16, W/16). C = 768 (B) ou 384 (S)."""
 
     def __init__(self, weights_path: str = DEFAULT_WEIGHTS,
                  pretrained: bool = True,
                  drop_path_rate: float = 0.0,
-                 grad_checkpoint: bool = True) -> None:
+                 grad_checkpoint: bool = True,
+                 timm_name: str = TIMM_NAME) -> None:
         super().__init__()
+        self.timm_name = str(timm_name)
         kwargs = dict(
             num_classes=0,
             global_pool="",
@@ -72,25 +74,25 @@ class _Dinov3VitEncoder(nn.Module):
             ckpt = _weights_file(weights_path)
             if ckpt.suffix == ".pt":
                 self.backbone = timm.create_model(
-                    TIMM_NAME, pretrained=False, **kwargs,
+                    self.timm_name, pretrained=False, **kwargs,
                 )
                 sd = torch.load(ckpt, map_location="cpu", weights_only=False)
                 self.load_state_dict(sd, strict=True)
                 print(
-                    f"DINOv3 ViT-B/16 charge : {ckpt} | {len(sd)} tenseurs",
+                    f"DINOv3 {self.timm_name} charge : {ckpt} | {len(sd)} tenseurs",
                     flush=True,
                 )
             else:
                 self.backbone = timm.create_model(
-                    TIMM_NAME,
+                    self.timm_name,
                     pretrained=True,
                     pretrained_cfg_overlay={"file": str(ckpt)},
                     **kwargs,
                 )
-                print(f"DINOv3 ViT-B/16 charge : {ckpt}", flush=True)
+                print(f"DINOv3 {self.timm_name} charge : {ckpt}", flush=True)
         else:
             self.backbone = timm.create_model(
-                TIMM_NAME, pretrained=False, **kwargs,
+                self.timm_name, pretrained=False, **kwargs,
             )
         self.backbone.set_grad_checkpointing(bool(grad_checkpoint))
         self.num_features = int(self.backbone.num_features)
@@ -151,6 +153,7 @@ class KneeNet(nn.Module):
             weights_path=backbone_weights, pretrained=pretrained,
             drop_path_rate=self.drop_path_rate,
             grad_checkpoint=self.grad_checkpoint,
+            timm_name=self.backbone_name,
         )
         self._freeze_layer_scale()
         feat_dim = self.encoder.num_features
