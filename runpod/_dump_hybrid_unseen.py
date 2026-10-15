@@ -32,7 +32,10 @@ from src.models.registry import build_model  # noqa: E402
 from src.nlp.lexicon import TARGETS  # noqa: E402
 from src.train.train import load_config  # noqa: E402
 
-VIT_CSV = ROOT / "data" / "hybrid_pred" / "hybrid_preds_unseen_rsna.csv"
+VIT_CANDIDATES = (
+    ROOT / "data" / "hybrid_pred" / "hybrid_preds_unseen_rsna.csv",
+    ROOT / "data" / "hybrid_pred" / "hybrid_preds_unseen_rsna_vitkllrd08.csv",
+)
 OUT_DIR = ROOT / "data" / "hybrid_pred"
 
 # (config, run). ViT-k est exclu : CSV deja ecrit.
@@ -198,10 +201,13 @@ def main() -> None:
     ap.add_argument("--flush-every", type=int, default=100)
     args = ap.parse_args()
 
-    uids = pd.read_csv(VIT_CSV, usecols=["StudyInstanceUID"]).StudyInstanceUID.astype(str).tolist()
+    vit_csv = next((p for p in VIT_CANDIDATES if p.is_file()), None)
+    if vit_csv is None:
+        raise SystemExit("liste ViT introuvable dans data/hybrid_pred")
+    uids = pd.read_csv(vit_csv, usecols=["StudyInstanceUID"]).StudyInstanceUID.astype(str).tolist()
     if args.limit:
         uids = uids[: args.limit]
-    print(f"etudes {len(uids)} (source {VIT_CSV.name})", flush=True)
+    print(f"etudes {len(uids)} (source {vit_csv.name})", flush=True)
     distil_uids = ROOT / "checkpoints" / (
         "subset_v20h_dino_ep11_v3b_rsna1687_distil_main_crop145"
     ) / "train_uids.txt"
