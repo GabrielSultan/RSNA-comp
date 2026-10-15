@@ -1,0 +1,59 @@
+# Full v20h DINO ep11 distille sur l'OOF Original_main (LB 0.954).
+# Pas d'OAI : ces etudes n'ont pas de prediction teacher.
+# Labels : data/labels/coolin/targets_v3b_rsna_distil_main_full.csv
+#   4348 RSNA de Original_main_LB0954_OOF_4348.csv, labels v3b.
+#   L'ancien hold-out hybrid (652) est dans le train.
+#   Reconstruire : python -X utf8 -m src.data.build_rsna_distil_main_full
+# Teacher : data/labels/teacher_original_main_oof_rsna_full.csv
+#   memes probas que le subset 1687 sur l'intersection.
+# Gold (58, train.csv) ajoutes au train, poids x4, sans teacher (KD masquee).
+# Pas de val : best.pt ne bouge pas. Snapshots epoch 5 a 9.
+# Recette wd01 du subset distil : wd 0.01, dropout 0.2, LR 1e-4 / 3e-4,
+# distil_lambda 0.3, T 1, 12 cibles. Schedule du full : cosine sur 20, stop a 9.
+# zip_path : crop145 d'abord (FS RSNA), crop130 complete les T1.
+# 3070 8 Go : encode_chunk 8, 3 workers. ~1 h 20 / epoch, ~12 h pour 9.
+#
+#   python -X utf8 -m src.train.train --config configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna_distil_main_full.yaml
+
+run_name: v20h_crop145_dino_ep11_v3b_rsna_distil_main_full
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_dino_screen/encoder_ep11.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/targets_v3b_rsna_distil_main_full.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path:
+  - data/crop145
+  - data/crop130
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+log_every: 100
+num_workers: 3
+epochs: 9
+cosine_epochs: 20
+save_epochs: [5, 6, 7, 8, 9]
+early_stop_patience: 0
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.01
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.2
+
+distil_csv: data/labels/teacher_original_main_oof_rsna_full.csv
+distil_targets: ["ACL", "MCL", "Medial Meniscus", "Lateral Meniscus", "Medial OA", "Lateral OA", "PF OA", "Effusion", "Synovitis", "Baker's", "Contusion", "Fracture"]
+distil_lambda: 0.3
+distil_temp: 1.0
