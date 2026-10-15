@@ -581,11 +581,17 @@ def main() -> None:
         enc_path = out_dir / "encoder.pt"
         _atomic_torch_save(payload["encoder"], enc_path)
         _atomic_torch_save(payload, resume_path)
+        if epoch + 1 in {int(e) for e in cfg.get("snapshot_epochs", [])}:
+            _atomic_torch_save(payload["encoder"], out_dir / f"encoder_ep{epoch + 1}.pt")
         print(
             f"epoch {epoch + 1}/{epochs} | loss {avg:.4f} "
             f"(uniforme {uniform:.3f}) | {dt / 60:.1f} min | -> {enc_path}",
             flush=True,
         )
+        stop_after = cfg.get("stop_after_epoch")
+        if stop_after is not None and epoch + 1 >= int(stop_after):
+            print(f"arret apres l'epoch {epoch + 1} (stop_after_epoch, cosine sur {epochs})", flush=True)
+            break
 
     print(
         f"DINO termine. Init v20h : backbone_weights: {out_dir / 'encoder.pt'}",

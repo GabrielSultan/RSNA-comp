@@ -680,7 +680,8 @@ def main() -> None:
             torch.cuda.manual_seed_all(seed + epoch * 100_003)
         model.train()
         t0 = time.time()
-        running = 0.0
+        # Tensor, pas un float : loss.item() synchroniserait le GPU a chaque pas.
+        running = torch.zeros((), device=device)
         running_kd = 0.0
         nb = 0
         n_micro = steps_per_epoch
@@ -719,7 +720,7 @@ def main() -> None:
                     loss = loss + distil.lam * kd
             (loss / win_n).backward()
 
-            running += loss.item()
+            running += loss.detach()
             if log_every and (micro_i + 1) % log_every == 0:
                 print(f"  step {micro_i + 1}/{n_micro} | "
                       f"{time.time() - t0:.0f}s", flush=True)
@@ -744,11 +745,11 @@ def main() -> None:
                     vram = torch.cuda.max_memory_allocated() / 1e9 if device == "cuda" else 0.0
                     print(f"bench : {(time.time() - t_bench) / max(n_b, 1):.3f} s/step "
                           f"(steps {BENCH_WARMUP + 1}-{args.max_steps}) | VRAM max {vram:.1f} Go "
-                          f"| loss {running / max(nb, 1):.4f} | {steps_per_epoch} steps/epoch",
+                          f"| loss {(running / max(nb, 1)).item():.4f} | {steps_per_epoch} steps/epoch",
                           flush=True)
                     return
 
-        train_loss = running / max(nb, 1)
+        train_loss = (running / max(nb, 1)).item()
         train_kd = running_kd / max(nb, 1) if distil is not None else None
         per_target: dict[str, float] = {}
         gold_auc = None
