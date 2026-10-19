@@ -72,6 +72,9 @@ MODELS: dict[str, str] = {
     "kneenet_coat_d": "src.models.kneenet_coat_d",
     "kneenet_cnx_a": "src.models.kneenet_cnx_a",
     "kneenet_cnx_r7": "src.models.kneenet_cnx_r7",
+    "ieee_matched_resnet50": "IEEE.models.resnet50",
+    "ieee_matched_convnext": "IEEE.models.convnext",
+    "ieee_matched_vit": "IEEE.models.vit",
     "kneenet_mvlqm": "src.models.kneenet_mvlqm",
     "kneenet_mrx": "src.models.kneenet_mrx",
 }
