@@ -1,0 +1,136 @@
+{
+  "zip": "C:\\Users\\sulta\\Downloads\\archive (2).zip",
+  "extracted": "data/labels/expertsoft_v2",
+  "n_train": 1687,
+  "n_val": 652,
+  "n_oai": 0,
+  "train_uids": "memes UID que targets_v3b_rsna1687_distil_main.csv split=train",
+  "val_source": "data/labels/coolin/targets_v3b_hybrid025.csv",
+  "synovitis": "label v3b du subset distil (colonne absente du zip)",
+  "eleven": [
+    "ACL",
+    "MCL",
+    "Medial Meniscus",
+    "Lateral Meniscus",
+    "Medial OA",
+    "Lateral OA",
+    "PF OA",
+    "Effusion",
+    "Baker's",
+    "Contusion",
+    "Fracture"
+  ],
+  "report_group_overlap_train_val": 52,
+  "variants": [
+    {
+      "key": "soft",
+      "source": "soft_labels.csv",
+      "masked_by_accepted60": false,
+      "csv": "data/labels/coolin/targets_v3b_rsna1687_esv2_soft.csv",
+      "config": "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_soft.yaml",
+      "run_name": "subset_v20h_dino_ep11_v3b_rsna1687_esv2_soft_crop145",
+      "train_cell_coverage": 1.0,
+      "train_mean": {
+        "ACL": 0.2091,
+        "MCL": 0.1195,
+        "Medial Meniscus": 0.4677,
+        "Lateral Meniscus": 0.2807,
+        "Medial OA": 0.3511,
+        "Lateral OA": 0.3046,
+        "PF OA": 0.3772,
+        "Effusion": 0.4437,
+        "Baker's": 0.3532,
+        "Contusion": 0.3222,
+        "Fracture": 0.1327
+      }
+    },
+    {
+      "key": "calibrated",
+      "source": "calibrated_soft_labels.csv",
+      "masked_by_accepted60": false,
+      "csv": "data/labels/coolin/targets_v3b_rsna1687_esv2_calibrated.csv",
+      "config": "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_calibrated.yaml",
+      "run_name": "subset_v20h_dino_ep11_v3b_rsna1687_esv2_calibrated_crop145",
+      "train_cell_coverage": 1.0,
+      "train_mean": {
+        "ACL": 0.1142,
+        "MCL": 0.0217,
+        "Medial Meniscus": 0.3857,
+        "Lateral Meniscus": 0.1691,
+        "Medial OA": 0.1782,
+        "Lateral OA": 0.0964,
+        "PF OA": 0.2799,
+        "Effusion": 0.286,
+        "Baker's": 0.1126,
+        "Contusion": 0.1058,
+        "Fracture": 0.0563
+      }
+    },
+    {
+      "key": "accuracy",
+      "source": "accuracy_soft_labels.csv",
+      "masked_by_accepted60": false,
+      "csv": "data/labels/coolin/targets_v3b_rsna1687_esv2_accuracy.csv",
+      "config": "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_accuracy.yaml",
+      "run_name": "subset_v20h_dino_ep11_v3b_rsna1687_esv2_accuracy_crop145",
+      "train_cell_coverage": 1.0,
+      "train_mean": {
+        "ACL": 0.1438,
+        "MCL": 0.0548,
+        "Medial Meniscus": 0.403,
+        "Lateral Meniscus": 0.1927,
+        "Medial OA": 0.2346,
+        "Lateral OA": 0.1387,
+        "PF OA": 0.3593,
+        "Effusion": 0.3619,
+        "Baker's": 0.1799,
+        "Contusion": 0.1299,
+        "Fracture": 0.0902
+      }
+    },
+    {
+      "key": "strictmri",
+      "source": "strict_mri_oof_soft_labels.csv",
+      "masked_by_accepted60": false,
+      "csv": "data/labels/coolin/targets_v3b_rsna1687_esv2_strictmri.csv",
+      "config": "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_strictmri.yaml",
+      "run_name": "subset_v20h_dino_ep11_v3b_rsna1687_esv2_strictmri_crop145",
+      "train_cell_coverage": 1.0,
+      "train_mean": {
+        "ACL": 0.5106,
+        "MCL": 0.3941,
+        "Medial Meniscus": 0.5059,
+        "Lateral Meniscus": 0.5031,
+        "Medial OA": 0.4749,
+        "Lateral OA": 0.499,
+        "PF OA": 0.4692,
+        "Effusion": 0.5196,
+        "Baker's": 0.4916,
+        "Contusion": 0.5029,
+        "Fracture": 0.4123
+      }
+    },
+    {
+      "key": "acc60",
+      "source": "accuracy_soft_labels.csv",
+      "masked_by_accepted60": true,
+      "csv": "data/labels/coolin/targets_v3b_rsna1687_esv2_acc60.csv",
+      "config": "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_acc60.yaml",
+      "run_name": "subset_v20h_dino_ep11_v3b_rsna1687_esv2_acc60_crop145",
+      "train_cell_coverage": 0.5961,
+      "train_mean": {
+        "ACL": 0.097,
+        "MCL": 0.0152,
+        "Medial Meniscus": 0.3242,
+        "Lateral Meniscus": 0.1119,
+        "Medial OA": 0.1026,
+        "Lateral OA": 0.0345,
+        "PF OA": 0.2735,
+        "Effusion": 0.2778,
+        "Baker's": 0.0454,
+        "Contusion": 0.0199,
+        "Fracture": 0.0349
+      }
+    }
+  ]
+}
