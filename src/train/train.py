@@ -12,7 +12,8 @@
   candidat (hash UID stable, pas PYTHONHASHSEED). grid_sample CUDA peut
   encore jitter (warn_only).
 - Augmentation GPU dans la boucle ; normalisation ImageNet dans KneeNet.
-- Checkpoint du meilleur macro-AUC val -> checkpoints/<run>/best.pt
+- Checkpoint du meilleur macro-AUC val -> <run_root>/<run>/best.pt
+  (run_root vaut checkpoints si le YAML ne le fixe pas)
 - Early stopping sur la val AUC (patience dans le YAML).
 - Val loss (BCE, pas d'aug) loggee chaque epoch pour comparer a la train loss.
 - Macro-AUC gold (58) loggee chaque epoch, jamais utilisee pour piloter.
@@ -451,8 +452,10 @@ def main() -> None:
         return
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    run_dir = Path("checkpoints") / cfg["run_name"]
+    run_root = Path(str(cfg.get("run_root") or "checkpoints"))
+    run_dir = run_root / cfg["run_name"]
     run_dir.mkdir(parents=True, exist_ok=True)
+    print(f"run_dir : {run_dir}", flush=True)
 
     train_ld, val_ld, targets = make_loaders(
         labels_csv=cfg["labels_csv"], series_csv=cfg["series_csv"],
