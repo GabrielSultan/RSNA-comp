@@ -55,12 +55,13 @@ FROZEN = [
 MSG = (
     "ens ViT-k320 v20h_full OAI3 SWA 1-3 + v20b OAI SWA + "
     "v20h distil crop145 SWA 7-9 + CoAt OAI SWA + CNX-r7 SWA 7-10, "
-    "mix lineaire 70% + public degnonguidi 30%, rang, sans TTA, pas de flip, T4"
+    "mix lineaire 70% + public degnonguidi 30%, rang, sans TTA, pas de flip, "
+    "mix sur 2 T4, Raptor 384 et 224 en parallele"
 )
 
 MD = """# RSNA Knee — rsna-knee-ens-cnx-pub70
 
-**Sans TTA.** Internet off, **T4**. Pas de flip.
+**Sans TTA.** Internet off, **deux T4**. Pas de flip.
 
 1. Mix lineaire de 5 modeles, poids par finding
    (ViT-k320 / v20b / v20h distil / CoAt-a / CNX-r7).
@@ -76,17 +77,19 @@ MD = """# RSNA Knee — rsna-knee-ens-cnx-pub70
    CoAt-a : SWA OAI 1-3 (gold 0.988). Entree 224, FOV 130 mm.
    CNX-r7 : `cnx_r7_in22k_v3b_oofmask_full` SWA 7-10 (gold 0.976).
    Entree 224, FOV 130 mm. ConvNeXt-Small IN-22k.
-   Budget 3 h, puis la memoire GPU est liberee.
+   Les etudes sont coupees sur les deux T4 (une copie des 5 modeles par carte).
+   Une seule etude est decodee a la fois. Budget 5 h, puis la memoire est rendue.
 2. Notebook public `degnonguidi/rnsa-best-public-score`.
-   Echeance 8.3 h depuis le debut du notebook.
+   Raptor-384 puis Raptor-224, l'un apres l'autre (les deux ensembles depassent la RAM).
+   Echeance 8,9 h depuis le debut du notebook.
 3. Fusion par rangs, **70 %** le mix des 5 modeles et **30 %** la solution publique.
 """
 
 CLOCK = """import time
 NB_T0 = time.time()
-MIX5_BUDGET_S = 3.0 * 3600
+MIX5_BUDGET_S = 5.0 * 3600
 print('horloge depart', flush=True)
-print('budget mix5 h', MIX5_BUDGET_S / 3600, '| echeance publique h 8.3', flush=True)
+print('budget mix5 h', MIX5_BUDGET_S / 3600, '| echeance publique h 8.9', flush=True)
 """
 
 SAVE = """# Scores du mix 5, puis liberation du GPU avant Raptor.
@@ -98,9 +101,15 @@ mix_csv = out_dir / 'mix5_probs.csv'
 pred.to_csv(mix_csv, index=False)
 print('MIX5_SCORED', len(pred), '|', mix_csv, flush=True)
 del model_vit, model_v20b, model_v20h, model_coat, model_cnx
+del model_vit_b, model_v20b_b, model_v20h_b, model_coat_b, model_cnx_b
 gc.collect()
 if torch.cuda.is_available():
     torch.cuda.empty_cache()
+try:
+    import ctypes
+    ctypes.CDLL('libc.so.6').malloc_trim(0)
+except Exception:
+    pass
 print('GPU mix5 libere', flush=True)
 """
 
@@ -292,6 +301,153 @@ def _patch_v20h(nb: dict) -> None:
     _replace_nb(nb, "'swa-6-7-8', [6, 7, 8]", "'swa-7-8-9', [7, 8, 9]", 1)
 
 
+_MIX2_LOOP = """import copy
+import threading
+from concurrent.futures import ThreadPoolExecutor
+
+_TLS = threading.local()
+
+
+def _center_crop(img, row_mm, col_mm):
+    crop_mm = float(getattr(_TLS, 'crop_mm', CROP_MM))
+    h, w = img.shape[:2]
+    if row_mm is not None and col_mm is not None and row_mm > 0 and col_mm > 0:
+        ch = min(h, max(8, int(round(crop_mm / row_mm))))
+        cw = min(w, max(8, int(round(crop_mm / col_mm))))
+    else:
+        ch = min(h, max(8, int(round(h * CROP_REL))))
+        cw = min(w, max(8, int(round(w * CROP_REL))))
+    y0, x0 = (h - ch) // 2, (w - cw) // 2
+    return img[y0:y0 + ch, x0:x0 + cw]
+
+
+def load_series_dicom(series_dir, img_size=224):
+    cache = getattr(_TLS, 'series_cache', None)
+    if cache is None:
+        cache = {}
+        _TLS.series_cache = cache
+    key = str(Path(series_dir))
+    if key not in cache:
+        cache[key] = _series_band(series_dir)
+    band = cache[key]
+    size = int(img_size)
+    out = np.empty((band.shape[0], size, size), dtype=np.uint8)
+    for i in range(band.shape[0]):
+        sl = band[i]
+        if sl.shape != (size, size):
+            sl = cv2.resize(sl, (size, size), interpolation=cv2.INTER_AREA)
+        out[i] = np.clip(np.asarray(sl, dtype=np.float32) * 255.0, 0, 255).round().astype(np.uint8)
+    return out
+
+
+def _split_gpu(model):
+    model.cpu()
+    replica = copy.deepcopy(model)
+    return model.to('cuda:0').eval(), replica.to('cuda:1').eval()
+
+
+n_gpu = torch.cuda.device_count() if DEVICE == 'cuda' else 0
+if n_gpu < 2:
+    raise RuntimeError(('attendu 2 GPU', n_gpu))
+model_vit, model_vit_b = _split_gpu(model_vit)
+model_v20b, model_v20b_b = _split_gpu(model_v20b)
+model_v20h, model_v20h_b = _split_gpu(model_v20h)
+model_coat, model_coat_b = _split_gpu(model_coat)
+model_cnx, model_cnx_b = _split_gpu(model_cnx)
+import gc as _gc
+print('gpus mix 2 | cuda:0 cuda:1 | decode 1 etude a la fois', flush=True)
+_gc.collect()
+packs = {
+    'cuda:0': (model_vit, model_v20b, model_v20h, model_coat, model_cnx),
+    'cuda:1': (model_vit_b, model_v20b_b, model_v20h_b, model_coat_b, model_cnx_b),
+}
+_DECODE_LOCK = threading.Lock()
+
+
+def _trim_ram():
+    _gc.collect()
+    try:
+        import ctypes
+        ctypes.CDLL('libc.so.6').malloc_trim(0)
+    except Exception:
+        pass
+
+
+def _forward_on(model, x):
+    with torch.autocast('cuda', dtype=AMP_DTYPE):
+        return model(x)
+
+
+def _decode_study(uid):
+    with _DECODE_LOCK:
+        _TLS.series_cache = {}
+        srows = test_series[test_series.StudyInstanceUID == uid]
+        sdir = TEST_SERIES_DIR / uid
+        _TLS.crop_mm = 130.0
+        vol_224 = study_to_tensor(sdir, srows, n_series=6, laterality=False, img_size=224)
+        vol_vit = study_to_tensor(sdir, srows, n_series=6, laterality=False, img_size=320)
+        _TLS.series_cache = {}
+        _TLS.crop_mm = 145.0
+        vol_h = study_to_tensor(sdir, srows, n_series=6, laterality=False, img_size=224)
+        _TLS.series_cache = {}
+        _TLS.crop_mm = 130.0
+        return vol_224, vol_vit, vol_h
+
+
+def _score_shard(dev, uids):
+    torch.cuda.set_device(dev)
+    m_vit, m_v20b, m_v20h, m_coat, m_cnx = packs[dev]
+    local = {}
+    t0 = time.time()
+    for n, uid in enumerate(uids):
+        if time.time() - NB_T0 > MIX5_BUDGET_S:
+            print(f'MIX5_BUDGET {dev} {n}/{len(uids)}', flush=True)
+            break
+        vol_224, vol_vit, vol_h = _decode_study(uid)
+        if vol_vit.shape[-1] != 320 or vol_224.shape[-1] != 224 or vol_h.shape[-1] != 224:
+            raise RuntimeError((uid, vol_vit.shape, vol_224.shape, vol_h.shape))
+        x_224 = torch.from_numpy(vol_224).unsqueeze(0).to(dev)
+        x_vit = torch.from_numpy(vol_vit).unsqueeze(0).to(dev)
+        x_h = torch.from_numpy(vol_h).unsqueeze(0).to(dev)
+        del vol_224, vol_vit, vol_h
+        with torch.no_grad():
+            p_vit = torch.sigmoid(_forward_on(m_vit, x_vit).float())
+            p_v20b = torch.sigmoid(_forward_on(m_v20b, x_224).float())
+            p_v20h = torch.sigmoid(_forward_on(m_v20h, x_h).float())
+            p_coat = torch.sigmoid(_forward_on(m_coat, x_224).float())
+            with torch.autocast('cuda', enabled=False):
+                p_cnx = torch.sigmoid(m_cnx(x_224.float()).float())
+            w = torch.tensor(MIX, dtype=torch.float32, device=dev)
+            prob = (
+                w[:, 0] * p_vit + w[:, 1] * p_v20b + w[:, 2] * p_v20h
+                + w[:, 3] * p_coat + w[:, 4] * p_cnx
+            ).float().cpu().numpy()[0]
+            del p_vit, p_v20b, p_v20h, p_coat, p_cnx, w
+        del x_224, x_vit, x_h
+        local[uid] = prob
+        if (n + 1) % 20 == 0:
+            _trim_ram()
+            print(f'{dev} {n + 1}/{len(uids)} | {(time.time() - t0) / 60:.1f} min', flush=True)
+    _trim_ram()
+    return local
+
+
+uids = [str(u) for u in test.StudyInstanceUID]
+with ThreadPoolExecutor(max_workers=2) as pool:
+    fa = pool.submit(_score_shard, 'cuda:0', uids[0::2])
+    fb = pool.submit(_score_shard, 'cuda:1', uids[1::2])
+    scored = fa.result()
+    scored.update(fb.result())
+missing = [u for u in uids if u not in scored]
+if missing and time.time() - NB_T0 < MIX5_BUDGET_S - 30:
+    raise RuntimeError(('etudes manquantes', len(missing), len(uids)))
+rows = [[u] + scored[u].tolist() for u in uids if u in scored]
+pred = pd.DataFrame(rows, columns=['StudyInstanceUID'] + TARGETS)
+print(f'MIX5_COVERAGE {len(pred)}/{len(test)}', flush=True)
+pred.head()
+"""
+
+
 def _patch_cnx(nb: dict, rows: list[tuple[float, ...]]) -> None:
     _replace_nb(
         nb,
@@ -342,7 +498,7 @@ def _patch_cnx(nb: dict, rows: list[tuple[float, ...]]) -> None:
     _replace_nb(
         nb,
         "print(len(test), 'etudes | sans TTA | pas de flip | FOV vit/v20b/coat 130 mm, v20h 145 mm')\n",
-        "print(len(test), 'etudes | sans TTA | pas de flip | FOV vit/v20b/coat/cnx 130 mm, v20h 145 mm | cnx forward fp32')\n",
+        "print(len(test), 'etudes | sans TTA | pas de flip | FOV vit/v20b/coat/cnx 130 mm, v20h 145 mm | cnx forward fp32 | 2 GPU')\n",
         1,
     )
     _replace_nb(nb, "or len(w) != 4:", "or len(w) != 5:", 1)
@@ -369,14 +525,43 @@ def _patch_cnx(nb: dict, rows: list[tuple[float, ...]]) -> None:
         "        ).cpu().numpy()[0]\n",
         1,
     )
-    old = "    for i, uid in enumerate(test.StudyInstanceUID):\n"
-    new = (
-        "    for i, uid in enumerate(test.StudyInstanceUID):\n"
-        "        if time.time() - NB_T0 > MIX5_BUDGET_S:\n"
-        "            print(f'MIX5_BUDGET {i}/{len(test)}', flush=True)\n"
-        "            break\n"
-    )
-    _replace_nb(nb, old, new, 1)
+    old_loop = """rows = []
+t0 = time.time()
+with torch.no_grad():
+    for i, uid in enumerate(test.StudyInstanceUID):
+        _SERIES_CACHE.clear()
+        srows = test_series[test_series.StudyInstanceUID == uid]
+        sdir = TEST_SERIES_DIR / uid
+        CROP_MM = 130.0
+        vol_224 = study_to_tensor(sdir, srows, n_series=6, laterality=False, img_size=224)
+        vol_vit = study_to_tensor(sdir, srows, n_series=6, laterality=False, img_size=320)
+        _SERIES_CACHE.clear()
+        CROP_MM = 145.0
+        vol_h = study_to_tensor(sdir, srows, n_series=6, laterality=False, img_size=224)
+        CROP_MM = 130.0
+        if vol_vit.shape[-1] != 320 or vol_224.shape[-1] != 224 or vol_h.shape[-1] != 224:
+            raise RuntimeError((vol_vit.shape, vol_224.shape, vol_h.shape))
+        x_224 = torch.from_numpy(vol_224).unsqueeze(0).to(DEVICE)
+        x_vit = torch.from_numpy(vol_vit).unsqueeze(0).to(DEVICE)
+        x_h = torch.from_numpy(vol_h).unsqueeze(0).to(DEVICE)
+        p_vit = torch.sigmoid(_forward(model_vit, x_vit).float())
+        p_v20b = torch.sigmoid(_forward(model_v20b, x_224).float())
+        p_v20h = torch.sigmoid(_forward(model_v20h, x_h).float())
+        p_coat = torch.sigmoid(_forward(model_coat, x_224).float())
+        with torch.autocast('cuda', enabled=False):
+            p_cnx = torch.sigmoid(model_cnx(x_224.float()).float())
+        w = torch.tensor(MIX, dtype=torch.float32, device=p_vit.device)
+        prob = (
+            w[:, 0] * p_vit + w[:, 1] * p_v20b + w[:, 2] * p_v20h + w[:, 3] * p_coat + w[:, 4] * p_cnx
+        ).cpu().numpy()[0]
+        rows.append([uid] + prob.tolist())
+        if (i + 1) % 50 == 0:
+            print(f'{i+1}/{len(test)} | {(time.time()-t0)/60:.1f} min', flush=True)
+
+pred = pd.DataFrame(rows, columns=['StudyInstanceUID'] + TARGETS)
+pred.head()
+"""
+    _replace_nb(nb, old_loop, _MIX2_LOOP, 1)
 
 
 def _patch_public(cells: list[dict]) -> None:
@@ -406,6 +591,78 @@ def _patch_public(cells: list[dict]) -> None:
     if blend.count(old_raise) != 1:
         raise SystemExit("garde 50% introuvable")
     _set(cells[6], blend.replace(old_raise, new_raise, 1))
+    src4 = _text(cells[4])
+    old_dead = "DEADLINE_HOURS = 8.3\n"
+    if src4.count(old_dead) != 1:
+        raise SystemExit(f"DEADLINE x{src4.count(old_dead)}")
+    _set(cells[4], src4.replace(old_dead, "DEADLINE_HOURS = 8.9\n", 1))
+    run = _text(cells[1])
+    old_run = """_t384 = time.time()
+rc = subprocess.run([sys.executable, '-u', '/tmp/raptor_run.py'], timeout=2 * 3600).returncode
+if rc != 0:
+    raise RuntimeError('Raptor stage failed with exit code %d' % rc)
+for f in ('raptor_sub.csv', 'raptor_raw.csv'):
+    assert os.path.isfile('/kaggle/working/' + f), f + ' missing'
+RAPTOR_SECONDS = time.time() - _t384
+print('RAPTOR_STAGE_DONE seconds %.0f' % RAPTOR_SECONDS, flush=True)
+subprocess.run(['nvidia-smi', '--query-gpu=index,memory.used', '--format=csv,noheader'], check=False)
+"""
+    new_run = """_t384 = time.time()
+import gc as _gc
+import ctypes as _ct
+_gc.collect()
+if torch.cuda.is_available():
+    torch.cuda.empty_cache()
+try:
+    _ct.CDLL('libc.so.6').malloc_trim(0)
+except Exception:
+    pass
+rc = subprocess.run([sys.executable, '-u', '/tmp/raptor_run.py'], timeout=2 * 3600).returncode
+if rc != 0:
+    raise RuntimeError('Raptor stage failed with exit code %d' % rc)
+for f in ('raptor_sub.csv', 'raptor_raw.csv'):
+    assert os.path.isfile('/kaggle/working/' + f), f + ' missing'
+RAPTOR_SECONDS = time.time() - _t384
+print('RAPTOR_STAGE_DONE seconds %.0f' % RAPTOR_SECONDS, flush=True)
+print('RAPTOR_SEQUENTIEL', flush=True)
+subprocess.run(['nvidia-smi', '--query-gpu=index,memory.used', '--format=csv,noheader'], check=False)
+"""
+    if run.count(old_run) != 1:
+        raise SystemExit("lancement raptor 384 introuvable")
+    _set(cells[1], run.replace(old_run, new_run, 1))
+    run224 = _text(cells[3])
+    old224 = """_t224 = time.time()
+rc = subprocess.run([sys.executable, '-u', '/tmp/raptor224_run.py'], timeout=2 * 3600).returncode
+if rc != 0:
+    raise RuntimeError('Raptor-224 stage failed with exit code %d' % rc)
+for f in ('raptor224_sub.csv', 'raptor224_raw.csv'):
+    assert os.path.isfile('/kaggle/working/' + f), f + ' missing'
+RAPTOR224_SECONDS = time.time() - _t224
+print('RAPTOR224_STAGE_DONE seconds %.0f' % RAPTOR224_SECONDS, flush=True)
+subprocess.run(['nvidia-smi', '--query-gpu=index,memory.used', '--format=csv,noheader'], check=False)
+"""
+    new224 = """_t224 = time.time()
+import gc as _gc
+import ctypes as _ct
+_gc.collect()
+if torch.cuda.is_available():
+    torch.cuda.empty_cache()
+try:
+    _ct.CDLL('libc.so.6').malloc_trim(0)
+except Exception:
+    pass
+rc = subprocess.run([sys.executable, '-u', '/tmp/raptor224_run.py'], timeout=2 * 3600).returncode
+if rc != 0:
+    raise RuntimeError('Raptor-224 stage failed with exit code %d' % rc)
+for f in ('raptor224_sub.csv', 'raptor224_raw.csv'):
+    assert os.path.isfile('/kaggle/working/' + f), f + ' missing'
+RAPTOR224_SECONDS = time.time() - _t224
+print('RAPTOR224_STAGE_DONE seconds %.0f' % RAPTOR224_SECONDS, flush=True)
+subprocess.run(['nvidia-smi', '--query-gpu=index,memory.used', '--format=csv,noheader'], check=False)
+"""
+    if run224.count(old224) != 1:
+        raise SystemExit("lancement raptor 224 introuvable")
+    _set(cells[3], run224.replace(old224, new224, 1))
 
 
 def _cnx_cell() -> dict:
@@ -469,9 +726,13 @@ def write_nb() -> str:
         "kneenet_cnx_r7",
         "N_MODELS = 5",
         f"({acl[0]:.2f}, {acl[1]:.2f}, {acl[2]:.2f}, {acl[3]:.2f}, {acl[4]:.2f})",
-        "CROP_MM = 145.0",
+        "_TLS.crop_mm = 145.0",
         "laterality=False",
         "MIX5_BUDGET_S",
+        "gpus mix 2 | cuda:0 cuda:1",
+        "MIX5_COVERAGE",
+        "RAPTOR_SEQUENTIEL",
+        "DEADLINE_HOURS = 8.9",
         "model_cnx",
         "w[:, 4] * p_cnx",
         "raptor_ft_alldata_t16_blendjev_oai_d96_r384_swa.pt",
@@ -492,6 +753,7 @@ def write_nb() -> str:
         "W_MIX4, W_PUBLIC = 0.60, 0.40",
         "N_MODELS = 4",
         "(0.09, 0.32, 0.55, 0.04)",
+        "DEADLINE_HOURS = 8.3",
     ):
         if banned in blob:
             raise SystemExit(f"residu {banned}")
@@ -648,6 +910,9 @@ def submit(version: str) -> None:
         "poids mix5 0.70 public 0.30",
         "BLEND70_OK",
         "sans TTA",
+        "gpus mix 2 | cuda:0 cuda:1",
+        "MIX5_COVERAGE 3/3",
+        "RAPTOR_SEQUENTIEL",
         "lignes 3",
     ):
         if needle not in text:
