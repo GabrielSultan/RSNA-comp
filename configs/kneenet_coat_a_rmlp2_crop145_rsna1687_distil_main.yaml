@@ -7,13 +7,15 @@
 # Ici : la meme famille timm en 224 (poids IN-12k deja sur disque,
 # RelPosMlp, 1024-d, stages 2/6/14/2, 72.9 M). Le graphe CoAt-a
 # reste (CAM, BiLSTM, 6 slots, norme 0.5).
-# Le run sans gel (lr 5e-5 sur les 24 blocs des le pas 0) est reste
-# au hasard : val AUC 0.536 puis 0.511, loss train 0.693. Les features
-# IN-12k sont bonnes (std 2.4) et la tete gele apprend (0.69 -> 0.40
-# en 12 pas sur un batch fixe). Il faut donc le gel d'une epoch, puis
-# un re-warmup complet au degel. LLRD 0.97 : sur 24 blocs le stem reste
-# a ~0.5 du pic, pas le 0.8 qui le gele. Pic backbone 1e-4, comme CoAt-0
-# qui apprenait. Mesure : meme split et meme teacher que
+# Sans gel, lr 5e-5 partout : val AUC 0.536 puis 0.511.
+# Gel 1 epoch + LLRD 0.97 : epoch 1 (gele) val 0.722 / gold 0.670,
+# puis le degel casse tout (epoch 2 val 0.519, et ca reste vers 0.55).
+# 0.97 sur 24 blocs laisse le stem a 4.8e-5, le meme ordre que le
+# 5e-5 uniforme qui detruisait deja les features. CoAt-0 qui apprenait
+# (val 0.79, 14 blocs, LLRD 0.8) avait le stem a 4.4e-6 et le bloc 1
+# a 5.5e-6. Sur 24 blocs, le meme ecart demande LLRD 0.88
+# (stem 4.7e-6, bloc 1 5.3e-6, pic 1e-4). 0.8 mettrait le stem a 4.7e-7.
+# Mesure : meme split et meme teacher que
 # subset_v20h_dino_ep11_v3b_rsna1687_distil_main_crop145.
 # 3070 8 Go. Banc pire cas (144 coupes valides, bf16, backward) :
 #   chunk 8  -> 7.7 s/step, 3.8 Go
@@ -24,7 +26,7 @@
 #
 #   python -X utf8 -m src.train.train --config configs/kneenet_coat_a_rmlp2_crop145_rsna1687_distil_main.yaml
 
-run_name: subset_coat_a_rmlp2_freeze_crop145_rsna1687_distil_main
+run_name: subset_coat_a_rmlp2_llrd088_freeze_crop145_rsna1687_distil_main
 model: kneenet_coat_a
 n_series: 6
 backbone: coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k
@@ -54,7 +56,7 @@ save_epochs: []
 early_stop_patience: 0
 skip_gold: false
 
-llrd: 0.97
+llrd: 0.88
 no_decay: true
 freeze_encoder_epochs: 1
 unfreeze_rewarm_frac: 1.0
