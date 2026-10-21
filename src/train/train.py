@@ -820,7 +820,7 @@ def main() -> None:
         try:
             _atomic_torch_save(
                 payload, last_p,
-                also=(run_dir / "best.pt") if improved else None)
+                also=(run_dir / "best.pt") if improved and cfg.get("save_best", True) else None)
             saved = True
         except RuntimeError as e:
             print(f"  !! {e}", flush=True)
@@ -832,7 +832,7 @@ def main() -> None:
                 print(f"  -> snapshot {snap.name}", flush=True)
             except RuntimeError as e:
                 print(f"  !! snapshot {snap.name} : {e}", flush=True)
-        if improved:
+        if improved and cfg.get("save_best", True):
             if saved:
                 print(f"  -> checkpoint (best {best_auc:.4f})", flush=True)
             else:
