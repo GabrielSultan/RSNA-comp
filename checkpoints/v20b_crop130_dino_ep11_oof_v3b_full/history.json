@@ -1,0 +1,102 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.4661071956509574,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 0.0001,
+    "lr_backbone_max": 0.0001,
+    "gold_macro_auc": 0.8848548815193836
+  },
+  {
+    "epoch": 2,
+    "loss": 0.38563797800893895,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 9.931930054580081e-05,
+    "lr_backbone_max": 9.931930054580081e-05,
+    "gold_macro_auc": 0.923411271830017
+  },
+  {
+    "epoch": 3,
+    "loss": 0.3671838918211891,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 9.729329970237601e-05,
+    "lr_backbone_max": 9.729329970237601e-05,
+    "gold_macro_auc": 0.9421657726241522
+  },
+  {
+    "epoch": 4,
+    "loss": 0.35835448701905726,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 9.397726092750157e-05,
+    "lr_backbone_max": 9.397726092750157e-05,
+    "gold_macro_auc": 0.9530035403168662
+  },
+  {
+    "epoch": 5,
+    "loss": 0.3530562635744625,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 8.94616371146881e-05,
+    "lr_backbone_max": 8.94616371146881e-05,
+    "gold_macro_auc": 0.9554136646824686
+  },
+  {
+    "epoch": 6,
+    "loss": 0.3478015546604896,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 8.386960271019644e-05,
+    "lr_backbone_max": 8.386960271019644e-05,
+    "gold_macro_auc": 0.9609554743590875
+  },
+  {
+    "epoch": 7,
+    "loss": 0.34513053858312664,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 7.735369383523536e-05,
+    "lr_backbone_max": 7.735369383523536e-05,
+    "gold_macro_auc": 0.9658484164712654
+  },
+  {
+    "epoch": 8,
+    "loss": 0.3409443521342637,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 7.00916474982071e-05,
+    "lr_backbone_max": 7.00916474982071e-05,
+    "gold_macro_auc": 0.9707156012190001
+  },
+  {
+    "epoch": 9,
+    "loss": 0.3384060384900217,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 6.228155339244383e-05,
+    "lr_backbone_max": 6.228155339244383e-05,
+    "gold_macro_auc": 0.9735574190346727
+  },
+  {
+    "epoch": 10,
+    "loss": 0.3364096962382423,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 5.4136450525754945e-05,
+    "lr_backbone_max": 5.4136450525754945e-05,
+    "gold_macro_auc": 0.9761357969016834
+  }
+]

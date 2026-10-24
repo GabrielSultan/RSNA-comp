@@ -1,0 +1,26 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130_320 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=320
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+RadImageNet ResNet-50 charge : weights\ResNet50.pt | entree 320 | CAM 20x20 | BiLSTM hidden 256 | slots 6
+kneenet_v20b320 (resnet50) : 30.5M params
+pos_weight desactive (BCE simple)
+accumulation x2 | batch 2 | effectif 4 | opt steps/epoch 231 (micro 462)
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 3 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 320 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 462
+epoch 1/10 | train 0.5488 | val 0.4881 | val AUC 0.6599 | gold AUC 0.6433 | proba std 0.1929 | 2576s
+  -> checkpoint (best 0.6599)
+epoch 2/10 | train 0.5079 | val 0.4831 | val AUC 0.7013 | gold AUC 0.6769 | proba std 0.2067 | 2614s
+  -> checkpoint (best 0.7013)

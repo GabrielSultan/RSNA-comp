@@ -1,0 +1,13 @@
+v8 => ConvNeXt + attn 12 tetes (public LB 0.876)
+v8bis => v8 + ConvNeXt-Small (prior-init, encodeur gele 2 epochs, lr 2e-5)
+v9 => ConvNeXt avec tentative d'un slot T1 suplémentaire + attn
+v10 => ResNet 50 (RadImageNet) + attn
+v11 => ResNet 50 + A+B diffs k-1/k/k+1 + stem_mix + attn (public LB 0.914)
+v12 => v11 + train sur solution D (subset, sous v11)
+v13 => v10 + Temporal Shift sur les tokens (solution C, subset sous v11)
+v14 => v11 + pooling spatial 7x7 (CAM appris, softmax par cible)
+v14bis => v14 + conv depthwise 3x3 (voisinage) avant spatial_score
+v15 => v14 + attn_score sur le token CAM 7x7 (choix de coupe par tete, sous v14)
+v16 => v14 + CAM 14x14 (layer4 dilated, output stride 16)
+v17 => v16 + BiLSTM profondeur (residu init 0, hidden 256) (public LB 0.934 @ ep12)
+v17bis => v17 sur crop130 320x320 (CAM 20x20, subset echec)

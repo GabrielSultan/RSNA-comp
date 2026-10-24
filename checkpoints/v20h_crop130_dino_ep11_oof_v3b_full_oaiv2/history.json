@@ -1,0 +1,15 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.45847565624238745,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 0.0001,
+    "lr_backbone_max": 0.0001,
+    "gold_macro_auc": 0.9013196353365059,
+    "head_out_w_div": 0.0059116738848388195,
+    "head_out_b_div": 0.004060173407196999,
+    "label_embed_abs": 0.003316970309242606
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "ckpt": "checkpoints\\v20b_crop130_oofmask_full\\epoch8.pt",
+  "epoch": 8,
+  "device": "cuda",
+  "splits": {
+    "gold": {
+      "n_studies": 58,
+      "delta_vs_softmax": {
+        "softmax": 0.0,
+        "token_max": -0.03981341259450932,
+        "token_top2": -0.030846840619047855,
+        "logit_max": -0.08240599811092153,
+        "logit_top2": -0.06174567501910255,
+        "logit_mean": -0.038321897356669354,
+        "logit_soft8": -0.0502164290624485,
+        "mix_dino": -0.04558378318298095,
+        "oracle_per_target": 0.0
+      },
+      "macros": {
+        "softmax": 0.9593223634133367,
+        "token_max": 0.9195089508188273,
+        "token_top2": 0.9284755227942888,
+        "logit_max": 0.8769163653024151,
+        "logit_top2": 0.8975766883942341,
+        "logit_mean": 0.9210004660566673,
+        "logit_soft8": 0.9091059343508882,
+        "mix_dino": 0.9137385802303557,
+        "oracle_per_target": 0.9593223634133367
+      }
+    }
+  }
+}

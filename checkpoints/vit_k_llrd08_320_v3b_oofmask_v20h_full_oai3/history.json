@@ -1,0 +1,32 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.3053082087726553,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 3.0738954189810975e-06,
+    "lr_backbone_max": 4.473106555787812e-05,
+    "gold_macro_auc": 0.9861421261124789
+  },
+  {
+    "epoch": 2,
+    "loss": 0.28970963403698646,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 1.8601856168446053e-06,
+    "lr_backbone_max": 2.7069263405349982e-05,
+    "gold_macro_auc": 0.9903331965121169
+  },
+  {
+    "epoch": 3,
+    "loss": 0.2757521885262965,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 5.547008859252116e-07,
+    "lr_backbone_max": 8.071960269083667e-06,
+    "gold_macro_auc": 0.9944572767019914
+  }
+]

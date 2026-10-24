@@ -1,0 +1,13 @@
+{
+  "csv": "data\\labels\\teacher_vite_subset_e.csv",
+  "lambda": 0.3,
+  "temp": 1.0,
+  "targets": [
+    "MCL",
+    "Medial Meniscus",
+    "Effusion"
+  ],
+  "teacher_n": 924,
+  "train_hit": 924,
+  "train_n": 924
+}

@@ -1,0 +1,20 @@
+{
+  "macro_auc": 0.9681006401250082,
+  "per_target": {
+    "ACL": 1.0,
+    "MCL": 1.0,
+    "Medial Meniscus": 0.9819711538461539,
+    "Lateral Meniscus": 0.9652173913043479,
+    "Medial OA": 1.0,
+    "Lateral OA": 0.8955512572533849,
+    "PF OA": 0.9395109395109394,
+    "Effusion": 0.9975155279503106,
+    "Synovitis": 0.8853046594982079,
+    "Baker's": 1.0,
+    "Contusion": 0.9743589743589743,
+    "Fracture": 0.9777777777777779
+  },
+  "epoch": 8,
+  "ckpt": "checkpoints\\v20h_crop145_dino_ep11_oof_v3b_full_oaiv2_wd01\\last.pt",
+  "gold_in_train": true
+}

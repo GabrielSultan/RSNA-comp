@@ -1,0 +1,208 @@
+{
+  "n_manifest_ok": 21594,
+  "n_raw_p50": 30.0,
+  "band_n_p50": 20.0,
+  "dup_linspace_p50": 4.0,
+  "by_plane": {
+    "Axial": {
+      "n_series": 5263,
+      "n_raw_p50": 32.0,
+      "n_raw_p10": 22.0,
+      "n_raw_p90": 44.0,
+      "band_n_p50": 20.0,
+      "dup_linspace_p50": 4.0
+    },
+    "Coronal": {
+      "n_series": 7664,
+      "n_raw_p50": 30.0,
+      "n_raw_p10": 18.0,
+      "n_raw_p90": 36.0,
+      "band_n_p50": 20.0,
+      "dup_linspace_p50": 4.0
+    },
+    "Sagittal": {
+      "n_series": 8667,
+      "n_raw_p50": 30.0,
+      "n_raw_p10": 22.0,
+      "n_raw_p90": 36.0,
+      "band_n_p50": 20.0,
+      "dup_linspace_p50": 4.0
+    }
+  },
+  "studies": 4407,
+  "studies_with_ge2_cands_any_slot": 1936,
+  "pct_studies_multi_cand": 43.9,
+  "n_cands_per_slot_mean": 0.9216776340670146,
+  "proba_std_by_epoch": {
+    "subset_vit_dinov3_e_crop130_frac025": [
+      {
+        "epoch": 1,
+        "proba_std": 0.1448550671339035
+      },
+      {
+        "epoch": 2,
+        "proba_std": 0.13409946858882904
+      },
+      {
+        "epoch": 3,
+        "proba_std": 0.1972198337316513
+      },
+      {
+        "epoch": 4,
+        "proba_std": 0.2186812460422516
+      },
+      {
+        "epoch": 5,
+        "proba_std": 0.21625910699367523
+      },
+      {
+        "epoch": 6,
+        "proba_std": 0.2526213228702545
+      },
+      {
+        "epoch": 7,
+        "proba_std": 0.259366512298584
+      }
+    ],
+    "subset_vit_k_llrd08_frac025": [
+      {
+        "epoch": 1,
+        "proba_std": 0.14727452397346497
+      },
+      {
+        "epoch": 2,
+        "proba_std": 0.16415919363498688
+      },
+      {
+        "epoch": 3,
+        "proba_std": 0.20590762794017792
+      },
+      {
+        "epoch": 4,
+        "proba_std": 0.2744978666305542
+      },
+      {
+        "epoch": 5,
+        "proba_std": 0.26080501079559326
+      },
+      {
+        "epoch": 6,
+        "proba_std": 0.21226873993873596
+      },
+      {
+        "epoch": 7,
+        "proba_std": 0.2872397303581238
+      },
+      {
+        "epoch": 8,
+        "proba_std": 0.3069857060909271
+      },
+      {
+        "epoch": 9,
+        "proba_std": 0.3440000116825104
+      },
+      {
+        "epoch": 10,
+        "proba_std": 0.335103839635849
+      },
+      {
+        "epoch": 11,
+        "proba_std": 0.33217307925224304
+      },
+      {
+        "epoch": 12,
+        "proba_std": 0.348273366689682
+      },
+      {
+        "epoch": 13,
+        "proba_std": 0.35438212752342224
+      },
+      {
+        "epoch": 14,
+        "proba_std": 0.35231614112854004
+      }
+    ],
+    "subset_v20b_crop130_frac025": [
+      {
+        "epoch": 1,
+        "proba_std": 0.22718928754329681
+      },
+      {
+        "epoch": 2,
+        "proba_std": 0.24058543145656586
+      },
+      {
+        "epoch": 3,
+        "proba_std": 0.2310306429862976
+      },
+      {
+        "epoch": 4,
+        "proba_std": 0.2798003852367401
+      },
+      {
+        "epoch": 5,
+        "proba_std": 0.2687428891658783
+      },
+      {
+        "epoch": 6,
+        "proba_std": 0.27963757514953613
+      },
+      {
+        "epoch": 7,
+        "proba_std": 0.29530608654022217
+      },
+      {
+        "epoch": 8,
+        "proba_std": 0.2959975600242615
+      },
+      {
+        "epoch": 9,
+        "proba_std": 0.2930505573749542
+      },
+      {
+        "epoch": 10,
+        "proba_std": 0.2922198176383972
+      }
+    ],
+    "vit_e_crop130v1": [
+      {
+        "epoch": 1,
+        "proba_std": 0.2552472949028015
+      },
+      {
+        "epoch": 2,
+        "proba_std": 0.20575003325939178
+      },
+      {
+        "epoch": 3,
+        "proba_std": 0.31358692049980164
+      },
+      {
+        "epoch": 4,
+        "proba_std": 0.3131166696548462
+      },
+      {
+        "epoch": 5,
+        "proba_std": 0.3101891875267029
+      },
+      {
+        "epoch": 6,
+        "proba_std": 0.31889796257019043
+      },
+      {
+        "epoch": 7,
+        "proba_std": 0.32160237431526184
+      },
+      {
+        "epoch": 8,
+        "proba_std": 0.33479490876197815
+      },
+      {
+        "epoch": 9,
+        "proba_std": 0.3418649435043335
+      }
+    ]
+  },
+  "update_norm_per_block": null,
+  "update_norm_note": "non logge pendant le train ; indisponible sans retrain"
+}

@@ -1,0 +1,18 @@
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 320 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\sulta\Documents\RSNA-comp\src\train\train.py", line 849, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\sulta\Documents\RSNA-comp\src\train\train.py", line 660, in main
+    x = augment_batch(x)
+  File "C:\Users\sulta\Documents\RSNA-comp\src\data\transforms.py", line 55, in augment_batch
+    theta[:, 0, 1] = -sin
+                     ^^^^
+torch.AcceleratorError: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+

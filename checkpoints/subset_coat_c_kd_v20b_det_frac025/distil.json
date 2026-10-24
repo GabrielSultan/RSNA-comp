@@ -1,0 +1,16 @@
+{
+  "csv": "data\\labels\\teacher_v20b_det_subset.csv",
+  "lambda": 0.5,
+  "temp": 2.0,
+  "targets": [
+    "ACL",
+    "MCL",
+    "Medial Meniscus",
+    "PF OA",
+    "Baker's",
+    "Fracture"
+  ],
+  "teacher_n": 924,
+  "train_hit": 924,
+  "train_n": 924
+}

@@ -1,0 +1,42 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+DINOv3 ViT-B/16 charge : weights\dinov3-vitb16-lvd1689m\model.safetensors
+LayerScale gele : 24 tenseurs gamma
+KneeNet-ViT-e | CAM patch 16 | BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6
+kneenet_vit_e (vit_base_patch16_dinov3.lvd1689m) : 88.6M params
+pos_weight desactive (BCE simple)
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 3 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 224 | oof_fold - | include_gold 0 | drop_path 0 | seed 42 | steps/epoch 462
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 224 | oof_fold - | include_gold 0 | drop_path 0 | seed 42 | steps/epoch 462
+encodeur gele jusqu'a l'epoch 1 (linear probing)
+epoch 1/10 | train 0.5355 | val 0.5200 | val AUC 0.6693 | gold AUC 0.6466 | proba std 0.2247 | 1407s
+  -> checkpoint (best 0.6693)
+epoch 2 : encodeur degele (re-warmup 462 steps)
+C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\autograd\graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\attention_backward.cu:902.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+epoch 2/10 | train 0.5124 | val 0.4916 | val AUC 0.6614 | gold AUC 0.6417 | proba std 0.1346 | 3936s
+  -> pas de gain val AUC (1/3)
+epoch 3/10 | train 0.5039 | val 0.4770 | val AUC 0.7116 | gold AUC 0.6880 | proba std 0.1806 | 3848s
+  -> checkpoint (best 0.7116)
+epoch 4/10 | train 0.4770 | val 0.4550 | val AUC 0.7340 | gold AUC 0.7137 | proba std 0.1949 | 3836s
+  -> checkpoint (best 0.7340)
+epoch 5/10 | train 0.4531 | val 0.4368 | val AUC 0.7689 | gold AUC 0.7793 | proba std 0.2316 | 3860s
+  -> checkpoint (best 0.7689)
+epoch 6/10 | train 0.4221 | val 0.4274 | val AUC 0.7838 | gold AUC 0.7892 | proba std 0.2608 | 3843s
+  -> checkpoint (best 0.7838)
+epoch 7/10 | train 0.3931 | val 0.4301 | val AUC 0.7942 | gold AUC 0.8069 | proba std 0.2636 | 3823s
+  -> checkpoint (best 0.7942)

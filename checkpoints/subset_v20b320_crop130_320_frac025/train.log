@@ -1,0 +1,26 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130_320 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=320
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+RadImageNet ResNet-50 charge : weights\ResNet50.pt | entree 320 | CAM 20x20 | BiLSTM hidden 256 | slots 6
+kneenet_v20b320 (resnet50) : 30.5M params
+pos_weight desactive (BCE simple)
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 3 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 320 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 462
+epoch 1/10 | train 0.5530 | val 0.4954 | val AUC 0.6687 | gold AUC 0.6479 | proba std 0.2084 | 2431s
+  -> checkpoint (best 0.6687)
+epoch 2/10 | train 0.5146 | val 0.4914 | val AUC 0.7023 | gold AUC 0.6882 | proba std 0.1671 | 2453s
+  !! disque presque plein (0.00 Go libres) : impossible d'ecrire checkpoints\subset_v20b320_crop130_320_frac025\last.pt. Liberer de l'espace (ex. checkpoints/*/last.pt des runs termines).
+  -> best AUC 0.7023 en RAM, PAS ecrit sur disque

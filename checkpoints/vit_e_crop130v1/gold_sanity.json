@@ -1,0 +1,22 @@
+{
+  "macro_auc": 0.8796818780242757,
+  "per_target": {
+    "ACL": 0.9301470588235294,
+    "MCL": 0.9115646258503401,
+    "Medial Meniscus": 0.9447115384615384,
+    "Lateral Meniscus": 0.7950310559006212,
+    "Medial OA": 0.9736434108527132,
+    "Lateral OA": 0.8394584139264991,
+    "PF OA": 0.7631917631917632,
+    "Effusion": 0.9416149068322982,
+    "Synovitis": 0.7574671445639187,
+    "Baker's": 0.967391304347826,
+    "Contusion": 0.9041835357624831,
+    "Fracture": 0.8277777777777777
+  },
+  "epoch": 8,
+  "ckpt": "C:\\Users\\sulta\\Documents\\RSNA-comp\\checkpoints\\vit_e_crop130v1\\best.pt",
+  "gold_in_train": false,
+  "n_studies": 58,
+  "device": "cpu"
+}

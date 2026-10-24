@@ -1,0 +1,22 @@
+{
+  "csv": "data\\labels\\teacher_original_main_oof_rsna1687.csv",
+  "lambda": 0.3,
+  "temp": 1.0,
+  "targets": [
+    "ACL",
+    "MCL",
+    "Medial Meniscus",
+    "Lateral Meniscus",
+    "Medial OA",
+    "Lateral OA",
+    "PF OA",
+    "Effusion",
+    "Synovitis",
+    "Baker's",
+    "Contusion",
+    "Fracture"
+  ],
+  "teacher_n": 1687,
+  "train_hit": 1687,
+  "train_n": 1687
+}

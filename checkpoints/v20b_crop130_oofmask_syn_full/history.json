@@ -1,0 +1,98 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.46569630626139047,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.863739889277603
+  },
+  {
+    "epoch": 2,
+    "loss": 0.352177066175262,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9102173963800274
+  },
+  {
+    "epoch": 3,
+    "loss": 0.31400557333006307,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9310396817239774
+  },
+  {
+    "epoch": 4,
+    "loss": 0.2970044914358968,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9323513370128206
+  },
+  {
+    "epoch": 5,
+    "loss": 0.28650192775637534,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9430123342921429
+  },
+  {
+    "epoch": 6,
+    "loss": 0.2763025437098514,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9490478022255923
+  },
+  {
+    "epoch": 7,
+    "loss": 0.27111225890894025,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9486084434001129
+  },
+  {
+    "epoch": 8,
+    "loss": 0.26201430979953716,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9528343011979571
+  },
+  {
+    "epoch": 9,
+    "loss": 0.25403204411403574,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9542920468358612
+  },
+  {
+    "epoch": 10,
+    "loss": 0.24916625281560703,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9589762333632689
+  },
+  {
+    "epoch": 11,
+    "loss": 0.2399087822746543,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9598694297919156
+  },
+  {
+    "epoch": 12,
+    "loss": 0.23566979284209624,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9618527539063476
+  }
+]

@@ -1,0 +1,39 @@
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 320 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\sulta\Documents\RSNA-comp\src\train\train.py", line 849, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\sulta\Documents\RSNA-comp\src\train\train.py", line 680, in main
+    logits = model(x)
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\sulta\Documents\RSNA-comp\src\models\kneenet_coat_a320.py", line 128, in forward
+    return super().forward(x)
+           ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\sulta\Documents\RSNA-comp\src\models\kneenet_coat_a.py", line 295, in forward
+    logits, _attn = self._slice_pool(x, valid, gaps, local)
+                    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sulta\Documents\RSNA-comp\src\models\kneenet_coat_a.py", line 256, in _slice_pool
+    logits = self.head(self.norm(pooled)).squeeze(-1)
+             ~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\container.py", line 253, in forward
+    input = module(input)
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\nn\modules\linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_EXECUTION_FAILED when calling `cublasGemmEx( handle, opa, opb, m, n, k, &falpha, a, CUDA_R_16BF, lda, b, CUDA_R_16BF, ldb, &fbeta, c, std::is_same_v<C_Dtype, float> ? CUDA_R_32F : CUDA_R_16BF, ldc, compute_type, CUBLAS_GEMM_DEFAULT_TENSOR_OP)`

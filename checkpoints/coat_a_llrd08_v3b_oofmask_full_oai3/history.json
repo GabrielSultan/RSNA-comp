@@ -1,0 +1,41 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.3219790289869454,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 1.967457118262098e-06,
+    "lr_backbone_max": 4.473479562562026e-05,
+    "gold_macro_auc": 0.9841759704815218,
+    "stem_mix_km1": 0.00021975291019771248,
+    "stem_mix_k": 0.9996583461761475,
+    "stem_mix_kp1": 0.00012186278763692826
+  },
+  {
+    "epoch": 2,
+    "loss": 0.31112151834533397,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 1.1907850641329538e-06,
+    "lr_backbone_max": 2.7075317669481433e-05,
+    "gold_macro_auc": 0.9887732221992196,
+    "stem_mix_km1": 0.0002594160905573517,
+    "stem_mix_k": 0.9995825886726379,
+    "stem_mix_kp1": 0.00015799394168425351
+  },
+  {
+    "epoch": 3,
+    "loss": 0.2987101573578089,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 3.5520520555092107e-07,
+    "lr_backbone_max": 8.07643131226816e-06,
+    "gold_macro_auc": 0.9921153378726095,
+    "stem_mix_km1": 0.00024182061315514147,
+    "stem_mix_k": 0.9996203184127808,
+    "stem_mix_kp1": 0.00013787634088657796
+  }
+]

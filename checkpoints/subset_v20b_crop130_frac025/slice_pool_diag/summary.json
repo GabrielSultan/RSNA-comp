@@ -1,0 +1,57 @@
+{
+  "ckpt": "checkpoints\\subset_v20b_crop130_frac025\\best.pt",
+  "epoch": 10,
+  "device": "cuda",
+  "splits": {
+    "val": {
+      "n_studies": 653,
+      "delta_vs_softmax": {
+        "softmax": 0.0,
+        "token_max": -0.08634113627832007,
+        "token_top2": -0.06768926093236194,
+        "logit_max": -0.03951848353826892,
+        "logit_top2": -0.034056803155320114,
+        "logit_mean": -0.015748652299403254,
+        "logit_soft8": -0.04444154082373464,
+        "mix_dino": -0.022109738205797647,
+        "oracle_per_target": 0.00011950726236442666
+      },
+      "macros": {
+        "softmax": 0.838903327656832,
+        "token_max": 0.7525621913785119,
+        "token_top2": 0.77121406672447,
+        "logit_max": 0.799384844118563,
+        "logit_top2": 0.8048465245015118,
+        "logit_mean": 0.8231546753574287,
+        "logit_soft8": 0.7944617868330973,
+        "mix_dino": 0.8167935894510343,
+        "oracle_per_target": 0.8390228349191964
+      }
+    },
+    "gold": {
+      "n_studies": 58,
+      "delta_vs_softmax": {
+        "softmax": 0.0,
+        "token_max": -0.1257213958874115,
+        "token_top2": -0.08661917534048114,
+        "logit_max": -0.054631812867403484,
+        "logit_top2": -0.04541809947247111,
+        "logit_mean": -0.025042874701624585,
+        "logit_soft8": -0.043062874511192506,
+        "mix_dino": -0.024352173992188697,
+        "oracle_per_target": 0.003066770186335388
+      },
+      "macros": {
+        "softmax": 0.8853183198637754,
+        "token_max": 0.7595969239763639,
+        "token_top2": 0.7986991445232943,
+        "logit_max": 0.8306865069963719,
+        "logit_top2": 0.8399002203913043,
+        "logit_mean": 0.8602754451621508,
+        "logit_soft8": 0.8422554453525829,
+        "mix_dino": 0.8609661458715867,
+        "oracle_per_target": 0.8883850900501108
+      }
+    }
+  }
+}

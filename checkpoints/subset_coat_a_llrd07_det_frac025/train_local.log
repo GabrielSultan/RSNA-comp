@@ -1,0 +1,109 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+CoAtNet charge : coatnet_0_rw_224.sw_in1k | weights\coatnet_0_rw_224-sw_in1k\model.safetensors
+KneeNet-CoAt-a | coatnet_0_rw_224.sw_in1k | CAM + BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6 | norm (0.5, 0.5, 0.5)/(0.5, 0.5, 0.5)
+kneenet_coat_a (coatnet_0_rw_224.sw_in1k) : 29.6M params
+pos_weight desactive (BCE simple)
+LLRD 0.7 | 14 blocs | pic (bloc 14) 1.00e-04 | bloc1 9.69e-07 | embed 6.78e-07
+  embed_decay        lr=6.782e-07 n=3 wd=0.05
+  embed_nodecay      lr=6.782e-07 n=2 wd=0
+  block01_decay      lr=9.689e-07 n=6 wd=0.05
+  block01_nodecay    lr=9.689e-07 n=8 wd=0
+  block02_decay      lr=1.384e-06 n=5 wd=0.05
+  block02_nodecay    lr=1.384e-06 n=8 wd=0
+  block03_decay      lr=1.977e-06 n=6 wd=0.05
+  block03_nodecay    lr=1.977e-06 n=8 wd=0
+  block04_decay      lr=2.825e-06 n=5 wd=0.05
+  block04_nodecay    lr=2.825e-06 n=8 wd=0
+  block05_decay      lr=4.035e-06 n=5 wd=0.05
+  block05_nodecay    lr=4.035e-06 n=8 wd=0
+  block06_decay      lr=5.765e-06 n=6 wd=0.05
+  block06_nodecay    lr=5.765e-06 n=8 wd=0
+  block07_decay      lr=8.235e-06 n=5 wd=0.05
+  block07_nodecay    lr=8.235e-06 n=8 wd=0
+  block08_decay      lr=1.176e-05 n=5 wd=0.05
+  block08_nodecay    lr=1.176e-05 n=8 wd=0
+  block09_decay      lr=1.681e-05 n=5 wd=0.05
+  block09_nodecay    lr=1.681e-05 n=8 wd=0
+  block10_decay      lr=2.401e-05 n=5 wd=0.05
+  block10_nodecay    lr=2.401e-05 n=8 wd=0
+  block11_decay      lr=3.430e-05 n=5 wd=0.05
+  block11_nodecay    lr=3.430e-05 n=8 wd=0
+  block12_decay      lr=4.900e-05 n=5 wd=0.05
+  block12_nodecay    lr=4.900e-05 n=8 wd=0
+  block13_decay      lr=7.000e-05 n=6 wd=0.05
+  block13_nodecay    lr=7.000e-05 n=8 wd=0
+  block14_decay      lr=1.000e-04 n=5 wd=0.05
+  block14_nodecay    lr=1.000e-04 n=10 wd=0
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 4 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 224 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 224 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+encodeur gele jusqu'a l'epoch 1 (linear probing)
+epoch 1/12 | train 0.5248 | val 0.4825 | val AUC 0.6934 | gold AUC 0.6590 | proba std 0.1976 | 573s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.6934)
+epoch 2 : encodeur degele (re-warmup 231 steps)
+C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\autograd\graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\attention_backward.cu:902.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+epoch 2/12 | train 0.4895 | val 0.5032 | val AUC 0.7229 | gold AUC 0.6988 | proba std 0.2065 | 1534s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.7229)
+epoch 3/12 | train 0.4705 | val 0.4762 | val AUC 0.7407 | gold AUC 0.7224 | proba std 0.1757 | 1536s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.7407)
+epoch 4/12 | train 0.4484 | val 0.4427 | val AUC 0.7638 | gold AUC 0.7419 | proba std 0.2258 | 1538s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.7638)
+epoch 5/12 | train 0.4258 | val 0.4314 | val AUC 0.7803 | gold AUC 0.7673 | proba std 0.2545 | 1540s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.7803)
+epoch 6/12 | train 0.3859 | val 0.4263 | val AUC 0.7857 | gold AUC 0.7806 | proba std 0.2800 | 1543s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.7857)
+epoch 7/12 | train 0.3588 | val 0.4359 | val AUC 0.7947 | gold AUC 0.7916 | proba std 0.2936 | 1544s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.7947)
+epoch 8/12 | train 0.3148 | val 0.4579 | val AUC 0.7918 | gold AUC 0.7936 | proba std 0.3078 | 1534s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> pas de gain val AUC (1/4)
+epoch 9/12 | train 0.2807 | val 0.4550 | val AUC 0.7920 | gold AUC 0.7973 | proba std 0.3121 | 1549s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> pas de gain val AUC (2/4)
+epoch 10/12 | train 0.2447 | val 0.4772 | val AUC 0.7902 | gold AUC 0.7971 | proba std 0.3269 | 1539s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> pas de gain val AUC (3/4)
+epoch 11/12 | train 0.2209 | val 0.5016 | val AUC 0.7900 | gold AUC 0.7983 | proba std 0.3300 | 1536s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> pas de gain val AUC (4/4)
+early stop a l'epoch 11 (meilleur val AUC 0.7947)
+
+=== SANITY GOLD (58 etudes, jamais vues, epoch 7, best.pt) ===
+macro-AUC gold : 0.7916
+  Effusion           0.937
+  Medial OA          0.899
+  Contusion          0.858
+  Baker's            0.842
+  Fracture           0.818
+  Synovitis          0.797
+  PF OA              0.789
+  Lateral Meniscus   0.788
+  Lateral OA         0.749
+  Medial Meniscus    0.727
+  ACL                0.717
+  MCL                0.578
+
+termine. best val macro-AUC = 0.7947 -> checkpoints\subset_coat_a_llrd07_det_frac025

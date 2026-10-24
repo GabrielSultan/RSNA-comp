@@ -1,0 +1,491 @@
+{
+  "ckpt": "checkpoints\\v17_crop130v1\\best.pt",
+  "epoch": 12,
+  "val_macro_auc_ckpt": 0.8731099414879878,
+  "split": "val",
+  "n_studies": 653,
+  "targets": [
+    "ACL",
+    "MCL",
+    "Medial Meniscus",
+    "Lateral Meniscus",
+    "Medial OA",
+    "Lateral OA",
+    "PF OA",
+    "Effusion",
+    "Synovitis",
+    "Baker's",
+    "Contusion",
+    "Fracture"
+  ],
+  "summary": {
+    "threshold": 0.8,
+    "n_studies": 653,
+    "n_cells_valid": 7836,
+    "n_disagree": 376,
+    "pct_cells": 4.79836651352731,
+    "per_target": [
+      {
+        "target": "ACL",
+        "n_valid": 653,
+        "n_disagree": 32,
+        "pct": 4.900459418070444,
+        "llm1_model_low": 31,
+        "llm0_model_high": 1,
+        "mean_abs_delta": 0.15069398283958435
+      },
+      {
+        "target": "MCL",
+        "n_valid": 653,
+        "n_disagree": 43,
+        "pct": 6.584992343032159,
+        "llm1_model_low": 40,
+        "llm0_model_high": 3,
+        "mean_abs_delta": 0.17568236589431763
+      },
+      {
+        "target": "Medial Meniscus",
+        "n_valid": 653,
+        "n_disagree": 28,
+        "pct": 4.287901990811639,
+        "llm1_model_low": 18,
+        "llm0_model_high": 10,
+        "mean_abs_delta": 0.17696480453014374
+      },
+      {
+        "target": "Lateral Meniscus",
+        "n_valid": 653,
+        "n_disagree": 24,
+        "pct": 3.6753445635528332,
+        "llm1_model_low": 21,
+        "llm0_model_high": 3,
+        "mean_abs_delta": 0.12754493951797485
+      },
+      {
+        "target": "Medial OA",
+        "n_valid": 653,
+        "n_disagree": 30,
+        "pct": 4.594180704441041,
+        "llm1_model_low": 9,
+        "llm0_model_high": 21,
+        "mean_abs_delta": 0.246343731880188
+      },
+      {
+        "target": "Lateral OA",
+        "n_valid": 653,
+        "n_disagree": 31,
+        "pct": 4.747320061255743,
+        "llm1_model_low": 21,
+        "llm0_model_high": 10,
+        "mean_abs_delta": 0.25977736711502075
+      },
+      {
+        "target": "PF OA",
+        "n_valid": 653,
+        "n_disagree": 49,
+        "pct": 7.503828483920367,
+        "llm1_model_low": 7,
+        "llm0_model_high": 42,
+        "mean_abs_delta": 0.29610303044319153
+      },
+      {
+        "target": "Effusion",
+        "n_valid": 653,
+        "n_disagree": 36,
+        "pct": 5.51301684532925,
+        "llm1_model_low": 7,
+        "llm0_model_high": 29,
+        "mean_abs_delta": 0.2730019688606262
+      },
+      {
+        "target": "Synovitis",
+        "n_valid": 653,
+        "n_disagree": 20,
+        "pct": 3.0627871362940278,
+        "llm1_model_low": 10,
+        "llm0_model_high": 10,
+        "mean_abs_delta": 0.22371263802051544
+      },
+      {
+        "target": "Baker's",
+        "n_valid": 653,
+        "n_disagree": 35,
+        "pct": 5.359877488514548,
+        "llm1_model_low": 28,
+        "llm0_model_high": 7,
+        "mean_abs_delta": 0.1550280600786209
+      },
+      {
+        "target": "Contusion",
+        "n_valid": 653,
+        "n_disagree": 34,
+        "pct": 5.206738131699847,
+        "llm1_model_low": 34,
+        "llm0_model_high": 0,
+        "mean_abs_delta": 0.13413017988204956
+      },
+      {
+        "target": "Fracture",
+        "n_valid": 653,
+        "n_disagree": 14,
+        "pct": 2.1439509954058193,
+        "llm1_model_low": 14,
+        "llm0_model_high": 0,
+        "mean_abs_delta": 0.07017625868320465
+      }
+    ]
+  },
+  "by_threshold": {
+    "0.7": {
+      "threshold": 0.7,
+      "n_studies": 653,
+      "n_cells_valid": 7836,
+      "n_disagree": 564,
+      "pct_cells": 7.197549770290965,
+      "per_target": [
+        {
+          "target": "ACL",
+          "n_valid": 653,
+          "n_disagree": 39,
+          "pct": 5.972434915773354,
+          "llm1_model_low": 35,
+          "llm0_model_high": 4,
+          "mean_abs_delta": 0.15069398283958435
+        },
+        {
+          "target": "MCL",
+          "n_valid": 653,
+          "n_disagree": 56,
+          "pct": 8.575803981623277,
+          "llm1_model_low": 51,
+          "llm0_model_high": 5,
+          "mean_abs_delta": 0.17568236589431763
+        },
+        {
+          "target": "Medial Meniscus",
+          "n_valid": 653,
+          "n_disagree": 43,
+          "pct": 6.584992343032159,
+          "llm1_model_low": 28,
+          "llm0_model_high": 15,
+          "mean_abs_delta": 0.17696480453014374
+        },
+        {
+          "target": "Lateral Meniscus",
+          "n_valid": 653,
+          "n_disagree": 37,
+          "pct": 5.666156202143951,
+          "llm1_model_low": 32,
+          "llm0_model_high": 5,
+          "mean_abs_delta": 0.12754493951797485
+        },
+        {
+          "target": "Medial OA",
+          "n_valid": 653,
+          "n_disagree": 51,
+          "pct": 7.810107197549771,
+          "llm1_model_low": 18,
+          "llm0_model_high": 33,
+          "mean_abs_delta": 0.246343731880188
+        },
+        {
+          "target": "Lateral OA",
+          "n_valid": 653,
+          "n_disagree": 52,
+          "pct": 7.9632465543644715,
+          "llm1_model_low": 31,
+          "llm0_model_high": 21,
+          "mean_abs_delta": 0.25977736711502075
+        },
+        {
+          "target": "PF OA",
+          "n_valid": 653,
+          "n_disagree": 80,
+          "pct": 12.251148545176111,
+          "llm1_model_low": 18,
+          "llm0_model_high": 62,
+          "mean_abs_delta": 0.29610303044319153
+        },
+        {
+          "target": "Effusion",
+          "n_valid": 653,
+          "n_disagree": 60,
+          "pct": 9.188361408882082,
+          "llm1_model_low": 22,
+          "llm0_model_high": 38,
+          "mean_abs_delta": 0.2730019688606262
+        },
+        {
+          "target": "Synovitis",
+          "n_valid": 653,
+          "n_disagree": 35,
+          "pct": 5.359877488514548,
+          "llm1_model_low": 14,
+          "llm0_model_high": 21,
+          "mean_abs_delta": 0.22371263802051544
+        },
+        {
+          "target": "Baker's",
+          "n_valid": 653,
+          "n_disagree": 47,
+          "pct": 7.197549770290965,
+          "llm1_model_low": 33,
+          "llm0_model_high": 14,
+          "mean_abs_delta": 0.1550280600786209
+        },
+        {
+          "target": "Contusion",
+          "n_valid": 653,
+          "n_disagree": 45,
+          "pct": 6.891271056661562,
+          "llm1_model_low": 45,
+          "llm0_model_high": 0,
+          "mean_abs_delta": 0.13413017988204956
+        },
+        {
+          "target": "Fracture",
+          "n_valid": 653,
+          "n_disagree": 19,
+          "pct": 2.909647779479326,
+          "llm1_model_low": 18,
+          "llm0_model_high": 1,
+          "mean_abs_delta": 0.07017625868320465
+        }
+      ]
+    },
+    "0.8": {
+      "threshold": 0.8,
+      "n_studies": 653,
+      "n_cells_valid": 7836,
+      "n_disagree": 376,
+      "pct_cells": 4.79836651352731,
+      "per_target": [
+        {
+          "target": "ACL",
+          "n_valid": 653,
+          "n_disagree": 32,
+          "pct": 4.900459418070444,
+          "llm1_model_low": 31,
+          "llm0_model_high": 1,
+          "mean_abs_delta": 0.15069398283958435
+        },
+        {
+          "target": "MCL",
+          "n_valid": 653,
+          "n_disagree": 43,
+          "pct": 6.584992343032159,
+          "llm1_model_low": 40,
+          "llm0_model_high": 3,
+          "mean_abs_delta": 0.17568236589431763
+        },
+        {
+          "target": "Medial Meniscus",
+          "n_valid": 653,
+          "n_disagree": 28,
+          "pct": 4.287901990811639,
+          "llm1_model_low": 18,
+          "llm0_model_high": 10,
+          "mean_abs_delta": 0.17696480453014374
+        },
+        {
+          "target": "Lateral Meniscus",
+          "n_valid": 653,
+          "n_disagree": 24,
+          "pct": 3.6753445635528332,
+          "llm1_model_low": 21,
+          "llm0_model_high": 3,
+          "mean_abs_delta": 0.12754493951797485
+        },
+        {
+          "target": "Medial OA",
+          "n_valid": 653,
+          "n_disagree": 30,
+          "pct": 4.594180704441041,
+          "llm1_model_low": 9,
+          "llm0_model_high": 21,
+          "mean_abs_delta": 0.246343731880188
+        },
+        {
+          "target": "Lateral OA",
+          "n_valid": 653,
+          "n_disagree": 31,
+          "pct": 4.747320061255743,
+          "llm1_model_low": 21,
+          "llm0_model_high": 10,
+          "mean_abs_delta": 0.25977736711502075
+        },
+        {
+          "target": "PF OA",
+          "n_valid": 653,
+          "n_disagree": 49,
+          "pct": 7.503828483920367,
+          "llm1_model_low": 7,
+          "llm0_model_high": 42,
+          "mean_abs_delta": 0.29610303044319153
+        },
+        {
+          "target": "Effusion",
+          "n_valid": 653,
+          "n_disagree": 36,
+          "pct": 5.51301684532925,
+          "llm1_model_low": 7,
+          "llm0_model_high": 29,
+          "mean_abs_delta": 0.2730019688606262
+        },
+        {
+          "target": "Synovitis",
+          "n_valid": 653,
+          "n_disagree": 20,
+          "pct": 3.0627871362940278,
+          "llm1_model_low": 10,
+          "llm0_model_high": 10,
+          "mean_abs_delta": 0.22371263802051544
+        },
+        {
+          "target": "Baker's",
+          "n_valid": 653,
+          "n_disagree": 35,
+          "pct": 5.359877488514548,
+          "llm1_model_low": 28,
+          "llm0_model_high": 7,
+          "mean_abs_delta": 0.1550280600786209
+        },
+        {
+          "target": "Contusion",
+          "n_valid": 653,
+          "n_disagree": 34,
+          "pct": 5.206738131699847,
+          "llm1_model_low": 34,
+          "llm0_model_high": 0,
+          "mean_abs_delta": 0.13413017988204956
+        },
+        {
+          "target": "Fracture",
+          "n_valid": 653,
+          "n_disagree": 14,
+          "pct": 2.1439509954058193,
+          "llm1_model_low": 14,
+          "llm0_model_high": 0,
+          "mean_abs_delta": 0.07017625868320465
+        }
+      ]
+    },
+    "0.9": {
+      "threshold": 0.9,
+      "n_studies": 653,
+      "n_cells_valid": 7836,
+      "n_disagree": 188,
+      "pct_cells": 2.399183256763655,
+      "per_target": [
+        {
+          "target": "ACL",
+          "n_valid": 653,
+          "n_disagree": 18,
+          "pct": 2.756508422664625,
+          "llm1_model_low": 18,
+          "llm0_model_high": 0,
+          "mean_abs_delta": 0.15069398283958435
+        },
+        {
+          "target": "MCL",
+          "n_valid": 653,
+          "n_disagree": 18,
+          "pct": 2.756508422664625,
+          "llm1_model_low": 17,
+          "llm0_model_high": 1,
+          "mean_abs_delta": 0.17568236589431763
+        },
+        {
+          "target": "Medial Meniscus",
+          "n_valid": 653,
+          "n_disagree": 18,
+          "pct": 2.756508422664625,
+          "llm1_model_low": 11,
+          "llm0_model_high": 7,
+          "mean_abs_delta": 0.17696480453014374
+        },
+        {
+          "target": "Lateral Meniscus",
+          "n_valid": 653,
+          "n_disagree": 12,
+          "pct": 1.8376722817764166,
+          "llm1_model_low": 11,
+          "llm0_model_high": 1,
+          "mean_abs_delta": 0.12754493951797485
+        },
+        {
+          "target": "Medial OA",
+          "n_valid": 653,
+          "n_disagree": 12,
+          "pct": 1.8376722817764166,
+          "llm1_model_low": 2,
+          "llm0_model_high": 10,
+          "mean_abs_delta": 0.246343731880188
+        },
+        {
+          "target": "Lateral OA",
+          "n_valid": 653,
+          "n_disagree": 10,
+          "pct": 1.5313935681470139,
+          "llm1_model_low": 6,
+          "llm0_model_high": 4,
+          "mean_abs_delta": 0.25977736711502075
+        },
+        {
+          "target": "PF OA",
+          "n_valid": 653,
+          "n_disagree": 31,
+          "pct": 4.747320061255743,
+          "llm1_model_low": 4,
+          "llm0_model_high": 27,
+          "mean_abs_delta": 0.29610303044319153
+        },
+        {
+          "target": "Effusion",
+          "n_valid": 653,
+          "n_disagree": 16,
+          "pct": 2.450229709035222,
+          "llm1_model_low": 1,
+          "llm0_model_high": 15,
+          "mean_abs_delta": 0.2730019688606262
+        },
+        {
+          "target": "Synovitis",
+          "n_valid": 653,
+          "n_disagree": 5,
+          "pct": 0.7656967840735069,
+          "llm1_model_low": 4,
+          "llm0_model_high": 1,
+          "mean_abs_delta": 0.22371263802051544
+        },
+        {
+          "target": "Baker's",
+          "n_valid": 653,
+          "n_disagree": 19,
+          "pct": 2.909647779479326,
+          "llm1_model_low": 17,
+          "llm0_model_high": 2,
+          "mean_abs_delta": 0.1550280600786209
+        },
+        {
+          "target": "Contusion",
+          "n_valid": 653,
+          "n_disagree": 20,
+          "pct": 3.0627871362940278,
+          "llm1_model_low": 20,
+          "llm0_model_high": 0,
+          "mean_abs_delta": 0.13413017988204956
+        },
+        {
+          "target": "Fracture",
+          "n_valid": 653,
+          "n_disagree": 9,
+          "pct": 1.3782542113323124,
+          "llm1_model_low": 9,
+          "llm0_model_high": 0,
+          "mean_abs_delta": 0.07017625868320465
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,36 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+CoAtNet charge : coatnet_0_rw_224.sw_in1k | weights\coatnet_0_rw_224-sw_in1k\model.safetensors
+KneeNet-CoAt-a | coatnet_0_rw_224.sw_in1k | CAM + BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6 | norm (0.5, 0.5, 0.5)/(0.5, 0.5, 0.5)
+kneenet_coat_a (coatnet_0_rw_224.sw_in1k) : 29.6M params
+pos_weight desactive (BCE simple)
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 4 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 224 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 224 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+encodeur gele jusqu'a l'epoch 1 (linear probing)
+epoch 1/12 | train 0.5248 | val 0.4825 | val AUC 0.6934 | gold AUC 0.6590 | proba std 0.1976 | 602s
+  extra : stem_mix_km1=0.000 stem_mix_k=1.000 stem_mix_kp1=0.000
+  -> checkpoint (best 0.6934)
+epoch 2 : encodeur degele (re-warmup 231 steps)
+C:\Users\sulta\AppData\Roaming\Python\Python313\site-packages\torch\autograd\graph.py:869: UserWarning: Memory Efficient attention defaults to a non-deterministic algorithm. To explicitly enable determinism call torch.use_deterministic_algorithms(True, warn_only=False). (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\aten\src\ATen\native\transformers\cuda\attention_backward.cu:902.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+epoch 2/12 | train 0.5230 | val 0.5431 | val AUC 0.6941 | gold AUC 0.6672 | proba std 0.2109 | 1754s
+  extra : stem_mix_km1=0.000 stem_mix_k=0.999 stem_mix_kp1=0.000
+  -> checkpoint (best 0.6941)
+epoch 3/12 | train 0.5160 | val 0.5293 | val AUC 0.6524 | gold AUC 0.6379 | proba std 0.1142 | 1769s
+  extra : stem_mix_km1=0.001 stem_mix_k=0.997 stem_mix_kp1=0.001
+  -> pas de gain val AUC (1/4)

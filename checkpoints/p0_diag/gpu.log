@@ -1,0 +1,566 @@
+device cuda | out C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag
+ecrit C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag\d2_gold_vs_llm.json
+ecrit C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag\d3_gold_holdout.json
+ecrit C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag\d5_slices_and_cands.json
+D1 subset_v20b_crop130_frac025 -> C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_v20b_crop130_frac025\attention_inspect
+ckpt C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_v20b_crop130_frac025\best.pt
+kneenet_v20b epoch 10 val AUC 0.8389053787188763 | split val
+gold exclus du train/val : 58 etudes
+volumes data\crop130 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+653 etudes, batch 4
+  4 etudes
+  8 etudes
+  12 etudes
+  16 etudes
+  20 etudes
+  24 etudes
+  28 etudes
+  32 etudes
+  36 etudes
+  40 etudes
+  44 etudes
+  48 etudes
+  52 etudes
+  56 etudes
+  60 etudes
+  64 etudes
+  68 etudes
+  72 etudes
+  76 etudes
+  80 etudes
+  84 etudes
+  88 etudes
+  92 etudes
+  96 etudes
+  100 etudes
+  104 etudes
+  108 etudes
+  112 etudes
+  116 etudes
+  120 etudes
+  124 etudes
+  128 etudes
+  132 etudes
+  136 etudes
+  140 etudes
+  144 etudes
+  148 etudes
+  152 etudes
+  156 etudes
+  160 etudes
+  164 etudes
+  168 etudes
+  172 etudes
+  176 etudes
+  180 etudes
+  184 etudes
+  188 etudes
+  192 etudes
+  196 etudes
+  200 etudes
+  204 etudes
+  208 etudes
+  212 etudes
+  216 etudes
+  220 etudes
+  224 etudes
+  228 etudes
+  232 etudes
+  236 etudes
+  240 etudes
+  244 etudes
+  248 etudes
+  252 etudes
+  256 etudes
+  260 etudes
+  264 etudes
+  268 etudes
+  272 etudes
+  276 etudes
+  280 etudes
+  284 etudes
+  288 etudes
+  292 etudes
+  296 etudes
+  300 etudes
+  304 etudes
+  308 etudes
+  312 etudes
+  316 etudes
+  320 etudes
+  324 etudes
+  328 etudes
+  332 etudes
+  336 etudes
+  340 etudes
+  344 etudes
+  348 etudes
+  352 etudes
+  356 etudes
+  360 etudes
+  364 etudes
+  368 etudes
+  372 etudes
+  376 etudes
+  380 etudes
+  384 etudes
+  388 etudes
+  392 etudes
+  396 etudes
+  400 etudes
+  404 etudes
+  408 etudes
+  412 etudes
+  416 etudes
+  420 etudes
+  424 etudes
+  428 etudes
+  432 etudes
+  436 etudes
+  440 etudes
+  444 etudes
+  448 etudes
+  452 etudes
+  456 etudes
+  460 etudes
+  464 etudes
+  468 etudes
+  472 etudes
+  476 etudes
+  480 etudes
+  484 etudes
+  488 etudes
+  492 etudes
+  496 etudes
+  500 etudes
+  504 etudes
+  508 etudes
+  512 etudes
+  516 etudes
+  520 etudes
+  524 etudes
+  528 etudes
+  532 etudes
+  536 etudes
+  540 etudes
+  544 etudes
+  548 etudes
+  552 etudes
+  556 etudes
+  560 etudes
+  564 etudes
+  568 etudes
+  572 etudes
+  576 etudes
+  580 etudes
+  584 etudes
+  588 etudes
+  592 etudes
+  596 etudes
+  600 etudes
+  604 etudes
+  608 etudes
+  612 etudes
+  616 etudes
+  620 etudes
+  624 etudes
+  628 etudes
+  632 etudes
+  636 etudes
+  640 etudes
+  644 etudes
+  648 etudes
+  652 etudes
+  653 etudes
+
+=== attention par coupe (masse sommee sur les plans) ===
+ slice  depth_pct  mass pct_top5_any
+     0       20.0 3.68%        20.4%
+     1       22.6 3.67%        16.7%
+     2       25.2 3.69%        13.8%
+     3       27.8 3.84%        14.5%
+     4       30.4 4.08%        17.8%
+     5       33.0 4.13%        18.3%
+     6       35.7 4.09%        16.8%
+     7       38.3 4.04%        17.6%
+     8       40.9 4.00%        15.5%
+     9       43.5 4.24%        22.9%
+    10       46.1 4.39%        31.6%
+    11       48.7 4.96%        45.5%
+    12       51.3 5.12%        50.9%
+    13       53.9 4.95%        45.4%
+    14       56.5 4.55%        29.5%
+    15       59.1 4.57%        29.4%
+    16       61.7 4.25%        19.6%
+    17       64.3 4.09%        13.4%
+    18       67.0 4.22%        20.4%
+    19       69.6 4.21%        22.7%
+    20       72.2 4.15%        22.0%
+    21       74.8 3.86%        15.6%
+    22       77.4 3.74%        13.9%
+    23       80.0 3.46%         9.0%
+
+90 % de la masse : coupes 1–22 (22/24) = bande 23–77 % (masse 92.9 %)
+bords a retirer : [0, 23]
+aucune coupe « morte » au sens strict : le softmax est juste concentre au centre de la bande.
+
+Pour retirer sans reconvertir : garder les indices 1:23 dans le NPZ (D=22).
+Pour densifier : reconvertir avec BAND=(0.23, 0.77) et garder 24 coupes.
+GAP vs CAM (contrefactuel v15) corr mediane 0.812 -> C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_v20b_crop130_frac025\attention_inspect\gap_vs_cam_slice.csv
+
+ecrit -> C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_v20b_crop130_frac025\attention_inspect
+D1 subset_vit_dinov3_e_crop130_frac025 -> C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_vit_dinov3_e_crop130_frac025\attention_inspect
+ckpt C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_vit_dinov3_e_crop130_frac025\best.pt
+LayerScale gele : 24 tenseurs gamma
+KneeNet-ViT-e | CAM patch 16 | BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6
+kneenet_vit_e epoch 7 val AUC 0.8074592141344493 | split val
+gold exclus du train/val : 58 etudes
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+653 etudes, batch 2
+  2 etudes
+  4 etudes
+  6 etudes
+  8 etudes
+  10 etudes
+  12 etudes
+  14 etudes
+  16 etudes
+  18 etudes
+  20 etudes
+  22 etudes
+  24 etudes
+  26 etudes
+  28 etudes
+  30 etudes
+  32 etudes
+  34 etudes
+  36 etudes
+  38 etudes
+  40 etudes
+  42 etudes
+  44 etudes
+  46 etudes
+  48 etudes
+  50 etudes
+  52 etudes
+  54 etudes
+  56 etudes
+  58 etudes
+  60 etudes
+  62 etudes
+  64 etudes
+  66 etudes
+  68 etudes
+  70 etudes
+  72 etudes
+  74 etudes
+  76 etudes
+  78 etudes
+  80 etudes
+  82 etudes
+  84 etudes
+  86 etudes
+  88 etudes
+  90 etudes
+  92 etudes
+  94 etudes
+  96 etudes
+  98 etudes
+  100 etudes
+  102 etudes
+  104 etudes
+  106 etudes
+  108 etudes
+  110 etudes
+  112 etudes
+  114 etudes
+  116 etudes
+  118 etudes
+  120 etudes
+  122 etudes
+  124 etudes
+  126 etudes
+  128 etudes
+  130 etudes
+  132 etudes
+  134 etudes
+  136 etudes
+  138 etudes
+  140 etudes
+  142 etudes
+  144 etudes
+  146 etudes
+  148 etudes
+device cuda | out C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag
+D1 skip subset_v20b_crop130_frac025 (summary deja la)
+D1 subset_vit_dinov3_e_crop130_frac025 max=200 -> C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_vit_dinov3_e_crop130_frac025\attention_inspect
+ckpt C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_vit_dinov3_e_crop130_frac025\best.pt
+LayerScale gele : 24 tenseurs gamma
+KneeNet-ViT-e | CAM patch 16 | BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6
+kneenet_vit_e epoch 7 val AUC 0.8074592141344493 | split val
+gold exclus du train/val : 58 etudes
+volumes data\crop130 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+200 etudes, batch 2
+  2 etudes
+  4 etudes
+  6 etudes
+  8 etudes
+  10 etudes
+  12 etudes
+  14 etudes
+  16 etudes
+  18 etudes
+  20 etudes
+  22 etudes
+  24 etudes
+  26 etudes
+  28 etudes
+  30 etudes
+  32 etudes
+  34 etudes
+  36 etudes
+  38 etudes
+  40 etudes
+  42 etudes
+  44 etudes
+  46 etudes
+  48 etudes
+  50 etudes
+  52 etudes
+  54 etudes
+  56 etudes
+  58 etudes
+  60 etudes
+  62 etudes
+  64 etudes
+  66 etudes
+  68 etudes
+  70 etudes
+  72 etudes
+  74 etudes
+  76 etudes
+  78 etudes
+  80 etudes
+  82 etudes
+  84 etudes
+  86 etudes
+  88 etudes
+  90 etudes
+  92 etudes
+  94 etudes
+  96 etudes
+  98 etudes
+  100 etudes
+  102 etudes
+  104 etudes
+  106 etudes
+  108 etudes
+  110 etudes
+  112 etudes
+  114 etudes
+  116 etudes
+  118 etudes
+  120 etudes
+  122 etudes
+  124 etudes
+  126 etudes
+  128 etudes
+  130 etudes
+  132 etudes
+  134 etudes
+  136 etudes
+  138 etudes
+  140 etudes
+  142 etudes
+  144 etudes
+  146 etudes
+  148 etudes
+  150 etudes
+  152 etudes
+  154 etudes
+  156 etudes
+  158 etudes
+  160 etudes
+  162 etudes
+  164 etudes
+  166 etudes
+  168 etudes
+  170 etudes
+  172 etudes
+  174 etudes
+  176 etudes
+  178 etudes
+  180 etudes
+  182 etudes
+  184 etudes
+  186 etudes
+  188 etudes
+  190 etudes
+  192 etudes
+  194 etudes
+  196 etudes
+  198 etudes
+  200 etudes
+
+=== attention par coupe (masse sommee sur les plans) ===
+ slice  depth_pct  mass pct_top5_any
+     0       20.0 3.65%        15.8%
+     1       22.6 3.90%        21.5%
+     2       25.2 3.96%        22.6%
+     3       27.8 4.12%        28.7%
+     4       30.4 4.19%        28.0%
+     5       33.0 4.13%        25.8%
+     6       35.7 4.00%        20.2%
+     7       38.3 3.98%        21.4%
+     8       40.9 4.09%        19.7%
+     9       43.5 4.15%        20.6%
+    10       46.1 4.11%        20.3%
+    11       48.7 4.12%        21.2%
+    12       51.3 4.26%        22.8%
+    13       53.9 4.45%        26.0%
+    14       56.5 4.48%        25.8%
+    15       59.1 4.53%        27.8%
+    16       61.7 4.33%        24.2%
+    17       64.3 4.26%        26.7%
+    18       67.0 4.28%        28.8%
+    19       69.6 4.40%        32.5%
+    20       72.2 4.37%        29.5%
+    21       74.8 4.22%        25.9%
+    22       77.4 4.16%        25.5%
+    23       80.0 3.86%        20.2%
+
+90 % de la masse : coupes 1–22 (22/24) = bande 23–77 % (masse 92.5 %)
+bords a retirer : [0, 23]
+aucune coupe « morte » au sens strict : le softmax est juste concentre au centre de la bande.
+
+Pour retirer sans reconvertir : garder les indices 1:23 dans le NPZ (D=22).
+Pour densifier : reconvertir avec BAND=(0.23, 0.77) et garder 24 coupes.
+
+ecrit -> C:\Users\sulta\Documents\RSNA-comp\checkpoints\subset_vit_dinov3_e_crop130_frac025\attention_inspect
+ecrit C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag\d1_attention.json
+termine
+
+===== TTA 2026-09-17T00:26:27.2001219+02:00 =====
+device cuda | out C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag
+TTA load v20b
+gold exclus du train/val : 58 etudes
+volumes C:\Users\sulta\Documents\RSNA-comp\data\crop130_rgb25d : 21332 series dans 6 zip(s)
+series presentes dans les volumes : 21332 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+rgb_neighbors : volumes (D, 3, H, W) DICOM k-1/k/k+1
+rgb_as_gray : canal G (equivalent crop130 linspace)
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+  val n=653 rgb25d
+  eval v20b G_first
+    G_first macro=0.8153 n=653
+  eval v20b G_last
+    G_last macro=0.8153 n=653
+  eval v20b R_first
+    R_first macro=0.8159 n=653
+  eval v20b B_first
+    B_first macro=0.8156 n=653
+TTA load vit_e
+LayerScale gele : 24 tenseurs gamma
+KneeNet-ViT-e | CAM patch 16 | BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6
+gold exclus du train/val : 58 etudes
+series presentes dans les volumes : 21332 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+rgb_neighbors : volumes (D, 3, H, W) DICOM k-1/k/k+1
+rgb_as_gray : canal G (equivalent crop130 linspace)
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+  val n=653 rgb25d
+  eval vit_e G_first
+    G_first macro=0.7841 n=653
+  eval vit_e G_last
+    G_last macro=0.7841 n=653
+  eval vit_e R_first
+    R_first macro=0.7827 n=653
+  eval vit_e B_first
+    B_first macro=0.7837 n=653
+ecrit C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag\d4_tta.json
+termine
+
+===== TTA series crop130 2026-09-17T01:36:44.7720635+02:00 =====
+device cuda | out C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag
+TTA series crop130 v20b
+gold exclus du train/val : 58 etudes
+volumes C:\Users\sulta\Documents\RSNA-comp\data\crop130 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+  val n=653 crop130
+  eval v20b crop130 first
+    first macro=0.8389 n=653
+  eval v20b crop130 last
+    last macro=0.8385 n=653
+TTA series crop130 vit_e
+LayerScale gele : 24 tenseurs gamma
+KneeNet-ViT-e | CAM patch 16 | BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6
+gold exclus du train/val : 58 etudes
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=224
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+  val n=653 crop130
+  eval vit_e crop130 first
+    first macro=0.8075 n=653
+  eval vit_e crop130 last
+    last macro=0.8077 n=653
+ecrit C:\Users\sulta\Documents\RSNA-comp\checkpoints\p0_diag\d4_tta.json
+termine

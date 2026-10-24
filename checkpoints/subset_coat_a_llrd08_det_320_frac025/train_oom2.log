@@ -1,0 +1,54 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130_320 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=320
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+KneeNet-CoAt-a | coatnet_0_rw_224.sw_in1k | CAM + BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6 | norm (0.5, 0.5, 0.5)/(0.5, 0.5, 0.5)
+KneeNet-CoAt-a320 | entree 320 | CAM 10x10 | rel-pos stage2 20 (14 -> 20) stage3 10 (7 -> 10) | encode_chunk 8 | dropout 0.4
+kneenet_coat_a320 (coatnet_0_rw_224.sw_in1k) : 29.7M params
+pos_weight desactive (BCE simple)
+LLRD 0.8 | 14 blocs | pic (bloc 14) 1.00e-04 | bloc1 5.50e-06 | embed 4.40e-06
+  embed_decay        lr=4.398e-06 n=3 wd=0.05
+  embed_nodecay      lr=4.398e-06 n=2 wd=0
+  block01_decay      lr=5.498e-06 n=6 wd=0.05
+  block01_nodecay    lr=5.498e-06 n=8 wd=0
+  block02_decay      lr=6.872e-06 n=5 wd=0.05
+  block02_nodecay    lr=6.872e-06 n=8 wd=0
+  block03_decay      lr=8.590e-06 n=6 wd=0.05
+  block03_nodecay    lr=8.590e-06 n=8 wd=0
+  block04_decay      lr=1.074e-05 n=5 wd=0.05
+  block04_nodecay    lr=1.074e-05 n=8 wd=0
+  block05_decay      lr=1.342e-05 n=5 wd=0.05
+  block05_nodecay    lr=1.342e-05 n=8 wd=0
+  block06_decay      lr=1.678e-05 n=6 wd=0.05
+  block06_nodecay    lr=1.678e-05 n=8 wd=0
+  block07_decay      lr=2.097e-05 n=5 wd=0.05
+  block07_nodecay    lr=2.097e-05 n=8 wd=0
+  block08_decay      lr=2.621e-05 n=5 wd=0.05
+  block08_nodecay    lr=2.621e-05 n=8 wd=0
+  block09_decay      lr=3.277e-05 n=5 wd=0.05
+  block09_nodecay    lr=3.277e-05 n=8 wd=0
+  block10_decay      lr=4.096e-05 n=5 wd=0.05
+  block10_nodecay    lr=4.096e-05 n=8 wd=0
+  block11_decay      lr=5.120e-05 n=5 wd=0.05
+  block11_nodecay    lr=5.120e-05 n=8 wd=0
+  block12_decay      lr=6.400e-05 n=5 wd=0.05
+  block12_nodecay    lr=6.400e-05 n=8 wd=0
+  block13_decay      lr=8.000e-05 n=6 wd=0.05
+  block13_nodecay    lr=8.000e-05 n=8 wd=0
+  block14_decay      lr=1.000e-04 n=5 wd=0.05
+  block14_nodecay    lr=1.000e-04 n=10 wd=0
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 4 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 320 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 231
+resume checkpoints\subset_coat_a_llrd08_det_320_frac025\last.pt | epoch 1 | best val AUC 0.6920 | step 231

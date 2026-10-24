@@ -1,0 +1,35 @@
+{
+  "n_series": 2400,
+  "n_series_n8": 2400,
+  "pct_kind": {
+    "same": 0.5845833333333333,
+    "reverse": 0.41541666666666666,
+    "mild": 0.0,
+    "scramble": 0.0,
+    "no_inst": 0.0,
+    "no_geom": 0.0,
+    "unknown": 0.0
+  },
+  "kind_counts": {
+    "same": 1403,
+    "reverse": 997
+  },
+  "rho_inst_geom_mean": 0.16916666666666666,
+  "rho_inst_geom_p05": -1.0,
+  "rho_name_geom_mean": 0.006157797810216423,
+  "jaccard_24_mean": 1.0,
+  "jaccard_24_lt1": 0.0,
+  "jaccard_24_lt095": 0.0,
+  "jaccard_24_name_mean": 0.461255257216298,
+  "pct_dup_inst": 0.0,
+  "pct_mixed_inst": 0.0,
+  "pct_multiframe": 0.0,
+  "convert": false,
+  "reason": [
+    "InstanceNumber et IPP\u00b7normale selectionnent les memes 24 coupes (a un flip pres)"
+  ],
+  "verdict": "NE PAS CONVERTIR",
+  "elapsed_s": 193.5,
+  "n_studies_requested": 800,
+  "seed": 0
+}

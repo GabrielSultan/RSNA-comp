@@ -1,0 +1,303 @@
+{
+  "n_gold": 58,
+  "by_target": {
+    "Effusion": {
+      "tp": 35,
+      "tn": 7,
+      "fp": 14,
+      "fn": 0,
+      "fp_trace_kw": 10,
+      "fn_no_synov_kw": 0,
+      "fp_by_lang": {
+        "en": 7,
+        "es": 3,
+        "hr": 2,
+        "bg": 1,
+        "de": 1
+      },
+      "fn_by_lang": {},
+      "rows": [
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.10170898615867673028696505248839028269",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": " The study reveals normal knee joint alignment. No fracture is seen. ACL is intact. PCL is preserved. The MCL is intact. Medial meniscus is not torn. The FCL, popliteus and biceps femoris tendons are preserved. Horizontal tear at anterior horn of the lateral meniscus is noted. Fo"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.10306159113324811538703788080836752052",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "Exam Type: MRI KNEE RIGHT WO CONTRAST Exam Date and Time: [DATE] [TIME] Indication: 2 years of pain with walking up and down the stairs twisting and squatting. Comparison: No relevant prior studies available for comparison. TECHNIQUE: MRI of the right knee was performed on a 1.5 "
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.11771393824519892797114773408583976756",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "MRI of Knee with -Locator, SG PD FatSat, SG T2W FS, SG T1W, CO T2W FS, AX T2W FS * High signal in the soft tissue medial to the medial collateral ligament with mild increased signal intensity of proximal ligament, suspect grade 2 injury. * Interstitial hyperintense signal of ACL,"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.12978510157202852202776899910529174803",
+          "lang": "bg",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "МР находка: МР данни за фрактура на тибията в областта на интеркондиларните еминенции. Фрактурата е без данни за значима дислокация. Визуализира се контузионен костномозъчен едем в тибията срединно и към медиалното тибиално плато. Минимален субхондрален едем се изобразява и по ме"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.13267780356245120052411517053322874891",
+          "lang": "en",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "> MRI of knee was performed in sagittal, axial and coronal sections. > Spin echo sequence were used. > Split fractures at tibial plateau with depression of the lateral articular surface and extending to tibial intercondylar region > Bone contusion with neglected fracture line at "
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.15593638897292057356864060466120253309",
+          "lang": "es",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "Antecedentes Clínicos: Gonalgia izquierda. Hallazgos: No hay alteraciones de señal significativas de la médula ósea. Transformación quística parcial del tercio proximal del LCA. LCP y ligamentos colaterales dentro de límites normales. Aumento de señal central del cuerno posterior"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.22109739962224309418874538994436903404",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "Exam Type: MRI KNEE LEFT WO CONTRAST Exam Date and Time: [DATE] [TIME] Indication: Pain. Comparison: [REDACTED]. TECHNIQUE: MRI of the lumbar knee was performed on a 3.0 Tesla system with a dedicated knee coil in three planes (axial, sagittal, and coronal), using a standard non-c"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.26790702379506190936834447203448882465",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "There is a mild knee effusion. Normal medial and lateral menisci. No evidence of tears. ACL is ruptured in its mid substance. There is mild residual bone contusion in the weightbearing aspect of the lateral femoral condyle and posterior aspect of the lateral tibial condyle. Mild "
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.37392127307867238524251864751713143683",
+          "lang": "hr",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "Patella alta (Insall-Salvati omjer 1,5), Wiberg tip III. Iregularna, blago udubljena medijalna kontura patele u području apeksa, moguće u sklopu impresijske frakture. Opsežan okolni koštani edem. U području lateralnog kondila femura anteriorno od hvatišta tetive m. popliteus nala"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.41600498783384864111179175518614837125",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": " In the medial compartment, there is buckethandle tear at the anterior horn, body and posterior horn of the medial meniscus. There is displaced meniscal fragment into the intercondylar notch. There is no focal chondrosis or chondral injury. The lateral compartment, there is suspi"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.48348615349418615469875801439348424274",
+          "lang": "es",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "Antecedentes Clínicos: Esguince del ligamento colateral medial. Hallazgos: No hay alteraciones de señal significativas de la médula ósea. Engrosamiento y aumento de señal con pérdida parcial de la continuidad del tercio medio proximal del componente superficial del ligamento cola"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.54977581323931277817074741182670080450",
+          "lang": "es",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "Antecedentes Clínicos: Artrosis. Hallazgos: No hay alteraciones en significativas de la médula ósea. Ligamentos cruzados y colaterales dentro de límites normales. Aumento de señal central del cuerno posterior y cuerpo del menisco medial que no impresiona contactar con la superfic"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.78512215519177850923279235346968676828",
+          "lang": "hr",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "Zglobna tijela PF zgloba su kongruentna. PF artrotske promjene s reduciranim zglobnim prostorom, manjim izljevom i hondromalacijom IV stupnja hrskavice interfasetarno. Hondromalacija II.stupnja lateralnog platoa tibije i hrskavice medijalnog kondila femura. OA promjene obostrano,"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.97274720257634584071500649275217521662",
+          "lang": "de",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "Stigmata der Inaktivitätsosteopenie sowie verbliebenes bone bruise im posterolateralen Tibiaplateau nahe der Eminentia bei subchondraler Impression mit teils punktuell chondralen Läsionen. Anamnestisch bek. VKB Ruptur mit wohl ligamentärer Ruptur des anteromedialen Bündels sowie "
+        }
+      ]
+    },
+    "Synovitis": {
+      "tp": 13,
+      "tn": 27,
+      "fp": 4,
+      "fn": 14,
+      "fp_trace_kw": 3,
+      "fn_no_synov_kw": 14,
+      "fp_by_lang": {
+        "en": 3,
+        "es": 1
+      },
+      "fn_by_lang": {
+        "en": 5,
+        "el": 2,
+        "tr": 2,
+        "es": 1,
+        "bg": 1,
+        "nl": 1,
+        "hr": 1,
+        "de": 1
+      },
+      "rows": [
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.11287937729196958426538087439102017580",
+          "lang": "en",
+          "trace_kw": false,
+          "synov_kw": true,
+          "excerpt": "MRI of left Knee with -3-Plane Loc R'T, Sag PD FS, AX T2 FS, Sag T2 FS, Sag T1, CORT2 FS > There is no abnormal intensity or articular surface disrupt in the medial meniscus, It appears to be normal. > There is no increased intensity in the ACL, MCL and LCL, it appears to be norm"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.11771393824519892797114773408583976756",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "MRI of Knee with -Locator, SG PD FatSat, SG T2W FS, SG T1W, CO T2W FS, AX T2W FS * High signal in the soft tissue medial to the medial collateral ligament with mild increased signal intensity of proximal ligament, suspect grade 2 injury. * Interstitial hyperintense signal of ACL,"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.54977581323931277817074741182670080450",
+          "lang": "es",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "Antecedentes Clínicos: Artrosis. Hallazgos: No hay alteraciones en significativas de la médula ósea. Ligamentos cruzados y colaterales dentro de límites normales. Aumento de señal central del cuerno posterior y cuerpo del menisco medial que no impresiona contactar con la superfic"
+        },
+        {
+          "kind": "fp",
+          "uid": "1.2.826.0.1.3680043.8.498.73527530686853911124431549317032662220",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": true,
+          "excerpt": "MRI of Knee with -3-Plane Loc, Sag PD FS, Sag T2 FS, Sag T1, Cor T2 FS, Ax T2 FS > The contour of ACL is not in a straight line and increase signal intensity inside on F/S T2WI, in favor of tear, major at proximal portion. > The contour of PCL appears to be within normal, no abno"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.10306159113324811538703788080836752052",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "Exam Type: MRI KNEE RIGHT WO CONTRAST Exam Date and Time: [DATE] [TIME] Indication: 2 years of pain with walking up and down the stairs twisting and squatting. Comparison: No relevant prior studies available for comparison. TECHNIQUE: MRI of the right knee was performed on a 1.5 "
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.11548045715264151632153040089882701935",
+          "lang": "en",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": " In the medial compartment, the meniscus is not torn and there is no focal chondrosis or chondral injury. The lateral compartment, there is complex tear (main radial and longitudinal vertical component) at the posterior horn of the lateral meniscus. There is no focal chondrosis o"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.12448079646359892252441208258836556945",
+          "lang": "es",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "Técnica: RMN de la rodilla. Resultados: Fricción de la banda iliotibial. Síndrome de pinzamiento de la almohadilla grasa de Hoffa. Condropatía rotuliana. Impresión: Fricción de la banda iliotibial. Síndrome de pinzamiento de la almohadilla grasa de Hoffa. Condropatía rotuliana."
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.12801308844398614687904447633432197492",
+          "lang": "el",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "ΤΕΧΝΙΚΗ Η εξέταση έγινε µε ακολουθίες παλµών Τ1, πυκνότητας πρωτονίων µε καταστολή του σήµατος του λίπους και Τ2 βαθµιδωτής ηχούς. ΕΥΡΗΜΑΤΑ - Στο έσω διαµέρισµα παρατηρείται εκφυλιστική ρήξη στο οπίσθιο κέρας και σώµα του µηνίσκου. Επιπλέον παρατηρείται ήπιο οστεοµυελικό οίδηµα κ"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.16060119389060497136231217718921482192",
+          "lang": "en",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "Technique: MRI of the knee. ACL normal. MCL normal. Medial meniscus tear. Lateral meniscus tear. Incipient OA of all three compartmens. Baker's cyst present. Large effusion. Insufficient fracture of medial femoral condyl with adjacent bone marrow oedema. Conclusion: Medial menisc"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.30246079718471552972130572444383079911",
+          "lang": "tr",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "SAĞ DİZ MRG. Tetkik protokolü: Çok düzlemli, çok sekanslı. Bulgular: Medial menisküste grade II dejenerasyon, radial yırtık ile uyumlu görünüm mevcuttur. Lateral menisküste grade II dejenerasyon, kova sapı yırtığı ile uyumlu görünüm mevcuttur. Arka çaprazda fokal sinyal artışları"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.32321830776739689645700555055955725945",
+          "lang": "el",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "ΜΑΓΝΗΤΙΚΗ ΤΟΜΟΓΡΑΦΙΑ ∆ΕΞΙΟΥ ΓΟΝΑΤΟΣ Τεχνική: Η εξέταση έγινε µε ακολουθίες παλµών Τ1, PD fs και Τ2*. Ευρήµατα: - Εκτεταµένο οίδηµα του οστικού µυελού στην εγγύς µετάφυση/επίφυση της κνήµης παριστά οστικό µώλωπα στο πλαίσιο της αναφερόµενης κάκωσης. - Οιδηµατώδης απεικόνιση του πρ"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.47921753480592595198052407850568677187",
+          "lang": "tr",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "SOL DİZ MRG. Tetkik protokolü: Çok düzlemli, çok sekanslı. Bulgular: Medial menisküs posterior hornda grade III dejenerasyon ve horizontal yırtık izlendi. Medial menisküs mediale doğru ekstrude görünümdedir. Lateral menisküste grade I dejenerasyon izlendi. Ön çapraz bağda diffüz "
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.59483999067816153759785789654766826710",
+          "lang": "bg",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "МР находка: МР данни за фрактура в областта на латералното тибиално плато, без дислокация. Наличие на костно-мозъчен едем около фрактурата. Контузионен костно-мозъчен едем се визуализира и в латералния феморален кондил. МР данни за руптура на предната кръстна връзка. На топичното"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.62465595376489211274225312453216559395",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "MRI right knee INDICATION: Assess ligamentous injury There is a vertical tear in the periphery of the posterior horn of the medial meniscus. No lateral meniscal tear. Complete rupture of the ACL. Complete rupture of the PCL. Extensor mechanism intact. Complete rupture of the MCL "
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.62549354677638403845904556149868367236",
+          "lang": "nl",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "[DATE]: MR Knie Rechts 15ch AA: Klinische inlichtingen: Zie gescande aanvraag Diagnostische vraagstelling: Zie gescande aanvraag Bevindingen: Impactiefractuur op centraal dragende deel van de laterale femorale condylen, gepaard gaand met uitgebreid botoedeem . Minstens botcontusi"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.64408609256163127278435484217683272910",
+          "lang": "hr",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "Koštani edem medijalnog kondila femura, anterionog dijela medijalnog kondila tibije te lateralnog tubera interkondilarne eminencije tibije. Obzirom erozivne promjene zglobne hrskavice medijalnog kompartmenta femorotibijalnog zgloba opisano vjerojatno u sklopu OA promjena. Prikaže"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.73926443729786165628848843707532839995",
+          "lang": "de",
+          "trace_kw": false,
+          "synov_kw": false,
+          "excerpt": "T2-hyperintense lineare radiale Läsion der Pars intermedia des Innenmeniskus mit inkompletter Separation eines kleinen Lappens (3/7, 5/109-110). Die initial extruierte Pars intermedia des Innenmeniskus im Corpusbereich mukoid aufgefasert. Weitere zarte horizontale T2-Hyperintensi"
+        },
+        {
+          "kind": "fn",
+          "uid": "1.2.826.0.1.3680043.8.498.77362718298550276679350855963451855003",
+          "lang": "en",
+          "trace_kw": true,
+          "synov_kw": false,
+          "excerpt": "Technique: MRI of the knee. ACL normal. MCL normal. Medial meniscus tear. Lateral meniscus normal. Cartilages normal. Medial retinaculum rupture and medial patello-femoral ligament tear at the site of femoral attachment with haematoma. No Baker's cyst. Mild effusion. Patella type"
+        }
+      ]
+    }
+  }
+}

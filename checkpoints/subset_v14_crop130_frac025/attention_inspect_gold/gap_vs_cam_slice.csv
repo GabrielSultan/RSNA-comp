@@ -1,0 +1,13 @@
+target,corr,peak_gap,peak_cam,plane_gap,plane_cam
+ACL,0.9026089773804135,19,21,Coronal,Coronal
+MCL,0.9054331881016466,13,13,Coronal,Coronal
+Medial Meniscus,0.9122947272866895,19,19,Sagittal,Coronal
+Lateral Meniscus,0.9277391913477133,19,18,Sagittal,Sagittal
+Medial OA,0.96285259496173,13,13,Sagittal,Sagittal
+Lateral OA,0.9178803141007578,8,5,Sagittal,Sagittal
+PF OA,0.9807496953382979,10,10,Axial,Axial
+Effusion,0.9324186041034056,6,6,Sagittal,Sagittal
+Synovitis,0.8802804375248634,0,0,Sagittal,Sagittal
+Baker's,0.6075606349917108,4,16,Axial,Axial
+Contusion,0.6042008558607157,13,9,Coronal,Coronal
+Fracture,0.6608953904381452,11,23,Coronal,Coronal

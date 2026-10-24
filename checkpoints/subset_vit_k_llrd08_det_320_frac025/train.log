@@ -1,0 +1,59 @@
+seed 42 (cudnn det, shuffle + pick UID stables)
+gold exclus du train/val : 58 etudes
+volumes data\crop130_320 : 21594 series dans 6 zip(s)
+series presentes dans les volumes : 21594 / 24371
+split auto 85/15 : train 3696 | val 653
+train_frac=0.25 seed=42 : 924 / 3696 etudes
+img_size=320
+slot SAG_FS: 880/924 etudes train
+slot COR_FS: 896/924 etudes train
+slot AX_FS: 924/924 etudes train
+slot SAG_T1: 888/924 etudes train
+slot COR_T1: 727/924 etudes train
+slot AX_T1: 169/924 etudes train
+train 924 | val 653 | n_series 6
+DINOv3 ViT-B/16 charge : weights\dinov3-vitb16-lvd1689m\model.safetensors
+LayerScale gele : 24 tenseurs gamma
+KneeNet-ViT-e | CAM patch 16 | BiLSTM | RGB k-1/k/k+1 | dim 768 | slots 6
+KneeNet-ViT-k320 | entree 320 | CAM 20x20 (RoPE DINOv3 renormalise, pas de pos embed)
+kneenet_vit_k320 (vit_base_patch16_dinov3.lvd1689m) : 88.6M params
+pos_weight desactive (BCE simple)
+LLRD 0.8 | 12 blocs | pic (bloc 12) 1.00e-04 | bloc1 8.59e-06 | embed 6.87e-06
+  embed_decay        lr=6.872e-06 n=2 wd=0.05
+  embed_nodecay      lr=6.872e-06 n=3 wd=0
+  block01_decay      lr=8.590e-06 n=4 wd=0.05
+  block01_nodecay    lr=8.590e-06 n=7 wd=0
+  block02_decay      lr=1.074e-05 n=4 wd=0.05
+  block02_nodecay    lr=1.074e-05 n=7 wd=0
+  block03_decay      lr=1.342e-05 n=4 wd=0.05
+  block03_nodecay    lr=1.342e-05 n=7 wd=0
+  block04_decay      lr=1.678e-05 n=4 wd=0.05
+  block04_nodecay    lr=1.678e-05 n=7 wd=0
+  block05_decay      lr=2.097e-05 n=4 wd=0.05
+  block05_nodecay    lr=2.097e-05 n=7 wd=0
+  block06_decay      lr=2.621e-05 n=4 wd=0.05
+  block06_nodecay    lr=2.621e-05 n=7 wd=0
+  block07_decay      lr=3.277e-05 n=4 wd=0.05
+  block07_nodecay    lr=3.277e-05 n=7 wd=0
+  block08_decay      lr=4.096e-05 n=4 wd=0.05
+  block08_nodecay    lr=4.096e-05 n=7 wd=0
+  block09_decay      lr=5.120e-05 n=4 wd=0.05
+  block09_nodecay    lr=5.120e-05 n=7 wd=0
+  block10_decay      lr=6.400e-05 n=4 wd=0.05
+  block10_nodecay    lr=6.400e-05 n=7 wd=0
+  block11_decay      lr=8.000e-05 n=4 wd=0.05
+  block11_nodecay    lr=8.000e-05 n=7 wd=0
+  block12_decay      lr=1.000e-04 n=4 wd=0.05
+  block12_nodecay    lr=1.000e-04 n=9 wd=0
+snapshots epochs : 7, 8, 9, 10
+series presentes dans les volumes : 21594 / 24371
+gold sanity loader : 58 etudes (loggee, jamais pour le checkpoint)
+early stopping : patience 5 (val macro-AUC)
+dataset effectif : train 924 | val 653 | n_series 6 | train_frac 0.25 | val_frac 0.15 | img_size 320 | oof_fold - | include_gold 0 | drop_path 0 | laterality 0 | seed 42 | steps/epoch 462
+resume checkpoints\subset_vit_k_llrd08_det_320_frac025\last.pt | epoch 6 | best val AUC 0.8052 | step 2772
+epoch 7/14 | train 0.3731 | val 0.4040 | val AUC 0.8204 | gold AUC 0.8206 | proba std 0.2990 | 7553s
+  -> snapshot epoch7.pt
+  -> checkpoint (best 0.8204)
+epoch 8/14 | train 0.3360 | val 0.4221 | val AUC 0.8242 | gold AUC 0.8275 | proba std 0.2996 | 7130s
+  -> snapshot epoch8.pt
+  -> checkpoint (best 0.8242)

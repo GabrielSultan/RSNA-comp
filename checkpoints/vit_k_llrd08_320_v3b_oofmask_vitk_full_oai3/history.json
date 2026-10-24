@@ -1,0 +1,92 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.4867556970008046,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 6.871947673600004e-06,
+    "lr_backbone_max": 0.0001,
+    "gold_macro_auc": 0.7889733108250191
+  },
+  {
+    "epoch": 2,
+    "loss": 0.39374865372410633,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 6.825112951922358e-06,
+    "lr_backbone_max": 9.931846510040274e-05,
+    "gold_macro_auc": 0.8913942932182698
+  },
+  {
+    "epoch": 3,
+    "loss": 0.3599449923702202,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 6.685831354068769e-06,
+    "lr_backbone_max": 9.729165109556584e-05,
+    "gold_macro_auc": 0.9121413007355202
+  },
+  {
+    "epoch": 4,
+    "loss": 0.3426785514487949,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 6.457902114890359e-06,
+    "lr_backbone_max": 9.397484412897546e-05,
+    "gold_macro_auc": 0.9257767165280159
+  },
+  {
+    "epoch": 5,
+    "loss": 0.3313535055784024,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 6.147542549864732e-06,
+    "lr_backbone_max": 8.945851804840972e-05,
+    "gold_macro_auc": 0.9423580389054459
+  },
+  {
+    "epoch": 6,
+    "loss": 0.31974695192163766,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 5.763218458878785e-06,
+    "lr_backbone_max": 8.386586645616308e-05,
+    "gold_macro_auc": 0.9474007168321866
+  },
+  {
+    "epoch": 7,
+    "loss": 0.3107038946944929,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 5.31541320127648e-06,
+    "lr_backbone_max": 7.734944230871737e-05,
+    "gold_macro_auc": 0.960134040555256
+  },
+  {
+    "epoch": 8,
+    "loss": 0.3014210705208192,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 4.816341737144026e-06,
+    "lr_backbone_max": 7.008699666976497e-05,
+    "gold_macro_auc": 0.9704197610422715
+  },
+  {
+    "epoch": 9,
+    "loss": 0.3192038416923364,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "lr_backbone_min": 4.489453234074672e-06,
+    "lr_backbone_max": 6.5330142883972e-05,
+    "gold_macro_auc": 0.9751208216212587
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "epoch": 1,
+    "loss": 0.477870194235486,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.6590833869887534
+  },
+  {
+    "epoch": 2,
+    "loss": 0.44013516111126066,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.7359615464674932
+  },
+  {
+    "epoch": 3,
+    "loss": 0.3710234116592085,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.8768514215956729
+  },
+  {
+    "epoch": 4,
+    "loss": 0.324592307616656,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9010898590969324
+  },
+  {
+    "epoch": 5,
+    "loss": 0.2960036237184271,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9234226884813489
+  },
+  {
+    "epoch": 6,
+    "loss": 0.27515389534394935,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9286914893555568
+  },
+  {
+    "epoch": 7,
+    "loss": 0.2534362429184767,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9396891096531154
+  },
+  {
+    "epoch": 8,
+    "loss": 0.23645269190645268,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9567657381777471
+  },
+  {
+    "epoch": 9,
+    "loss": 0.21953328210848655,
+    "val_loss": null,
+    "val_macro_auc": null,
+    "proba_std": null,
+    "gold_macro_auc": 0.9586077690047787
+  }
+]

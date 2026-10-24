@@ -6,12 +6,12 @@ data/oai/
 __pycache__/
 *.md
 *.txt
+!checkpoints/**/*.txt
 memory_context/
 scripts/
 kaggle_kernel/
-checkpoints/*
-    !checkpoints/.gitkeep
 *.pt
+*.partial
 .env
 .env.*
 !.env.example

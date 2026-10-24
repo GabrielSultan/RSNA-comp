@@ -1,0 +1,32 @@
+{
+  "ckpt": "checkpoints\\subset_vit_dinov3_e_crop130_frac025\\best.pt",
+  "epoch": 7,
+  "device": "cuda",
+  "splits": {
+    "gold": {
+      "n_studies": 58,
+      "delta_vs_softmax": {
+        "softmax": 0.0,
+        "token_max": -0.08212245323969214,
+        "token_top2": -0.07114588304832148,
+        "logit_max": -0.08007859682306329,
+        "logit_top2": -0.07855441979574185,
+        "logit_mean": -0.03231690807005283,
+        "logit_soft8": -0.07212246810778089,
+        "mix_dino": -0.060966517583338375,
+        "oracle_per_target": 0.008073929629344057
+      },
+      "macros": {
+        "softmax": 0.8144215533855883,
+        "token_max": 0.7322991001458962,
+        "token_top2": 0.7432756703372668,
+        "logit_max": 0.734342956562525,
+        "logit_top2": 0.7358671335898465,
+        "logit_mean": 0.7821046453155355,
+        "logit_soft8": 0.7422990852778074,
+        "mix_dino": 0.7534550358022499,
+        "oracle_per_target": 0.8224954830149324
+      }
+    }
+  }
+}
