@@ -9,8 +9,8 @@ Une coupe « morte » = presque jamais dans le top-5 d'aucune tete, et
 une masse d'attention tres inferieure a l'uniforme 1/D.
 
 Usage :
-  python -X utf8 -m src.infer.inspect_attention --config configs/kneenet_v14_crop130_subset.yaml --split gold
-  python -X utf8 -m src.infer.inspect_attention --config configs/kneenet_v11_crop130.yaml
+  python -X utf8 -m src.infer.inspect_attention --config configs/archive/kneenet_v14_crop130_subset.yaml --split gold
+  python -X utf8 -m src.infer.inspect_attention --config configs/archive/kneenet_v11_crop130.yaml
 """
 from __future__ import annotations
 
@@ -595,7 +595,7 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="configs/kneenet_v11_crop130.yaml")
+    parser.add_argument("--config", default="configs/archive/kneenet_v11_crop130.yaml")
     parser.add_argument("--ckpt", default=None,
                         help="defaut : checkpoints/<run_name>/best.pt")
     parser.add_argument("--split", default="val",

@@ -15,10 +15,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 CONFIGS = [
-    "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_soft.yaml",
-    "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_calibrated.yaml",
-    "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_accuracy.yaml",
-    "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_strictmri.yaml",
+    "configs/archive/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_soft.yaml",
+    "configs/archive/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_calibrated.yaml",
+    "configs/archive/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_accuracy.yaml",
+    "configs/archive/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_strictmri.yaml",
 ]
 EPOCHS = 4
 

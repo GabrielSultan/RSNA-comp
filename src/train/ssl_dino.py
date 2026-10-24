@@ -16,8 +16,8 @@ Entree : R=G=B = coupe dans [0, 1]. Pas de flip horizontal.
 ViT-k : ensuite la meme normalisation ImageNet que KneeNet-ViT-e.
 
 Usage :
-  python -X utf8 -m src.train.ssl_dino --config configs/ssl_v20h_dino.yaml
-  python -X utf8 -m src.train.ssl_dino --config configs/ssl_v20h_dino.yaml --resume
+  python -X utf8 -m src.train.ssl_dino --config configs/archive/ssl_v20h_dino.yaml
+  python -X utf8 -m src.train.ssl_dino --config configs/archive/ssl_v20h_dino.yaml --resume
 """
 from __future__ import annotations
 

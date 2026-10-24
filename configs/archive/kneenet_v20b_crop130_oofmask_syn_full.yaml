@@ -1,0 +1,40 @@
+# v20b retrain 100 % : meme recette que v20b_crop130_oofmask_full (0.945 @ ep8)
+# sauf Synovitis : masque silent sur oofmask_v20b (mot -> label OOF conserve,
+# silence+epanchement -> 0.60, silence sans epanchement -> NaN).
+# Gold x4 inchanges. Effusion de la regle = gpt56sol (pas un NaN OOF).
+#   python -X utf8 -m src.data.patch_synovitis_from_effusion --mask-silent --protect-gold --labels data/labels/labels_llm_gpt56sol_oofmask_v20b.csv --effusion-from data/labels/labels_llm_gpt56sol.csv --out data/labels/labels_llm_gpt56sol_oofmask_v20b_syn.csv
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_v20b_crop130_oofmask_syn_full.yaml
+
+run_name: v20b_crop130_oofmask_syn_full
+model: kneenet_v20b
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: weights/ResNet50.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/labels_llm_gpt56sol_oofmask_v20b_syn.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+cosine_epochs: 20
+save_epochs: [7, 8, 9, 10, 11, 12]
+early_stop_patience: 0
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

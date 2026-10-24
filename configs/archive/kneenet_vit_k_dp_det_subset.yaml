@@ -1,0 +1,49 @@
+# P1 : drop-path 0.1 seul, recette k det (LLRD 0.8 + no_decay, graphe e).
+# Un levier vs subset_vit_k_llrd08_det_frac025 : stochastic depth timm.
+# Head dropout reste 0.4. DropPath OFF pendant freeze 1 (epoch 1 = k/e),
+# ON au degel. Ne pas confondre avec j_dp01 (hybride j + dp, ep1-5 non-det).
+# Juger vs k_det : val ET gold coherents, Delta > 0.02 (bruit ViT det).
+# Succes si gold ne chute plus apres ep8 et val_loss ne explose pas
+# (k_det : meme attracteur CR-overfit). Snapshots 7-10.
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_dp_det_subset.yaml --check-optim
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_dp_det_subset.yaml
+
+run_name: subset_vit_k_dp01_det_frac025
+model: kneenet_vit_e
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+drop_path_rate: 0.1
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+rgb_as_gray: true
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 14
+early_stop_patience: 5
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

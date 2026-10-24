@@ -1,0 +1,41 @@
+# Run 2 plan : ViT-e + accumulation x4 seule (batch 2 -> effectif 8).
+# Graphe e, lr uniforme 3e-5, PAS de LLRD. 14 epochs, freeze 1, rewarm 1.
+# Juger vs subset_vit_dinov3_e_crop130_frac025 : Δ > 0.01 val ET gold.
+# Data pod : canal G de crop130_rgb25d (= linspace crop130).
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_e_accum4_subset.yaml
+
+run_name: subset_vit_e_accum4_frac025
+model: kneenet_vit_e
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+accum_steps: 4
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+rgb_as_gray: true
+
+train_frac: 0.25
+train_frac_seed: 42
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 14
+early_stop_patience: 5
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.00003
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

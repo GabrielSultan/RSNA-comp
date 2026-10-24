@@ -1,0 +1,49 @@
+# CoAt-a LLRD 0.8, meme subset que subset_coat_a_llrd08_det_frac025,
+# entree 320. Parent 224 arrete ep6 : val 0.7913 / gold 0.7894.
+# Adaptation 320 : timm img_size=320 (rel-pos stage2 14 -> 20, stage3
+# 7 -> 10, CAM 10x10). Zip gris data/crop130_320, stem 2.5D inchange.
+# batch 4 / encode_chunk 8 / num_workers 0. Le stem 2.5D est decoupe
+# par encode_chunk : sinon le RGB fp32 du batch (675 Mo d'un bloc) OOM
+# au backward du degel. Workers > 0 font echouer cublas sur cette 8 Go.
+# Split, labels, LLRD, freeze, lr, batch : identiques au parent.
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_coat_a_llrd08_det_320_subset.yaml
+
+run_name: subset_coat_a_llrd08_det_320_frac025
+model: kneenet_coat_a320
+img_size: 320
+n_series: 6
+backbone: coatnet_0_rw_224.sw_in1k
+pretrained: true
+backbone_weights: weights/coatnet_0_rw_224-sw_in1k
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_320
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+# 0 : avec 3 workers le premier gemm (tete) renvoie CUBLAS_STATUS_EXECUTION_FAILED
+# sur cette carte 8 Go. Le pas GPU domine, le chargement zip dans le process
+# principal ne change pas les gradients.
+num_workers: 0
+epochs: 12
+early_stop_patience: 4
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

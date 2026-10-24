@@ -1,0 +1,39 @@
+# v20b det (seed 42, meme graphe / lr / wd que subset_v20b_crop130_det_frac025)
+# avec les soft labels Coolin targets_v3b.
+# UID figes sur le split det gpt56sol : re-stratifier sur v3b ne garde
+# que 198/924 du train. CSV deja sous-echantillonne -> train_frac 1.0.
+#   train 924 | val 652 (1 val gpt56sol absente de targets_v3b, droppee)
+#   gold 58 inchange (train.csv), hors split. Val AUC = v3b binarise a 0.5 ;
+#   le chiffre comparable au parent (val 0.8364 / gold 0.8842) est le gold.
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_v20b_crop130_det_v3b_subset.yaml
+
+run_name: subset_v20b_crop130_det_v3b_frac025
+model: kneenet_v20b
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: weights/ResNet50.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/targets_v3b_det_frac025.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 10
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

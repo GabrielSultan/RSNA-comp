@@ -1,0 +1,37 @@
+# KneeNet-ViT-d subset : c + RGB k-1/k/k+1 (stem_mix init G, epoch 0 == c).
+# C ep4 : val 0.740 ~ v1 0.737, gold 0.712, degel 1e-5 OK. Pas de CAM.
+# Recette = c (freeze 1, lr 1e-5, re-warmup 1 epoch, LayerScale gele).
+# Ne pas relancer tant que subset_vit_dinov3_c_crop130_frac025 tourne.
+# Juger vs C et v1 (val ET gold, Δ > 0.01). Contusion / gold = signal 2.5D.
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_d_crop130_subset.yaml
+
+run_name: subset_vit_dinov3_d_crop130_frac025
+model: kneenet_vit_d
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 10
+early_stop_patience: 3
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.00001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

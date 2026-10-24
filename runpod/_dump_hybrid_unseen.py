@@ -61,7 +61,7 @@ JOBS = [
         "subset_cnx_r7_in22k_v3b_hybrid025",
     ),
     (
-        "configs/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_distil_main.yaml",
+        "configs/archive/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_distil_main.yaml",
         "subset_v20h_dino_ep11_v3b_rsna1687_distil_main_crop145",
     ),
 ]

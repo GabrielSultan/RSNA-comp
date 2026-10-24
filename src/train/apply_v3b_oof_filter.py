@@ -24,7 +24,7 @@ from src.models.registry import build_model
 from src.nlp.lexicon import TARGETS
 from src.train.train import evaluate, load_config, make_gold_loader
 
-CONFIG = "configs/kneenet_v20h_crop130_dino_ep11_oof_v3b.yaml"
+CONFIG = "configs/archive/kneenet_v20h_crop130_dino_ep11_oof_v3b.yaml"
 RUN = "v20h_crop130_dino_ep11_oof_v3b"
 LABELS = Path("data/labels/coolin/targets_v3b.csv")
 OOF_OUT = Path("data/labels/oof_preds_v20h_dino_ep11_v3b.csv")

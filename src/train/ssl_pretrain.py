@@ -15,8 +15,8 @@ de v20h (le canal central copie sur les 3 canaux, mean 0, std 1).
 Pas de flip horizontal (medial / lateral).
 
 Usage :
-  python -X utf8 -m src.train.ssl_pretrain --config configs/ssl_v20h_simclr.yaml
-  python -X utf8 -m src.train.ssl_pretrain --config configs/ssl_v20h_simclr.yaml --resume
+  python -X utf8 -m src.train.ssl_pretrain --config configs/archive/ssl_v20h_simclr.yaml
+  python -X utf8 -m src.train.ssl_pretrain --config configs/archive/ssl_v20h_simclr.yaml --resume
 """
 from __future__ import annotations
 

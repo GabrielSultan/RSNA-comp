@@ -1,0 +1,37 @@
+# ViT-e full train : CAM last + BiLSTM + stem RGB k-1/k/k+1, DINOv3 ViT-B/16.
+# Subset (25 %) : val 0.807 / gold 0.814 @ ep7 (interrompu, encore en hausse).
+# Comme v11 full : gpt56sol, train_frac 1.0, val 15 %, gold hold-out (pas dans
+# le train), pas de masque OOF, pas de gold_sample_weight.
+# Recette e : freeze 1, lr_backbone 3e-5, re-warmup 1 epoch. Batch 2 (ViT 8 Go).
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_e_crop130.yaml
+
+run_name: vit_e_crop130v1
+model: kneenet_vit_e
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 3
+epochs: 20
+early_stop_patience: 3
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.00003
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

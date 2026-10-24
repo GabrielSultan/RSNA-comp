@@ -1,0 +1,51 @@
+# v20h DINO ep11, meme recette que
+# subset_v20h_dino_ep11_v3b_hybrid025_wd01_crop145 (wd 0.01, dropout 0.2,
+# 4 epochs, cosine 10, LR 1e-4 / 3e-4, crop 145 puis 130).
+# Train : 1687 etudes RSNA, les memes UID que
+# targets_v3b_rsna1687_distil_main.csv (taille hybrid025, pas d'OAI).
+# 11 cibles : accuracy_soft_labels.csv : variante orientee accuracy.
+# Synovitis : label v3b du subset distil (absente du zip).
+# Val : les 652 etudes de targets_v3b_hybrid025.csv, labels inchanges.
+# Pas de distillation.
+# Juger l'AUC val contre hybrid025 crop145 (0.9584) et le distil
+# crop145 (0.9609 a l'epoch 7). Gold = sanity, hors split.
+# 3070 8 Go : encode_chunk 8, 2 workers.
+#
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_v20h_crop145_dino_ep11_v3b_rsna1687_esv2_accuracy.yaml
+
+run_name: subset_v20h_dino_ep11_v3b_rsna1687_esv2_accuracy_crop145
+model: kneenet_v20h
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: checkpoints/v20h_ssl_dino_screen/encoder_ep11.pt
+lstm_hidden: 256
+
+labels_csv: data/labels/coolin/targets_v3b_rsna1687_esv2_accuracy.csv
+series_csv: data/oai/derived/train_series_oai.csv
+zip_path:
+  - data/crop145
+  - data/crop130
+
+train_frac: 1.0
+val_frac: 0.15
+include_gold: false
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+log_every: 100
+num_workers: 2
+epochs: 4
+cosine_epochs: 10
+save_epochs: []
+early_stop_patience: 0
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.01
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.2

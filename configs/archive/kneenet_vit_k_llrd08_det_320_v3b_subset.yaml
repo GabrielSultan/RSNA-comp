@@ -1,0 +1,56 @@
+# ViT-k LLRD 0.8 det, entree 320, labels targets_v3b.
+# Squelette : kneenet_vit_k_llrd08_320_v3b_oofmask_v20h_full.yaml
+# sans le masque OOF v20h et sans le retrain 100 %.
+# Recette subset = kneenet_vit_k_llrd08_det_320_subset.yaml
+# (seed 42, freeze 1, rewarm 1, batch 2, encode_chunk 1, 14 epochs).
+# UID figes sur le split det gpt56sol (memes 924 que
+# subset_vit_k_llrd08_det_320_frac025). CSV deja sous-echantillonne
+# -> train_frac 1.0. Re-stratifier targets_v3b ne garderait pas ce split.
+#   train 924 | val 652. Gold 58 (train.csv), hors split.
+# Val AUC = v3b binarise a 0.5.
+# Juger vs subset_vit_k_llrd08_det_320_frac025 (arrete ep8 :
+# val 0.8242 / gold 0.8275), delta > 0.01 val ET gold.
+#
+# Donnees : crop130_320 grayscale (D, H, W). Pas de rgb_neighbors.
+# encode_chunk 1 : 20x20 tokens vs 14x14. Un chunk de 1 a 320 tient
+# la place d'un chunk de 4 a 224. Le gradient ne change pas.
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_llrd08_det_320_v3b_subset.yaml --check-optim
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_llrd08_det_320_v3b_subset.yaml
+
+run_name: subset_vit_k_llrd08_det_320_v3b_frac025
+model: kneenet_vit_k320
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 320
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/coolin/targets_v3b_det_frac025.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_320
+
+train_frac: 1.0
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 1
+num_workers: 2
+epochs: 14
+early_stop_patience: 5
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

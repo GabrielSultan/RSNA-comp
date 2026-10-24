@@ -12,7 +12,7 @@ Usage train : cles YAML `distil_csv`, `distil_targets`, `distil_lambda`,
 `distil_temp` (defaut 1). Dumper le teacher avant :
 
   python -X utf8 -m src.train.dump_teacher_preds \\
-      --config configs/kneenet_vit_e_crop130_subset.yaml
+      --config configs/archive/kneenet_vit_e_crop130_subset.yaml
 """
 from __future__ import annotations
 
@@ -94,7 +94,7 @@ def load_distil(cfg: dict, targets: list[str]) -> DistilSpec | None:
             f"distil_csv introuvable : {path}\n"
             "Dumper le teacher, par ex. :\n"
             "  python -X utf8 -m src.train.dump_teacher_preds "
-            "--config configs/kneenet_vit_e_crop130_subset.yaml"
+            "--config configs/archive/kneenet_vit_e_crop130_subset.yaml"
         )
     names = list(cfg.get("distil_targets") or DISTIL_V20B_FROM_VITE)
     unknown = [n for n in names if n not in targets]

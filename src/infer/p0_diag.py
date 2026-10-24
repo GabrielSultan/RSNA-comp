@@ -353,9 +353,9 @@ def _d1_edges(run: str) -> dict | None:
 
 def stage_d1(device: str) -> dict:
     jobs = [
-        ("configs/kneenet_v20b_crop130_subset.yaml",
+        ("configs/archive/kneenet_v20b_crop130_subset.yaml",
          "checkpoints/subset_v20b_crop130_frac025/best.pt", 4, None),
-        ("configs/kneenet_vit_e_crop130_subset.yaml",
+        ("configs/archive/kneenet_vit_e_crop130_subset.yaml",
          "checkpoints/subset_vit_dinov3_e_crop130_frac025/best.pt", 2, 200),
     ]
     results = {}
@@ -446,13 +446,13 @@ def stage_tta(device: str) -> dict:
     jobs = [
         {
             "name": "v20b",
-            "config": "configs/kneenet_v20b_crop130_subset.yaml",
+            "config": "configs/archive/kneenet_v20b_crop130_subset.yaml",
             "ckpt": "checkpoints/subset_v20b_crop130_frac025/best.pt",
             "batch_size": 4,
         },
         {
             "name": "vit_e",
-            "config": "configs/kneenet_vit_e_crop130_subset.yaml",
+            "config": "configs/archive/kneenet_vit_e_crop130_subset.yaml",
             "ckpt": "checkpoints/subset_vit_dinov3_e_crop130_frac025/best.pt",
             "batch_size": 2,
         },
@@ -529,13 +529,13 @@ def stage_tta_series_crop130(device: str) -> dict:
     jobs = [
         {
             "name": "v20b",
-            "config": "configs/kneenet_v20b_crop130_subset.yaml",
+            "config": "configs/archive/kneenet_v20b_crop130_subset.yaml",
             "ckpt": "checkpoints/subset_v20b_crop130_frac025/best.pt",
             "batch_size": 4,
         },
         {
             "name": "vit_e",
-            "config": "configs/kneenet_vit_e_crop130_subset.yaml",
+            "config": "configs/archive/kneenet_vit_e_crop130_subset.yaml",
             "ckpt": "checkpoints/subset_vit_dinov3_e_crop130_frac025/best.pt",
             "batch_size": 2,
         },

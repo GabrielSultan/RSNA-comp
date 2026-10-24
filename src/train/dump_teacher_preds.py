@@ -4,9 +4,9 @@
 Pas de TTA, pas d'aug, series_drop off — les soft labels du KD.
 
   python -X utf8 -m src.train.dump_teacher_preds \\
-      --config configs/kneenet_vit_e_crop130_subset.yaml
+      --config configs/archive/kneenet_vit_e_crop130_subset.yaml
   python -X utf8 -m src.train.dump_teacher_preds \\
-      --config configs/kneenet_vit_e_crop130_subset.yaml \\
+      --config configs/archive/kneenet_vit_e_crop130_subset.yaml \\
       --ckpt checkpoints/subset_vit_dinov3_e_crop130_frac025/best.pt \\
       --splits train --out data/labels/teacher_vite_subset_e.csv
 """

@@ -7,10 +7,10 @@ a appris a localiser. v15 score la coupe sur le token CAM. v16 = 14x14.
 v17 = v16 + BiLSTM. v17bis = v17 a 320 px (CAM 20x20).
 
 Usage :
-  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v14_crop130_subset.yaml
-  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v16_crop130_subset.yaml
-  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v17_crop130_subset.yaml
-  python -X utf8 -m src.infer.inspect_spatial --config configs/kneenet_v17bis_crop130_320_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/archive/kneenet_v14_crop130_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/archive/kneenet_v16_crop130_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/archive/kneenet_v17_crop130_subset.yaml
+  python -X utf8 -m src.infer.inspect_spatial --config configs/archive/kneenet_v17bis_crop130_320_subset.yaml
 """
 from __future__ import annotations
 
@@ -568,7 +568,7 @@ def run(cfg: dict, ckpt_path: Path, split: str, out_dir: Path,
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--config", default="configs/kneenet_v14_crop130_subset.yaml",
+        "--config", default="configs/archive/kneenet_v14_crop130_subset.yaml",
     )
     parser.add_argument("--ckpt", default=None)
     parser.add_argument("--split", default="gold",

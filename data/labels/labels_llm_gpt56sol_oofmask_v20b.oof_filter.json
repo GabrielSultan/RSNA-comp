@@ -1,9 +1,0 @@
-{
-  "out_csv": "data\\labels\\labels_llm_gpt56sol_oofmask_v20b.csv",
-  "source_oofmask": "data/labels/labels_llm_gpt56sol_oofmask.csv",
-  "acl_restored": 52,
-  "acl_nan_before": 52,
-  "acl_nan_after": 0,
-  "n_gold": 58,
-  "src_acl_missing_non_gold": 0
-}

@@ -10,7 +10,7 @@ crop130 (1 fluid-prioritaire / plan). Meme bande 20-80 % + linspace 24.
 Usage local (si train_series DICOM est dispo) :
   python -X utf8 -m src.infer.diag_slice_order --comp-dir path/vers/competition
 
-Sur Kaggle : notebook `kaggle_DICOM_exctract/diag_slice_order/`.
+Sur Kaggle : notebook `_archive/kaggle_DICOM_exctract/diag_slice_order/`.
 """
 from __future__ import annotations
 

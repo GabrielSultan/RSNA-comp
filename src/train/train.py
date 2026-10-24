@@ -21,9 +21,9 @@
   epoch 0. `oai_sample_weight` : poids des etudes OAI_* (cumule au gold).
 
 Usage :
-  python -X utf8 -m src.train.train --config configs/kneenet_v8.yaml
-  python -X utf8 -m src.train.train --config configs/kneenet_v8_subset.yaml
-  python -X utf8 -m src.train.train --config configs/kneenet_v9_t1_subset.yaml
+  python -X utf8 -m src.train.train --config configs/archive/kneenet_v8.yaml
+  python -X utf8 -m src.train.train --config configs/archive/kneenet_v8_subset.yaml
+  python -X utf8 -m src.train.train --config configs/archive/kneenet_v9_t1_subset.yaml
   python -X utf8 -m src.train.train --list-models
 """
 from __future__ import annotations

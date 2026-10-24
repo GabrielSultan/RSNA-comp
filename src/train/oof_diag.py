@@ -2,8 +2,8 @@
 """Etape 0 OOF : desaccord |label LLM - proba| sur un split deja hors train.
 
 Usage :
-  python -X utf8 -m src.train.oof_diag --config configs/kneenet_v17_crop130.yaml
-  python -X utf8 -m src.train.oof_diag --config configs/kneenet_v17_crop130.yaml --split gold
+  python -X utf8 -m src.train.oof_diag --config configs/archive/kneenet_v17_crop130.yaml
+  python -X utf8 -m src.train.oof_diag --config configs/archive/kneenet_v17_crop130.yaml --split gold
 """
 from __future__ import annotations
 
@@ -60,7 +60,7 @@ def _summarize(y: np.ndarray, p: np.ndarray, targets: list[str],
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="configs/kneenet_v17_crop130.yaml")
+    parser.add_argument("--config", default="configs/archive/kneenet_v17_crop130.yaml")
     parser.add_argument("--ckpt", default=None,
                         help="defaut : checkpoints/<run_name>/best.pt")
     parser.add_argument("--split", default="val", choices=("val", "gold"))

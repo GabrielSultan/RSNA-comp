@@ -15,7 +15,7 @@ ses coupes / plans. Plans manquants (zeros) sont masques.
 Le backbone est evalue par chunks + gradient checkpointing pour tenir en 8 Go.
 
 Nouvelle archi : copier ce fichier vers kneenet_v9.py, l'inscrire dans
-`src/models/registry.py`, creer `configs/kneenet_v9.yaml`.
+`src/models/registry.py`, creer `configs/archive/kneenet_v9.yaml`.
 """
 from __future__ import annotations
 

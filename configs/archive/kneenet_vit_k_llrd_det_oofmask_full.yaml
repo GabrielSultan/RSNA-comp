@@ -1,0 +1,59 @@
+# ViT-k LLRD 0.8 det, retrain 100 %. Graphe e (CAM+LSTM, stem RGB linspace),
+# hyps k : llrd 0.8, no_decay, lr_backbone 1e-4 (pic bloc 12), freeze 1,
+# re-warmup 1, seed 42. Data = subset k (G de crop130_rgb25d = linspace).
+#
+# Labels : PAS de filtre OOF ViT-e en stock.
+#   teacher_vite_subset_e.csv = 924 UID (subset train, in-sample, pas un OOF)
+#   aucun oof_preds_vit_e / labels_*oofmask*vite*
+# Fallback recette full etablie : masque OOF v17 + ACL gpt56sol restauree
+# (meme CSV que vit_e_crop130_oofmask_full / v20b full). Gold x4, pas de val.
+# Cosine sur 20 epochs, stop a 12. Snapshots 5-12 (pic gold ViT ~ep5 sur
+# vit_e_crop130v1 ; k subset best @ ep10 puis drop ep11). Pas de laterality
+# (levier v20h, pas k).
+#
+# Labels deja prets (ne pas re-masquer / --restore-acl) :
+#   data/labels/labels_llm_gpt56sol_oofmask_v20b.csv
+# Train (plus tard) :
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_llrd_det_oofmask_full.yaml
+
+run_name: vit_k_llrd08_det_oofmask_full
+model: kneenet_vit_e
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol_oofmask_v20b.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+rgb_as_gray: true
+
+train_frac: 1.0
+val_frac: 0
+include_gold: true
+gold_sample_weight: 4.0
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 12
+cosine_epochs: 20
+save_epochs: [5, 6, 7, 8, 9, 10, 11, 12]
+early_stop_patience: 0
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+seed: 42
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

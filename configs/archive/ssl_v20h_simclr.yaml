@@ -1,0 +1,42 @@
+# SimCLR in-domain pour l'encodeur v20h.
+# Init RadImageNet, puis 20 epochs sur les series crop130 (train seulement).
+# 8 coupes / 24 par serie et par epoch. Batch contraste N=96 (192 vues),
+# taille pour une RTX 4090 24 Go. OOM -> series_batch: 8.
+# Sortie chargeable telle quelle par v20h : checkpoints/v20h_ssl_simclr/encoder.pt
+#
+# Duree attendue (4090, zips locaux) : environ 4 h, fourchette 3-8 h.
+# La loss doit passer sous ~5.25 (hasard a N=96) des la 1re epoch.
+# encoder.pt est reecrit a chaque epoch : on peut s'arreter entre deux epochs.
+#
+#   python -X utf8 -m src.train.ssl_pretrain --config configs/archive/ssl_v20h_simclr.yaml
+# Reprise :
+#   python -X utf8 -m src.train.ssl_pretrain --config configs/archive/ssl_v20h_simclr.yaml --resume
+
+run_name: v20h_ssl_simclr
+out_dir: checkpoints/v20h_ssl_simclr
+init_weights: weights/ResNet50.pt
+
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+img_size: 224
+
+epochs: 20
+series_batch: 12
+slices_per_series: 8
+num_workers: 4
+seed: 42
+log_every: 50
+
+lr_encoder: 0.0001
+lr_projector: 0.001
+weight_decay: 0.0001
+temperature: 0.2
+proj_hidden: 2048
+proj_dim: 128
+
+scale_range: [0.75, 1.0]
+max_rotate_deg: 12
+max_translate: 0.08
+brightness: 0.2
+contrast: 0.2
+gamma_range: [0.8, 1.2]

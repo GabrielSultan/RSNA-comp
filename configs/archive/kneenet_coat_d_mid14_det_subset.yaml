@@ -1,0 +1,52 @@
+# CoAt-d = CoAt-a (LLRD 0.8) + un seul levier d'archi : CAM du stage 2
+# (14x14, 384 canaux) ajoutee a la CAM 7x7 par un Linear init 0.
+# Epoch 0 = CoAt-a. Le GAP et le BiLSTM restent sur la carte 7x7.
+# Pourquoi : le stage 3 jette le 14x14 dans un AvgPool avant l'attention.
+# C'est la resolution de la CAM v20b. Le passage 7 -> 14 n'a rien fait
+# sur ResNet (v14bis 0.8297 vs v16 0.8290, memes features locales), et
+# les fusions multi-niveaux ViT echouent parce que toutes les couches
+# sont deja en 14x14. Ici la carte 14x14 n'est jamais lue.
+# Ne pas retirer le pool du stage 3 : le biais de position est en 7x7.
+# Lire mid_proj_l1 dans extra : s'il reste a 0, la branche est morte
+# (meme symptome que stem_mix).
+# Juger vs subset_coat_a_llrd08_det_frac025 a epoch egale (arrete ep6 :
+# 0.7913 / 0.7894), Δ > 0.01 val ET gold, puis vs v20b det (0.8364 / 0.8842).
+# Surtout Medial Meniscus / Baker's / MCL, le trou de CoAt-a.
+# Un seul train a la fois sur la 3070 :
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_coat_d_mid14_det_subset.yaml
+
+run_name: subset_coat_d_mid14_det_frac025
+model: kneenet_coat_d
+n_series: 6
+backbone: coatnet_0_rw_224.sw_in1k
+pretrained: true
+backbone_weights: weights/coatnet_0_rw_224-sw_in1k
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 12
+early_stop_patience: 4
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

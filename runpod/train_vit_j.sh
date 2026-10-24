@@ -7,5 +7,5 @@ export PYTHONUNBUFFERED=1
 export OMP_NUM_THREADS=1
 mkdir -p checkpoints/subset_vit_j_llrd08_frac025
 exec python -X utf8 -m src.train.train \
-  --config configs/kneenet_vit_j_llrd_subset.yaml \
+  --config configs/archive/kneenet_vit_j_llrd_subset.yaml \
   "$@"

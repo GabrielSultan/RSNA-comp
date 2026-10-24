@@ -23,7 +23,7 @@ python -m pip install -q pandas pyyaml "timm>=1.0.15" safetensors
 python - <<'PY'
 from pathlib import Path
 need = [
-    "configs/kneenet_vit_e_rgb25d_subset.yaml",
+    "configs/archive/kneenet_vit_e_rgb25d_subset.yaml",
     "src/models/kneenet_vit_e_d.py",
     "data/labels/labels_llm_gpt56sol.csv",
     "data/csv/train_series.csv",
@@ -46,4 +46,4 @@ PY
 
 echo
 echo "lancer :  bash runpod/train.sh"
-echo "resume :  python -X utf8 -m src.train.train --config configs/kneenet_vit_e_rgb25d_subset.yaml --resume"
+echo "resume :  python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_e_rgb25d_subset.yaml --resume"

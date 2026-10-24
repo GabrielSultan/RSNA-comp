@@ -5,9 +5,9 @@ La concat ecrit cfg['oof_preds_csv'] (sinon data/labels/oof_preds_<run_name>.csv
 Toujours fixer oof_preds_csv sur un nouveau run pour ne pas ecraser v17.
 
 Usage :
-  python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v17_crop130_oof.yaml
-  python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v20h_crop130_oof.yaml
-  python -X utf8 -m src.train.run_oof_folds --config configs/kneenet_v17_crop130_oof.yaml --from-fold 1
+  python -X utf8 -m src.train.run_oof_folds --config configs/archive/kneenet_v17_crop130_oof.yaml
+  python -X utf8 -m src.train.run_oof_folds --config configs/archive/kneenet_v20h_crop130_oof.yaml
+  python -X utf8 -m src.train.run_oof_folds --config configs/archive/kneenet_v17_crop130_oof.yaml --from-fold 1
 """
 from __future__ import annotations
 
@@ -55,7 +55,7 @@ def _merge_oof(cfg: dict, n_folds: int) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="configs/kneenet_v17_crop130_oof.yaml")
+    parser.add_argument("--config", default="configs/archive/kneenet_v17_crop130_oof.yaml")
     parser.add_argument("--from-fold", type=int, default=0)
     parser.add_argument("--n-folds", type=int, default=None)
     parser.add_argument("--skip-train", action="store_true",

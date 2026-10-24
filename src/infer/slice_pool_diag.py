@@ -10,8 +10,8 @@ compare d'autres reductions, a priori focale vs diffus :
   softmax (actuel) : OA, Effusion, Synovitis
 
 Usage :
-  python -X utf8 -m src.infer.slice_pool_diag --config configs/kneenet_v20b_crop130_subset.yaml
-  python -X utf8 -m src.infer.slice_pool_diag --config configs/kneenet_v20b_crop130_oofmask_full.yaml --ckpt checkpoints/v20b_crop130_oofmask_full/epoch8.pt --splits gold
+  python -X utf8 -m src.infer.slice_pool_diag --config configs/archive/kneenet_v20b_crop130_subset.yaml
+  python -X utf8 -m src.infer.slice_pool_diag --config configs/archive/kneenet_v20b_crop130_oofmask_full.yaml --ckpt checkpoints/v20b_crop130_oofmask_full/epoch8.pt --splits gold
 """
 from __future__ import annotations
 
@@ -254,7 +254,7 @@ def run_split(cfg: dict, model, split: str, device: str,
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="configs/kneenet_v20b_crop130_subset.yaml")
+    parser.add_argument("--config", default="configs/archive/kneenet_v20b_crop130_subset.yaml")
     parser.add_argument("--ckpt", default=None)
     parser.add_argument("--splits", default="val,gold")
     parser.add_argument("--out", default=None)

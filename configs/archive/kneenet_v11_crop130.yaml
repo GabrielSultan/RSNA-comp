@@ -1,0 +1,31 @@
+# v11 full train : A+B (diffs + stem_mix) sur crop 130 mm grayscale.
+# Meilleure recette subset (val 0.810 / gold 0.816 @ ep10, 25 % du train).
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_v11_crop130.yaml
+
+run_name: v11_crop130v1
+model: kneenet_v11
+n_series: 3
+backbone: resnet50
+pretrained: true
+backbone_weights: weights/ResNet50.pt
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 1.0
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 20
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

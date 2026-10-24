@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Serie OAI (.tar.gz ou dossier de DICOM sans extension) -> volumes crop130.
 
-Recette de kaggle_DICOM_exctract/_gen_convert_nb.py::convert_series, verifiee
+Recette de _archive/kaggle_DICOM_exctract/_gen_convert_nb.py::convert_series, verifiee
 bit a bit contre src/infer/preprocess_dicom.load_series_dicom
 (runpod/oai/check_sample.py), avec trois ecarts propres a l'OAI :
 - tous les fichiers sont lus (noms 001, 002... sans .dcm), force=True ;

@@ -1,0 +1,52 @@
+# Ablation resolution : ViT-k LLRD 0.8 det, meme recette que
+# kneenet_vit_k_llrd_det_subset.yaml (labels gpt56sol, seed 42, frac 0.25,
+# freeze 1, rewarm 1, batch 2, 14 epochs). Seule la resolution change.
+# Juger vs subset_vit_k_llrd08_det_frac025 (val ET gold, delta > 0.01).
+#
+# Donnees : crop130_320 grayscale. Le det 224 lit le canal G de crop130_rgb25d,
+# qui est le linspace crop130. Le stem k-1/k/k+1 est le meme.
+# Pas de rgb_neighbors : ces NPZ sont (D, H, W), pas (D, 3, H, W).
+#
+# encode_chunk 1 : 20x20 tokens vs 14x14, l'attention est ~4x plus lourde.
+# Un chunk de 1 a 320 tient la place d'un chunk de 4 a 224. Le gradient
+# ne change pas (checkpoint par chunk).
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_llrd08_det_320_subset.yaml --check-optim
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_llrd08_det_320_subset.yaml
+
+run_name: subset_vit_k_llrd08_det_320_frac025
+model: kneenet_vit_k320
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+img_size: 320
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_320
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 1
+num_workers: 2
+epochs: 14
+early_stop_patience: 5
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4

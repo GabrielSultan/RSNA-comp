@@ -1,0 +1,51 @@
+# ViT-k LLRD 0.8 det + vrais voisins DICOM (224).
+# Recette = kneenet_vit_k_llrd_det_subset.yaml (gpt56sol, frac 0.25,
+# seed 42, freeze 1, re-warmup 1, llrd 0.8, no_decay, lr pic 1e-4,
+# batch 2, 14 epochs). Un seul changement : kneenet_vit_e_d lit
+# (D, 3, H, W) au lieu du canal G.
+# Parent : subset_vit_k_llrd08_det_frac025 (meme NPZ, rgb_as_gray).
+# Epoch 0 = canal G = ce parent (stem_mix init G). Juger val ET gold,
+# surtout Contusion / Baker / Fracture / menisques. Lire
+# stem_mix_from_R/G/B dans history.json : si R et B restent ~0, le
+# reseau ignore les voisins.
+# stem_mix est dans le groupe embed (lr la plus basse du LLRD).
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_vit_k_llrd_det_rgb25d_subset.yaml
+
+run_name: subset_vit_k_llrd08_det_rgb25d_frac025
+model: kneenet_vit_e_d
+n_series: 6
+backbone: vit_base_patch16_dinov3.lvd1689m
+pretrained: true
+backbone_weights: weights/dinov3-vitb16-lvd1689m
+lstm_hidden: 256
+
+llrd: 0.8
+no_decay: true
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130_rgb25d
+rgb_neighbors: true
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 2
+encode_chunk: 4
+num_workers: 2
+epochs: 14
+early_stop_patience: 5
+save_epochs: [7, 8, 9, 10]
+skip_gold: false
+freeze_encoder_epochs: 1
+unfreeze_rewarm_frac: 1.0
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
+img_size: 224

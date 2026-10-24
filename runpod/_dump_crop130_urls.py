@@ -6,7 +6,7 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "kaggle_DICOM_exctract"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "_archive/kaggle_DICOM_exctract"))
 from download_crop130 import list_files  # noqa: E402
 from kaggle.api.kaggle_api_extended import KaggleApi
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Pretraitement DICOM -> volume uint8, aligne sur la conversion NPZ.
 
-Recette identique a `kaggle_DICOM_exctract/_gen_convert_nb.py` (grayscale)
+Recette identique a `_archive/kaggle_DICOM_exctract/_gen_convert_nb.py` (grayscale)
 et `_gen_convert_rgb25d_nb.py` (voisins DICOM) :
 1. Lecture des .dcm, tri InstanceNumber (fallback : normale IOP).
 2. RescaleSlope/Intercept, inversion MONOCHROME1.

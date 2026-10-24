@@ -5,16 +5,16 @@ Chaque version = un fichier Python **fige** (ex. kneenet_v8.py). On ne
 modifie pas une version deja soumise : on copie vers kneenet_v9.py.
 
 Entrainer n'importe quelle version :
-  python -X utf8 -m src.train.train --config configs/kneenet_v8.yaml
+  python -X utf8 -m src.train.train --config configs/archive/kneenet_v8.yaml
   python -X utf8 -m src.train.train --list-models
 
 Nouvelle architecture :
   1. copier src/models/kneenet_v8.py -> src/models/kneenet_v9.py
   2. changer arch_id = "kneenet_v9" dans la classe
   3. ajouter "kneenet_v9": "src.models.kneenet_v9" dans MODELS ci-dessous
-  4. copier configs/kneenet_v8.yaml -> configs/kneenet_v9.yaml
+  4. copier configs/archive/kneenet_v8.yaml -> configs/archive/kneenet_v9.yaml
      (model: kneenet_v9, run_name: ... unique)
-  5. python -X utf8 -m src.train.train --config configs/kneenet_v9.yaml
+  5. python -X utf8 -m src.train.train --config configs/archive/kneenet_v9.yaml
 """
 from __future__ import annotations
 

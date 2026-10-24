@@ -1,0 +1,43 @@
+# v20e subset, meme recette que kneenet_v20e_crop130_subset.yaml,
+# mais run_name distinct + seed 42 (train.py deterministe).
+# Ne pas ecraser subset_v20e_crop130_frac025 (e original non-det).
+# Pooling profondeur par finding (DINOsaur) :
+#   max   : Medial/Lateral Meniscus, Baker's, Contusion, Fracture
+#   top-2 : ACL, MCL
+#   softmax (v20b) : OA, Effusion, Synovitis
+# mix 0.85 = 85 % specialiste + 15 % softmax plein.
+# Juger vs subset_v20b_crop130_det_frac025 (pas l'ancien v20b).
+#   python -X utf8 -m src.train.train --config configs/archive/kneenet_v20e_crop130_det_subset.yaml
+
+run_name: subset_v20e_crop130_det_frac025
+model: kneenet_v20e
+n_series: 6
+backbone: resnet50
+pretrained: true
+backbone_weights: weights/ResNet50.pt
+lstm_hidden: 256
+slice_pool_k: [2, 2, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1]
+slice_pool_mix: 0.85
+
+labels_csv: data/labels/labels_llm_gpt56sol.csv
+series_csv: data/csv/train_series.csv
+zip_path: data/crop130
+
+train_frac: 0.25
+train_frac_seed: 42
+seed: 42
+
+batch_size: 4
+encode_chunk: 8
+num_workers: 3
+epochs: 10
+early_stop_patience: 3
+skip_gold: false
+
+lr_backbone: 0.0001
+lr_head: 0.0003
+weight_decay: 0.05
+label_smoothing: 0.0
+pos_weight_max: null
+head_dim: 512
+dropout: 0.4
