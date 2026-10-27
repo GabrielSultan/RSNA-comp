@@ -1,6 +1,6 @@
 # RSNA Knee Abnormality Detection
 
-Detection of **12 knee abnormalities** from MRI. Kaggle rank: **98th of 6,425**, solo. Private leaderboard score: **0.948**.
+Detection of **12 knee abnormalities** from MRI. Kaggle rank: **96th of 6,300** (top 1.5%), solo. Private leaderboard score: **0.948**.
 
 Competition: [rsna-knee-abnormality-detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection) (**organized by the Radiological Society of North America**)
 
@@ -14,7 +14,7 @@ The selected submission combines six models, in float32. Five cover the knee wit
 
 | | |
 |---|---|
-| Rank | 98th / 6,425, solo |
+| Rank | 96th / 6,300 (top 1.5%), solo |
 | Private score | 0.948 |
 | Targets | 12 findings (ligaments, menisci, osteoarthritis, effusion, fracture, …) |
 | Input | 6 series per study (sagittal, coronal, axial × fluid / T1) |
